@@ -1,4 +1,4 @@
-package com.andor.watchit.screens
+package com.andor.watchit.screens.common.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -1,19 +1,14 @@
-package com.andor.watchit.screens
+package com.andor.watchit.screens.topratedmovielist
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.lifecycle.ViewModelProviders
 import com.andor.watchit.R
+import com.andor.watchit.screens.common.main.BaseFragment
 
-class TopRatedMovieListFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = TopRatedMovieListFragment()
-    }
+class TopRatedMovieListFragment : BaseFragment() {
 
     private lateinit var viewModel: TopRatedMovieListViewModel
 
@@ -28,6 +23,7 @@ class TopRatedMovieListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(TopRatedMovieListViewModel::class.java)
         // TODO: Use the ViewModel
+
     }
 
 }

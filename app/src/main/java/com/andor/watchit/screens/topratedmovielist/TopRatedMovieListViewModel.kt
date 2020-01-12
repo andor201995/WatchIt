@@ -1,4 +1,4 @@
-package com.andor.watchit.screens
+package com.andor.watchit.screens.topratedmovielist
 
 import androidx.lifecycle.ViewModel
 

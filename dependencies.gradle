@@ -10,6 +10,8 @@ ext {
     expresso_version = '3.2.0'
     navigation_component_version = '2.1.0'
     gradle_build_version = '3.5.3'
+    dagger_version = '2.24'
+    annotation_processor_version = '1.1'
 
     dependencies = [
             kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -21,11 +23,6 @@ ext {
             //UI
             constraintlayout       : "androidx.constraintlayout:constraintlayout:$constraint_layout_version",
 
-            //Testing
-            junit                  : "junit:junit:$junit_version",
-            junit_ext              : "androidx.test.ext:junit:$androidx_text_ext",
-            espresso               : "androidx.test.espresso:espresso-core:$expresso_version",
-
             //Navigation
             navigation_fragment    : "androidx.navigation:navigation-fragment:$navigation_component_version",
             navigation_ui          : "androidx.navigation:navigation-ui:$navigation_component_version",
@@ -33,6 +30,18 @@ ext {
             //ViewModel
             legacy                 : "androidx.legacy:legacy-support-v4:$androidx_legacy_version",
             lifecycle_extensions   : "androidx.lifecycle:lifecycle-extensions:$androidx_lifecycle_version",
-            lifecycle_viewmodel_ktx: "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
+            lifecycle_viewmodel_ktx: "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version",
+
+            //Dagger2
+            dagger                 : "com.google.dagger:dagger:$dagger_version",
+            dagger_android         : "com.google.dagger:dagger-android:$dagger_version",
+            dagger_android_support : "com.google.dagger:dagger-android-support:$dagger_version"
+    ]
+
+    test_dependencies = [
+            //Testing
+            junit    : "junit:junit:$junit_version",
+            junit_ext: "androidx.test.ext:junit:$androidx_text_ext",
+            espresso : "androidx.test.espresso:espresso-core:$expresso_version"
     ]
 }

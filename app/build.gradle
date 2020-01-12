@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
     buildToolsVersion "29.0.2"
@@ -21,10 +23,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    kapt "com.google.dagger:dagger-compiler:$rootProject.ext.dagger_version"
 
     implementation rootProject.ext.dependencies.values()
+    testImplementation rootProject.ext.test_dependencies.values()
 }
