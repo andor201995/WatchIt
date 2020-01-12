@@ -4,4 +4,4 @@ import android.app.Application
 import dagger.Module
 
 @Module
-class ApplicationModule(application: Application)
+class ApplicationModule(private val application: Application)

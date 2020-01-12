@@ -6,11 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.andor.watchit.R
-import com.andor.watchit.screens.common.main.BaseFragment
+import com.andor.watchit.screens.common.controller.BaseFragment
 
 class TopRatedMovieListFragment : BaseFragment() {
 
     private lateinit var viewModel: TopRatedMovieListViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        presentationComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
