@@ -28,14 +28,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    //androidX
+    //AndroidX
     implementation "androidx.appcompat:appcompat:$androidx_version"
     implementation "androidx.core:core-ktx:$androidx_version"
 
     //UI
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
 
-    // Testing
+    //Testing
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$androidx_text_ext"
     androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_version"
@@ -43,6 +43,8 @@ dependencies {
     //Navigation
     implementation "androidx.navigation:navigation-fragment:$navigation_component_version"
     implementation "androidx.navigation:navigation-ui:$navigation_component_version"
-
-
+    //ViewModel
+    implementation "androidx.legacy:legacy-support-v4:$androidx_legacy_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$androidx_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
 }

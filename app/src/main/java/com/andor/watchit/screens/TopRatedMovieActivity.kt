@@ -1,9 +1,10 @@
-package com.andor.watchit
+package com.andor.watchit.screens
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.andor.watchit.R
 
-class TopRatedMovieListActivity : AppCompatActivity() {
+class TopRatedMovieActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
