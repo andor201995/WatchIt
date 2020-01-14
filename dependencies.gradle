@@ -14,6 +14,8 @@ ext {
     annotation_processor_version = '1.1'
     mockito_kotlin_version = '2.2.0'
     retrofit_versiom = '2.6.2'
+    mockwebserver_version = '4.2.1'
+    java_version = '1.8'
 
     dependencies = [
             kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -42,14 +44,22 @@ ext {
             //Retrofit
             gson_converter         : "com.squareup.retrofit2:converter-gson:$retrofit_versiom",
             retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_versiom"
+
+
     ]
 
     test_dependencies = [
             //Testing
             junit         : "junit:junit:$junit_version",
             junit_ext     : "androidx.test.ext:junit:$androidx_text_ext",
+
+            //Automation
             espresso      : "androidx.test.espresso:espresso-core:$expresso_version",
-            mockito_kotlin: "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
+
+            //Mocking
+            mockito_kotlin: "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version",
+            mockwebserver : "com.squareup.okhttp3:mockwebserver:$mockwebserver_version"
+
 
     ]
 }

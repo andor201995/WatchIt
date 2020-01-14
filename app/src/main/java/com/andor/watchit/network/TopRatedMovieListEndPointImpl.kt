@@ -10,15 +10,17 @@ class TopRatedMovieListEndPointImpl(private val movieApi: MovieApi) : TopRatedMo
     override fun onFetchTopRatedMovieListAndNotify(listener: TopRatedMovieListEndPoint.Listener) {
         movieApi.fetchTopRatedMovie().enqueue(object : Callback<TopRatedMovieSchema> {
             override fun onFailure(call: Call<TopRatedMovieSchema>, t: Throwable) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                listener.onFetchFailed()
             }
 
             override fun onResponse(
                 call: Call<TopRatedMovieSchema>,
                 response: Response<TopRatedMovieSchema>
             ) {
-                if (response.isSuccessful) {
-                    listener.onFetchSuccess(TopRatedMovieSchema())
+                if (response.isSuccessful && response.body() != null) {
+                    listener.onFetchSuccess(response.body()!!)
+                } else {
+                    listener.onFetchFailed()
                 }
             }
         }
