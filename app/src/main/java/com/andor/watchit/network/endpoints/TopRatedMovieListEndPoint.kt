@@ -1,4 +1,4 @@
-package com.andor.watchit.network
+package com.andor.watchit.network.endpoints
 
 import com.andor.watchit.network.schema.TopRatedMovieSchema
 

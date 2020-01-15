@@ -1,11 +1,14 @@
-package com.andor.watchit.network
+package com.andor.watchit.network.endpoints
 
+import com.andor.watchit.network.api.MovieApi
+import com.andor.watchit.network.endpoints.TopRatedMovieListEndPoint
 import com.andor.watchit.network.schema.TopRatedMovieSchema
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TopRatedMovieListEndPointImpl(private val movieApi: MovieApi) : TopRatedMovieListEndPoint {
+class TopRatedMovieListEndPointImpl(private val movieApi: MovieApi) :
+    TopRatedMovieListEndPoint {
 
     override fun onFetchTopRatedMovieListAndNotify(listener: TopRatedMovieListEndPoint.Listener) {
         movieApi.fetchTopRatedMovie().enqueue(object : Callback<TopRatedMovieSchema> {

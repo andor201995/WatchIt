@@ -2,6 +2,9 @@ package com.andor.watchit.network
 
 import com.andor.watchit.helper.CurrentThreadExecutor
 import com.andor.watchit.helper.TestData
+import com.andor.watchit.network.api.MovieApi
+import com.andor.watchit.network.endpoints.TopRatedMovieListEndPoint
+import com.andor.watchit.network.endpoints.TopRatedMovieListEndPointImpl
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -39,7 +42,10 @@ class TopRatedMovieListEndPointImplTest {
         mMockWebServer.start()
         val movieApi = setUpMovieApi()
 
-        systemUT = TopRatedMovieListEndPointImpl(movieApi)
+        systemUT =
+            TopRatedMovieListEndPointImpl(
+                movieApi
+            )
         // initial state setup
     }
 

@@ -1,4 +1,4 @@
-package com.andor.watchit.network
+package com.andor.watchit.network.api
 
 import com.andor.watchit.network.schema.TopRatedMovieSchema
 import retrofit2.Call
