@@ -7,6 +7,7 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.observers.TestObserver
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -30,6 +31,11 @@ class TopRatedMovieUseCaseImplTest {
     fun setup() {
         systemUT = TopRatedMovieUseCaseImpl(mTopRatedMovieListEndPointMock)
         // initial state setup
+    }
+
+    @After
+    fun tearDown() {
+        testObserver.dispose()
     }
 
     //fetch data return success response

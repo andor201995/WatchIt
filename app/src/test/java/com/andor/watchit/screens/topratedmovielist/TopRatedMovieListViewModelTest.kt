@@ -8,6 +8,7 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.observers.TestObserver
 import io.reactivex.subjects.PublishSubject
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,6 +36,11 @@ class TopRatedMovieListViewModelTest {
         whenever(mTopRatedMovieUseCaseMock.getResultStream()).thenReturn(fetchStream)
         systemUT = TopRatedMovieListViewModel(mTopRatedMovieUseCaseMock)
         // initial state setup
+    }
+
+    @After
+    fun tearDown() {
+        testObserver.dispose()
     }
 
     @Test
