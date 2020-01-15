@@ -52,7 +52,7 @@ class TopRatedMovieListEndPointImplTest {
     @Test
     fun onFetchTopRatedMovieListAndNotify_fetchSuccess_validData() {
         //Arrange
-        success()
+        success(TestData.SERVER_RESPONSE_JSON_SUCCESS)
         //Act
         systemUT.onFetchTopRatedMovieListAndNotify(listener)
         //Assert
@@ -64,7 +64,7 @@ class TopRatedMovieListEndPointImplTest {
     @Test
     fun onFetchTopRatedMovieListAndNotify_fetchFail_nullData() {
         //Arrange
-        success("")
+        success(TestData.SERVER_RESPONSE_JSON_SUCCESS_NULL)
         //Act
         systemUT.onFetchTopRatedMovieListAndNotify(listener)
         //Assert
@@ -103,7 +103,7 @@ class TopRatedMovieListEndPointImplTest {
         return OkHttpClient().newBuilder().dispatcher(dispatcher).build()
     }
 
-    private fun success(data: String = TestData.SERVER_RESPONSE_JSON_SUCCESS) {
+    private fun success(data: String) {
         val response = MockResponse()
             .setResponseCode(HttpURLConnection.HTTP_OK)
             .setBody(data)
