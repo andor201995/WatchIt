@@ -2,6 +2,7 @@ package com.andor.watchit.screens.topratedmovielist
 
 import androidx.lifecycle.ViewModel
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCase
+import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCaseImpl
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
@@ -11,16 +12,16 @@ class TopRatedMovieListViewModel(private val topRatedMovieUseCase: TopRatedMovie
     val screenStateStream: BehaviorSubject<TopRatedMovieScreenState> =
         BehaviorSubject.create()
 
-    private val useCaseObserver = object : Observer<TopRatedMovieUseCase.FetchResult> {
+    private val useCaseObserver = object : Observer<TopRatedMovieUseCaseImpl.FetchResult> {
         override fun onComplete() {
         }
 
         override fun onSubscribe(d: Disposable) {
         }
 
-        override fun onNext(t: TopRatedMovieUseCase.FetchResult) {
+        override fun onNext(t: TopRatedMovieUseCaseImpl.FetchResult) {
             when (t) {
-                is TopRatedMovieUseCase.FetchResult.Success -> {
+                is TopRatedMovieUseCaseImpl.FetchResult.Success -> {
                     screenStateStream.onNext(
                         TopRatedMovieScreenState(
                             t.topRatedMovieList,
@@ -28,7 +29,7 @@ class TopRatedMovieListViewModel(private val topRatedMovieUseCase: TopRatedMovie
                         )
                     )
                 }
-                is TopRatedMovieUseCase.FetchResult.Failure -> {
+                is TopRatedMovieUseCaseImpl.FetchResult.Failure -> {
                     screenStateStream.onNext(
                         TopRatedMovieScreenState(
                             listOf(),

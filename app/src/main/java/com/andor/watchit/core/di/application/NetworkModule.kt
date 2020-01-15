@@ -1,5 +1,6 @@
 package com.andor.watchit.core.di.application
 
+import com.andor.watchit.core.Constants
 import com.andor.watchit.network.api.MovieApi
 import com.andor.watchit.network.endpoints.TopRatedMovieListEndPoint
 import com.andor.watchit.network.endpoints.TopRatedMovieListEndPointImpl

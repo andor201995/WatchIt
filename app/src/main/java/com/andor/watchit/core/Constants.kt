@@ -1,4 +1,4 @@
-package com.andor.watchit.core.di.application
+package com.andor.watchit.core
 
 object Constants {
 

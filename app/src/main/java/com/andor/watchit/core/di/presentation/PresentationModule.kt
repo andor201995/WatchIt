@@ -1,7 +1,7 @@
 package com.andor.watchit.core.di.presentation
 
 import android.app.Activity
-import com.andor.watchit.screens.topratedmovielist.ViewMvcFactory
+import com.andor.watchit.screens.common.ViewMvcFactory
 import dagger.Module
 import dagger.Provides
 

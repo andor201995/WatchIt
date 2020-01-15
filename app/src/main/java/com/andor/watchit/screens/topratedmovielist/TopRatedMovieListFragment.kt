@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.andor.watchit.R
 import com.andor.watchit.screens.common.ViewModelFactory
+import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -32,7 +33,7 @@ class TopRatedMovieListFragment : BaseFragment() {
         }
 
         override fun onNext(t: TopRatedMovieScreenState) {
-
+            val listOfTopRatedMovie = t.listOfTopRatedMovie
         }
 
         override fun onError(e: Throwable) {

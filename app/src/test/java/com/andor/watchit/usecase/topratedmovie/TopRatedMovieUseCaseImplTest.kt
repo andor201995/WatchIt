@@ -14,22 +14,21 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class TopRatedMovieUseCaseTest {
+class TopRatedMovieUseCaseImplTest {
     // region constants ----------------------------------------------------------------------------
     // endregion constants -------------------------------------------------------------------------
 
     // region helper fields ------------------------------------------------------------------------
     @Mock
     lateinit var mTopRatedMovieListEndPointMock: TopRatedMovieListEndPoint
+    private val testObserver = TestObserver<TopRatedMovieUseCaseImpl.FetchResult>()
     // end region helper fields --------------------------------------------------------------------
 
-    private lateinit var systemUT: TopRatedMovieUseCase
-
-    private val testObserver = TestObserver<TopRatedMovieUseCase.FetchResult>()
+    private lateinit var systemUT: TopRatedMovieUseCaseImpl
 
     @Before
     fun setup() {
-        systemUT = TopRatedMovieUseCase(mTopRatedMovieListEndPointMock)
+        systemUT = TopRatedMovieUseCaseImpl(mTopRatedMovieListEndPointMock)
         // initial state setup
     }
 
@@ -45,7 +44,7 @@ class TopRatedMovieUseCaseTest {
         verify(mTopRatedMovieListEndPointMock).onFetchTopRatedMovieListAndNotify(systemUT)
 
         testObserver.assertValue {
-            it == TopRatedMovieUseCase.FetchResult.Success(Convertor.convertFrom(TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA))
+            it == TopRatedMovieUseCaseImpl.FetchResult.Success(Convertor.convertFrom(TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA))
         }
 
     }
@@ -61,7 +60,7 @@ class TopRatedMovieUseCaseTest {
         //Assert
         verify(mTopRatedMovieListEndPointMock).onFetchTopRatedMovieListAndNotify(systemUT)
         testObserver.assertValue {
-            it is TopRatedMovieUseCase.FetchResult.Failure
+            it is TopRatedMovieUseCaseImpl.FetchResult.Failure
         }
     }
 
