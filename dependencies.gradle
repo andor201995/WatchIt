@@ -16,6 +16,7 @@ ext {
     retrofit_versiom = '2.6.2'
     mockwebserver_version = '4.2.1'
     java_version = '1.8'
+    rxjava_version = '2.2.17'
 
     dependencies = [
             kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -43,7 +44,8 @@ ext {
 
             //Retrofit
             gson_converter         : "com.squareup.retrofit2:converter-gson:$retrofit_versiom",
-            retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_versiom"
+            retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_versiom",
+            rxjava         : "io.reactivex.rxjava2:rxjava:$rxjava_version"
 
 
     ]

@@ -62,7 +62,7 @@ class TopRatedMovieListEndPointImplTest {
         //Act
         systemUT.onFetchTopRatedMovieListAndNotify(listener)
         //Assert
-        verify(listener, times(1)).onFetchSuccess(TestData.SERVER_RESPONSE_WEATHER_SCHEMA)
+        verify(listener, times(1)).onFetchSuccess(TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA)
     }
 
 
