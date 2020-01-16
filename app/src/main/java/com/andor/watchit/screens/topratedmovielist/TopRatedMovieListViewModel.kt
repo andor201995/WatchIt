@@ -33,7 +33,7 @@ class TopRatedMovieListViewModel(private val topRatedMovieUseCase: TopRatedMovie
                     screenStateStream.onNext(
                         TopRatedMovieScreenState(
                             listOf(),
-                            ScreenStatus.FETCH_SUCCESS
+                            ScreenStatus.FETCH_FAILED
                         )
                     )
                 }
@@ -55,6 +55,9 @@ class TopRatedMovieListViewModel(private val topRatedMovieUseCase: TopRatedMovie
 
 
     fun fetchTopRatedMovieAndNotify() {
+
+        screenStateStream.onNext(TopRatedMovieScreenState(listOf(), ScreenStatus.LOADING))
+
         topRatedMovieUseCase.fetchTopRatedMovieAndNotify()
     }
 }

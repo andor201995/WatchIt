@@ -8,5 +8,5 @@ data class TopRatedMovieScreenState(
 )
 
 enum class ScreenStatus {
-    LOADING, FETCH_SUCCESS, FETCH_FAILED
+    LOADING, FETCH_SUCCESS, FETCH_FAILED, IDEAL
 }

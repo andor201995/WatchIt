@@ -7,9 +7,9 @@ import retrofit2.http.Query
 
 interface MovieApi {
 
-    @GET("/movie/popular")
+    @GET("movie/popular")
     fun fetchTopRatedMovie(
-        @Query("language") language:String = "en-US",
-        @Query("page") page:String = "1"
+        @Query("language") language: String = "en-US",
+        @Query("page") page: String = "1"
     ): Call<TopRatedMovieSchema>
 }

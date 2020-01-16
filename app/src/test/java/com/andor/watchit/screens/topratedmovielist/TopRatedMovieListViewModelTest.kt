@@ -47,33 +47,39 @@ class TopRatedMovieListViewModelTest {
     fun fetchTopRatedMovieAndNotify_fetchSuccess_returnValidData() {
         //Arrange
         systemUT.screenStateStream.subscribe(testObserver)
-        success()
         //Act
         systemUT.fetchTopRatedMovieAndNotify()
+        success()
         //Assert
         verify(mTopRatedMovieUseCaseMock).fetchTopRatedMovieAndNotify()
 
-        testObserver.assertValue {
-            it.listOfTopRatedMovie == Convertor.convertFrom(TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA) &&
-                    it.status == ScreenStatus.FETCH_SUCCESS
-        }
-
+        testObserver.assertValueSequence(
+            listOf(
+                TopRatedMovieScreenState(listOf(), ScreenStatus.LOADING),
+                TopRatedMovieScreenState(
+                    Convertor.convertFrom(TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA),
+                    ScreenStatus.FETCH_SUCCESS
+                )
+            )
+        )
     }
 
     @Test
     fun fetchTopRatedMovieAndNotify_fetchFail_returnFailStatus() {
         //Arrange
         systemUT.screenStateStream.subscribe(testObserver)
-        failure()
         //Act
         systemUT.fetchTopRatedMovieAndNotify()
+        failure()
         //Assert
         verify(mTopRatedMovieUseCaseMock).fetchTopRatedMovieAndNotify()
 
-        testObserver.assertValue {
-            it.listOfTopRatedMovie.isEmpty() &&
-                    it.status == ScreenStatus.FETCH_SUCCESS
-        }
+        testObserver.assertValueSequence(
+            listOf(
+                TopRatedMovieScreenState(listOf(), ScreenStatus.LOADING),
+                TopRatedMovieScreenState(listOf(), ScreenStatus.FETCH_FAILED)
+            )
+        )
 
     }
 

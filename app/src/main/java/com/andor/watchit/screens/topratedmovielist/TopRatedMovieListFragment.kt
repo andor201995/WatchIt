@@ -9,8 +9,8 @@ import com.andor.watchit.R
 import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 
 class TopRatedMovieListFragment : BaseFragment() {
@@ -19,27 +19,13 @@ class TopRatedMovieListFragment : BaseFragment() {
 
     private lateinit var mViewMvc: TopRatedMovieListViewMvc
 
+    private val compositeDisposable = CompositeDisposable()
+
     @Inject
     lateinit var mViewModelFactory: ViewModelFactory
 
     @Inject
     lateinit var mViewMvcFactory: ViewMvcFactory
-
-    private val mScreenStateObserver = object : Observer<TopRatedMovieScreenState> {
-        override fun onComplete() {
-        }
-
-        override fun onSubscribe(d: Disposable) {
-        }
-
-        override fun onNext(t: TopRatedMovieScreenState) {
-            val listOfTopRatedMovie = t.listOfTopRatedMovie
-        }
-
-        override fun onError(e: Throwable) {
-        }
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +36,8 @@ class TopRatedMovieListFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        mViewMvc = mViewMvcFactory.getTopRatedMovieMvc(container)
+
         return inflater.inflate(R.layout.top_rated_movie_list_fragment, container, false)
     }
 
@@ -62,6 +50,45 @@ class TopRatedMovieListFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
+
+        val mScreenStateObserver = object : DisposableObserver<TopRatedMovieScreenState>() {
+
+            override fun onNext(t: TopRatedMovieScreenState) {
+
+                when (t.status) {
+                    ScreenStatus.IDEAL -> {
+                        mViewModel.fetchTopRatedMovieAndNotify()
+                    }
+                    ScreenStatus.FETCH_SUCCESS -> {
+                        val listOfTopRatedMovie = t.listOfTopRatedMovie
+                    }
+                    ScreenStatus.FETCH_FAILED -> {
+
+                    }
+                    ScreenStatus.LOADING -> {
+
+                    }
+                }
+            }
+
+            override fun onComplete() {
+
+            }
+
+            override fun onError(e: Throwable) {
+            }
+
+        }
         mViewModel.screenStateStream.subscribe(mScreenStateObserver)
+        compositeDisposable.add(mScreenStateObserver)
+
+        if (mViewModel.screenStateStream.value == null || mViewModel.screenStateStream.value!!.status == ScreenStatus.IDEAL) {
+            mViewModel.fetchTopRatedMovieAndNotify()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        compositeDisposable.clear()
     }
 }
