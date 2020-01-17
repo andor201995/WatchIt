@@ -1,16 +1,18 @@
-package com.andor.watchit.screens.topratedmovielist
+package com.andor.watchit.screens.topratedmovielist.controller
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
-import com.andor.watchit.screens.topratedmovielist.topratedmoviemodel.ScreenStatus
-import com.andor.watchit.screens.topratedmovielist.topratedmoviemodel.TopRatedMovieListViewModel
-import com.andor.watchit.screens.topratedmovielist.topratedmoviemodel.TopRatedMovieScreenState
+import com.andor.watchit.screens.topratedmovielist.model.ScreenStatus
+import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieListViewModel
+import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieScreenState
+import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvc
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
@@ -28,6 +30,9 @@ class TopRatedMovieListFragment : BaseFragment() {
 
     @Inject
     lateinit var mViewMvcFactory: ViewMvcFactory
+
+    @Inject
+    lateinit var mScreenNavigator: ScreenNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +56,7 @@ class TopRatedMovieListFragment : BaseFragment() {
     override fun onStart() {
         super.onStart()
 
-        setUpScreenStateObserver()
+        bindScreenStateObserver()
 
         if (mViewModel.screenStateStream.value == null || mViewModel.screenStateStream.value!!.status == ScreenStatus.IDEAL) {
             mViewModel.fetchTopRatedMovieAndNotify()
@@ -63,7 +68,7 @@ class TopRatedMovieListFragment : BaseFragment() {
         compositeDisposable.clear()
     }
 
-    private fun setUpScreenStateObserver() {
+    private fun bindScreenStateObserver() {
         val mScreenStateObserver = object : DisposableObserver<TopRatedMovieScreenState>() {
 
             override fun onNext(t: TopRatedMovieScreenState) {
@@ -78,6 +83,7 @@ class TopRatedMovieListFragment : BaseFragment() {
                         mViewMvc.hideLoader()
                     }
                     ScreenStatus.FETCH_FAILED -> {
+                        mScreenNavigator.navigateToErrorScreen()
                         mViewMvc.hideLoader()
                     }
                     ScreenStatus.LOADING -> {

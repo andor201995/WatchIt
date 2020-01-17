@@ -3,11 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.topratedmovielist.TopRatedMovieListFragment">
+    tools:context=".screens.topratedmovielist.controller.TopRatedMovieListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/top_rated_movie_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/loader"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible" />
 
 </FrameLayout>

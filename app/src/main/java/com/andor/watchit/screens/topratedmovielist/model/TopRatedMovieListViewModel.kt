@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.topratedmovielist.topratedmoviemodel
+package com.andor.watchit.screens.topratedmovielist.model
 
 import androidx.lifecycle.ViewModel
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCase

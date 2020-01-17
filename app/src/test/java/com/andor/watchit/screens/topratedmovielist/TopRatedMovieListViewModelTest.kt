@@ -2,9 +2,9 @@ package com.andor.watchit.screens.topratedmovielist
 
 import com.andor.watchit.core.Convertor
 import com.andor.watchit.helper.TestData
-import com.andor.watchit.screens.topratedmovielist.topratedmoviemodel.ScreenStatus
-import com.andor.watchit.screens.topratedmovielist.topratedmoviemodel.TopRatedMovieListViewModel
-import com.andor.watchit.screens.topratedmovielist.topratedmoviemodel.TopRatedMovieScreenState
+import com.andor.watchit.screens.topratedmovielist.model.ScreenStatus
+import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieListViewModel
+import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieScreenState
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCase
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCaseImpl
 import com.nhaarman.mockitokotlin2.verify

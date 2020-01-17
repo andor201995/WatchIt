@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.topratedmovielist
+package com.andor.watchit.screens.topratedmovielist.view
 
 import com.andor.watchit.screens.common.mvc.ViewMvc
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie

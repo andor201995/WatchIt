@@ -1,8 +1,9 @@
-package com.andor.watchit.screens.topratedmovielist.topratedlistitem
+package com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.controller
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.screens.common.ViewMvcFactory
+import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvc
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
 
 class TopRatedMovieListAdapter(private val viewMvcFactory: ViewMvcFactory) :

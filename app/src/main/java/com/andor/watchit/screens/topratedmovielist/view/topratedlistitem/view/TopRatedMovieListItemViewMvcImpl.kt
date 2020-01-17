@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.topratedmovielist.topratedlistitem
+package com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
