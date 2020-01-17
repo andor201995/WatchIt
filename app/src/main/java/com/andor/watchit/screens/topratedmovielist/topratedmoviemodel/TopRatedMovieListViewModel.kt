@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.topratedmovielist
+package com.andor.watchit.screens.topratedmovielist.topratedmoviemodel
 
 import androidx.lifecycle.ViewModel
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCase
@@ -56,7 +56,12 @@ class TopRatedMovieListViewModel(private val topRatedMovieUseCase: TopRatedMovie
 
     fun fetchTopRatedMovieAndNotify() {
 
-        screenStateStream.onNext(TopRatedMovieScreenState(listOf(), ScreenStatus.LOADING))
+        screenStateStream.onNext(
+            TopRatedMovieScreenState(
+                listOf(),
+                ScreenStatus.LOADING
+            )
+        )
 
         topRatedMovieUseCase.fetchTopRatedMovieAndNotify()
     }

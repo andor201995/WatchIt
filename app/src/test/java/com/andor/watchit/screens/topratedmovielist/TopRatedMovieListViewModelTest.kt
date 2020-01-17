@@ -2,6 +2,9 @@ package com.andor.watchit.screens.topratedmovielist
 
 import com.andor.watchit.core.Convertor
 import com.andor.watchit.helper.TestData
+import com.andor.watchit.screens.topratedmovielist.topratedmoviemodel.ScreenStatus
+import com.andor.watchit.screens.topratedmovielist.topratedmoviemodel.TopRatedMovieListViewModel
+import com.andor.watchit.screens.topratedmovielist.topratedmoviemodel.TopRatedMovieScreenState
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCase
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCaseImpl
 import com.nhaarman.mockitokotlin2.verify
@@ -34,7 +37,10 @@ class TopRatedMovieListViewModelTest {
     @Before
     fun setup() {
         whenever(mTopRatedMovieUseCaseMock.getResultStream()).thenReturn(fetchStream)
-        systemUT = TopRatedMovieListViewModel(mTopRatedMovieUseCaseMock)
+        systemUT =
+            TopRatedMovieListViewModel(
+                mTopRatedMovieUseCaseMock
+            )
         // initial state setup
     }
 
@@ -55,7 +61,10 @@ class TopRatedMovieListViewModelTest {
 
         testObserver.assertValueSequence(
             listOf(
-                TopRatedMovieScreenState(listOf(), ScreenStatus.LOADING),
+                TopRatedMovieScreenState(
+                    listOf(),
+                    ScreenStatus.LOADING
+                ),
                 TopRatedMovieScreenState(
                     Convertor.convertFrom(TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA),
                     ScreenStatus.FETCH_SUCCESS
@@ -76,8 +85,14 @@ class TopRatedMovieListViewModelTest {
 
         testObserver.assertValueSequence(
             listOf(
-                TopRatedMovieScreenState(listOf(), ScreenStatus.LOADING),
-                TopRatedMovieScreenState(listOf(), ScreenStatus.FETCH_FAILED)
+                TopRatedMovieScreenState(
+                    listOf(),
+                    ScreenStatus.LOADING
+                ),
+                TopRatedMovieScreenState(
+                    listOf(),
+                    ScreenStatus.FETCH_FAILED
+                )
             )
         )
 

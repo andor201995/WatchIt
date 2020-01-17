@@ -17,6 +17,7 @@ ext {
     mockwebserver_version = '4.2.1'
     java_version = '1.8'
     rxjava_version = '2.2.17'
+    shimmer_version = '0.4.0@aar'
 
     dependencies = [
             kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -45,7 +46,10 @@ ext {
             //Retrofit
             gson_converter         : "com.squareup.retrofit2:converter-gson:$retrofit_versiom",
             retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_versiom",
-            rxjava         : "io.reactivex.rxjava2:rxjava:$rxjava_version"
+            rxjava                 : "io.reactivex.rxjava2:rxjava:$rxjava_version",
+
+            //FB shimmer
+            shimmer                : "com.facebook.shimmer:shimmer:$shimmer_version"
 
 
     ]

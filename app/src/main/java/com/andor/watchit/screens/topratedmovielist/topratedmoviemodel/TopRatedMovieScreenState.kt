@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.topratedmovielist
+package com.andor.watchit.screens.topratedmovielist.topratedmoviemodel
 
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
 
