@@ -1,12 +1,13 @@
-//noinspection GradleDependency
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
-    compileSdkVersion 29
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.andor.watchit"
@@ -22,27 +23,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = rootProject.ext.java_version
+        targetCompatibility = rootProject.ext.java_version
+    }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+    kapt "com.google.dagger:dagger-compiler:$rootProject.ext.dagger_version"
 
-    //androidX
-    implementation "androidx.appcompat:appcompat:$androidx_version"
-    implementation "androidx.core:core-ktx:$androidx_version"
-
-    //UI
-    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
-
-    // Testing
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$androidx_text_ext"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_version"
-
-    //Navigation
-    implementation "androidx.navigation:navigation-fragment:$navigation_component_version"
-    implementation "androidx.navigation:navigation-ui:$navigation_component_version"
-
-
+    implementation rootProject.ext.dependencies.values()
+    testImplementation rootProject.ext.test_dependencies.values()
 }
