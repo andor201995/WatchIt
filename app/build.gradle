@@ -7,14 +7,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+    compileSdkVersion Version.compileSdk
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.andor.watchit"
-        minSdkVersion 16
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        applicationId ApplicationId.id
+        minSdkVersion Version.minSdk
+        targetSdkVersion Version.targetSdk
+        versionCode Releases.versionCode
+        versionName Releases.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -24,19 +24,39 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = rootProject.ext.java_version
-        targetCompatibility = rootProject.ext.java_version
+        sourceCompatibility = Version.java
+        targetCompatibility = Version.java
     }
 
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
-    kapt "com.google.dagger:dagger-compiler:$rootProject.ext.dagger_version"
 
-    implementation rootProject.ext.dependencies.values()
-    testImplementation rootProject.ext.test_dependencies.values()
+    implementation Libraries.kotlin
+    implementation Libraries.appcompat
+    implementation Libraries.androidxcore
+    implementation Libraries.constraintlayout
+    implementation Libraries.navigation_fragment
+    implementation Libraries.navigation_ui
+    implementation Libraries.legacy
+    implementation Libraries.lifecycle_extensions
+    implementation Libraries.lifecycle_viewmodel_ktx
+
+    implementation Libraries.dagger
+    implementation Libraries.dagger_android
+    implementation Libraries.dagger_android_support
+    kapt Libraries.dagger_compiler
+
+    implementation Libraries.gson_converter
+    implementation Libraries.retrofit
+    implementation Libraries.rxjava
+    implementation Libraries.shimmer
+
+    testImplementation TestLibraries.junit
+    testImplementation TestLibraries.junit_ext
+    testImplementation TestLibraries.espresso
+    testImplementation TestLibraries.mockito_kotlin
+    testImplementation TestLibraries.mockwebserver
+
 }
