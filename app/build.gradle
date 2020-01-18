@@ -37,23 +37,29 @@ dependencies {
     implementation Libraries.appcompat
     implementation Libraries.androidxcore
     implementation Libraries.constraintlayout
+
     implementation Libraries.navigation_fragment
     implementation Libraries.navigation_ui
+
     implementation Libraries.legacy
     implementation Libraries.lifecycle_extensions
     implementation Libraries.lifecycle_viewmodel_ktx
 
     implementation Libraries.dagger
-    implementation Libraries.dagger_android
-    implementation Libraries.dagger_android_support
-
     kapt Libraries.dagger_compiler
 
     implementation Libraries.gson_converter
     implementation Libraries.retrofit
+    implementation Libraries.adapter_rxjava
+    implementation Libraries.logging_interceptor
+
     implementation Libraries.rxjava
+    implementation Libraries.rxandroid
+
     implementation Libraries.shimmer
     implementation Libraries.picasso
+    implementation Libraries.pagination
+
 
     testImplementation TestLibraries.junit
     testImplementation TestLibraries.junit_ext
