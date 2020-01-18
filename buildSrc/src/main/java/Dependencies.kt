@@ -34,6 +34,7 @@ object Version {
     const val java = "1.8"
     const val rxjava = "2.2.17"
     const val shimmer = "0.5.0@aar"
+    const val picasso = "2.71828"
 }
 
 object Libraries {
@@ -74,6 +75,10 @@ object Libraries {
 
     //FB shimmer
     const val shimmer = "com.facebook.shimmer:shimmer:${Version.shimmer}"
+
+    //Picasso
+    const val picasso = "com.squareup.picasso:picasso:${Version.picasso}"
+
 }
 
 object TestLibraries {

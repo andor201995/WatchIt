@@ -8,8 +8,9 @@ import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvcImpl
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvcImpl
+import com.squareup.picasso.Picasso
 
-class ViewMvcFactory(private val layoutInflater: LayoutInflater) {
+class ViewMvcFactory(private val layoutInflater: LayoutInflater, private val picasso: Picasso) {
     fun getTopRatedMovieMvc(parent: ViewGroup?): TopRatedMovieListViewMvc {
         return TopRatedMovieListViewMvcImpl(
             parent,
@@ -21,7 +22,8 @@ class ViewMvcFactory(private val layoutInflater: LayoutInflater) {
     fun getTopRatedMovieListItemViewMvc(parent: ViewGroup?): TopRatedMovieListItemViewMvc {
         return TopRatedMovieListItemViewMvcImpl(
             parent,
-            layoutInflater
+            layoutInflater,
+            picasso
         )
     }
 

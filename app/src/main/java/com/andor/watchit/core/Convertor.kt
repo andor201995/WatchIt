@@ -9,7 +9,8 @@ object Convertor {
         topRatedMovieSchema.results.forEach {
             listOfTopRatedMovie.add(
                 TopRatedMovie(
-                    originalTitle = it.original_title
+                    originalTitle = it.original_title,
+                    posterPath = it.poster_path
                 )
             )
         }

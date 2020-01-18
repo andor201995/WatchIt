@@ -53,6 +53,7 @@ dependencies {
     implementation Libraries.retrofit
     implementation Libraries.rxjava
     implementation Libraries.shimmer
+    implementation Libraries.picasso
 
     testImplementation TestLibraries.junit
     testImplementation TestLibraries.junit_ext
