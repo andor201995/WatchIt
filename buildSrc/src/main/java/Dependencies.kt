@@ -1,9 +1,9 @@
 object ApplicationId {
-    val id = "com.andor.watchit"
+    const val id = "com.andor.watchit"
 }
 
 object Modules {
-    val app = ":app"
+    const val app = ":app"
 }
 
 object Releases {
@@ -17,6 +17,7 @@ object Version {
     const val compileSdk = 29
     const val minSdk = 16
     const val targetSdk = 29
+    const val build_tool = "29.0.2"
     const val kotlin = "1.3.61"
     const val androidx = "1.1.0"
     const val junit_ext = "1.1.1"
@@ -26,13 +27,13 @@ object Version {
     const val junit = "4.13"
     const val expresso = "3.2.0"
     const val navigation_component = "2.1.0"
-    const val dagger = "2.24"
-    const val mockito_kotlin = "2.2.0"
-    const val retrofit = "2.6.2"
-    const val mockwebserver = "4.2.1"
+    const val dagger = "2.25.4"
+    const val mockito_kotlin = "2.1.0"
+    const val retrofit = "2.7.1"
+    const val mockwebserver = "4.3.0"
     const val java = "1.8"
     const val rxjava = "2.2.17"
-    const val shimmer = "0.4.0@aar"
+    const val shimmer = "0.5.0@aar"
 }
 
 object Libraries {
@@ -87,5 +88,4 @@ object TestLibraries {
     const val mockito_kotlin =
         "com.nhaarman.mockitokotlin2:mockito-kotlin:${Version.mockito_kotlin}"
     const val mockwebserver = "com.squareup.okhttp3:mockwebserver:${Version.mockwebserver}"
-
 }
