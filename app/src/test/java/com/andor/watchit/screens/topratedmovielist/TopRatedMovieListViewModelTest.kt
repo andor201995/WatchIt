@@ -5,7 +5,9 @@ import com.andor.watchit.network.helper.Converter
 import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieListViewModel
 import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieScreenState
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCaseImpl
+import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSource
 import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSourceFactory
+import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.observers.TestObserver
 import io.reactivex.subjects.PublishSubject
 import org.junit.After
@@ -27,8 +29,13 @@ class TopRatedMovieListViewModelTest {
     // region helper fields ------------------------------------------------------------------------
     @Mock
     private lateinit var mTopRatedMovieDataSourceFactory: TopRatedMovieDataSourceFactory
+    @Mock
+    private lateinit var mTopRatedMovieDataSource: TopRatedMovieDataSource
+
     private val testObserver = TestObserver<TopRatedMovieScreenState>()
     private val fetchStream: PublishSubject<TopRatedMovieUseCaseImpl.FetchResult> =
+        PublishSubject.create()
+    private val networkStream: PublishSubject<TopRatedMovieDataSource.NetworkState> =
         PublishSubject.create()
 
     // end region helper fields --------------------------------------------------------------------
@@ -37,6 +44,10 @@ class TopRatedMovieListViewModelTest {
 
     @Before
     fun setup() {
+        whenever(mTopRatedMovieDataSourceFactory.topRatedMovieDataSource).thenReturn(
+            mTopRatedMovieDataSource
+        )
+        whenever(mTopRatedMovieDataSource.networkStateStream).thenReturn(networkStream)
         systemUT =
             TopRatedMovieListViewModel(
                 mTopRatedMovieDataSourceFactory
