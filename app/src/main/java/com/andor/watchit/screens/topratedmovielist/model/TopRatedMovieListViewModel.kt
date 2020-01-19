@@ -1,68 +1,36 @@
 package com.andor.watchit.screens.topratedmovielist.model
 
 import androidx.lifecycle.ViewModel
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCase
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCaseImpl
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
+import androidx.paging.PagedList
+import androidx.paging.RxPagedListBuilder
+import com.andor.watchit.core.RxBaseObserver
+import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
+import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSourceFactory
+import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 
-class TopRatedMovieListViewModel(private val topRatedMovieUseCase: TopRatedMovieUseCase) :
+
+class TopRatedMovieListViewModel(topRatedMovieDataSourceFactory: TopRatedMovieDataSourceFactory) :
     ViewModel() {
-    val screenStateStream: BehaviorSubject<TopRatedMovieScreenState> =
-        BehaviorSubject.create()
 
-    private val useCaseObserver = object : Observer<TopRatedMovieUseCaseImpl.FetchResult> {
-        override fun onComplete() {
-        }
-
-        override fun onSubscribe(d: Disposable) {
-        }
-
-        override fun onNext(t: TopRatedMovieUseCaseImpl.FetchResult) {
-            when (t) {
-                is TopRatedMovieUseCaseImpl.FetchResult.Success -> {
-                    screenStateStream.onNext(
-                        TopRatedMovieScreenState(
-                            t.topRatedMovieList,
-                            ScreenStatus.FETCH_SUCCESS
-                        )
-                    )
-                }
-                is TopRatedMovieUseCaseImpl.FetchResult.Failure -> {
-                    screenStateStream.onNext(
-                        TopRatedMovieScreenState(
-                            listOf(),
-                            ScreenStatus.FETCH_FAILED
-                        )
-                    )
-                }
-            }
-        }
-
-        override fun onError(e: Throwable) {
-        }
-
-    }
+    val screenStateStream: BehaviorSubject<TopRatedMovieScreenState> = BehaviorSubject.create()
 
     init {
-        bindStream()
-    }
+        val pagedListConfig = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(10)
+            .setPageSize(20).build()
 
-    private fun bindStream() {
-        topRatedMovieUseCase.getResultStream().subscribe(useCaseObserver)
-    }
-
-
-    fun fetchTopRatedMovieAndNotify() {
-
-        screenStateStream.onNext(
-            TopRatedMovieScreenState(
-                listOf(),
-                ScreenStatus.LOADING
-            )
-        )
-
-        topRatedMovieUseCase.fetchTopRatedMovieAndNotify()
+        RxPagedListBuilder(topRatedMovieDataSourceFactory, pagedListConfig)
+            .setFetchScheduler(Schedulers.io())
+            .buildObservable().subscribe(object : RxBaseObserver<PagedList<TopRatedMovie>>() {
+                override fun onNext(t: PagedList<TopRatedMovie>) {
+                    screenStateStream.onNext(
+                        TopRatedMovieScreenState(
+                            ScreenStatus.SUCCESS(t)
+                        )
+                    )
+                }
+            })
     }
 }

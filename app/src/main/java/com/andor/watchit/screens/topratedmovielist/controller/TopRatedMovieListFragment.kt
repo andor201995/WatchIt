@@ -55,12 +55,7 @@ class TopRatedMovieListFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-
         bindScreenStateObserver()
-
-        if (mViewModel.screenStateStream.value == null || mViewModel.screenStateStream.value!!.status == ScreenStatus.IDEAL) {
-            mViewModel.fetchTopRatedMovieAndNotify()
-        }
     }
 
     override fun onStop() {
@@ -74,19 +69,16 @@ class TopRatedMovieListFragment : BaseFragment() {
             override fun onNext(t: TopRatedMovieScreenState) {
 
                 when (t.status) {
-                    ScreenStatus.IDEAL -> {
-                        mViewModel.fetchTopRatedMovieAndNotify()
-                    }
-                    ScreenStatus.FETCH_SUCCESS -> {
-                        val listOfTopRatedMovie = t.listOfTopRatedMovie
+                    is ScreenStatus.SUCCESS -> {
+                        val listOfTopRatedMovie = t.status.listOfTopRatedMovie
                         mViewMvc.updateList(listOfTopRatedMovie)
                         mViewMvc.hideLoader()
                     }
-                    ScreenStatus.FETCH_FAILED -> {
+                    is ScreenStatus.FAILED -> {
                         mScreenNavigator.navigateToErrorScreen()
                         mViewMvc.hideLoader()
                     }
-                    ScreenStatus.LOADING -> {
+                    is ScreenStatus.LOADING -> {
                         mViewMvc.showLoader()
                     }
                 }

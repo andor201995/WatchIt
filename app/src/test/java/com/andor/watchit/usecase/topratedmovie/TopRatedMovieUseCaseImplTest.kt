@@ -1,8 +1,8 @@
 package com.andor.watchit.usecase.topratedmovie
 
-import com.andor.watchit.core.Convertor
 import com.andor.watchit.helper.TestData
 import com.andor.watchit.network.endpoints.TopRatedMovieListEndPoint
+import com.andor.watchit.network.helper.Converter
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -44,13 +44,19 @@ class TopRatedMovieUseCaseImplTest {
         //Arrange
         success()
         //Act
-        systemUT.getResultStream().subscribe(testObserver)
-        systemUT.fetchTopRatedMovieAndNotify()
+        systemUT.fetchTopRatedMovieAndNotify(1).subscribe(testObserver)
         //Assert
-        verify(mTopRatedMovieListEndPointMock).onFetchTopRatedMovieListAndNotify(systemUT)
-
+        verify(mTopRatedMovieListEndPointMock).onFetchTopRatedMovieListAndNotify(
+            any(),
+            any()
+        )
+        val testServerResponse = TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA
         testObserver.assertValue {
-            it == TopRatedMovieUseCaseImpl.FetchResult.Success(Convertor.convertFrom(TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA))
+            it == TopRatedMovieUseCaseImpl.FetchResult.Success(
+                Converter.convertFrom(testServerResponse),
+                testServerResponse.page,
+                testServerResponse.total_pages
+            )
         }
 
     }
@@ -61,10 +67,12 @@ class TopRatedMovieUseCaseImplTest {
         //Arrange
         failure()
         //Act
-        systemUT.getResultStream().subscribe(testObserver)
-        systemUT.fetchTopRatedMovieAndNotify()
+        systemUT.fetchTopRatedMovieAndNotify(1).subscribe(testObserver)
         //Assert
-        verify(mTopRatedMovieListEndPointMock).onFetchTopRatedMovieListAndNotify(systemUT)
+        verify(mTopRatedMovieListEndPointMock).onFetchTopRatedMovieListAndNotify(
+            any(),
+            any()
+        )
         testObserver.assertValue {
             it is TopRatedMovieUseCaseImpl.FetchResult.Failure
         }
@@ -73,16 +81,26 @@ class TopRatedMovieUseCaseImplTest {
     // region helper methods -----------------------------------------------------------------------
 
     private fun failure() {
-        whenever(mTopRatedMovieListEndPointMock.onFetchTopRatedMovieListAndNotify(any())).thenAnswer {
-            val listener = it.getArgument(0) as TopRatedMovieListEndPoint.Listener
+        whenever(
+            mTopRatedMovieListEndPointMock.onFetchTopRatedMovieListAndNotify(
+                any(),
+                any()
+            )
+        ).thenAnswer {
+            val listener = it.getArgument(1) as TopRatedMovieListEndPoint.Listener
             listener.onFetchFailed()
             listener
         }
     }
 
     private fun success() {
-        whenever(mTopRatedMovieListEndPointMock.onFetchTopRatedMovieListAndNotify(any())).thenAnswer {
-            val listener = it.getArgument(0) as TopRatedMovieListEndPoint.Listener
+        whenever(
+            mTopRatedMovieListEndPointMock.onFetchTopRatedMovieListAndNotify(
+                any(),
+                any()
+            )
+        ).thenAnswer {
+            val listener = it.getArgument(1) as TopRatedMovieListEndPoint.Listener
             listener.onFetchSuccess(TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA)
             listener
         }

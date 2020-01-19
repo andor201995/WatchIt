@@ -1,41 +1,46 @@
 package com.andor.watchit.usecase.topratedmovie
 
-import com.andor.watchit.core.Convertor
 import com.andor.watchit.network.endpoints.TopRatedMovieListEndPoint
+import com.andor.watchit.network.helper.Converter
 import com.andor.watchit.network.schema.TopRatedMovieSchema
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.SingleSubject
 
 class TopRatedMovieUseCaseImpl(private val topRatedMovieListEndPoint: TopRatedMovieListEndPoint) :
-    TopRatedMovieListEndPoint.Listener, TopRatedMovieUseCase {
+    TopRatedMovieUseCase {
 
     sealed class FetchResult {
-        data class Success(val topRatedMovieList: List<TopRatedMovie>) : FetchResult()
+        data class Success(
+            val topRatedMovieList: List<TopRatedMovie>,
+            val pageNumber: Int,
+            val maxPageCount: Int
+        ) : FetchResult()
+
         object Failure : FetchResult()
     }
 
-    private val topRatedMovieFetchEventStream: PublishSubject<FetchResult> = PublishSubject.create()
+    override fun fetchTopRatedMovieAndNotify(pageNumber: Int): SingleSubject<FetchResult> {
+        val topRatedMovieFetchEvent: SingleSubject<FetchResult> = SingleSubject.create()
+        topRatedMovieListEndPoint.onFetchTopRatedMovieListAndNotify(pageNumber,
+            object : TopRatedMovieListEndPoint.Listener {
+                override fun onFetchSuccess(topRatedMovieSchema: TopRatedMovieSchema) {
+                    topRatedMovieFetchEvent.onSuccess(
+                        FetchResult.Success(
+                            Converter.convertFrom(
+                                topRatedMovieSchema
+                            ),
+                            topRatedMovieSchema.page,
+                            topRatedMovieSchema.total_pages
+                        )
+                    )
+                }
 
-    override fun fetchTopRatedMovieAndNotify() {
-        topRatedMovieListEndPoint.onFetchTopRatedMovieListAndNotify(this)
-    }
+                override fun onFetchFailed() {
+                    topRatedMovieFetchEvent.onSuccess(
+                        FetchResult.Failure
+                    )
+                }
+            })
 
-    override fun onFetchSuccess(topRatedMovieSchema: TopRatedMovieSchema) {
-        topRatedMovieFetchEventStream.onNext(
-            FetchResult.Success(
-                Convertor.convertFrom(
-                    topRatedMovieSchema
-                )
-            )
-        )
-    }
-
-    override fun onFetchFailed() {
-        topRatedMovieFetchEventStream.onNext(
-            FetchResult.Failure
-        )
-    }
-
-    override fun getResultStream(): PublishSubject<FetchResult> {
-        return topRatedMovieFetchEventStream
+        return topRatedMovieFetchEvent
     }
 }

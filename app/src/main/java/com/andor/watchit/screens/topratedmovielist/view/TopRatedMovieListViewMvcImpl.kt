@@ -3,6 +3,7 @@ package com.andor.watchit.screens.topratedmovielist.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.widget.ContentLoadingProgressBar
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -49,8 +50,8 @@ class TopRatedMovieListViewMvcImpl(
         )
     }
 
-    override fun updateList(listOfTopRatedMovie: List<TopRatedMovie>) {
-        adapter.updateList(listOfTopRatedMovie)
+    override fun updateList(listOfTopRatedMovie: PagedList<TopRatedMovie>) {
+        adapter.submitList(listOfTopRatedMovie)
     }
 
     override fun showLoader() {

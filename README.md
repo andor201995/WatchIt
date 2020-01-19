@@ -25,3 +25,4 @@ Reference:
   - [Kotlin DSL](https://proandroiddev.com/gradle-dependency-management-with-kotlin-94eed4df9a28)
   - [Pagination](https://proandroiddev.com/8-steps-to-implement-paging-library-in-android-d02500f7fffe)
   - [Architecture](https://www.techyourchance.com/architecture-diagrams-android-applications/)
+  - [Mocked PageList](https://stackoverflow.com/a/52511874/7972699)

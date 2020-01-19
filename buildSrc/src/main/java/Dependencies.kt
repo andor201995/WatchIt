@@ -42,7 +42,7 @@ object Version {
 
     const val shimmer = "0.5.0@aar"
     const val picasso = "2.71828"
-    const val pagination = "1.0.1"
+    const val pagination = "2.1.1"
 
 }
 
@@ -52,6 +52,9 @@ object Libraries {
     //AndroidX
     const val appcompat = "androidx.appcompat:appcompat:${Version.androidx}"
     const val androidxcore = "androidx.core:core-ktx:${Version.androidx}"
+    const val pagination = "androidx.paging:paging-runtime:${Version.pagination}"
+    const val pagination_rxjava = "androidx.paging:paging-rxjava2:${Version.pagination}"
+
 
     //UI
     const val constraintlayout =
@@ -92,9 +95,6 @@ object Libraries {
 
     //Picasso
     const val picasso = "com.squareup.picasso:picasso:${Version.picasso}"
-
-    //Pagination
-    const val pagination = "android.arch.paging:runtime:${Version.pagination}"
 
 }
 

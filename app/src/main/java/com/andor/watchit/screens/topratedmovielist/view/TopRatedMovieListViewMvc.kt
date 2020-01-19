@@ -1,11 +1,12 @@
 package com.andor.watchit.screens.topratedmovielist.view
 
+import androidx.paging.PagedList
 import com.andor.watchit.screens.common.mvc.ViewMvc
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
 
-interface TopRatedMovieListViewMvc:
+interface TopRatedMovieListViewMvc :
     ViewMvc {
-    fun updateList(listOfTopRatedMovie: List<TopRatedMovie>)
+    fun updateList(listOfTopRatedMovie: PagedList<TopRatedMovie>)
     fun showLoader()
     fun hideLoader()
 }

@@ -7,5 +7,8 @@ interface TopRatedMovieListEndPoint {
         fun onFetchSuccess(topRatedMovieSchema: TopRatedMovieSchema)
         fun onFetchFailed()
     }
-    fun onFetchTopRatedMovieListAndNotify(listener: Listener)
+    fun onFetchTopRatedMovieListAndNotify(
+        pageNumber: Int,
+        listener: Listener
+    )
 }
