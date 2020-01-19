@@ -5,6 +5,7 @@ import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
 import com.andor.watchit.core.RxBaseObserver
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
+import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSource
 import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSourceFactory
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
@@ -18,8 +19,8 @@ class TopRatedMovieListViewModel(topRatedMovieDataSourceFactory: TopRatedMovieDa
     init {
         val pagedListConfig = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
-            .setInitialLoadSizeHint(10)
-            .setPageSize(20).build()
+            .setPageSize(20)
+            .build()
 
         RxPagedListBuilder(topRatedMovieDataSourceFactory, pagedListConfig)
             .setFetchScheduler(Schedulers.io())
@@ -32,5 +33,23 @@ class TopRatedMovieListViewModel(topRatedMovieDataSourceFactory: TopRatedMovieDa
                     )
                 }
             })
+
+        topRatedMovieDataSourceFactory.topRatedMovieDataSource.networkStateStream.subscribe(object :
+            RxBaseObserver<TopRatedMovieDataSource.NetworkState>() {
+            override fun onNext(t: TopRatedMovieDataSource.NetworkState) {
+                when (t) {
+                    is TopRatedMovieDataSource.NetworkState.ErrorFirst -> {
+                        screenStateStream.onNext(TopRatedMovieScreenState(ScreenStatus.FAILED))
+                    }
+                    is TopRatedMovieDataSource.NetworkState.LoadingFirst -> {
+                        screenStateStream.onNext(TopRatedMovieScreenState(ScreenStatus.LOADING))
+                    }
+                    is TopRatedMovieDataSource.NetworkState.LoadingNext -> {
+                    }
+                    is TopRatedMovieDataSource.NetworkState.ErrorNext -> {
+                    }
+                }
+            }
+        })
     }
 }

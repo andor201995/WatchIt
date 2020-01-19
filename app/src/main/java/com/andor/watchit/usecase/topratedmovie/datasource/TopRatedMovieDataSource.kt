@@ -8,14 +8,18 @@ import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
 
 class TopRatedMovieDataSource(private val useCase: TopRatedMovieUseCase) :
     PageKeyedDataSource<Long, TopRatedMovie>() {
+
+    val networkStateStream: PublishSubject<NetworkState> = PublishSubject.create()
 
     override fun loadInitial(
         params: LoadInitialParams<Long>,
         callback: LoadInitialCallback<Long, TopRatedMovie>
     ) {
+        networkStateStream.onNext(NetworkState.LoadingFirst)
         useCase.fetchTopRatedMovieAndNotify(1)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -23,9 +27,13 @@ class TopRatedMovieDataSource(private val useCase: TopRatedMovieUseCase) :
                 override fun onSuccess(t: TopRatedMovieUseCaseImpl.FetchResult) {
                     when (t) {
                         is TopRatedMovieUseCaseImpl.FetchResult.Success -> {
+                            networkStateStream.onNext(NetworkState.Success)
                             if (t.pageNumber == 1) {
                                 callback.onResult(t.topRatedMovieList, null, 2L)
                             }
+                        }
+                        is TopRatedMovieUseCaseImpl.FetchResult.Failure -> {
+                            networkStateStream.onNext(NetworkState.ErrorFirst)
                         }
                     }
                 }
@@ -40,6 +48,7 @@ class TopRatedMovieDataSource(private val useCase: TopRatedMovieUseCase) :
     }
 
     override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, TopRatedMovie>) {
+        networkStateStream.onNext(NetworkState.LoadingNext)
         useCase.fetchTopRatedMovieAndNotify(params.key.toInt())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -47,10 +56,19 @@ class TopRatedMovieDataSource(private val useCase: TopRatedMovieUseCase) :
                 override fun onSuccess(t: TopRatedMovieUseCaseImpl.FetchResult) {
                     when (t) {
                         is TopRatedMovieUseCaseImpl.FetchResult.Success -> {
+                            networkStateStream.onNext(NetworkState.Success)
                             //check for last
                             val nextPage =
-                                if (t.maxPageCount.toLong() == params.key) null else params.key + 1
+                                if (t.maxPageCount.toLong() == params.key) {
+                                    networkStateStream.onNext(NetworkState.Completed)
+                                    null
+                                } else {
+                                    params.key + 1
+                                }
                             callback.onResult(t.topRatedMovieList, nextPage)
+                        }
+                        is TopRatedMovieUseCaseImpl.FetchResult.Failure -> {
+                            networkStateStream.onNext(NetworkState.ErrorNext)
                         }
                     }
                 }
@@ -67,5 +85,14 @@ class TopRatedMovieDataSource(private val useCase: TopRatedMovieUseCase) :
 
     override fun loadBefore(params: LoadParams<Long>, callback: LoadCallback<Long, TopRatedMovie>) {
         //leave it empty for now...
+    }
+
+    sealed class NetworkState {
+        object LoadingFirst : NetworkState()
+        object LoadingNext : NetworkState()
+        object ErrorFirst : NetworkState()
+        object ErrorNext : NetworkState()
+        object Completed : NetworkState()
+        object Success : NetworkState()
     }
 }
