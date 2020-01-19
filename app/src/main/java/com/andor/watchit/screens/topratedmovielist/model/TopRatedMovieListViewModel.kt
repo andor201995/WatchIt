@@ -16,7 +16,42 @@ class TopRatedMovieListViewModel(topRatedMovieDataSourceFactory: TopRatedMovieDa
 
     val screenStateStream: BehaviorSubject<TopRatedMovieScreenState> = BehaviorSubject.create()
 
+    private val networkObserver = object :
+        RxBaseObserver<TopRatedMovieDataSource.NetworkState>() {
+        override fun onNext(t: TopRatedMovieDataSource.NetworkState) {
+            when (t) {
+                is TopRatedMovieDataSource.NetworkState.ErrorFirst -> {
+                    screenStateStream.onNext(TopRatedMovieScreenState(ScreenStatus.FAILED))
+                }
+                is TopRatedMovieDataSource.NetworkState.LoadingFirst -> {
+                    screenStateStream.onNext(TopRatedMovieScreenState(ScreenStatus.LOADING))
+                }
+                is TopRatedMovieDataSource.NetworkState.LoadingNext -> {
+                }
+                is TopRatedMovieDataSource.NetworkState.ErrorNext -> {
+                }
+            }
+        }
+    }
+
+    private val pagedListObserver = object : RxBaseObserver<PagedList<TopRatedMovie>>() {
+        override fun onNext(t: PagedList<TopRatedMovie>) {
+            screenStateStream.onNext(
+                TopRatedMovieScreenState(
+                    ScreenStatus.SUCCESS(t)
+                )
+            )
+        }
+    }
+
     init {
+
+        topRatedMovieDataSourceFactory
+            .getDataSourceStream()
+            .flatMap {
+                it.networkStateStream
+            }.subscribe(networkObserver)
+
         val pagedListConfig = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
             .setPageSize(20)
@@ -24,32 +59,7 @@ class TopRatedMovieListViewModel(topRatedMovieDataSourceFactory: TopRatedMovieDa
 
         RxPagedListBuilder(topRatedMovieDataSourceFactory, pagedListConfig)
             .setFetchScheduler(Schedulers.io())
-            .buildObservable().subscribe(object : RxBaseObserver<PagedList<TopRatedMovie>>() {
-                override fun onNext(t: PagedList<TopRatedMovie>) {
-                    screenStateStream.onNext(
-                        TopRatedMovieScreenState(
-                            ScreenStatus.SUCCESS(t)
-                        )
-                    )
-                }
-            })
+            .buildObservable().subscribe(pagedListObserver)
 
-        topRatedMovieDataSourceFactory.topRatedMovieDataSource.networkStateStream.subscribe(object :
-            RxBaseObserver<TopRatedMovieDataSource.NetworkState>() {
-            override fun onNext(t: TopRatedMovieDataSource.NetworkState) {
-                when (t) {
-                    is TopRatedMovieDataSource.NetworkState.ErrorFirst -> {
-                        screenStateStream.onNext(TopRatedMovieScreenState(ScreenStatus.FAILED))
-                    }
-                    is TopRatedMovieDataSource.NetworkState.LoadingFirst -> {
-                        screenStateStream.onNext(TopRatedMovieScreenState(ScreenStatus.LOADING))
-                    }
-                    is TopRatedMovieDataSource.NetworkState.LoadingNext -> {
-                    }
-                    is TopRatedMovieDataSource.NetworkState.ErrorNext -> {
-                    }
-                }
-            }
-        })
     }
 }
