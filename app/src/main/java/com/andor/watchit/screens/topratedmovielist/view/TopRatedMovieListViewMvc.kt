@@ -9,4 +9,7 @@ interface TopRatedMovieListViewMvc :
     fun updateList(listOfTopRatedMovie: PagedList<TopRatedMovie>)
     fun showLoader()
     fun hideLoader()
+    fun showListLoadingError()
+    fun showListLoadingCompleted()
+    fun showListLoading()
 }

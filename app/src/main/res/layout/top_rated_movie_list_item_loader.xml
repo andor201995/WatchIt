@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loaderItemContainer"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/itemLoader"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/itemError"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_error_24px"
+        android:visibility="gone" />
+
+
+</FrameLayout>

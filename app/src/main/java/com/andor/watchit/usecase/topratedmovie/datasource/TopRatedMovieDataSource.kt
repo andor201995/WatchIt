@@ -13,13 +13,14 @@ import io.reactivex.subjects.PublishSubject
 class TopRatedMovieDataSource(private val useCase: TopRatedMovieUseCase) :
     PageKeyedDataSource<Long, TopRatedMovie>() {
 
-    val networkStateStream: PublishSubject<NetworkState> = PublishSubject.create()
+    val initialNetworkStateStream: PublishSubject<NetworkState.Initial> = PublishSubject.create()
+    val nextNetworkStateStream: PublishSubject<NetworkState.Next> = PublishSubject.create()
 
     override fun loadInitial(
         params: LoadInitialParams<Long>,
         callback: LoadInitialCallback<Long, TopRatedMovie>
     ) {
-        networkStateStream.onNext(NetworkState.LoadingFirst)
+        initialNetworkStateStream.onNext(NetworkState.Initial.Loading)
         useCase.fetchTopRatedMovieAndNotify(1)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -27,13 +28,13 @@ class TopRatedMovieDataSource(private val useCase: TopRatedMovieUseCase) :
                 override fun onSuccess(t: TopRatedMovieUseCaseImpl.FetchResult) {
                     when (t) {
                         is TopRatedMovieUseCaseImpl.FetchResult.Success -> {
-                            networkStateStream.onNext(NetworkState.Success)
+                            initialNetworkStateStream.onNext(NetworkState.Initial.Success)
                             if (t.pageNumber == 1) {
                                 callback.onResult(t.topRatedMovieList, null, 2L)
                             }
                         }
                         is TopRatedMovieUseCaseImpl.FetchResult.Failure -> {
-                            networkStateStream.onNext(NetworkState.ErrorFirst)
+                            initialNetworkStateStream.onNext(NetworkState.Initial.Error)
                         }
                     }
                 }
@@ -48,7 +49,7 @@ class TopRatedMovieDataSource(private val useCase: TopRatedMovieUseCase) :
     }
 
     override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, TopRatedMovie>) {
-        networkStateStream.onNext(NetworkState.LoadingNext)
+        nextNetworkStateStream.onNext(NetworkState.Next.Loading)
         useCase.fetchTopRatedMovieAndNotify(params.key.toInt())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -56,11 +57,11 @@ class TopRatedMovieDataSource(private val useCase: TopRatedMovieUseCase) :
                 override fun onSuccess(t: TopRatedMovieUseCaseImpl.FetchResult) {
                     when (t) {
                         is TopRatedMovieUseCaseImpl.FetchResult.Success -> {
-                            networkStateStream.onNext(NetworkState.Success)
+                            nextNetworkStateStream.onNext(NetworkState.Next.Success)
                             //check for last
                             val nextPage =
                                 if (t.maxPageCount.toLong() == params.key) {
-                                    networkStateStream.onNext(NetworkState.Completed)
+                                    nextNetworkStateStream.onNext(NetworkState.Next.Completed)
                                     null
                                 } else {
                                     params.key + 1
@@ -68,7 +69,7 @@ class TopRatedMovieDataSource(private val useCase: TopRatedMovieUseCase) :
                             callback.onResult(t.topRatedMovieList, nextPage)
                         }
                         is TopRatedMovieUseCaseImpl.FetchResult.Failure -> {
-                            networkStateStream.onNext(NetworkState.ErrorNext)
+                            nextNetworkStateStream.onNext(NetworkState.Next.Error)
                         }
                     }
                 }
@@ -88,11 +89,17 @@ class TopRatedMovieDataSource(private val useCase: TopRatedMovieUseCase) :
     }
 
     sealed class NetworkState {
-        object LoadingFirst : NetworkState()
-        object LoadingNext : NetworkState()
-        object ErrorFirst : NetworkState()
-        object ErrorNext : NetworkState()
-        object Completed : NetworkState()
-        object Success : NetworkState()
+        sealed class Initial : NetworkState() {
+            object Loading : Initial()
+            object Error : Initial()
+            object Success : Initial()
+        }
+
+        sealed class Next : NetworkState() {
+            object Loading : Next()
+            object Error : Next()
+            object Success : Next()
+            object Completed : Next()
+        }
     }
 }

@@ -5,16 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.paging.PagedList
+import com.andor.watchit.core.RxBaseObserver
 import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
-import com.andor.watchit.screens.topratedmovielist.model.ScreenStatus
 import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieListViewModel
-import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieScreenState
 import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvc
+import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
+import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSource
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableObserver
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class TopRatedMovieListFragment : BaseFragment() {
@@ -55,7 +58,8 @@ class TopRatedMovieListFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-        bindScreenStateObserver()
+        bindNetworkStateObserver()
+        bindPagedListStateObserver()
     }
 
     override fun onStop() {
@@ -63,36 +67,68 @@ class TopRatedMovieListFragment : BaseFragment() {
         compositeDisposable.clear()
     }
 
-    private fun bindScreenStateObserver() {
-        val mScreenStateObserver = object : DisposableObserver<TopRatedMovieScreenState>() {
 
-            override fun onNext(t: TopRatedMovieScreenState) {
+    private fun bindPagedListStateObserver() {
+        val pageListStateObserver =
+            object : RxBaseObserver<PagedList<TopRatedMovie>>() {
+                override fun onNext(t: PagedList<TopRatedMovie>) {
+                    mViewMvc.updateList(t)
+                }
+            }
+        mViewModel.topRatedMovieStream.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(pageListStateObserver)
 
-                when (t.status) {
-                    is ScreenStatus.SUCCESS -> {
-                        val listOfTopRatedMovie = t.status.listOfTopRatedMovie
-                        mViewMvc.updateList(listOfTopRatedMovie)
-                        mViewMvc.hideLoader()
-                    }
-                    is ScreenStatus.FAILED -> {
-                        mScreenNavigator.navigateToErrorScreen()
-                        mViewMvc.hideLoader()
-                    }
-                    is ScreenStatus.LOADING -> {
-                        mViewMvc.showLoader()
+        compositeDisposable.add(pageListStateObserver)
+
+    }
+
+    private fun bindNetworkStateObserver() {
+
+        val initialNetworkStateObserver =
+            object : RxBaseObserver<TopRatedMovieDataSource.NetworkState.Initial>() {
+                override fun onNext(t: TopRatedMovieDataSource.NetworkState.Initial) {
+                    when (t) {
+                        is TopRatedMovieDataSource.NetworkState.Initial.Success -> {
+                            mViewMvc.hideLoader()
+                        }
+                        is TopRatedMovieDataSource.NetworkState.Initial.Error -> {
+                            mViewMvc.hideLoader()
+                            mScreenNavigator.navigateToErrorScreen()
+                        }
+                        is TopRatedMovieDataSource.NetworkState.Initial.Loading -> {
+                            mViewMvc.showLoader()
+                        }
                     }
                 }
             }
 
-            override fun onComplete() {
-            }
+        mViewModel.initialNetworkStateStream.subscribe(initialNetworkStateObserver)
+        compositeDisposable.add(initialNetworkStateObserver)
 
-            override fun onError(e: Throwable) {
-                mViewMvc.hideLoader()
-            }
 
-        }
-        mViewModel.screenStateStream.subscribe(mScreenStateObserver)
-        compositeDisposable.add(mScreenStateObserver)
+        val nextNetworkStateObserver =
+            object : RxBaseObserver<TopRatedMovieDataSource.NetworkState.Next>() {
+                override fun onNext(t: TopRatedMovieDataSource.NetworkState.Next) {
+                    when (t) {
+                        is TopRatedMovieDataSource.NetworkState.Next.Success -> {
+                            //do nothing
+                        }
+                        is TopRatedMovieDataSource.NetworkState.Next.Error -> {
+                            mViewMvc.showListLoadingError()
+                        }
+                        is TopRatedMovieDataSource.NetworkState.Next.Loading -> {
+                            mViewMvc.showListLoading()
+                        }
+                        is TopRatedMovieDataSource.NetworkState.Next.Completed -> {
+                            mViewMvc.showListLoadingCompleted()
+                        }
+
+                    }
+                }
+            }
+        mViewModel.nextNetworkStateStream.subscribe(nextNetworkStateObserver)
+
+        compositeDisposable.add(nextNetworkStateObserver)
     }
 }

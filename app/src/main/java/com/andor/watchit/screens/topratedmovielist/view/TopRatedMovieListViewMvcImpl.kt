@@ -61,4 +61,16 @@ class TopRatedMovieListViewMvcImpl(
     override fun hideLoader() {
         loader.hide()
     }
+
+    override fun showListLoadingError() {
+        adapter.setListLoadingState(TopRatedMovieListAdapter.ListLoading.Error)
+    }
+
+    override fun showListLoadingCompleted() {
+        adapter.setListLoadingState(TopRatedMovieListAdapter.ListLoading.Completed)
+    }
+
+    override fun showListLoading() {
+        adapter.setListLoadingState(TopRatedMovieListAdapter.ListLoading.Loading)
+    }
 }
