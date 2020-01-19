@@ -9,9 +9,13 @@ import com.andor.watchit.screens.common.mvc.ViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvc
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
+import io.reactivex.subjects.PublishSubject
 
 
-class TopRatedMovieListAdapter(private val viewMvcFactory: ViewMvcFactory) :
+class TopRatedMovieListAdapter(
+    private val viewMvcFactory: ViewMvcFactory,
+    private val eventStream: PublishSubject<TopRatedMovieListItemLoaderViewMvc.Event>
+) :
     PagedListAdapter<TopRatedMovie, TopRatedMovieListAdapter.TopMovieHolder>(topRatedMovieDiffUtil) {
 
     private val TYPE_PROGRESS = 0
@@ -38,6 +42,9 @@ class TopRatedMovieListAdapter(private val viewMvcFactory: ViewMvcFactory) :
                 }
             }
             is TopRatedMovieListItemLoaderViewMvc -> {
+
+                mViewMvc.getEventStream().subscribe(eventStream)
+
                 when (listLoadingState) {
                     is ListLoading.Loading -> {
                         mViewMvc.showLoader()

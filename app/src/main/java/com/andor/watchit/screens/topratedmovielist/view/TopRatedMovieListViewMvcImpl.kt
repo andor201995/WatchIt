@@ -9,15 +9,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.R
 import com.andor.watchit.screens.common.ViewMvcFactory
-import com.andor.watchit.screens.common.mvc.BaseViewMvc
+import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.controller.TopRatedMovieListAdapter
+import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
 
 class TopRatedMovieListViewMvcImpl(
     parent: ViewGroup?,
     layoutInflater: LayoutInflater,
     viewMvcFactory: ViewMvcFactory
-) : BaseViewMvc(),
+) : BaseObservableViewMvc<TopRatedMovieListItemLoaderViewMvc.Event>(),
     TopRatedMovieListViewMvc {
 
     private var loader: ContentLoadingProgressBar
@@ -35,7 +36,8 @@ class TopRatedMovieListViewMvcImpl(
 
         adapter =
             TopRatedMovieListAdapter(
-                viewMvcFactory
+                viewMvcFactory,
+                getEventStream()
             )
 
         recyclerView.adapter = this.adapter
@@ -73,4 +75,5 @@ class TopRatedMovieListViewMvcImpl(
     override fun showListLoading() {
         adapter.setListLoadingState(TopRatedMovieListAdapter.ListLoading.Loading)
     }
+
 }

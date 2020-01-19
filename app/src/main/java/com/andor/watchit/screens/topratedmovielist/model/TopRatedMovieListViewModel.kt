@@ -46,6 +46,6 @@ class TopRatedMovieListViewModel(private val topRatedMovieDataSourceFactory: Top
     }
 
     fun retryLoadingList() {
-        topRatedMovieDataSourceFactory.topRatedMovieDataSource.invalidate()
+        topRatedMovieDataSourceFactory.topRatedMovieDataSource.retryAllFailed()
     }
 }

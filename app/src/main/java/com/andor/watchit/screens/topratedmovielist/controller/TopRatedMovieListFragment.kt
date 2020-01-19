@@ -13,6 +13,7 @@ import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
 import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieListViewModel
 import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvc
+import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
 import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSource
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -60,11 +61,23 @@ class TopRatedMovieListFragment : BaseFragment() {
         super.onStart()
         bindNetworkStateObserver()
         bindPagedListStateObserver()
+        bindListEventObserver()
     }
 
     override fun onStop() {
         super.onStop()
         compositeDisposable.clear()
+    }
+
+    private fun bindListEventObserver() {
+        mViewMvc.getEventStream()
+            .subscribe(object : RxBaseObserver<TopRatedMovieListItemLoaderViewMvc.Event>() {
+                override fun onNext(t: TopRatedMovieListItemLoaderViewMvc.Event) {
+                    if (t is TopRatedMovieListItemLoaderViewMvc.Event.RetryListLoading) {
+                        mViewModel.retryLoadingList()
+                    }
+                }
+            })
     }
 
 
@@ -103,7 +116,10 @@ class TopRatedMovieListFragment : BaseFragment() {
                 }
             }
 
-        mViewModel.initialNetworkStateStream.subscribe(initialNetworkStateObserver)
+        mViewModel.initialNetworkStateStream
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(initialNetworkStateObserver)
         compositeDisposable.add(initialNetworkStateObserver)
 
 
@@ -127,7 +143,10 @@ class TopRatedMovieListFragment : BaseFragment() {
                     }
                 }
             }
-        mViewModel.nextNetworkStateStream.subscribe(nextNetworkStateObserver)
+        mViewModel.nextNetworkStateStream
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(nextNetworkStateObserver)
 
         compositeDisposable.add(nextNetworkStateObserver)
     }

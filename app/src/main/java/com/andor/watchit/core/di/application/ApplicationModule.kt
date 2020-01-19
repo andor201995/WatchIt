@@ -8,6 +8,7 @@ import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSourc
 import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSourceFactory
 import dagger.Module
 import dagger.Provides
+import java.util.concurrent.Executors
 import javax.inject.Singleton
 
 @Module
@@ -26,6 +27,7 @@ class ApplicationModule(private val application: Application) {
 
     @Provides
     fun provideTopRatedMovieDataSource(topRatedMovieUseCase: TopRatedMovieUseCase): TopRatedMovieDataSource {
-        return TopRatedMovieDataSource(topRatedMovieUseCase)
+        val executor = Executors.newFixedThreadPool(5)
+        return TopRatedMovieDataSource(topRatedMovieUseCase, executor)
     }
 }
