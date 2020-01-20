@@ -3,7 +3,7 @@ package com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.core.widget.ContentLoadingProgressBar
 import com.andor.watchit.R
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
@@ -14,7 +14,7 @@ class TopRatedMovieListItemLoaderViewMvcImpl(parent: ViewGroup?, inflater: Layou
 
     private var retryContainer: View
     private var container: View
-    private var errorImageView: ImageButton
+    private var errorImageView: ImageView
     private val progressBar: ContentLoadingProgressBar
 
     init {
@@ -24,7 +24,7 @@ class TopRatedMovieListItemLoaderViewMvcImpl(parent: ViewGroup?, inflater: Layou
         retryContainer = findViewById(R.id.retryContainer)
         container = findViewById(R.id.loaderItemContainer)
 
-        errorImageView.setOnClickListener {
+        retryContainer.setOnClickListener {
             getEventStream()
                 .onNext(TopRatedMovieListItemLoaderViewMvc.Event.RetryListLoading)
         }

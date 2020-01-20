@@ -2,6 +2,7 @@
     <string name="app_name">WatchIt</string>
     <string name="networkErrorText">NetworkError</string>
     <string name="movietitle">MovieTitle</string>
-    <string name="retryText">Click To Retry -></string>
+    <string name="retryText">Retry</string>
     <string name="error_image_content_desc">Error Loading top rated movies image</string>
+    <string name="poster_image">Poster Image</string>
 </resources>

@@ -1,11 +1,14 @@
 package com.andor.watchit.screens.topratedmovielist.view
 
+import android.content.Context
+import android.util.DisplayMetrics
+import android.view.Display
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.paging.PagedList
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.R
 import com.andor.watchit.screens.common.ViewMvcFactory
@@ -13,6 +16,7 @@ import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.controller.TopRatedMovieListAdapter
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
+
 
 class TopRatedMovieListViewMvcImpl(
     parent: ViewGroup?,
@@ -42,14 +46,25 @@ class TopRatedMovieListViewMvcImpl(
 
         recyclerView.adapter = this.adapter
 
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        val gridCount = getPossibleGridCount()
 
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
+        recyclerView.layoutManager = GridLayoutManager(context, gridCount)
+
+    }
+
+    private fun getPossibleGridCount(): Int {
+        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val display: Display = windowManager.defaultDisplay
+        val outMetrics = DisplayMetrics()
+        display.getMetrics(outMetrics)
+
+        val density: Float = context.resources.displayMetrics.density
+        val dpWidth = outMetrics.widthPixels / density
+
+        val dimension = context.resources.getDimension(R.dimen.itemWidth)
+        val possibleGridCount = (dpWidth / dimension).toInt()
+        return if (possibleGridCount > 2) possibleGridCount else 2
+
     }
 
     override fun updateList(listOfTopRatedMovie: PagedList<TopRatedMovie>) {

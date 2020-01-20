@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="topRatedMovieDimen">50dp</dimen>
+    <dimen name="itemWidth">150dp</dimen>
+    <dimen name="itemHeight">250dp</dimen>
+    <dimen name="progressbar">50dp</dimen>
 </resources>
