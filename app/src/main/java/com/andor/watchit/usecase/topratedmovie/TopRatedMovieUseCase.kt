@@ -1,8 +1,8 @@
 package com.andor.watchit.usecase.topratedmovie
 
 import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.SingleSubject
 
 interface TopRatedMovieUseCase {
-    fun fetchTopRatedMovieAndNotify()
-    fun getResultStream(): PublishSubject<TopRatedMovieUseCaseImpl.FetchResult>
+    fun fetchTopRatedMovieAndNotify(pageNumber: Int): SingleSubject<TopRatedMovieUseCaseImpl.FetchResult>
 }

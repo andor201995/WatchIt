@@ -29,11 +29,21 @@ object Version {
     const val navigation_component = "2.1.0"
     const val dagger = "2.25.4"
     const val mockito_kotlin = "2.1.0"
+
     const val retrofit = "2.7.1"
+    const val logging_interceptor = "3.11.0"
+
     const val mockwebserver = "4.3.0"
     const val java = "1.8"
+
     const val rxjava = "2.2.17"
+    const val rxandroid = "2.1.0"
+    const val adapter_rxjava = "2.4.0"
+
     const val shimmer = "0.5.0@aar"
+    const val picasso = "2.71828"
+    const val pagination = "2.1.1"
+
 }
 
 object Libraries {
@@ -42,6 +52,9 @@ object Libraries {
     //AndroidX
     const val appcompat = "androidx.appcompat:appcompat:${Version.androidx}"
     const val androidxcore = "androidx.core:core-ktx:${Version.androidx}"
+    const val pagination = "androidx.paging:paging-runtime:${Version.pagination}"
+    const val pagination_rxjava = "androidx.paging:paging-rxjava2:${Version.pagination}"
+
 
     //UI
     const val constraintlayout =
@@ -68,12 +81,21 @@ object Libraries {
     //Retrofit
     const val gson_converter = "com.squareup.retrofit2:converter-gson:${Version.retrofit}"
     const val retrofit = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
+    const val logging_interceptor =
+        "com.squareup.okhttp3:logging-interceptor:${Version.logging_interceptor}"
+    const val adapter_rxjava = "com.squareup.retrofit2:adapter-rxjava2:${Version.adapter_rxjava}"
+
 
     //Rx-Java
     const val rxjava = "io.reactivex.rxjava2:rxjava:${Version.rxjava}"
+    const val rxandroid = "io.reactivex.rxjava2:rxandroid:${Version.rxandroid}"
 
     //FB shimmer
     const val shimmer = "com.facebook.shimmer:shimmer:${Version.shimmer}"
+
+    //Picasso
+    const val picasso = "com.squareup.picasso:picasso:${Version.picasso}"
+
 }
 
 object TestLibraries {

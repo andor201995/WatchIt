@@ -8,7 +8,9 @@ import com.andor.watchit.network.helper.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
@@ -18,14 +20,25 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideRetroFit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder().baseUrl(Constants.BASE_URL).client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create()).build()
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .client(okHttpClient)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(authInterceptor: AuthInterceptor): OkHttpClient {
-        return OkHttpClient().newBuilder().addInterceptor(authInterceptor).build()
+    fun provideOkHttpClient(
+        authInterceptor: AuthInterceptor,
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
+        return OkHttpClient()
+            .newBuilder()
+            .addInterceptor(authInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .build()
     }
 
     @Provides
@@ -43,5 +56,12 @@ class NetworkModule {
     @Provides
     fun provideTopRatedMovieListEndPoint(movieApi: MovieApi): TopRatedMovieListEndPoint {
         return TopRatedMovieListEndPointImpl(movieApi)
+    }
+
+    @Provides
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        return loggingInterceptor
     }
 }

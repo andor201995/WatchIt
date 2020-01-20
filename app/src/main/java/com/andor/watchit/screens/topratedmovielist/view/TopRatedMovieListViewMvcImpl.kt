@@ -3,20 +3,22 @@ package com.andor.watchit.screens.topratedmovielist.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.widget.ContentLoadingProgressBar
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.R
 import com.andor.watchit.screens.common.ViewMvcFactory
-import com.andor.watchit.screens.common.mvc.BaseViewMvc
+import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.controller.TopRatedMovieListAdapter
+import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
 
 class TopRatedMovieListViewMvcImpl(
     parent: ViewGroup?,
     layoutInflater: LayoutInflater,
     viewMvcFactory: ViewMvcFactory
-) : BaseViewMvc(),
+) : BaseObservableViewMvc<TopRatedMovieListItemLoaderViewMvc.Event>(),
     TopRatedMovieListViewMvc {
 
     private var loader: ContentLoadingProgressBar
@@ -34,7 +36,8 @@ class TopRatedMovieListViewMvcImpl(
 
         adapter =
             TopRatedMovieListAdapter(
-                viewMvcFactory
+                viewMvcFactory,
+                getEventStream()
             )
 
         recyclerView.adapter = this.adapter
@@ -49,8 +52,8 @@ class TopRatedMovieListViewMvcImpl(
         )
     }
 
-    override fun updateList(listOfTopRatedMovie: List<TopRatedMovie>) {
-        adapter.updateList(listOfTopRatedMovie)
+    override fun updateList(listOfTopRatedMovie: PagedList<TopRatedMovie>) {
+        adapter.submitList(listOfTopRatedMovie)
     }
 
     override fun showLoader() {
@@ -60,4 +63,17 @@ class TopRatedMovieListViewMvcImpl(
     override fun hideLoader() {
         loader.hide()
     }
+
+    override fun showListLoadingError() {
+        adapter.setListLoadingState(TopRatedMovieListAdapter.ListLoading.Error)
+    }
+
+    override fun showListLoadingCompleted() {
+        adapter.setListLoadingState(TopRatedMovieListAdapter.ListLoading.Completed)
+    }
+
+    override fun showListLoading() {
+        adapter.setListLoadingState(TopRatedMovieListAdapter.ListLoading.Loading)
+    }
+
 }

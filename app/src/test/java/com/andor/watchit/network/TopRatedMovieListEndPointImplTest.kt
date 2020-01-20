@@ -25,6 +25,10 @@ import java.net.HttpURLConnection
 @RunWith(MockitoJUnitRunner::class)
 class TopRatedMovieListEndPointImplTest {
     // region constants ----------------------------------------------------------------------------
+
+    val VALID_PAGE_NUMBER = 1
+    val INVALID_PAGE_NUMBER = 1
+
     // endregion constants -------------------------------------------------------------------------
 
     // region helper fields ------------------------------------------------------------------------
@@ -60,7 +64,7 @@ class TopRatedMovieListEndPointImplTest {
         //Arrange
         success(TestData.SERVER_RESPONSE_JSON_SUCCESS)
         //Act
-        systemUT.onFetchTopRatedMovieListAndNotify(listener)
+        systemUT.onFetchTopRatedMovieListAndNotify(VALID_PAGE_NUMBER, listener)
         //Assert
         verify(listener, times(1)).onFetchSuccess(TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA)
     }
@@ -72,7 +76,7 @@ class TopRatedMovieListEndPointImplTest {
         //Arrange
         success(TestData.SERVER_RESPONSE_JSON_SUCCESS_NULL)
         //Act
-        systemUT.onFetchTopRatedMovieListAndNotify(listener)
+        systemUT.onFetchTopRatedMovieListAndNotify(VALID_PAGE_NUMBER, listener)
         //Assert
         verify(listener, times(0)).onFetchSuccess(any())
         verify(listener, times(1)).onFetchFailed()
@@ -84,7 +88,7 @@ class TopRatedMovieListEndPointImplTest {
         //Arrange
         failure()
         //Act
-        systemUT.onFetchTopRatedMovieListAndNotify(listener)
+        systemUT.onFetchTopRatedMovieListAndNotify(VALID_PAGE_NUMBER, listener)
         //Assert
         verify(listener, times(0)).onFetchSuccess(any())
         verify(listener, times(1)).onFetchFailed()
