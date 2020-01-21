@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.R
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
+import com.andor.watchit.screens.topratedmovielist.model.Event
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.controller.TopRatedMovieListAdapter
-import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
 
 
@@ -22,7 +22,7 @@ class TopRatedMovieListViewMvcImpl(
     parent: ViewGroup?,
     layoutInflater: LayoutInflater,
     viewMvcFactory: ViewMvcFactory
-) : BaseObservableViewMvc<TopRatedMovieListItemLoaderViewMvc.Event>(),
+) : BaseObservableViewMvc<Event>(),
     TopRatedMovieListViewMvc {
 
     private var loader: ContentLoadingProgressBar
@@ -37,18 +37,22 @@ class TopRatedMovieListViewMvcImpl(
     }
 
     private fun setUpRecyclerView(viewMvcFactory: ViewMvcFactory) {
+        if (recyclerView.adapter == null) {
+            adapter =
+                TopRatedMovieListAdapter(
+                    viewMvcFactory,
+                    getEventStream()
+                )
 
-        adapter =
-            TopRatedMovieListAdapter(
-                viewMvcFactory,
-                getEventStream()
-            )
+            recyclerView.adapter = this.adapter
 
-        recyclerView.adapter = this.adapter
+            val gridCount = getPossibleGridCount()
 
-        val gridCount = getPossibleGridCount()
+            recyclerView.layoutManager = GridLayoutManager(context, gridCount)
+        } else {
+            adapter = recyclerView.adapter as TopRatedMovieListAdapter
+        }
 
-        recyclerView.layoutManager = GridLayoutManager(context, gridCount)
 
     }
 

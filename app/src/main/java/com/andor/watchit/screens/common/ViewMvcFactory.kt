@@ -2,6 +2,8 @@ package com.andor.watchit.screens.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.andor.watchit.screens.moviedetail.view.MovieDetailViewMvc
+import com.andor.watchit.screens.moviedetail.view.MovieDetailViewMvcImpl
 import com.andor.watchit.screens.networkerror.view.NetworkErrorViewMvc
 import com.andor.watchit.screens.networkerror.view.NetworkErrorViewMvcImpl
 import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvc
@@ -35,6 +37,10 @@ class ViewMvcFactory(private val layoutInflater: LayoutInflater, private val pic
 
     fun getTopRatedMovieListItemLoaderViewMvc(parent: ViewGroup?): TopRatedMovieListItemLoaderViewMvc {
         return TopRatedMovieListItemLoaderViewMvcImpl(parent, layoutInflater)
+    }
+
+    fun getMovieDetailViewMvc(parent: ViewGroup?): MovieDetailViewMvc {
+        return MovieDetailViewMvcImpl(parent = parent, inflater = layoutInflater)
     }
 
 }

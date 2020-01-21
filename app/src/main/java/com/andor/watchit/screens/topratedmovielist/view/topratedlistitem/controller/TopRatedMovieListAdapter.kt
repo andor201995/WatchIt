@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.mvc.ViewMvc
+import com.andor.watchit.screens.topratedmovielist.model.Event
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvc
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
@@ -14,13 +15,23 @@ import io.reactivex.subjects.PublishSubject
 
 class TopRatedMovieListAdapter(
     private val viewMvcFactory: ViewMvcFactory,
-    private val eventStream: PublishSubject<TopRatedMovieListItemLoaderViewMvc.Event>
+    private val eventStream: PublishSubject<Event>
 ) :
     PagedListAdapter<TopRatedMovie, TopRatedMovieListAdapter.TopMovieHolder>(topRatedMovieDiffUtil) {
 
     private val TYPE_PROGRESS = 0
     private val TYPE_ITEM = 1
     private var listLoadingState: ListLoading = ListLoading.Loading
+
+    override fun setHasStableIds(hasStableIds: Boolean) {
+        super.setHasStableIds(hasStableIds)
+        setHasStableIds(true)
+    }
+
+    override fun getItemId(position: Int): Long {
+        val topRatedMovie = getItem(position)
+        return topRatedMovie?.movieId?.toLong() ?: super.getItemId(position)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopMovieHolder {
         val mViewMvc: ViewMvc = if (viewType == TYPE_PROGRESS) {
@@ -36,6 +47,9 @@ class TopRatedMovieListAdapter(
 
         when (val mViewMvc = holder.mViewMvc) {
             is TopRatedMovieListItemViewMvc -> {
+
+                mViewMvc.getEventStream().subscribe(eventStream)
+
                 val topRatedMovie = getItem(position)
                 topRatedMovie?.let {
                     mViewMvc.updateView(it)

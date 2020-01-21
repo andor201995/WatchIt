@@ -22,8 +22,10 @@ class TopRatedMovieListViewModel(private val topRatedMovieDataSourceFactory: Top
 
     init {
         val pagedListConfig = PagedList.Config.Builder()
-            .setEnablePlaceholders(false)
+            .setEnablePlaceholders(true)
+            .setPrefetchDistance(60)
             .setPageSize(20)
+            .setMaxSize(200)
             .build()
 
         RxPagedListBuilder(topRatedMovieDataSourceFactory, pagedListConfig)

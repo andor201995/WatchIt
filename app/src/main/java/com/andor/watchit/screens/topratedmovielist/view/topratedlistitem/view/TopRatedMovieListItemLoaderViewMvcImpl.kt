@@ -7,10 +7,11 @@ import android.widget.ImageView
 import androidx.core.widget.ContentLoadingProgressBar
 import com.andor.watchit.R
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
+import com.andor.watchit.screens.topratedmovielist.model.Event
 
 class TopRatedMovieListItemLoaderViewMvcImpl(parent: ViewGroup?, inflater: LayoutInflater) :
     TopRatedMovieListItemLoaderViewMvc,
-    BaseObservableViewMvc<TopRatedMovieListItemLoaderViewMvc.Event>() {
+    BaseObservableViewMvc<Event>() {
 
     private var retryContainer: View
     private var container: View
@@ -26,7 +27,7 @@ class TopRatedMovieListItemLoaderViewMvcImpl(parent: ViewGroup?, inflater: Layou
 
         retryContainer.setOnClickListener {
             getEventStream()
-                .onNext(TopRatedMovieListItemLoaderViewMvc.Event.RetryListLoading)
+                .onNext(Event.RetryListLoading)
         }
 
     }
