@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#2A9A9E</color>
     <color name="cardview_dark_background_custom">#FF424242</color>
+    <color name="movieTitleBackground">#7C160101</color>
 </resources>

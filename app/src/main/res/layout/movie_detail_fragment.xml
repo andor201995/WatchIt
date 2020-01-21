@@ -1,17 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cardview_dark_background_custom"
+    android:fillViewport="true"
     tools:context=".screens.moviedetail.controller.MovieDetailFragment">
 
-    <ImageView
-        android:id="@+id/movieDetailPosterImageView"
+    <RelativeLayout
+        android:id="@+id/movieDetailContainer"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/itemHeight"
-        android:contentDescription="@string/poster_image"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_image_24px" />
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/posterContainer"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/movieDetailPosterHeight">
+
+            <ImageView
+                android:id="@+id/movieDetailPosterImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/poster_image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_image_24px"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/movieDetailMovieTitleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/movieTitleBackground"
+                android:fontFamily="sans-serif-smallcaps"
+                android:gravity="center_vertical"
+                android:padding="@dimen/commonPadding"
+                android:text="@string/movie_title"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/commonTextSize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/posterContainer"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/movieDetailMovieOverviewTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="casual"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:padding="@dimen/commonPadding"
+                android:scrollHorizontally="true"
+                android:text="@string/overview"
+                android:textColor="@android:color/holo_blue_bright"
+                android:textSize="@dimen/commonTextSize" />
+
+            <TextView
+                android:id="@+id/movieDetailMovieRatingTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:gravity="center_vertical"
+                android:padding="@dimen/commonPadding"
+                android:text="@string/movie_rating"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="@dimen/commonTextSize" />
+
+            <TextView
+                android:id="@+id/movieDetailMovieReleaseDataTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:gravity="center_vertical"
+                android:padding="@dimen/commonPadding"
+                android:text="@string/release_data"
+                android:textColor="@android:color/holo_green_light"
+                android:textSize="@dimen/commonTextSize" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

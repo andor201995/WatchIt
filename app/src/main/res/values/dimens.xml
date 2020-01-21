@@ -3,4 +3,7 @@
     <dimen name="itemWidth">150dp</dimen>
     <dimen name="itemHeight">250dp</dimen>
     <dimen name="progressbar">50dp</dimen>
+    <dimen name="movieDetailPosterHeight">300dp</dimen>
+    <dimen name="commonPadding">10dp</dimen>
+    <dimen name="commonTextSize">20sp</dimen>
 </resources>

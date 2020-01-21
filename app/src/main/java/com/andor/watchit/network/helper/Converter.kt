@@ -11,7 +11,10 @@ object Converter {
                 TopRatedMovie(
                     originalTitle = it.original_title,
                     posterPath = it.poster_path,
-                    movieId = it.id
+                    movieId = it.id,
+                    movieRating = it.vote_average,
+                    overView = it.overview,
+                    releaseData = it.release_date
                 )
             )
         }
