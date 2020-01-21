@@ -32,15 +32,25 @@ class ViewMvcFactory(private val layoutInflater: LayoutInflater, private val pic
     }
 
     fun getNetworkErrorViewMvc(parent: ViewGroup?): NetworkErrorViewMvc {
-        return NetworkErrorViewMvcImpl(parent, layoutInflater)
+        return NetworkErrorViewMvcImpl(
+            parent,
+            layoutInflater
+        )
     }
 
     fun getTopRatedMovieListItemLoaderViewMvc(parent: ViewGroup?): TopRatedMovieListItemLoaderViewMvc {
-        return TopRatedMovieListItemLoaderViewMvcImpl(parent, layoutInflater)
+        return TopRatedMovieListItemLoaderViewMvcImpl(
+            parent,
+            layoutInflater
+        )
     }
 
     fun getMovieDetailViewMvc(parent: ViewGroup?): MovieDetailViewMvc {
-        return MovieDetailViewMvcImpl(parent = parent, inflater = layoutInflater)
+        return MovieDetailViewMvcImpl(
+            parent,
+            layoutInflater,
+            picasso
+        )
     }
 
 }

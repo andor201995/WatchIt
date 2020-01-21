@@ -2,9 +2,10 @@ package com.andor.watchit.screens.common
 
 import android.app.Activity
 import androidx.navigation.Navigation
+import androidx.navigation.Navigator
 import com.andor.watchit.R
 import com.andor.watchit.core.safeNavigation
-import com.andor.watchit.screens.topratedmovielist.controller.TopRatedMovieListFragmentDirections.actionTopRatedMovieListFragmentToMovieDetailFragment
+import com.andor.watchit.screens.topratedmovielist.controller.TopRatedMovieListFragmentDirections.Companion.actionTopRatedMovieListFragmentToMovieDetailFragment
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
 
 class ScreenNavigator(private val activity: Activity) {
@@ -24,11 +25,11 @@ class ScreenNavigator(private val activity: Activity) {
             )
     }
 
-    fun navigateToMovieDetailScreen(topRatedMovie: TopRatedMovie) {
+    fun navigateToMovieDetailScreen(topRatedMovie: TopRatedMovie, extra: Navigator.Extras) {
         val action =
             actionTopRatedMovieListFragmentToMovieDetailFragment(topRatedMovie)
         Navigation.findNavController(activity, R.id.nav_host)
-            .safeNavigation(R.id.topRatedMovieListFragment, action)
+            .safeNavigation(R.id.topRatedMovieListFragment, action, extra)
     }
 
 

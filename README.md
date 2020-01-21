@@ -27,3 +27,4 @@ Reference:
   - [Architecture](https://www.techyourchance.com/architecture-diagrams-android-applications/)
   - [Mocked PageList](https://stackoverflow.com/a/52511874/7972699)
   - [Paging Retry](https://github.com/android/architecture-components-samples/blob/master/PagingWithNetworkSample/app/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/repository/inMemory/byPage/PageKeyedSubredditDataSource.kt)
+  - [Fragment Transition](https://medium.com/@serbelga/shared-elements-in-android-navigation-architecture-component-bc5e7922ecdf)

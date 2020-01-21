@@ -61,9 +61,12 @@ object Libraries {
         "androidx.constraintlayout:constraintlayout:${Version.constraint_layout}"
 
     //Navigation
+    const val navigation_runtime =
+        "androidx.navigation:navigation-runtime-ktx:${Version.navigation_component}"
     const val navigation_fragment =
-        "androidx.navigation:navigation-fragment:${Version.navigation_component}"
-    const val navigation_ui = "androidx.navigation:navigation-ui:${Version.navigation_component}"
+        "androidx.navigation:navigation-fragment-ktx:${Version.navigation_component}"
+    const val navigation_ui =
+        "androidx.navigation:navigation-ui-ktx:${Version.navigation_component}"
 
     //ViewModel
     const val legacy = "androidx.legacy:legacy-support-v4:${Version.androidx_legacy}"
