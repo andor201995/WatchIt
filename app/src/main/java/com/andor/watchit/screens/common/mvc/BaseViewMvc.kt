@@ -25,4 +25,12 @@ open class BaseViewMvc : ViewMvc {
     protected fun getString(id: Int): String {
         return context.resources.getString(id)
     }
+
+    protected fun getInteger(id: Int): Int {
+        return context.resources.getInteger(id)
+    }
+
+    protected fun getColor(id: Int): Int {
+        return context.resources.getInteger(id)
+    }
 }

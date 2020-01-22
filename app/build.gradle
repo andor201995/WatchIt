@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
 android {
     compileSdkVersion Version.compileSdk
     buildToolsVersion Version.build_tool
@@ -38,6 +40,7 @@ dependencies {
     implementation Libraries.androidxcore
     implementation Libraries.constraintlayout
 
+    implementation Libraries.navigation_runtime
     implementation Libraries.navigation_fragment
     implementation Libraries.navigation_ui
 
@@ -61,6 +64,7 @@ dependencies {
     implementation Libraries.pagination
     implementation Libraries.pagination_rxjava
 
+    implementation Libraries.zoomage
 
     testImplementation TestLibraries.junit
     testImplementation TestLibraries.junit_ext

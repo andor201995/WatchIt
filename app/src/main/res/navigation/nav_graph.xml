@@ -8,22 +8,46 @@
     <fragment
         android:id="@+id/topRatedMovieListFragment"
         android:name="com.andor.watchit.screens.topratedmovielist.controller.TopRatedMovieListFragment"
-        android:label="top_rated_movie_list_fragment"
-        tools:layout="@layout/top_rated_movie_list_fragment" >
+        android:label="Watch It"
+        tools:layout="@layout/top_rated_movie_list_fragment">
         <action
             android:id="@+id/action_topRatedMovieListFragment_to_networkErrorFragment"
             app:destination="@id/networkErrorFragment"
             app:popUpTo="@+id/nav_graph.xml"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_topRatedMovieListFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/networkErrorFragment"
         android:name="com.andor.watchit.screens.networkerror.controller.NetworkErrorFragment"
-        android:label="network_error_fragment"
-        tools:layout="@layout/network_error_fragment" >
+        android:label=" "
+        tools:layout="@layout/network_error_fragment">
         <action
             android:id="@+id/action_networkErrorFragment_to_topRatedMovieListFragment"
             app:destination="@id/topRatedMovieListFragment"
             app:popUpTo="@+id/nav_graph.xml" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.andor.watchit.screens.moviedetail.controller.MovieDetailFragment"
+        android:label=" "
+        tools:layout="@layout/movie_detail_fragment">
+        <argument
+            android:name="movieDetail"
+            app:argType="com.andor.watchit.usecase.topratedmovie.TopRatedMovie" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_posterFragment"
+            app:destination="@id/posterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/posterFragment"
+        android:name="com.andor.watchit.screens.posterview.controller.PosterFragment"
+        android:label=" "
+        tools:layout="@layout/poster_fragment">
+        <argument
+            android:name="movieDetail"
+            app:argType="com.andor.watchit.usecase.topratedmovie.TopRatedMovie" />
     </fragment>
 </navigation>

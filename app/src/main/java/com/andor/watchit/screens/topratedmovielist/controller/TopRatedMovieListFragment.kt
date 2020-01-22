@@ -11,9 +11,9 @@ import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
+import com.andor.watchit.screens.topratedmovielist.model.Event
 import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieListViewModel
 import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvc
-import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
 import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSource
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -47,7 +47,10 @@ class TopRatedMovieListFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mViewMvc = mViewMvcFactory.getTopRatedMovieMvc(container)
+
+        mViewMvc = if (::mViewMvc.isInitialized) mViewMvc else mViewMvcFactory.getTopRatedMovieMvc(
+            container
+        )
         return mViewMvc.getRootView()
     }
 
@@ -59,9 +62,7 @@ class TopRatedMovieListFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-        bindNetworkStateObserver()
-        bindPagedListStateObserver()
-        bindListEventObserver()
+        bindToStreams()
     }
 
     override fun onStop() {
@@ -69,12 +70,23 @@ class TopRatedMovieListFragment : BaseFragment() {
         compositeDisposable.clear()
     }
 
+    private fun bindToStreams() {
+        bindNetworkStateObserver()
+        bindPagedListStateObserver()
+        bindListEventObserver()
+    }
+
     private fun bindListEventObserver() {
         mViewMvc.getEventStream()
-            .subscribe(object : RxBaseObserver<TopRatedMovieListItemLoaderViewMvc.Event>() {
-                override fun onNext(t: TopRatedMovieListItemLoaderViewMvc.Event) {
-                    if (t is TopRatedMovieListItemLoaderViewMvc.Event.RetryListLoading) {
-                        mViewModel.retryLoadingList()
+            .subscribe(object : RxBaseObserver<Event>() {
+                override fun onNext(t: Event) {
+                    when (t) {
+                        is Event.RetryListLoading -> {
+                            mViewModel.retryLoadingList()
+                        }
+                        is Event.LoadMovie -> {
+                            mScreenNavigator.navigateToMovieDetailScreen(t.topRatedMovie, t.extra)
+                        }
                     }
                 }
             })

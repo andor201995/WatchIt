@@ -2,8 +2,12 @@ package com.andor.watchit.screens.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.andor.watchit.screens.moviedetail.view.MovieDetailViewMvc
+import com.andor.watchit.screens.moviedetail.view.MovieDetailViewMvcImpl
 import com.andor.watchit.screens.networkerror.view.NetworkErrorViewMvc
 import com.andor.watchit.screens.networkerror.view.NetworkErrorViewMvcImpl
+import com.andor.watchit.screens.posterview.view.PosterViewMvc
+import com.andor.watchit.screens.posterview.view.PosterViewMvcImpl
 import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvcImpl
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
@@ -30,11 +34,29 @@ class ViewMvcFactory(private val layoutInflater: LayoutInflater, private val pic
     }
 
     fun getNetworkErrorViewMvc(parent: ViewGroup?): NetworkErrorViewMvc {
-        return NetworkErrorViewMvcImpl(parent, layoutInflater)
+        return NetworkErrorViewMvcImpl(
+            parent,
+            layoutInflater
+        )
     }
 
     fun getTopRatedMovieListItemLoaderViewMvc(parent: ViewGroup?): TopRatedMovieListItemLoaderViewMvc {
-        return TopRatedMovieListItemLoaderViewMvcImpl(parent, layoutInflater)
+        return TopRatedMovieListItemLoaderViewMvcImpl(
+            parent,
+            layoutInflater
+        )
+    }
+
+    fun getMovieDetailViewMvc(parent: ViewGroup?): MovieDetailViewMvc {
+        return MovieDetailViewMvcImpl(
+            parent,
+            layoutInflater,
+            picasso
+        )
+    }
+
+    fun getPosterViewMvc(container: ViewGroup?): PosterViewMvc {
+        return PosterViewMvcImpl(container, layoutInflater, picasso)
     }
 
 }

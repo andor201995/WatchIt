@@ -4,6 +4,10 @@
 
 [![GithubCI](https://github.com/andor201995/WatchIt/workflows/Java%20CI/badge.svg)](https://github.com/andor201995/WatchIt/actions?query=workflow%3A%22Java+CI%22)
 
+
+![Application icon](https://github.com/andor201995/WatchIt/blob/ui_mock_%231/app/src/main/res/mipmap-xxxhdpi/ic_launcher_watch_it_round.png)
+"Icon made by Pixel perfect from www.flaticon.com"
+
 Tmdb Api based application 
 
 Used:
@@ -27,3 +31,8 @@ Reference:
   - [Architecture](https://www.techyourchance.com/architecture-diagrams-android-applications/)
   - [Mocked PageList](https://stackoverflow.com/a/52511874/7972699)
   - [Paging Retry](https://github.com/android/architecture-components-samples/blob/master/PagingWithNetworkSample/app/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/repository/inMemory/byPage/PageKeyedSubredditDataSource.kt)
+  - [Fragment Transition](https://medium.com/@serbelga/shared-elements-in-android-navigation-architecture-component-bc5e7922ecdf)
+  - [Spannable and Ellipsize](https://stackoverflow.com/q/14691511/7972699)
+  
+  Library:
+  - [zoomage](https://github.com/jsibbold/zoomage)

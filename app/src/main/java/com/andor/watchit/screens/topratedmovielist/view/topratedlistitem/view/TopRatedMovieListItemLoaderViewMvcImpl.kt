@@ -3,18 +3,21 @@ package com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.core.widget.ContentLoadingProgressBar
 import com.andor.watchit.R
+import com.andor.watchit.core.inVisible
+import com.andor.watchit.core.visible
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
+import com.andor.watchit.screens.topratedmovielist.model.Event
 
 class TopRatedMovieListItemLoaderViewMvcImpl(parent: ViewGroup?, inflater: LayoutInflater) :
     TopRatedMovieListItemLoaderViewMvc,
-    BaseObservableViewMvc<TopRatedMovieListItemLoaderViewMvc.Event>() {
+    BaseObservableViewMvc<Event>() {
 
     private var retryContainer: View
     private var container: View
-    private var errorImageView: ImageButton
+    private var errorImageView: ImageView
     private val progressBar: ContentLoadingProgressBar
 
     init {
@@ -24,24 +27,25 @@ class TopRatedMovieListItemLoaderViewMvcImpl(parent: ViewGroup?, inflater: Layou
         retryContainer = findViewById(R.id.retryContainer)
         container = findViewById(R.id.loaderItemContainer)
 
-        errorImageView.setOnClickListener {
+        retryContainer.setOnClickListener {
             getEventStream()
-                .onNext(TopRatedMovieListItemLoaderViewMvc.Event.RetryListLoading)
+                .onNext(Event.RetryListLoading)
         }
 
     }
 
     override fun showLoader() {
         progressBar.show()
-        retryContainer.visibility = View.GONE
+        progressBar.visible()
+        retryContainer.inVisible()
     }
 
     override fun showError() {
-        retryContainer.visibility = View.VISIBLE
+        retryContainer.visible()
         progressBar.hide()
     }
 
     override fun hideRow() {
-        container.visibility = View.GONE
+        container.inVisible()
     }
 }
