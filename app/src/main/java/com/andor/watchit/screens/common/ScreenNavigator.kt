@@ -32,14 +32,14 @@ class ScreenNavigator(private val activity: Activity) {
                 topRatedMovie
             )
         Navigation.findNavController(activity, R.id.nav_host)
-            .safeNavigation(R.id.topRatedMovieListFragment, action, extra)
+            .safeNavigation(R.id.topRatedMovieListFragment, action)
     }
 
     fun navigateToPosterScreen(movieDetail: TopRatedMovie, extra: Navigator.Extras) {
         val action =
             MovieDetailFragmentDirections.actionMovieDetailFragmentToPosterFragment(movieDetail)
         Navigation.findNavController(activity, R.id.nav_host)
-            .safeNavigation(R.id.movieDetailFragment, action, extra)
+            .safeNavigation(R.id.movieDetailFragment, action)
     }
 
 
