@@ -4,15 +4,18 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.andor.watchit.R
 import com.andor.watchit.core.Constants
 import com.andor.watchit.core.appendTextWithColor
-import com.andor.watchit.screens.common.mvc.BaseViewMvc
+import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
+import com.andor.watchit.screens.moviedetail.model.Event
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
 import com.squareup.picasso.Picasso
 
@@ -21,7 +24,7 @@ class MovieDetailViewMvcImpl(
     parent: ViewGroup?,
     inflater: LayoutInflater,
     private val picasso: Picasso
-) : MovieDetailViewMvc, BaseViewMvc() {
+) : MovieDetailViewMvc, BaseObservableViewMvc<Event>() {
     private var overViewTextView: TextView
     private var ratingTextView: TextView
     private var releaseDateTextView: TextView
@@ -46,8 +49,18 @@ class MovieDetailViewMvcImpl(
                 .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_image_24px)!!)
                 .error(ContextCompat.getDrawable(context, R.drawable.ic_error_24px)!!)
                 .into(it)
+
+            it.setOnClickListener { view ->
+                val extras =
+                    FragmentNavigatorExtras(
+                        view!! to movieDetail.posterPath!!,
+                        (movieTitleTextView as View) to movieDetail.originalTitle!!
+                    )
+                getEventStream().onNext(Event.PosterClick(movieDetail, extras))
+            }
         }
 
+        ViewCompat.setTransitionName(movieTitleTextView, movieDetail.originalTitle)
         movieTitleTextView.text = movieDetail.originalTitle
 
         overViewTextView.also {

@@ -6,6 +6,8 @@ import com.andor.watchit.screens.moviedetail.view.MovieDetailViewMvc
 import com.andor.watchit.screens.moviedetail.view.MovieDetailViewMvcImpl
 import com.andor.watchit.screens.networkerror.view.NetworkErrorViewMvc
 import com.andor.watchit.screens.networkerror.view.NetworkErrorViewMvcImpl
+import com.andor.watchit.screens.posterview.view.PosterViewMvc
+import com.andor.watchit.screens.posterview.view.PosterViewMvcImpl
 import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvcImpl
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
@@ -51,6 +53,10 @@ class ViewMvcFactory(private val layoutInflater: LayoutInflater, private val pic
             layoutInflater,
             picasso
         )
+    }
+
+    fun getPosterViewMvc(container: ViewGroup?): PosterViewMvc {
+        return PosterViewMvcImpl(container, layoutInflater, picasso)
     }
 
 }
