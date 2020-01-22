@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimaryDark">#2C2C44</color>
     <color name="colorAccent">#2A9A9E</color>
-    <color name="cardview_dark_background_custom">#FF424242</color>
+    <color name="applicationBackground">#33333F</color>
     <color name="movieTitleBackground">#7C160101</color>
+    <color name="actionBar">#00000000</color>
 </resources>

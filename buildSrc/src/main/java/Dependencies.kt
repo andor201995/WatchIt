@@ -43,6 +43,8 @@ object Version {
     const val shimmer = "0.5.0@aar"
     const val picasso = "2.71828"
     const val pagination = "2.1.1"
+    const val zoomage = "1.3.0-SNAPSHOT"
+
 
 }
 
@@ -98,6 +100,9 @@ object Libraries {
 
     //Picasso
     const val picasso = "com.squareup.picasso:picasso:${Version.picasso}"
+
+    //Zoomage
+    const val zoomage = "com.jsibbold:zoomage:${Version.zoomage}"
 
 }
 

@@ -9,7 +9,7 @@
         android:id="@+id/top_rated_movie_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cardview_dark_background_custom" />
+        android:layout_marginTop="?android:attr/actionBarSize" />
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/loader"
