@@ -1,7 +1,6 @@
 package com.andor.watchit.screens.moviedetail.view
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -64,7 +63,7 @@ class MovieDetailViewMvcImpl(
         movieTitleTextView.text = movieDetail.originalTitle
 
         overViewTextView.also {
-            it.appendTextWithColor("\n${movieDetail.overView}", Color.WHITE)
+            it.appendTextWithColor("\n${movieDetail.overView}", getColor(R.color.textColor))
 
             it.setOnClickListener { view ->
                 if (view is TextView) {
@@ -79,7 +78,13 @@ class MovieDetailViewMvcImpl(
             }
         }
 
-        ratingTextView.appendTextWithColor(" ${movieDetail.movieRating}", Color.WHITE)
-        releaseDateTextView.appendTextWithColor(" ${movieDetail.releaseData}", Color.WHITE)
+        ratingTextView.appendTextWithColor(
+            " ${movieDetail.movieRating}",
+            getColor(R.color.textColor)
+        )
+        releaseDateTextView.appendTextWithColor(
+            " ${movieDetail.releaseData}",
+            getColor(R.color.textColor)
+        )
     }
 }
