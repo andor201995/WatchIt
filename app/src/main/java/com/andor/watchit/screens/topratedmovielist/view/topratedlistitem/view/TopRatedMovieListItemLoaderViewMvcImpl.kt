@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.widget.ContentLoadingProgressBar
 import com.andor.watchit.R
+import com.andor.watchit.core.inVisible
+import com.andor.watchit.core.visible
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.topratedmovielist.model.Event
 
@@ -34,15 +36,16 @@ class TopRatedMovieListItemLoaderViewMvcImpl(parent: ViewGroup?, inflater: Layou
 
     override fun showLoader() {
         progressBar.show()
-        retryContainer.visibility = View.GONE
+        progressBar.visible()
+        retryContainer.inVisible()
     }
 
     override fun showError() {
-        retryContainer.visibility = View.VISIBLE
+        retryContainer.visible()
         progressBar.hide()
     }
 
     override fun hideRow() {
-        container.visibility = View.GONE
+        container.inVisible()
     }
 }

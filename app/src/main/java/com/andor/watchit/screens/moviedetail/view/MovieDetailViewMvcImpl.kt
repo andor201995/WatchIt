@@ -2,10 +2,7 @@ package com.andor.watchit.screens.moviedetail.view
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.text.Spannable
-import android.text.SpannableString
 import android.text.TextUtils
-import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -14,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.andor.watchit.R
 import com.andor.watchit.core.Constants
+import com.andor.watchit.core.appendTextWithColor
 import com.andor.watchit.screens.common.mvc.BaseViewMvc
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
 import com.squareup.picasso.Picasso
@@ -53,7 +51,7 @@ class MovieDetailViewMvcImpl(
         movieTitleTextView.text = movieDetail.originalTitle
 
         overViewTextView.also {
-            it.append(getCustomSpannable("\n${movieDetail.overView}", Color.WHITE))
+            it.appendTextWithColor("\n${movieDetail.overView}", Color.WHITE)
 
             it.setOnClickListener { view ->
                 if (view is TextView) {
@@ -61,30 +59,14 @@ class MovieDetailViewMvcImpl(
                         view.maxLines = Integer.MAX_VALUE
                         view.ellipsize = null
                     } else {
-                        view.maxLines = 2
+                        view.maxLines = getInteger(R.integer.overviewMaxLength)
                         view.ellipsize = TextUtils.TruncateAt.END
                     }
                 }
             }
         }
 
-        ratingTextView.append(
-            getCustomSpannable(
-                " ${movieDetail.movieRating}",
-                Color.WHITE
-            )
-        )
-        releaseDateTextView.append(getCustomSpannable(" ${movieDetail.releaseData}", Color.WHITE))
-    }
-
-    private fun getCustomSpannable(value: String, color: Int): Spannable {
-        val word: Spannable = SpannableString(value)
-        word.setSpan(
-            ForegroundColorSpan(color),
-            0,
-            word.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        return word
+        ratingTextView.appendTextWithColor(" ${movieDetail.movieRating}", Color.WHITE)
+        releaseDateTextView.appendTextWithColor(" ${movieDetail.releaseData}", Color.WHITE)
     }
 }

@@ -11,6 +11,7 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.R
+import com.andor.watchit.core.visible
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.topratedmovielist.model.Event
@@ -77,6 +78,7 @@ class TopRatedMovieListViewMvcImpl(
 
     override fun showLoader() {
         loader.show()
+        loader.visible()
     }
 
     override fun hideLoader() {

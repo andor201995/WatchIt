@@ -61,7 +61,7 @@
                 android:ellipsize="end"
                 android:fontFamily="casual"
                 android:gravity="center_vertical"
-                android:maxLines="2"
+                android:maxLines="@integer/overviewMaxLength"
                 android:padding="@dimen/commonPadding"
                 android:scrollHorizontally="true"
                 android:text="@string/overview"
