@@ -1,11 +1,10 @@
 package com.andor.watchit.screens.topratedmovielist.controller
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
+import com.andor.watchit.R
 import com.andor.watchit.core.RxBaseObserver
 import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewModelFactory
@@ -40,6 +39,7 @@ class TopRatedMovieListFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         presentationComponent.inject(this)
     }
 
@@ -69,6 +69,13 @@ class TopRatedMovieListFragment : BaseFragment() {
         super.onStop()
         compositeDisposable.clear()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.topratedmoviemenu, menu)
+        mViewMvc.setSearchBar(menu, requireActivity())
+    }
+
 
     private fun bindToStreams() {
         bindNetworkStateObserver()

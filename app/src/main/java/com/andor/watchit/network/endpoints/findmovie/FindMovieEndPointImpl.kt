@@ -1,4 +1,4 @@
-package com.andor.watchit.network.endpoints
+package com.andor.watchit.network.endpoints.findmovie
 
 import com.andor.watchit.network.api.MovieApi
 import com.andor.watchit.network.schema.TopRatedMovieSchema
@@ -6,14 +6,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TopRatedMovieListEndPointImpl(private val movieApi: MovieApi) :
-    TopRatedMovieListEndPoint {
+class FindMovieEndPointImpl(private val movieApi: MovieApi) : FindMovieEndPoint {
 
-    override fun onFetchTopRatedMovieListAndNotify(
-        pageNumber: Int,
-        listener: TopRatedMovieListEndPoint.Listener
-    ) {
-        movieApi.fetchTopRatedMovie(page = pageNumber.toString())
+    override fun findMovie(page: Int, query: String, listener: FindMovieEndPoint.Listener) {
+        movieApi.findMovie(page = page.toString(), query = query)
             .enqueue(object : Callback<TopRatedMovieSchema> {
                 override fun onFailure(call: Call<TopRatedMovieSchema>, t: Throwable) {
                     listener.onFetchFailed()
@@ -29,7 +25,6 @@ class TopRatedMovieListEndPointImpl(private val movieApi: MovieApi) :
                         listener.onFetchFailed()
                     }
                 }
-            }
-            )
+            })
     }
 }

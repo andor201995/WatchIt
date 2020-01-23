@@ -1,6 +1,6 @@
 package com.andor.watchit.usecase.topratedmovie
 
-import com.andor.watchit.network.endpoints.TopRatedMovieListEndPoint
+import com.andor.watchit.network.endpoints.topratedmovie.TopRatedMovieListEndPoint
 import com.andor.watchit.network.helper.Converter
 import com.andor.watchit.network.schema.TopRatedMovieSchema
 import io.reactivex.subjects.SingleSubject

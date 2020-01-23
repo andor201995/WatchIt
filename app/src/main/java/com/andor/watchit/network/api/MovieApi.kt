@@ -12,4 +12,11 @@ interface MovieApi {
         @Query("language") language: String = "en-US",
         @Query("page") page: String = "1"
     ): Call<TopRatedMovieSchema>
+
+    @GET("movie")
+    fun findMovie(
+        @Query("language") language: String = "en-US",
+        @Query("page") page: String = "1",
+        @Query("query") query: String
+    ): Call<TopRatedMovieSchema>
 }

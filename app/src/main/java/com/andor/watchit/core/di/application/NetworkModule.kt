@@ -2,8 +2,8 @@ package com.andor.watchit.core.di.application
 
 import com.andor.watchit.core.Constants
 import com.andor.watchit.network.api.MovieApi
-import com.andor.watchit.network.endpoints.TopRatedMovieListEndPoint
-import com.andor.watchit.network.endpoints.TopRatedMovieListEndPointImpl
+import com.andor.watchit.network.endpoints.topratedmovie.TopRatedMovieListEndPoint
+import com.andor.watchit.network.endpoints.topratedmovie.TopRatedMovieListEndPointImpl
 import com.andor.watchit.network.helper.AuthInterceptor
 import dagger.Module
 import dagger.Provides
@@ -55,7 +55,9 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideTopRatedMovieListEndPoint(movieApi: MovieApi): TopRatedMovieListEndPoint {
-        return TopRatedMovieListEndPointImpl(movieApi)
+        return TopRatedMovieListEndPointImpl(
+            movieApi
+        )
     }
 
     @Provides
