@@ -5,7 +5,7 @@
 [![GithubCI](https://github.com/andor201995/WatchIt/workflows/Java%20CI/badge.svg)](https://github.com/andor201995/WatchIt/actions?query=workflow%3A%22Java+CI%22)
 
 
-![Application icon](https://github.com/andor201995/WatchIt/blob/ui_mock_%231/app/src/main/res/mipmap-xxxhdpi/ic_launcher_watch_it_round.png)
+![Application icon](https://github.com/andor201995/WatchIt/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_watch_it_round.png)
 "Icon made by Pixel perfect from www.flaticon.com"
 
 Tmdb Api based application 
