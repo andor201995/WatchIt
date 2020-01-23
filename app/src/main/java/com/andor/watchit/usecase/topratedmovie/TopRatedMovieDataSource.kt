@@ -1,35 +1,21 @@
 package com.andor.watchit.usecase.topratedmovie
 
-import androidx.paging.PageKeyedDataSource
-import com.andor.watchit.usecase.common.datasource.GeneralMovie
-import io.reactivex.SingleObserver
+import com.andor.watchit.core.RxBaseSingleObserver
+import com.andor.watchit.usecase.common.datasource.PageKeyedDataSourceWithRetry
+import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.NetworkState
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.Executor
 
 class TopRatedMovieDataSource(
     private val useCase: TopRatedMovieUseCase,
-    private val retryExecutor: Executor
+    retryExecutor: Executor
 ) :
-    PageKeyedDataSource<Long, GeneralMovie>() {
+    PageKeyedDataSourceWithRetry<Long, GeneralMovie, NetworkState.Initial, NetworkState.Next>(
+        retryExecutor
+    ) {
 
-    val initialNetworkStateStream: PublishSubject<NetworkState.Initial> = PublishSubject.create()
-    val nextNetworkStateStream: PublishSubject<NetworkState.Next> = PublishSubject.create()
-
-    // keep a function reference for the retry event
-    private var retry: (() -> Any)? = null
-
-    fun retryAllFailed() {
-        val prevRetry = retry
-        retry = null
-        prevRetry?.let {
-            retryExecutor.execute {
-                it.invoke()
-            }
-        }
-    }
 
     override fun loadInitial(
         params: LoadInitialParams<Long>,
@@ -41,7 +27,7 @@ class TopRatedMovieDataSource(
         useCase.fetchTopRatedMovieAndNotify(1)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : SingleObserver<TopRatedMovieUseCaseImpl.FetchResult> {
+            .subscribe(object : RxBaseSingleObserver<TopRatedMovieUseCaseImpl.FetchResult>() {
                 override fun onSuccess(t: TopRatedMovieUseCaseImpl.FetchResult) {
                     when (t) {
                         is TopRatedMovieUseCaseImpl.FetchResult.Success -> {
@@ -61,13 +47,6 @@ class TopRatedMovieDataSource(
                         }
                     }
                 }
-
-                override fun onSubscribe(d: Disposable) {
-                }
-
-                override fun onError(e: Throwable) {
-                }
-
             })
     }
 
@@ -77,7 +56,7 @@ class TopRatedMovieDataSource(
         useCase.fetchTopRatedMovieAndNotify(params.key.toInt())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : SingleObserver<TopRatedMovieUseCaseImpl.FetchResult> {
+            .subscribe(object : RxBaseSingleObserver<TopRatedMovieUseCaseImpl.FetchResult>() {
                 override fun onSuccess(t: TopRatedMovieUseCaseImpl.FetchResult) {
                     when (t) {
                         is TopRatedMovieUseCaseImpl.FetchResult.Success -> {
@@ -102,33 +81,8 @@ class TopRatedMovieDataSource(
                         }
                     }
                 }
-
-                override fun onSubscribe(d: Disposable) {
-                }
-
-                override fun onError(e: Throwable) {
-                }
-
             })
 
     }
 
-    override fun loadBefore(params: LoadParams<Long>, callback: LoadCallback<Long, GeneralMovie>) {
-        //leave it empty for now...
-    }
-
-    sealed class NetworkState {
-        sealed class Initial : NetworkState() {
-            object Loading : Initial()
-            object Error : Initial()
-            object Success : Initial()
-        }
-
-        sealed class Next : NetworkState() {
-            object Loading : Next()
-            object Error : Next()
-            object Success : Next()
-            object Completed : Next()
-        }
-    }
 }

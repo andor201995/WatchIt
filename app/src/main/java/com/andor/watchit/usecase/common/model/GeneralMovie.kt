@@ -1,4 +1,4 @@
-package com.andor.watchit.usecase.common.datasource
+package com.andor.watchit.usecase.common.model
 
 import android.os.Parcel
 import android.os.Parcelable

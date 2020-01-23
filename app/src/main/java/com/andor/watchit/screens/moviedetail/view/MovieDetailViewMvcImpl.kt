@@ -11,7 +11,7 @@ import com.andor.watchit.core.appendTextWithColor
 import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.moviedetail.model.Event
-import com.andor.watchit.usecase.common.datasource.GeneralMovie
+import com.andor.watchit.usecase.common.model.GeneralMovie
 
 
 class MovieDetailViewMvcImpl(

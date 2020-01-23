@@ -39,7 +39,7 @@
             app:destination="@id/posterFragment" />
         <argument
             android:name="movieDetail"
-            app:argType="com.andor.watchit.usecase.common.datasource.GeneralMovie" />
+            app:argType="com.andor.watchit.usecase.common.model.GeneralMovie" />
     </fragment>
     <fragment
         android:id="@+id/posterFragment"
@@ -48,6 +48,6 @@
         tools:layout="@layout/poster_fragment">
         <argument
             android:name="movieDetail"
-            app:argType="com.andor.watchit.usecase.common.datasource.GeneralMovie" />
+            app:argType="com.andor.watchit.usecase.common.model.GeneralMovie" />
     </fragment>
 </navigation>

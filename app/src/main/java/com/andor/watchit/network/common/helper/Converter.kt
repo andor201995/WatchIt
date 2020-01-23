@@ -1,7 +1,7 @@
 package com.andor.watchit.network.common.helper
 
 import com.andor.watchit.network.common.schema.TopRatedMovieSchema
-import com.andor.watchit.usecase.common.datasource.GeneralMovie
+import com.andor.watchit.usecase.common.model.GeneralMovie
 
 object Converter {
     fun convertFrom(topRatedMovieSchema: TopRatedMovieSchema): List<GeneralMovie> {

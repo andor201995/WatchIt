@@ -8,7 +8,7 @@ import com.andor.watchit.R
 import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.topratedmovielist.model.Event
-import com.andor.watchit.usecase.common.datasource.GeneralMovie
+import com.andor.watchit.usecase.common.model.GeneralMovie
 
 class TopRatedMovieListItemViewMvcImpl(
     parent: ViewGroup?,

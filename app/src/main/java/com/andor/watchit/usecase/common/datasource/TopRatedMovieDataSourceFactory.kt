@@ -1,6 +1,7 @@
 package com.andor.watchit.usecase.common.datasource
 
 import androidx.paging.DataSource
+import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieDataSource
 import io.reactivex.subjects.PublishSubject
 

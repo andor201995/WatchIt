@@ -6,7 +6,7 @@ import com.andor.watchit.R
 import com.andor.watchit.core.safeNavigation
 import com.andor.watchit.screens.moviedetail.controller.MovieDetailFragmentDirections
 import com.andor.watchit.screens.topratedmovielist.controller.TopRatedMovieListFragmentDirections
-import com.andor.watchit.usecase.common.datasource.GeneralMovie
+import com.andor.watchit.usecase.common.model.GeneralMovie
 
 class ScreenNavigator(private val activity: Activity) {
     fun navigateToErrorScreen() {

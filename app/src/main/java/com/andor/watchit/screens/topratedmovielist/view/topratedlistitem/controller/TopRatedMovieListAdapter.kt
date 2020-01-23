@@ -9,7 +9,7 @@ import com.andor.watchit.screens.common.mvc.ViewMvc
 import com.andor.watchit.screens.topratedmovielist.model.Event
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvc
-import com.andor.watchit.usecase.common.datasource.GeneralMovie
+import com.andor.watchit.usecase.common.model.GeneralMovie
 import io.reactivex.subjects.PublishSubject
 
 

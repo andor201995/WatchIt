@@ -13,8 +13,8 @@ import com.andor.watchit.screens.common.controller.BaseFragment
 import com.andor.watchit.screens.topratedmovielist.model.Event
 import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieListViewModel
 import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvc
-import com.andor.watchit.usecase.common.datasource.GeneralMovie
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovieDataSource
+import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.NetworkState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -118,17 +118,17 @@ class TopRatedMovieListFragment : BaseFragment() {
     private fun bindNetworkStateObserver() {
 
         val initialNetworkStateObserver =
-            object : RxBaseObserver<TopRatedMovieDataSource.NetworkState.Initial>() {
-                override fun onNext(t: TopRatedMovieDataSource.NetworkState.Initial) {
+            object : RxBaseObserver<NetworkState.Initial>() {
+                override fun onNext(t: NetworkState.Initial) {
                     when (t) {
-                        is TopRatedMovieDataSource.NetworkState.Initial.Success -> {
+                        is NetworkState.Initial.Success -> {
                             mViewMvc.hideLoader()
                         }
-                        is TopRatedMovieDataSource.NetworkState.Initial.Error -> {
+                        is NetworkState.Initial.Error -> {
                             mViewMvc.hideLoader()
                             mScreenNavigator.navigateToErrorScreen()
                         }
-                        is TopRatedMovieDataSource.NetworkState.Initial.Loading -> {
+                        is NetworkState.Initial.Loading -> {
                             mViewMvc.showLoader()
                         }
                     }
@@ -143,19 +143,19 @@ class TopRatedMovieListFragment : BaseFragment() {
 
 
         val nextNetworkStateObserver =
-            object : RxBaseObserver<TopRatedMovieDataSource.NetworkState.Next>() {
-                override fun onNext(t: TopRatedMovieDataSource.NetworkState.Next) {
+            object : RxBaseObserver<NetworkState.Next>() {
+                override fun onNext(t: NetworkState.Next) {
                     when (t) {
-                        is TopRatedMovieDataSource.NetworkState.Next.Success -> {
+                        is NetworkState.Next.Success -> {
                             //do nothing
                         }
-                        is TopRatedMovieDataSource.NetworkState.Next.Error -> {
+                        is NetworkState.Next.Error -> {
                             mViewMvc.showListLoadingError()
                         }
-                        is TopRatedMovieDataSource.NetworkState.Next.Loading -> {
+                        is NetworkState.Next.Loading -> {
                             mViewMvc.showListLoading()
                         }
-                        is TopRatedMovieDataSource.NetworkState.Next.Completed -> {
+                        is NetworkState.Next.Completed -> {
                             mViewMvc.showListLoadingCompleted()
                         }
 
