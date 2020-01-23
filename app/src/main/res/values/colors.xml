@@ -6,5 +6,6 @@
     <color name="applicationBackground">#33333F</color>
     <color name="movieTitleBackground">#7C160101</color>
     <color name="actionBar">#00000000</color>
-    <color name="textColor">#FFFFFF</color>
+    <color name="textColor">#FFAF3D</color>
+    <color name="headTextColor">#00FFC4</color>
 </resources>
