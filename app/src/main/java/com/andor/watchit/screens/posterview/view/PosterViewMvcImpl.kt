@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import com.andor.watchit.R
 import com.andor.watchit.core.Constants
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
@@ -30,8 +29,6 @@ class PosterViewMvcImpl(
     override fun setMoviePoster(movieDetail: TopRatedMovie) {
 
         posterMovieImageView.also {
-            ViewCompat.setTransitionName(it, movieDetail.posterPath)
-
             picasso
                 .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/${movieDetail.posterPath}")
                 .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_image_24px)!!)
@@ -40,7 +37,6 @@ class PosterViewMvcImpl(
         }
 
         posterMovieTitleTextView.also {
-            ViewCompat.setTransitionName(it, movieDetail.originalTitle)
             it.text = movieDetail.originalTitle
         }
     }

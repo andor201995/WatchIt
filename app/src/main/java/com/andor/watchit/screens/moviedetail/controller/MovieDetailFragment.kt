@@ -1,12 +1,10 @@
 package com.andor.watchit.screens.moviedetail.controller
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
-import androidx.transition.TransitionInflater
 import com.andor.watchit.core.RxBaseObserver
 import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewMvcFactory
@@ -34,11 +32,6 @@ class MovieDetailFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presentationComponent.inject(this)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            sharedElementEnterTransition =
-                TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        }
-
     }
 
     override fun onCreateView(
@@ -68,7 +61,7 @@ class MovieDetailFragment : BaseFragment() {
             override fun onNext(t: Event) {
                 when (t) {
                     is Event.PosterClick -> {
-                        mScreenNavigator.navigateToPosterScreen(t.movieDetail, t.extra)
+                        mScreenNavigator.navigateToPosterScreen(t.movieDetail)
                     }
                     is Event.PosterScrollToBack -> {
 
