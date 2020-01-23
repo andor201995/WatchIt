@@ -2,6 +2,7 @@ package com.andor.watchit.core.di.application
 
 import android.app.Application
 import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPoint
+import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.usecase.common.datasource.TopRatedMovieDataSourceFactory
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieDataSource
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCase
@@ -32,5 +33,11 @@ class ApplicationModule(private val application: Application) {
             topRatedMovieUseCase,
             executor
         )
+    }
+
+    @Singleton
+    @Provides
+    fun provideImageLoader(): ImageLoader {
+        return ImageLoader(application)
     }
 }

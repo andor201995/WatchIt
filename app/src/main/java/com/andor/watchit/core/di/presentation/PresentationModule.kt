@@ -5,7 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewMvcFactory
-import com.squareup.picasso.Picasso
+import com.andor.watchit.screens.common.helper.ImageLoader
 import dagger.Module
 import dagger.Provides
 
@@ -13,8 +13,8 @@ import dagger.Provides
 class PresentationModule(private val activity: Activity) {
 
     @Provides
-    fun provideViewMvcFactory(inflater: LayoutInflater, picasso: Picasso): ViewMvcFactory {
-        return ViewMvcFactory(inflater, picasso)
+    fun provideViewMvcFactory(inflater: LayoutInflater, imageLoader: ImageLoader): ViewMvcFactory {
+        return ViewMvcFactory(inflater, imageLoader)
     }
 
     @Provides
@@ -35,10 +35,5 @@ class PresentationModule(private val activity: Activity) {
     @Provides
     fun provideScreenNavigator(activity: Activity): ScreenNavigator {
         return ScreenNavigator(activity)
-    }
-
-    @Provides
-    fun providePicasso(): Picasso {
-        return Picasso.get()
     }
 }

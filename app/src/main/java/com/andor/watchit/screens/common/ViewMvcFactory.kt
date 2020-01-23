@@ -2,6 +2,7 @@ package com.andor.watchit.screens.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.screens.moviedetail.view.MovieDetailViewMvc
 import com.andor.watchit.screens.moviedetail.view.MovieDetailViewMvcImpl
 import com.andor.watchit.screens.networkerror.view.NetworkErrorViewMvc
@@ -14,9 +15,11 @@ import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.To
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvcImpl
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvcImpl
-import com.squareup.picasso.Picasso
 
-class ViewMvcFactory(private val layoutInflater: LayoutInflater, private val picasso: Picasso) {
+class ViewMvcFactory(
+    private val layoutInflater: LayoutInflater,
+    private val imageLoader: ImageLoader
+) {
     fun getTopRatedMovieMvc(parent: ViewGroup?): TopRatedMovieListViewMvc {
         return TopRatedMovieListViewMvcImpl(
             parent,
@@ -29,7 +32,7 @@ class ViewMvcFactory(private val layoutInflater: LayoutInflater, private val pic
         return TopRatedMovieListItemViewMvcImpl(
             parent,
             layoutInflater,
-            picasso
+            imageLoader
         )
     }
 
@@ -51,12 +54,16 @@ class ViewMvcFactory(private val layoutInflater: LayoutInflater, private val pic
         return MovieDetailViewMvcImpl(
             parent,
             layoutInflater,
-            picasso
+            imageLoader
         )
     }
 
-    fun getPosterViewMvc(container: ViewGroup?): PosterViewMvc {
-        return PosterViewMvcImpl(container, layoutInflater, picasso)
+    fun getPosterViewMvc(parent: ViewGroup?): PosterViewMvc {
+        return PosterViewMvcImpl(
+            parent,
+            layoutInflater,
+            imageLoader
+        )
     }
 
 }
