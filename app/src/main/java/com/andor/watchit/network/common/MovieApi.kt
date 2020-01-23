@@ -1,6 +1,6 @@
-package com.andor.watchit.network.api
+package com.andor.watchit.network.common
 
-import com.andor.watchit.network.schema.TopRatedMovieSchema
+import com.andor.watchit.network.common.schema.TopRatedMovieSchema
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

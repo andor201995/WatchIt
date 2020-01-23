@@ -13,8 +13,8 @@ import com.andor.watchit.screens.common.controller.BaseFragment
 import com.andor.watchit.screens.topratedmovielist.model.Event
 import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieListViewModel
 import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvc
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
-import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSource
+import com.andor.watchit.usecase.common.datasource.GeneralMovie
+import com.andor.watchit.usecase.topratedmovie.TopRatedMovieDataSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -92,7 +92,7 @@ class TopRatedMovieListFragment : BaseFragment() {
                             mViewModel.retryLoadingList()
                         }
                         is Event.LoadMovie -> {
-                            mScreenNavigator.navigateToMovieDetailScreen(t.topRatedMovie)
+                            mScreenNavigator.navigateToMovieDetailScreen(t.generalMovie)
                         }
                     }
                 }
@@ -102,8 +102,8 @@ class TopRatedMovieListFragment : BaseFragment() {
 
     private fun bindPagedListStateObserver() {
         val pageListStateObserver =
-            object : RxBaseObserver<PagedList<TopRatedMovie>>() {
-                override fun onNext(t: PagedList<TopRatedMovie>) {
+            object : RxBaseObserver<PagedList<GeneralMovie>>() {
+                override fun onNext(t: PagedList<GeneralMovie>) {
                     mViewMvc.updateList(t)
                 }
             }

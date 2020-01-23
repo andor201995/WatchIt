@@ -2,8 +2,8 @@ package com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view
 
 import com.andor.watchit.screens.common.mvc.ObservableViewMvc
 import com.andor.watchit.screens.topratedmovielist.model.Event
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
+import com.andor.watchit.usecase.common.datasource.GeneralMovie
 
 interface TopRatedMovieListItemViewMvc : ObservableViewMvc<Event> {
-    fun updateView(topRatedMovie: TopRatedMovie)
+    fun updateView(generalMovie: GeneralMovie)
 }

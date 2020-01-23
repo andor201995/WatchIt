@@ -3,7 +3,7 @@ package com.andor.watchit.core.di.presentation
 import androidx.lifecycle.ViewModel
 import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieListViewModel
-import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSourceFactory
+import com.andor.watchit.usecase.common.datasource.TopRatedMovieDataSourceFactory
 import dagger.MapKey
 import dagger.Module
 import dagger.Provides

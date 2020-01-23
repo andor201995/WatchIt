@@ -9,7 +9,7 @@ import com.andor.watchit.screens.common.mvc.ViewMvc
 import com.andor.watchit.screens.topratedmovielist.model.Event
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvc
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
+import com.andor.watchit.usecase.common.datasource.GeneralMovie
 import io.reactivex.subjects.PublishSubject
 
 
@@ -17,7 +17,7 @@ class TopRatedMovieListAdapter(
     private val viewMvcFactory: ViewMvcFactory,
     private val eventStream: PublishSubject<Event>
 ) :
-    PagedListAdapter<TopRatedMovie, TopRatedMovieListAdapter.TopMovieHolder>(topRatedMovieDiffUtil) {
+    PagedListAdapter<GeneralMovie, TopRatedMovieListAdapter.TopMovieHolder>(topRatedMovieDiffUtil) {
 
     private val TYPE_PROGRESS = 0
     private val TYPE_ITEM = 1
@@ -93,15 +93,15 @@ class TopRatedMovieListAdapter(
         RecyclerView.ViewHolder(mViewMvc.getRootView())
 
     companion object {
-        private val topRatedMovieDiffUtil = object : DiffUtil.ItemCallback<TopRatedMovie>() {
+        private val topRatedMovieDiffUtil = object : DiffUtil.ItemCallback<GeneralMovie>() {
 
-            override fun areItemsTheSame(oldItem: TopRatedMovie, newItem: TopRatedMovie): Boolean {
+            override fun areItemsTheSame(oldItem: GeneralMovie, newItem: GeneralMovie): Boolean {
                 return oldItem.movieId == newItem.movieId
             }
 
             override fun areContentsTheSame(
-                oldItem: TopRatedMovie,
-                newItem: TopRatedMovie
+                oldItem: GeneralMovie,
+                newItem: GeneralMovie
             ): Boolean {
                 return oldItem == newItem
             }

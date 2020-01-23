@@ -34,12 +34,12 @@
         android:name="com.andor.watchit.screens.moviedetail.controller.MovieDetailFragment"
         android:label=" "
         tools:layout="@layout/movie_detail_fragment">
-        <argument
-            android:name="movieDetail"
-            app:argType="com.andor.watchit.usecase.topratedmovie.TopRatedMovie" />
         <action
             android:id="@+id/action_movieDetailFragment_to_posterFragment"
             app:destination="@id/posterFragment" />
+        <argument
+            android:name="movieDetail"
+            app:argType="com.andor.watchit.usecase.common.datasource.GeneralMovie" />
     </fragment>
     <fragment
         android:id="@+id/posterFragment"
@@ -48,6 +48,6 @@
         tools:layout="@layout/poster_fragment">
         <argument
             android:name="movieDetail"
-            app:argType="com.andor.watchit.usecase.topratedmovie.TopRatedMovie" />
+            app:argType="com.andor.watchit.usecase.common.datasource.GeneralMovie" />
     </fragment>
 </navigation>

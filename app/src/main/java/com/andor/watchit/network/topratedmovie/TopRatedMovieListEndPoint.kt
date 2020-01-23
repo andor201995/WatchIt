@@ -1,6 +1,6 @@
-package com.andor.watchit.network.endpoints.topratedmovie
+package com.andor.watchit.network.topratedmovie
 
-import com.andor.watchit.network.schema.TopRatedMovieSchema
+import com.andor.watchit.network.common.schema.TopRatedMovieSchema
 
 interface TopRatedMovieListEndPoint {
     interface Listener {

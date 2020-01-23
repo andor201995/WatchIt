@@ -1,4 +1,4 @@
-package com.andor.watchit.network.schema
+package com.andor.watchit.network.common.schema
 
 data class Result(
     val adult: Boolean = false,

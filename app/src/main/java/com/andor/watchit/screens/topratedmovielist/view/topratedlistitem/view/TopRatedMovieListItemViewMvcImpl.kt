@@ -9,7 +9,7 @@ import com.andor.watchit.R
 import com.andor.watchit.core.Constants
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.topratedmovielist.model.Event
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
+import com.andor.watchit.usecase.common.datasource.GeneralMovie
 import com.squareup.picasso.Picasso
 
 class TopRatedMovieListItemViewMvcImpl(
@@ -28,14 +28,14 @@ class TopRatedMovieListItemViewMvcImpl(
         moviePosterContainer = findViewById(R.id.moviePosterContainer)
     }
 
-    override fun updateView(topRatedMovie: TopRatedMovie) {
+    override fun updateView(generalMovie: GeneralMovie) {
         moviePosterImageView.also {
             it.setOnClickListener {
-                getEventStream().onNext(Event.LoadMovie(topRatedMovie))
+                getEventStream().onNext(Event.LoadMovie(generalMovie))
             }
 
             picasso
-                .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/${topRatedMovie.posterPath}")
+                .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/${generalMovie.posterPath}")
                 .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_image_24px)!!)
                 .error(ContextCompat.getDrawable(context, R.drawable.ic_error_24px)!!)
                 .into(it)

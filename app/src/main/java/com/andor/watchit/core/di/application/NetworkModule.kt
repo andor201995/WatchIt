@@ -1,10 +1,10 @@
 package com.andor.watchit.core.di.application
 
 import com.andor.watchit.core.Constants
-import com.andor.watchit.network.api.MovieApi
-import com.andor.watchit.network.endpoints.topratedmovie.TopRatedMovieListEndPoint
-import com.andor.watchit.network.endpoints.topratedmovie.TopRatedMovieListEndPointImpl
-import com.andor.watchit.network.helper.AuthInterceptor
+import com.andor.watchit.network.common.MovieApi
+import com.andor.watchit.network.common.helper.AuthInterceptor
+import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPoint
+import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPointImpl
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

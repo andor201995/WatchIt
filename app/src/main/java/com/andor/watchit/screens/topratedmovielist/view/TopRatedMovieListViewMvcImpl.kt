@@ -16,7 +16,7 @@ import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.topratedmovielist.model.Event
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.controller.TopRatedMovieListAdapter
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
+import com.andor.watchit.usecase.common.datasource.GeneralMovie
 
 
 class TopRatedMovieListViewMvcImpl(
@@ -72,8 +72,8 @@ class TopRatedMovieListViewMvcImpl(
 
     }
 
-    override fun updateList(listOfTopRatedMovie: PagedList<TopRatedMovie>) {
-        adapter.submitList(listOfTopRatedMovie)
+    override fun updateList(listOfGeneralMovie: PagedList<GeneralMovie>) {
+        adapter.submitList(listOfGeneralMovie)
     }
 
     override fun showLoader() {

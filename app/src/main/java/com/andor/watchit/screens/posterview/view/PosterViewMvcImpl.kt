@@ -9,7 +9,7 @@ import com.andor.watchit.R
 import com.andor.watchit.core.Constants
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.posterview.model.Event
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
+import com.andor.watchit.usecase.common.datasource.GeneralMovie
 import com.squareup.picasso.Picasso
 
 class PosterViewMvcImpl(
@@ -26,7 +26,7 @@ class PosterViewMvcImpl(
         posterMovieTitleTextView = findViewById(R.id.posterMovieTitleTextView)
     }
 
-    override fun setMoviePoster(movieDetail: TopRatedMovie) {
+    override fun setMoviePoster(movieDetail: GeneralMovie) {
 
         posterMovieImageView.also {
             picasso

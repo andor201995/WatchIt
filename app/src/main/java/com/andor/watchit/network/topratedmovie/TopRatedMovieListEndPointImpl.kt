@@ -1,7 +1,7 @@
-package com.andor.watchit.network.endpoints.topratedmovie
+package com.andor.watchit.network.topratedmovie
 
-import com.andor.watchit.network.api.MovieApi
-import com.andor.watchit.network.schema.TopRatedMovieSchema
+import com.andor.watchit.network.common.MovieApi
+import com.andor.watchit.network.common.schema.TopRatedMovieSchema
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

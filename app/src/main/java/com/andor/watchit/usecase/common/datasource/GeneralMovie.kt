@@ -1,10 +1,10 @@
-package com.andor.watchit.usecase.topratedmovie
+package com.andor.watchit.usecase.common.datasource
 
 import android.os.Parcel
 import android.os.Parcelable
 
 
-data class TopRatedMovie(
+data class GeneralMovie(
     val originalTitle: String? = "",
     val posterPath: String? = "",
     val movieId: Int = INVALID_MOVIE_ID,
@@ -35,14 +35,16 @@ data class TopRatedMovie(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<TopRatedMovie> {
+    companion object CREATOR : Parcelable.Creator<GeneralMovie> {
         const val INVALID_MOVIE_ID = -1
 
-        override fun createFromParcel(parcel: Parcel): TopRatedMovie {
-            return TopRatedMovie(parcel)
+        override fun createFromParcel(parcel: Parcel): GeneralMovie {
+            return GeneralMovie(
+                parcel
+            )
         }
 
-        override fun newArray(size: Int): Array<TopRatedMovie?> {
+        override fun newArray(size: Int): Array<GeneralMovie?> {
             return arrayOfNulls(size)
         }
     }

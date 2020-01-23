@@ -1,4 +1,4 @@
-package com.andor.watchit.network.helper
+package com.andor.watchit.network.common.helper
 
 import okhttp3.Interceptor
 import okhttp3.Response

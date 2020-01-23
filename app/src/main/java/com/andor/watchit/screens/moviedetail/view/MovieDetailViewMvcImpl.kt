@@ -12,7 +12,7 @@ import com.andor.watchit.core.Constants
 import com.andor.watchit.core.appendTextWithColor
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.moviedetail.model.Event
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovie
+import com.andor.watchit.usecase.common.datasource.GeneralMovie
 import com.squareup.picasso.Picasso
 
 
@@ -37,7 +37,7 @@ class MovieDetailViewMvcImpl(
     }
 
     @SuppressLint("SetTextI18n")
-    override fun setMovieDetails(movieDetail: TopRatedMovie) {
+    override fun setMovieDetails(movieDetail: GeneralMovie) {
         posterImageView.also {
             picasso
                 .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/${movieDetail.posterPath}")
