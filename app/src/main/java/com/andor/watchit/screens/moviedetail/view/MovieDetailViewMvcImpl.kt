@@ -53,7 +53,7 @@ class MovieDetailViewMvcImpl(
         movieTitleTextView.text = movieDetail.originalTitle
 
         overViewTextView.also {
-            it.appendTextWithColor("\n${movieDetail.overView}", getColor(R.color.textColor))
+            it.text = movieDetail.overView
 
             it.setOnClickListener { view ->
                 if (view is TextView) {

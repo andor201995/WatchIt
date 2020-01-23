@@ -54,39 +54,56 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/movieDetailMovieOverviewHeadTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@string/movie_detail_heading_font"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/commonPadding"
+                android:paddingLeft="@dimen/commonPadding"
+                android:paddingTop="@dimen/commonPadding"
+                android:paddingEnd="@dimen/commonPadding"
+                android:paddingRight="@dimen/commonPadding"
+                android:text="@string/overview"
+                android:textColor="@color/headTextColor"
+                android:textSize="@dimen/commonTextSize" />
+
+            <TextView
                 android:id="@+id/movieDetailMovieOverviewTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:fontFamily="casual"
+                android:fontFamily="@string/movie_detail_heading_font"
                 android:gravity="center_vertical"
                 android:maxLines="@integer/overviewMaxLength"
-                android:padding="@dimen/commonPadding"
-                android:scrollHorizontally="true"
-                android:text="@string/overview"
-                android:textColor="@android:color/holo_blue_bright"
+                android:paddingStart="@dimen/commonPadding"
+                android:paddingLeft="@dimen/commonPadding"
+                android:paddingEnd="@dimen/commonPadding"
+                android:paddingRight="@dimen/commonPadding"
+                android:paddingBottom="@dimen/commonPadding"
+                android:textColor="@color/textColor"
                 android:textSize="@dimen/commonTextSize" />
 
             <TextView
                 android:id="@+id/movieDetailMovieRatingTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="casual"
+                android:fontFamily="@string/movie_detail_heading_font"
                 android:gravity="center_vertical"
                 android:padding="@dimen/commonPadding"
                 android:text="@string/movie_rating"
-                android:textColor="@android:color/holo_orange_dark"
+                android:textColor="@color/headTextColor"
                 android:textSize="@dimen/commonTextSize" />
 
             <TextView
                 android:id="@+id/movieDetailMovieReleaseDataTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="casual"
+                android:fontFamily="@string/movie_detail_heading_font"
                 android:gravity="center_vertical"
                 android:padding="@dimen/commonPadding"
                 android:text="@string/release_data"
-                android:textColor="@android:color/holo_green_light"
+                android:textColor="@color/headTextColor"
                 android:textSize="@dimen/commonTextSize" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
