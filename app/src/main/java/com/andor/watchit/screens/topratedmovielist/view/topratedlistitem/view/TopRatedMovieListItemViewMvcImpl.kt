@@ -5,8 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.navigation.fragment.FragmentNavigator
 import com.andor.watchit.R
 import com.andor.watchit.core.Constants
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
@@ -32,13 +30,8 @@ class TopRatedMovieListItemViewMvcImpl(
 
     override fun updateView(topRatedMovie: TopRatedMovie) {
         moviePosterImageView.also {
-            ViewCompat.setTransitionName(it, topRatedMovie.posterPath)
-
-            it.setOnClickListener { _ ->
-                val extra = FragmentNavigator.Extras.Builder()
-                    .addSharedElement(it, topRatedMovie.posterPath!!)
-
-                getEventStream().onNext(Event.LoadMovie(topRatedMovie, extra.build()))
+            it.setOnClickListener {
+                getEventStream().onNext(Event.LoadMovie(topRatedMovie))
             }
 
             picasso
