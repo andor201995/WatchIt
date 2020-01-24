@@ -1,8 +1,7 @@
-package com.andor.watchit.usecase.common.datasource
+package com.andor.watchit.usecase.topratedmovie
 
 import androidx.paging.DataSource
 import com.andor.watchit.usecase.common.model.GeneralMovie
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovieDataSource
 import io.reactivex.subjects.PublishSubject
 
 
@@ -19,5 +18,4 @@ class TopRatedMovieDataSourceFactory(val topRatedMovieDataSource: TopRatedMovieD
     fun getDataSourceStream(): PublishSubject<TopRatedMovieDataSource> {
         return mDataSourceRelay
     }
-
 }

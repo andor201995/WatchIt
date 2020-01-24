@@ -4,6 +4,7 @@ import com.andor.watchit.helper.TestData
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.network.common.schema.TopRatedMovieSchema
 import com.andor.watchit.network.findmovie.FindMovieEndPoint
+import com.andor.watchit.usecase.findmovie.FindMovieUseCase.FetchResult
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
@@ -27,7 +28,7 @@ class FindMovieUseCaseImplTest {
     // region helper fields ------------------------------------------------------------------------
     @Mock
     private lateinit var mFindMovieEndPointMock: FindMovieEndPoint
-    private val testObserver = TestObserver<FindMovieUseCaseImpl.FetchResult>()
+    private val testObserver = TestObserver<FetchResult>()
 
     // end region helper fields --------------------------------------------------------------------
 
@@ -70,7 +71,7 @@ class FindMovieUseCaseImplTest {
         systemUT.findMovie(VALID_PAGE, VALID_QUERY).subscribe(testObserver)
         //Assert
         testObserver.assertValue {
-            it is FindMovieUseCaseImpl.FetchResult.Success &&
+            it is FetchResult.Success &&
                     it.pageNumber == schema.page &&
                     it.generalMovieList == Converter.convertFrom(schema) &&
                     it.maxPageCount == schema.total_pages
@@ -88,7 +89,7 @@ class FindMovieUseCaseImplTest {
         systemUT.findMovie(VALID_PAGE, VALID_QUERY).subscribe(testObserver)
         //Assert
         testObserver.assertValue {
-            it is FindMovieUseCaseImpl.FetchResult.Failure
+            it is FetchResult.Failure
         }
 
     }

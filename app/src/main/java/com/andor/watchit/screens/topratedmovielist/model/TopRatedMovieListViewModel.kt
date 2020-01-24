@@ -3,14 +3,18 @@ package com.andor.watchit.screens.topratedmovielist.model
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
-import com.andor.watchit.usecase.common.datasource.TopRatedMovieDataSourceFactory
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.andor.watchit.usecase.common.model.NetworkState
+import com.andor.watchit.usecase.findmovie.FindMovieDataSourceFactory
+import com.andor.watchit.usecase.topratedmovie.TopRatedMovieDataSourceFactory
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 
 
-class TopRatedMovieListViewModel(private val topRatedMovieDataSourceFactory: TopRatedMovieDataSourceFactory) :
+class TopRatedMovieListViewModel(
+    private val topRatedMovieDataSourceFactory: TopRatedMovieDataSourceFactory,
+    private val findMovieDataSourceFactory: FindMovieDataSourceFactory
+) :
     ViewModel() {
 
     var topRatedMovieStream: BehaviorSubject<PagedList<GeneralMovie>> = BehaviorSubject.create()

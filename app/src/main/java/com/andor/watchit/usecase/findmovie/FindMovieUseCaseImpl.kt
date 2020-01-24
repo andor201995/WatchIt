@@ -3,20 +3,10 @@ package com.andor.watchit.usecase.findmovie
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.network.common.schema.TopRatedMovieSchema
 import com.andor.watchit.network.findmovie.FindMovieEndPoint
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.findmovie.FindMovieUseCase.FetchResult
 import io.reactivex.subjects.SingleSubject
 
 class FindMovieUseCaseImpl(private val findMovieEndPoint: FindMovieEndPoint) : FindMovieUseCase {
-
-    sealed class FetchResult {
-        data class Success(
-            val generalMovieList: List<GeneralMovie>,
-            val pageNumber: Int,
-            val maxPageCount: Int
-        ) : FetchResult()
-
-        object Failure : FetchResult()
-    }
 
     override fun findMovie(page: Int, query: String): SingleSubject<FetchResult> {
         val responseSingle = SingleSubject.create<FetchResult>()
