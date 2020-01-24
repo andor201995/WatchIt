@@ -13,10 +13,6 @@ class FindMovieDataSourceFactory(
     private val mDataSourceRelay: PublishSubject<FindMovieDataSource> = PublishSubject.create()
 
     var query: String = ""
-        set(value) {
-            field = value
-            create()
-        }
 
     override
     fun create(): DataSource<Long, GeneralMovie> {

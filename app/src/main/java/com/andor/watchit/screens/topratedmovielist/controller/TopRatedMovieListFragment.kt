@@ -73,9 +73,12 @@ class TopRatedMovieListFragment : BaseFragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.topratedmoviemenu, menu)
-        mViewMvc.setSearchBar(menu, requireActivity())
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        mViewMvc.selectOptionItem(item.itemId)
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun bindToStreams() {
         bindNetworkStateObserver()
@@ -93,6 +96,9 @@ class TopRatedMovieListFragment : BaseFragment() {
                         }
                         is Event.LoadMovie -> {
                             mScreenNavigator.navigateToMovieDetailScreen(t.generalMovie)
+                        }
+                        is Event.OpenSearchScreen -> {
+                            mScreenNavigator.navigateToSearchScreen()
                         }
                     }
                 }

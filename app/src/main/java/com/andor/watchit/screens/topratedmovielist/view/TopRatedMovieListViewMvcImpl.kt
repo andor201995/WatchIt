@@ -1,12 +1,12 @@
 package com.andor.watchit.screens.topratedmovielist.view
 
-import android.app.SearchManager
 import android.content.Context
 import android.util.DisplayMetrics
-import android.view.*
-import androidx.appcompat.widget.SearchView
+import android.view.Display
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.widget.ContentLoadingProgressBar
-import androidx.fragment.app.FragmentActivity
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -97,52 +97,9 @@ class TopRatedMovieListViewMvcImpl(
         adapter.setListLoadingState(TopRatedMovieListAdapter.ListLoading.Loading)
     }
 
-    override fun setSearchBar(
-        menu: Menu,
-        activity: FragmentActivity
-    ) {
-        //SearchView setup
-        val searchActionMenuItem = menu.findItem(R.id.search)
-        // get other option menu
-        //val settingActionMenuItem = menu.findItem(R.id.action_setting)
-        if (searchActionMenuItem is MenuItem) {
-            searchActionMenuItem.setOnActionExpandListener(object :
-                MenuItem.OnActionExpandListener {
-                override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
-                    //make other options menu not visible
-                    //settingActionMenuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
-                    return true
-                }
-
-                override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
-                    activity.invalidateOptionsMenu()
-                    return true
-                }
-            })
-        }
-        val searchView = searchActionMenuItem.actionView
-        if (searchView is SearchView) {
-            searchView.apply {
-                // Assumes current activity is the searchable activity
-                val searchManager = context.getSystemService(Context.SEARCH_SERVICE)
-                if (searchManager is SearchManager) {
-                    setSearchableInfo(searchManager.getSearchableInfo(activity.componentName))
-                }
-                setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                    override fun onQueryTextSubmit(query: String?): Boolean {
-                        return true
-                    }
-
-                    override fun onQueryTextChange(newText: String?): Boolean {
-                        // filter object based on query
-                        //this@NoteListingFragment.listingAdapter.filter.filter(newText)
-                        return true
-                    }
-
-                })
-
-            }
+    override fun selectOptionItem(itemId: Int) {
+        if (itemId == R.id.search) {
+            getEventStream().onNext(Event.OpenSearchScreen)
         }
     }
-
 }

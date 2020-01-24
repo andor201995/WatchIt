@@ -41,5 +41,7 @@ class ScreenNavigator(private val activity: Activity) {
             .safeNavigation(R.id.movieDetailFragment, action)
     }
 
+    fun navigateToSearchScreen() {
+    }
 
 }
