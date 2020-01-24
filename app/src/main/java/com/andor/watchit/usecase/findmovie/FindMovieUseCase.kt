@@ -1,3 +1,7 @@
 package com.andor.watchit.usecase.findmovie
 
-class FindMovieUseCase
+import io.reactivex.Single
+
+interface FindMovieUseCase {
+    fun findMovie(page: Int, query: String): Single<FindMovieUseCaseImpl.FetchResult>
+}

@@ -2,6 +2,8 @@ package com.andor.watchit.network.common.helper
 
 import com.andor.watchit.network.common.schema.TopRatedMovieSchema
 import com.andor.watchit.usecase.common.model.GeneralMovie
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 object Converter {
     fun convertFrom(topRatedMovieSchema: TopRatedMovieSchema): List<GeneralMovie> {
@@ -19,6 +21,13 @@ object Converter {
             )
         }
         return listOfTopRatedMovie
+    }
+
+    fun convertFrom(query: String): String {
+        val pattern: Pattern = Pattern.compile("\\s+")
+        val mat: Matcher = pattern.matcher(query)
+        val result = mat.replaceAll("+")
+        return result.removePrefix("+").removeSuffix("+")
     }
 
 }

@@ -38,7 +38,6 @@ class TopRatedMovieUseCaseImplTest {
         testObserver.dispose()
     }
 
-    //fetch data return success response
     @Test
     fun fetchTopRatedMovieAndNotify_success_returnValidData() {
         //Arrange
@@ -61,7 +60,6 @@ class TopRatedMovieUseCaseImplTest {
 
     }
 
-    //fetch data return error response
     @Test
     fun fetchTopRatedMovieAndNotify_Failure_retrunFailure() {
         //Arrange
