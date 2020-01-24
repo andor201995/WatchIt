@@ -5,15 +5,13 @@ import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.andor.watchit.usecase.common.model.NetworkState
-import com.andor.watchit.usecase.findmovie.FindMovieDataSourceFactory
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieDataSourceFactory
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 
 
 class TopRatedMovieListViewModel(
-    private val topRatedMovieDataSourceFactory: TopRatedMovieDataSourceFactory,
-    private val findMovieDataSourceFactory: FindMovieDataSourceFactory
+    private val topRatedMovieDataSourceFactory: TopRatedMovieDataSourceFactory
 ) :
     ViewModel() {
 

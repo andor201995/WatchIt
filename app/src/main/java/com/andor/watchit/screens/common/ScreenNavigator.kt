@@ -42,6 +42,11 @@ class ScreenNavigator(private val activity: Activity) {
     }
 
     fun navigateToSearchScreen() {
+        Navigation.findNavController(activity, R.id.nav_host)
+            .safeNavigation(
+                R.id.topRatedMovieListFragment,
+                R.id.action_topRatedMovieListFragment_to_searchMovieFragment
+            )
     }
 
 }
