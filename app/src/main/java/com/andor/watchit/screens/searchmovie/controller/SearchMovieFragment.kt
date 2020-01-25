@@ -86,7 +86,7 @@ class SearchMovieFragment : BaseFragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putString("searchQuery", mSearchQuery)
+        outState.putString(searchQueryTag, mSearchQuery)
         super.onSaveInstanceState(outState)
     }
 

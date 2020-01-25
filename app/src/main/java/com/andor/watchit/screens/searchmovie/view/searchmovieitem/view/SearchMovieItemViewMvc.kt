@@ -6,4 +6,5 @@ import com.andor.watchit.usecase.common.model.GeneralMovie
 
 interface SearchMovieItemViewMvc : ObservableViewMvc<Event> {
     fun bindItem(item: GeneralMovie)
+    fun cleanUp()
 }

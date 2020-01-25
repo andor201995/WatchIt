@@ -33,4 +33,8 @@ class SearchMovieItemViewMvcImpl(
 
         imageLoader.loadImageInto(moviePosterImageView, item.posterPath)
     }
+
+    override fun cleanUp() {
+        imageLoader.cleanUp(moviePosterImageView)
+    }
 }

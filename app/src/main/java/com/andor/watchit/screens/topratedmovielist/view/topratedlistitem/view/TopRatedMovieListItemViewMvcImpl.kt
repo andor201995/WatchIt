@@ -37,4 +37,8 @@ class TopRatedMovieListItemViewMvcImpl(
         }
 
     }
+
+    override fun cleanUp() {
+        imageLoader.cleanUp(moviePosterImageView)
+    }
 }

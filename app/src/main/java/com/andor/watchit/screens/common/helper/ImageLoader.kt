@@ -20,4 +20,9 @@ class ImageLoader(private val context: Context) {
             .error(ContextCompat.getDrawable(context, R.drawable.ic_error_24px)!!)
             .into(view)
     }
+
+    fun cleanUp(imageView: ImageView) {
+        picasso.cancelRequest(imageView)
+        imageView.setImageDrawable(null)
+    }
 }

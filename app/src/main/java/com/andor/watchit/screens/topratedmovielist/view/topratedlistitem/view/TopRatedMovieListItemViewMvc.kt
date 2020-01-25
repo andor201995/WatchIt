@@ -6,4 +6,5 @@ import com.andor.watchit.usecase.common.model.GeneralMovie
 
 interface TopRatedMovieListItemViewMvc : ObservableViewMvc<Event> {
     fun updateView(generalMovie: GeneralMovie)
+    fun cleanUp()
 }

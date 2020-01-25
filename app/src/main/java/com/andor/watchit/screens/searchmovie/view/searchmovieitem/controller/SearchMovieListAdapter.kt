@@ -34,6 +34,13 @@ class SearchMovieListAdapter(
         }
     }
 
+    override fun onViewRecycled(holder: SearchMovieHolder) {
+        super.onViewRecycled(holder)
+        if (holder.viewMvc is SearchMovieItemViewMvc) {
+            holder.viewMvc.cleanUp()
+        }
+    }
+
     inner class SearchMovieHolder(val viewMvc: ViewMvc) :
         RecyclerView.ViewHolder(viewMvc.getRootView())
 
