@@ -39,6 +39,7 @@ object Version {
     const val rxjava = "2.2.17"
     const val rxandroid = "2.1.0"
     const val adapter_rxjava = "2.4.0"
+    const val rxbinding = "3.1.0"
 
     const val shimmer = "0.5.0@aar"
     const val picasso = "2.71828"
@@ -94,6 +95,11 @@ object Libraries {
     //Rx-Java
     const val rxjava = "io.reactivex.rxjava2:rxjava:${Version.rxjava}"
     const val rxandroid = "io.reactivex.rxjava2:rxandroid:${Version.rxandroid}"
+    const val rxbinding_appcompact =
+        "com.jakewharton.rxbinding3:rxbinding-appcompat:${Version.rxbinding}"
+    const val rxbinding_core = "com.jakewharton.rxbinding3:rxbinding-core:${Version.rxbinding}"
+    const val rxbinding_platform = "com.jakewharton.rxbinding3:rxbinding:${Version.rxbinding}"
+
 
     //FB shimmer
     const val shimmer = "com.facebook.shimmer:shimmer:${Version.shimmer}"

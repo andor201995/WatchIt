@@ -5,6 +5,7 @@ import androidx.navigation.Navigation
 import com.andor.watchit.R
 import com.andor.watchit.core.safeNavigation
 import com.andor.watchit.screens.moviedetail.controller.MovieDetailFragmentDirections
+import com.andor.watchit.screens.searchmovie.controller.SearchMovieFragmentDirections
 import com.andor.watchit.screens.topratedmovielist.controller.TopRatedMovieListFragmentDirections
 import com.andor.watchit.usecase.common.model.GeneralMovie
 
@@ -25,13 +26,22 @@ class ScreenNavigator(private val activity: Activity) {
             )
     }
 
-    fun navigateToMovieDetailScreen(generalMovie: GeneralMovie) {
+    fun navigateFromTopRatedScreenToMovieDetailScreen(generalMovie: GeneralMovie) {
         val action =
             TopRatedMovieListFragmentDirections.actionTopRatedMovieListFragmentToMovieDetailFragment(
                 generalMovie
             )
         Navigation.findNavController(activity, R.id.nav_host)
             .safeNavigation(R.id.topRatedMovieListFragment, action)
+    }
+
+    fun navigateFromSearchScreenToMovieDetailScreen(generalMovie: GeneralMovie) {
+        val action =
+            SearchMovieFragmentDirections.actionSearchMovieFragmentToMovieDetailFragment(
+                generalMovie
+            )
+        Navigation.findNavController(activity, R.id.nav_host)
+            .safeNavigation(R.id.searchMovieFragment, action)
     }
 
     fun navigateToPosterScreen(movieDetail: GeneralMovie) {
@@ -47,6 +57,10 @@ class ScreenNavigator(private val activity: Activity) {
                 R.id.topRatedMovieListFragment,
                 R.id.action_topRatedMovieListFragment_to_searchMovieFragment
             )
+    }
+
+    fun navigateUp() {
+        Navigation.findNavController(activity, R.id.nav_host).navigateUp()
     }
 
 }

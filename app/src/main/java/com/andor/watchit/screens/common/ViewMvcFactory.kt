@@ -11,6 +11,8 @@ import com.andor.watchit.screens.posterview.view.PosterViewMvc
 import com.andor.watchit.screens.posterview.view.PosterViewMvcImpl
 import com.andor.watchit.screens.searchmovie.view.SearchMovieViewMvc
 import com.andor.watchit.screens.searchmovie.view.SearchMovieViewMvcImpl
+import com.andor.watchit.screens.searchmovie.view.searchmovieitem.view.SearchMovieItemViewMvc
+import com.andor.watchit.screens.searchmovie.view.searchmovieitem.view.SearchMovieItemViewMvcImpl
 import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvcImpl
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
@@ -71,8 +73,13 @@ class ViewMvcFactory(
     fun getSearchViewMvc(parent: ViewGroup?): SearchMovieViewMvc {
         return SearchMovieViewMvcImpl(
             parent,
-            layoutInflater
+            layoutInflater,
+            this
         )
+    }
+
+    fun getSearchMovieItemViewMvc(parent: ViewGroup): SearchMovieItemViewMvc {
+        return SearchMovieItemViewMvcImpl(parent, layoutInflater, imageLoader)
     }
 
 }

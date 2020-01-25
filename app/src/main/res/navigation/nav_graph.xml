@@ -57,5 +57,9 @@
         android:id="@+id/searchMovieFragment"
         android:name="com.andor.watchit.screens.searchmovie.controller.SearchMovieFragment"
         android:label=" "
-        tools:layout="@layout/search_movie_fragment" />
+        tools:layout="@layout/search_movie_fragment">
+        <action
+            android:id="@+id/action_searchMovieFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
 </navigation>

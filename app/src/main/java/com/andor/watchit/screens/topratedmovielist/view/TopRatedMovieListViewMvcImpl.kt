@@ -53,8 +53,6 @@ class TopRatedMovieListViewMvcImpl(
         } else {
             adapter = recyclerView.adapter as TopRatedMovieListAdapter
         }
-
-
     }
 
     private fun getPossibleGridCount(): Int {

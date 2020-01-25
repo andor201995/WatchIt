@@ -19,6 +19,7 @@ android {
         versionName Releases.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -63,6 +64,9 @@ dependencies {
     implementation Libraries.picasso
     implementation Libraries.pagination
     implementation Libraries.pagination_rxjava
+
+    implementation Libraries.rxbinding_appcompact
+    implementation Libraries.rxbinding_platform
 
     implementation Libraries.zoomage
 

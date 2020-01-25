@@ -95,7 +95,7 @@ class TopRatedMovieListFragment : BaseFragment() {
                             mViewModel.retryLoadingList()
                         }
                         is Event.LoadMovie -> {
-                            mScreenNavigator.navigateToMovieDetailScreen(t.generalMovie)
+                            mScreenNavigator.navigateFromTopRatedScreenToMovieDetailScreen(t.generalMovie)
                         }
                         is Event.OpenSearchScreen -> {
                             mScreenNavigator.navigateToSearchScreen()
