@@ -6,10 +6,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/moviePosterContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minWidth="@dimen/itemWidth"
-        android:minHeight="@dimen/itemHeight"
+        android:layout_width="@dimen/itemWidth"
+        android:layout_height="@dimen/itemHeight"
+        android:layout_gravity="center"
         app:cardBackgroundColor="@android:color/background_dark"
         app:cardCornerRadius="5dp"
         app:cardElevation="10dp"
@@ -18,12 +17,12 @@
 
         <ImageView
             android:id="@+id/moviePosterImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:contentDescription="@string/poster_image"
-            android:scaleType="centerInside"
+            android:scaleType="fitXY"
             android:src="@drawable/ic_image_24px" />
 
     </androidx.cardview.widget.CardView>

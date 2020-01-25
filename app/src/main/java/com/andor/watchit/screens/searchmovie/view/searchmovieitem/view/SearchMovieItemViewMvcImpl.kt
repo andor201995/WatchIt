@@ -21,7 +21,7 @@ class SearchMovieItemViewMvcImpl(
 
     init {
         //using  same item for search view
-        setRootView(inflater.inflate(R.layout.top_rated_movie_list_item, parent, false))
+        setRootView(inflater.inflate(R.layout.movie_list_item, parent, false))
         moviePosterImageView = findViewById(R.id.moviePosterImageView)
         moviePosterContainer = findViewById(R.id.moviePosterContainer)
     }

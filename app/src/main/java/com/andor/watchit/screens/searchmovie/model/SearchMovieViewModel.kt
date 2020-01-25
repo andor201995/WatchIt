@@ -12,6 +12,7 @@ import io.reactivex.subjects.BehaviorSubject
 class SearchMovieViewModel(private val findMovieDataSourceFactory: FindMovieDataSourceFactory) :
     ViewModel() {
 
+    private var lastSearchQuery: String = ""
     var movieStream: BehaviorSubject<PagedList<GeneralMovie>> = BehaviorSubject.create()
     val nextNetworkStateStream: BehaviorSubject<NetworkState.Next> =
         BehaviorSubject.create()
@@ -49,7 +50,8 @@ class SearchMovieViewModel(private val findMovieDataSourceFactory: FindMovieData
     }
 
     fun findMovie(query: String) {
-        if (query.isNotBlank()) {
+        if (query.isNotBlank() && lastSearchQuery != query) {
+            lastSearchQuery = query
             findMovieDataSourceFactory.query = query
             RxPagedListBuilder(findMovieDataSourceFactory, getPageConfig())
                 .setFetchScheduler(Schedulers.io())

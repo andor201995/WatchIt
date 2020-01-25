@@ -1,11 +1,7 @@
 package com.andor.watchit.screens.topratedmovielist.view
 
-import android.content.Context
-import android.util.DisplayMetrics
-import android.view.Display
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.R
 import com.andor.watchit.core.visible
 import com.andor.watchit.screens.common.ViewMvcFactory
+import com.andor.watchit.screens.common.helper.Utils
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.topratedmovielist.model.Event
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.controller.TopRatedMovieListAdapter
@@ -47,27 +44,12 @@ class TopRatedMovieListViewMvcImpl(
 
             recyclerView.adapter = this.adapter
 
-            val gridCount = getPossibleGridCount()
+            val gridCount = Utils.getPossibleGridCount(context)
 
             recyclerView.layoutManager = GridLayoutManager(context, gridCount)
         } else {
             adapter = recyclerView.adapter as TopRatedMovieListAdapter
         }
-    }
-
-    private fun getPossibleGridCount(): Int {
-        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val display: Display = windowManager.defaultDisplay
-        val outMetrics = DisplayMetrics()
-        display.getMetrics(outMetrics)
-
-        val density: Float = context.resources.displayMetrics.density
-        val dpWidth = outMetrics.widthPixels / density
-
-        val dimension = context.resources.getDimension(R.dimen.itemWidth)
-        val possibleGridCount = (dpWidth / dimension).toInt()
-        return if (possibleGridCount > 2) possibleGridCount else 2
-
     }
 
     override fun updateList(listOfGeneralMovie: PagedList<GeneralMovie>) {

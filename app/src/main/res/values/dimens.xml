@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="itemWidth">150dp</dimen>
-    <dimen name="itemHeight">250dp</dimen>
+    <dimen name="itemWidth">200dp</dimen>
+    <dimen name="itemHeight">300dp</dimen>
     <dimen name="progressbar">50dp</dimen>
     <dimen name="movieDetailPosterHeight">300dp</dimen>
     <dimen name="commonPadding">10dp</dimen>
