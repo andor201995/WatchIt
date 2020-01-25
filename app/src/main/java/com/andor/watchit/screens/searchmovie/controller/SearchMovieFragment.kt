@@ -136,14 +136,20 @@ class SearchMovieFragment : BaseFragment() {
                         is NetworkState.Initial.Success -> {
                             mViewMvc.hidePlaceHolder()
                             mViewMvc.hideLoader()
+                            if (t.totalResult == 0) {
+                                mViewMvc.showEmptyListPlaceholder()
+                            }
                         }
                         is NetworkState.Initial.Error -> {
                             mViewMvc.hidePlaceHolder()
                             mViewMvc.hideLoader()
+                            mViewMvc.hideEmptyListPlaceholder()
                             mScreenNavigator.navigateFromSearchScreenToErrorScreen()
                         }
                         is NetworkState.Initial.Loading -> {
                             mViewMvc.showLoader()
+                            mViewMvc.hidePlaceHolder()
+                            mViewMvc.hideEmptyListPlaceholder()
                         }
                     }
                 }

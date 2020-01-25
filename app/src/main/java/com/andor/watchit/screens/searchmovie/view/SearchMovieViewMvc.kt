@@ -19,4 +19,6 @@ interface SearchMovieViewMvc : ObservableViewMvc<Event> {
     fun showPlaceHolder()
     fun hideLoader()
     fun showLoader()
+    fun showEmptyListPlaceholder()
+    fun hideEmptyListPlaceholder()
 }

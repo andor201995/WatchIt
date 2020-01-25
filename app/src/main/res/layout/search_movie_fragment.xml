@@ -11,29 +11,13 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?android:attr/actionBarSize" />
 
-    <RelativeLayout
-        android:id="@+id/searchPlaceHolder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <include
+        android:id="@+id/searchFirstPlaceHolder"
+        layout="@layout/searchfirstplaceholder" />
 
-        <ImageView
-            android:id="@+id/tvImage"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_centerInParent="true"
-            android:contentDescription="@string/logo"
-            android:src="@drawable/ic_launcher_watch_it_foreground" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvImage"
-            android:layout_centerInParent="true"
-            android:fontFamily="@string/movie_detail_heading_font"
-            android:text="@string/search_placeholder"
-            android:textColor="@color/headTextColor"
-            android:textSize="20sp" />
-    </RelativeLayout>
+    <include
+        android:id="@+id/searchEmptyPlaceHolder"
+        layout="@layout/searchemptyplaceholder" />
 
     <include
         android:id="@+id/loader"
