@@ -1,4 +1,4 @@
-package com.andor.watchit.core
+package com.andor.watchit.core.rx
 
 import io.reactivex.observers.DisposableObserver
 

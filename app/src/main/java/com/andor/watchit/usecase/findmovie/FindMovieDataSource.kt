@@ -1,6 +1,6 @@
 package com.andor.watchit.usecase.findmovie
 
-import com.andor.watchit.core.RxBaseSingleObserver
+import com.andor.watchit.core.rx.RxBaseSingleObserver
 import com.andor.watchit.usecase.common.datasource.PageKeyedDataSourceWithRetry
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.andor.watchit.usecase.common.model.NetworkState
