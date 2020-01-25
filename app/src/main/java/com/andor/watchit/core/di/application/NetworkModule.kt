@@ -1,10 +1,8 @@
 package com.andor.watchit.core.di.application
 
 import com.andor.watchit.core.Constants
-import com.andor.watchit.network.api.MovieApi
-import com.andor.watchit.network.endpoints.TopRatedMovieListEndPoint
-import com.andor.watchit.network.endpoints.TopRatedMovieListEndPointImpl
-import com.andor.watchit.network.helper.AuthInterceptor
+import com.andor.watchit.network.common.MovieApi
+import com.andor.watchit.network.common.helper.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -50,12 +48,6 @@ class NetworkModule {
     @Provides
     fun provideMovieApi(retrofit: Retrofit): MovieApi {
         return retrofit.create(MovieApi::class.java)
-    }
-
-    @Singleton
-    @Provides
-    fun provideTopRatedMovieListEndPoint(movieApi: MovieApi): TopRatedMovieListEndPoint {
-        return TopRatedMovieListEndPointImpl(movieApi)
     }
 
     @Provides

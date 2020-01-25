@@ -2,8 +2,10 @@ package com.andor.watchit.core.di.presentation
 
 import androidx.lifecycle.ViewModel
 import com.andor.watchit.screens.common.ViewModelFactory
+import com.andor.watchit.screens.searchmovie.model.SearchMovieViewModel
 import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieListViewModel
-import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSourceFactory
+import com.andor.watchit.usecase.findmovie.FindMovieDataSourceFactory
+import com.andor.watchit.usecase.topratedmovie.TopRatedMovieDataSourceFactory
 import dagger.MapKey
 import dagger.Module
 import dagger.Provides
@@ -30,9 +32,18 @@ class ViewModelModule {
     @Provides
     @IntoMap
     @ViewModelKey(TopRatedMovieListViewModel::class)
-    fun provideTopRatedMovieViewModel(topRatedMovieDataSourceFactory: TopRatedMovieDataSourceFactory): ViewModel {
+    fun provideTopRatedMovieViewModel(
+        topRatedMovieDataSourceFactory: TopRatedMovieDataSourceFactory
+    ): ViewModel {
         return TopRatedMovieListViewModel(
             topRatedMovieDataSourceFactory
         )
+    }
+
+    @Provides
+    @IntoMap
+    @ViewModelKey(SearchMovieViewModel::class)
+    fun provideSearchViewModel(findMovieDataSourceFactory: FindMovieDataSourceFactory): ViewModel {
+        return SearchMovieViewModel(findMovieDataSourceFactory)
     }
 }

@@ -9,4 +9,7 @@
     <string name="overview">Overview : </string>
     <string name="release_data">Release Data :</string>
     <string name="movie_detail_heading_font">"@font/coda"</string>
+    <string name="search">search</string>
+    <string name="search_placeholder">What you want know now ?</string>
+    <string name="logo">logo</string>
 </resources>

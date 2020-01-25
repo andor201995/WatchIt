@@ -1,6 +1,6 @@
 package com.andor.watchit.helper
 
-import com.andor.watchit.network.schema.TopRatedMovieSchema
+import com.andor.watchit.network.common.schema.TopRatedMovieSchema
 import com.google.gson.Gson
 import java.io.File
 

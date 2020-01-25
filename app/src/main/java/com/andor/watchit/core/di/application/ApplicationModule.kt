@@ -1,13 +1,22 @@
 package com.andor.watchit.core.di.application
 
 import android.app.Application
-import com.andor.watchit.network.endpoints.TopRatedMovieListEndPoint
+import com.andor.watchit.network.common.MovieApi
+import com.andor.watchit.network.findmovie.FindMovieEndPoint
+import com.andor.watchit.network.findmovie.FindMovieEndPointImpl
+import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPoint
+import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPointImpl
+import com.andor.watchit.screens.common.helper.ImageLoader
+import com.andor.watchit.usecase.findmovie.FindMovieDataSourceFactory
+import com.andor.watchit.usecase.findmovie.FindMovieUseCase
+import com.andor.watchit.usecase.findmovie.FindMovieUseCaseImpl
+import com.andor.watchit.usecase.topratedmovie.TopRatedMovieDataSource
+import com.andor.watchit.usecase.topratedmovie.TopRatedMovieDataSourceFactory
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCase
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCaseImpl
-import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSource
-import com.andor.watchit.usecase.topratedmovie.datasource.TopRatedMovieDataSourceFactory
 import dagger.Module
 import dagger.Provides
+import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.inject.Singleton
 
@@ -20,14 +29,61 @@ class ApplicationModule(private val application: Application) {
         return TopRatedMovieUseCaseImpl(topRatedMovieListEndPoint)
     }
 
+    @Singleton
     @Provides
-    fun provideTopRatedMovieDataSourceFactory(topRatedMovieDataSource: TopRatedMovieDataSource): TopRatedMovieDataSourceFactory {
-        return TopRatedMovieDataSourceFactory(topRatedMovieDataSource)
+    fun provideTopRatedMovieListEndPoint(movieApi: MovieApi): TopRatedMovieListEndPoint {
+        return TopRatedMovieListEndPointImpl(
+            movieApi
+        )
     }
 
     @Provides
-    fun provideTopRatedMovieDataSource(topRatedMovieUseCase: TopRatedMovieUseCase): TopRatedMovieDataSource {
-        val executor = Executors.newFixedThreadPool(5)
-        return TopRatedMovieDataSource(topRatedMovieUseCase, executor)
+    fun provideTopRatedMovieDataSourceFactory(topRatedMovieDataSource: TopRatedMovieDataSource): TopRatedMovieDataSourceFactory {
+        return TopRatedMovieDataSourceFactory(
+            topRatedMovieDataSource
+        )
+    }
+
+    @Provides
+    fun provideTopRatedMovieDataSource(
+        topRatedMovieUseCase: TopRatedMovieUseCase,
+        executor: ExecutorService
+    ): TopRatedMovieDataSource {
+        return TopRatedMovieDataSource(
+            topRatedMovieUseCase,
+            executor
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideFindMovieUseCase(findMovieEndPoint: FindMovieEndPoint): FindMovieUseCase {
+        return FindMovieUseCaseImpl(findMovieEndPoint)
+    }
+
+    @Singleton
+    @Provides
+    fun provideFindMovieEndPoint(movieApi: MovieApi): FindMovieEndPoint {
+        return FindMovieEndPointImpl(movieApi)
+    }
+
+    @Provides
+    fun provideFindMovieDataSourceFactory(
+        findMovieUseCase: FindMovieUseCase,
+        executor: ExecutorService
+    ): FindMovieDataSourceFactory {
+        return FindMovieDataSourceFactory(findMovieUseCase, executor)
+    }
+
+    @Singleton
+    @Provides
+    fun provideExecutor(): ExecutorService {
+        return Executors.newFixedThreadPool(5)
+    }
+
+    @Singleton
+    @Provides
+    fun provideImageLoader(): ImageLoader {
+        return ImageLoader(application)
     }
 }
