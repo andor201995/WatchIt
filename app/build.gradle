@@ -61,6 +61,8 @@ dependencies {
     implementation Libraries.rxandroid
 
     implementation Libraries.shimmer
+    implementation Libraries.shimmer_recyclerview
+
     implementation Libraries.picasso
     implementation Libraries.glide
     annotationProcessor Libraries.glide_compiler

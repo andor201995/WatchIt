@@ -41,7 +41,7 @@ object Version {
     const val adapter_rxjava = "2.4.0"
     const val rxbinding = "3.1.0"
 
-    const val shimmer = "0.5.0@aar"
+    const val shimmer = "0.4.0"
     const val picasso = "2.71828"
     const val glide = "4.11.0"
 
@@ -105,6 +105,7 @@ object Libraries {
 
     //FB shimmer
     const val shimmer = "com.facebook.shimmer:shimmer:${Version.shimmer}"
+    const val shimmer_recyclerview = "com.todkars:shimmer-recyclerview:${Version.shimmer}"
 
     //Picasso
     const val picasso = "com.squareup.picasso:picasso:${Version.picasso}"

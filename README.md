@@ -36,3 +36,4 @@ Reference:
   
   Library:
   - [zoomage](https://github.com/jsibbold/zoomage)
+  - [shimmer recycler view](https://android-arsenal.com/details/1/7612)

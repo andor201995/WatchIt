@@ -4,7 +4,6 @@ import android.app.SearchManager
 import android.content.Context
 import android.view.*
 import androidx.appcompat.widget.SearchView
-import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.FragmentActivity
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,6 +18,7 @@ import com.andor.watchit.screens.searchmovie.model.Event
 import com.andor.watchit.screens.searchmovie.view.searchmovieitem.controller.SearchMovieListAdapter
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.jakewharton.rxbinding3.appcompat.queryTextChanges
+import com.todkars.shimmer.ShimmerRecyclerView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 
@@ -28,7 +28,8 @@ class SearchMovieViewMvcImpl(
     inflater: LayoutInflater,
     viewMvcFactory: ViewMvcFactory
 ) : SearchMovieViewMvc, BaseObservableViewMvc<Event>() {
-    private var loader: ContentLoadingProgressBar
+    private var shimmerRecyclerView: ShimmerRecyclerView
+    private var loader: View
     private lateinit var adapter: SearchMovieListAdapter
     private var placeHolderContainer: View
     private var recyclerView: RecyclerView
@@ -37,6 +38,8 @@ class SearchMovieViewMvcImpl(
         setRootView(inflater.inflate(R.layout.search_movie_fragment, parent, false))
         recyclerView = findViewById(R.id.searchList)
         placeHolderContainer = findViewById(R.id.searchPlaceHolder)
+        shimmerRecyclerView = findViewById(R.id.shimmer_recycler_view)
+
         loader = findViewById(R.id.loader)
         setUpRecyclerView(viewMvcFactory)
     }
@@ -55,6 +58,7 @@ class SearchMovieViewMvcImpl(
             val gridCount = Utils.getPossibleGridCount(context)
 
             recyclerView.layoutManager = GridLayoutManager(context, gridCount)
+            shimmerRecyclerView.layoutManager = GridLayoutManager(context, gridCount)
 
         } else {
             adapter = recyclerView.adapter as SearchMovieListAdapter
@@ -116,10 +120,12 @@ class SearchMovieViewMvcImpl(
     }
 
     override fun hideLoader() {
-        loader.hide()
+        shimmerRecyclerView.hideShimmer()
+        loader.inVisible()
     }
 
     override fun showLoader() {
-        loader.show()
+        shimmerRecyclerView.showShimmer()
+        loader.visible()
     }
 }
