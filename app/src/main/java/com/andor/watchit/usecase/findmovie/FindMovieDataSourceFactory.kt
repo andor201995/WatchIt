@@ -2,7 +2,7 @@ package com.andor.watchit.usecase.findmovie
 
 import androidx.paging.DataSource
 import com.andor.watchit.usecase.common.model.GeneralMovie
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.BehaviorSubject
 import java.util.concurrent.Executor
 
 class FindMovieDataSourceFactory(
@@ -10,7 +10,7 @@ class FindMovieDataSourceFactory(
     private val executor: Executor
 ) :
     DataSource.Factory<Long, GeneralMovie>() {
-    private val mDataSourceRelay: PublishSubject<FindMovieDataSource> = PublishSubject.create()
+    private val mDataSourceRelay: BehaviorSubject<FindMovieDataSource> = BehaviorSubject.create()
 
     var query: String = ""
 
@@ -21,7 +21,7 @@ class FindMovieDataSourceFactory(
         return dataSource
     }
 
-    fun getDataSourceStream(): PublishSubject<FindMovieDataSource> {
+    fun getDataSourceStream(): BehaviorSubject<FindMovieDataSource> {
         return mDataSourceRelay
     }
 }

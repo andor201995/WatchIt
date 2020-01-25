@@ -65,6 +65,7 @@ class SearchMovieFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
+        mViewModel.retryLoadingList()
         bindStreams()
     }
 

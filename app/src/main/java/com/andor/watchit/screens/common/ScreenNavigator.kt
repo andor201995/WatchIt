@@ -13,16 +13,8 @@ class ScreenNavigator(private val activity: Activity) {
     fun navigateToErrorScreen() {
         Navigation.findNavController(activity, R.id.nav_host)
             .safeNavigation(
-                R.id.topRatedMovieListFragment,
-                R.id.action_topRatedMovieListFragment_to_networkErrorFragment
-            )
-    }
-
-    fun navigateToTopRatedMovieListScreen() {
-        Navigation.findNavController(activity, R.id.nav_host)
-            .safeNavigation(
-                R.id.networkErrorFragment,
-                R.id.action_networkErrorFragment_to_topRatedMovieListFragment
+                listOf(R.id.topRatedMovieListFragment, R.id.searchMovieFragment),
+                R.id.networkErrorFragment
             )
     }
 

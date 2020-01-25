@@ -62,6 +62,7 @@ class TopRatedMovieListFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
+        mViewModel.retryLoadingList()
         bindToStreams()
     }
 
