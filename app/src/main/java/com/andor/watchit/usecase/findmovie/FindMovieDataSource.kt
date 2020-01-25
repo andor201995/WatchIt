@@ -31,7 +31,7 @@ class FindMovieDataSource(
                 override fun onSuccess(t: FetchResult) {
                     when (t) {
                         is FetchResult.Success -> {
-                            initialNetworkStateStream.onNext(NetworkState.Initial.Success)
+                            initialNetworkStateStream.onNext(NetworkState.Initial.Success(t.totalResult))
                             nextNetworkStateStream.onNext(NetworkState.Next.Success)
                             if (t.pageNumber == 1) {
                                 retry = null

@@ -13,7 +13,8 @@ class TopRatedMovieUseCaseImpl(private val topRatedMovieListEndPoint: TopRatedMo
         data class Success(
             val generalMovieList: List<GeneralMovie>,
             val pageNumber: Int,
-            val maxPageCount: Int
+            val maxPageCount: Int,
+            val totalResults: Int
         ) : FetchResult()
 
         object Failure : FetchResult()
@@ -30,7 +31,8 @@ class TopRatedMovieUseCaseImpl(private val topRatedMovieListEndPoint: TopRatedMo
                                 topRatedMovieSchema
                             ),
                             topRatedMovieSchema.page,
-                            topRatedMovieSchema.total_pages
+                            topRatedMovieSchema.total_pages,
+                            topRatedMovieSchema.total_results
                         )
                     )
                 }

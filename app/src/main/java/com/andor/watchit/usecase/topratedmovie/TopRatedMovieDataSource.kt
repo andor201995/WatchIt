@@ -31,7 +31,7 @@ class TopRatedMovieDataSource(
                 override fun onSuccess(t: TopRatedMovieUseCaseImpl.FetchResult) {
                     when (t) {
                         is TopRatedMovieUseCaseImpl.FetchResult.Success -> {
-                            initialNetworkStateStream.onNext(NetworkState.Initial.Success)
+                            initialNetworkStateStream.onNext(NetworkState.Initial.Success(t.totalResults))
                             nextNetworkStateStream.onNext(NetworkState.Next.Success)
                             if (t.pageNumber == 1) {
                                 retry = null

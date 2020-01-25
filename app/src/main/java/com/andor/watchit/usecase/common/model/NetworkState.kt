@@ -4,7 +4,7 @@ sealed class NetworkState {
     sealed class Initial : NetworkState() {
         object Loading : Initial()
         object Error : Initial()
-        object Success : Initial()
+        data class Success(val totalResult: Int) : Initial()
     }
 
     sealed class Next : NetworkState() {

@@ -8,7 +8,8 @@ interface FindMovieUseCase {
         data class Success(
             val generalMovieList: List<GeneralMovie>,
             val pageNumber: Int,
-            val maxPageCount: Int
+            val maxPageCount: Int,
+            val totalResult: Int
         ) : FetchResult()
 
         object Failure : FetchResult()

@@ -28,6 +28,7 @@ class SearchMovieViewMvcImpl(
     inflater: LayoutInflater,
     viewMvcFactory: ViewMvcFactory
 ) : SearchMovieViewMvc, BaseObservableViewMvc<Event>() {
+    private var emptyPlaceHolderContainer: View
     private var shimmerRecyclerView: ShimmerRecyclerView
     private var loader: View
     private lateinit var adapter: SearchMovieListAdapter
@@ -37,7 +38,8 @@ class SearchMovieViewMvcImpl(
     init {
         setRootView(inflater.inflate(R.layout.search_movie_fragment, parent, false))
         recyclerView = findViewById(R.id.searchList)
-        placeHolderContainer = findViewById(R.id.searchPlaceHolder)
+        placeHolderContainer = findViewById(R.id.searchFirstPlaceHolder)
+        emptyPlaceHolderContainer = findViewById(R.id.searchEmptyPlaceHolder)
         shimmerRecyclerView = findViewById(R.id.shimmer_recycler_view)
 
         loader = findViewById(R.id.loader)
@@ -127,5 +129,13 @@ class SearchMovieViewMvcImpl(
     override fun showLoader() {
         shimmerRecyclerView.showShimmer()
         loader.visible()
+    }
+
+    override fun showEmptyListPlaceholder() {
+        emptyPlaceHolderContainer.visible()
+    }
+
+    override fun hideEmptyListPlaceholder() {
+        emptyPlaceHolderContainer.inVisible()
     }
 }

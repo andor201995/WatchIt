@@ -24,7 +24,8 @@ class FindMovieUseCaseImpl(private val findMovieEndPoint: FindMovieEndPoint) : F
                         FetchResult.Success(
                             Converter.convertFrom(movieSchema),
                             movieSchema.page,
-                            movieSchema.total_pages
+                            movieSchema.total_pages,
+                            movieSchema.total_results
                         )
                     )
                 }

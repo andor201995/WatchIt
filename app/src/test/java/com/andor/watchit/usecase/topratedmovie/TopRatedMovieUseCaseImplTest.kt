@@ -54,7 +54,8 @@ class TopRatedMovieUseCaseImplTest {
             it == TopRatedMovieUseCaseImpl.FetchResult.Success(
                 Converter.convertFrom(testServerResponse),
                 testServerResponse.page,
-                testServerResponse.total_pages
+                testServerResponse.total_pages,
+                testServerResponse.total_results
             )
         }
 
