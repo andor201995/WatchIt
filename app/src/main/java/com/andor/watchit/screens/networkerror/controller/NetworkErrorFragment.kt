@@ -56,7 +56,7 @@ class NetworkErrorFragment : BaseFragment() {
             override fun onNext(t: NetworkErrorViewMvc.Event) {
                 when (t) {
                     NetworkErrorViewMvc.Event.SwipeRefresh -> {
-                        mScreenNavigator.navigateToTopRatedMovieListScreen()
+                        mScreenNavigator.navigateUp()
                     }
                 }
             }

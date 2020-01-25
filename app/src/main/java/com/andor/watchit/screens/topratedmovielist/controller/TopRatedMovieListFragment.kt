@@ -5,7 +5,7 @@ import android.view.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import com.andor.watchit.R
-import com.andor.watchit.core.RxBaseObserver
+import com.andor.watchit.core.rx.RxBaseObserver
 import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.common.ViewMvcFactory
@@ -62,6 +62,7 @@ class TopRatedMovieListFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
+        mViewModel.retryLoadingList()
         bindToStreams()
     }
 
@@ -132,7 +133,7 @@ class TopRatedMovieListFragment : BaseFragment() {
                         }
                         is NetworkState.Initial.Error -> {
                             mViewMvc.hideLoader()
-                            mScreenNavigator.navigateToErrorScreen()
+                            mScreenNavigator.navigateFromTopRatedScreenToErrorScreen()
                         }
                         is NetworkState.Initial.Loading -> {
                             mViewMvc.showLoader()

@@ -35,12 +35,8 @@
             android:textSize="20sp" />
     </RelativeLayout>
 
-    <androidx.core.widget.ContentLoadingProgressBar
+    <include
         android:id="@+id/loader"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
+        layout="@layout/movie_list_loader" />
 
 </FrameLayout>

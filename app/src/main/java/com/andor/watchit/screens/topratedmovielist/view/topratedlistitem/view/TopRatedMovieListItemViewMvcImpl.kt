@@ -33,8 +33,12 @@ class TopRatedMovieListItemViewMvcImpl(
         }.subscribe(getEventStream())
 
         moviePosterImageView.also {
-            imageLoader.loadImageInto(it, generalMovie.posterPath)
+            imageLoader.loadImageIntoWithGlide(it, generalMovie.posterPath)
         }
 
+    }
+
+    override fun cleanUp() {
+        imageLoader.cleanUp(moviePosterImageView)
     }
 }

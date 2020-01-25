@@ -5,7 +5,7 @@ import android.view.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import com.andor.watchit.R
-import com.andor.watchit.core.RxBaseObserver
+import com.andor.watchit.core.rx.RxBaseObserver
 import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.common.ViewMvcFactory
@@ -65,6 +65,7 @@ class SearchMovieFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
+        mViewModel.retryLoadingList()
         bindStreams()
     }
 
@@ -86,7 +87,7 @@ class SearchMovieFragment : BaseFragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putString("searchQuery", mSearchQuery)
+        outState.putString(searchQueryTag, mSearchQuery)
         super.onSaveInstanceState(outState)
     }
 
@@ -139,7 +140,7 @@ class SearchMovieFragment : BaseFragment() {
                         is NetworkState.Initial.Error -> {
                             mViewMvc.hidePlaceHolder()
                             mViewMvc.hideLoader()
-                            mScreenNavigator.navigateToErrorScreen()
+                            mScreenNavigator.navigateFromSearchScreenToErrorScreen()
                         }
                         is NetworkState.Initial.Loading -> {
                             mViewMvc.showLoader()

@@ -82,6 +82,13 @@ class TopRatedMovieListAdapter(
         }
     }
 
+    override fun onViewRecycled(holder: TopMovieHolder) {
+        super.onViewRecycled(holder)
+        if (holder.mViewMvc is TopRatedMovieListItemViewMvc) {
+            holder.mViewMvc.cleanUp()
+        }
+    }
+
     fun setListLoadingState(newListLoading: ListLoading) {
         if (listLoadingState != newListLoading) {
             listLoadingState = newListLoading

@@ -11,27 +11,22 @@
         android:label="Watch It"
         tools:layout="@layout/top_rated_movie_list_fragment">
         <action
-            android:id="@+id/action_topRatedMovieListFragment_to_networkErrorFragment"
-            app:destination="@id/networkErrorFragment"
-            app:popUpTo="@+id/nav_graph.xml"
-            app:popUpToInclusive="false" />
-        <action
             android:id="@+id/action_topRatedMovieListFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
         <action
             android:id="@+id/action_topRatedMovieListFragment_to_searchMovieFragment"
             app:destination="@id/searchMovieFragment" />
+        <action
+            android:id="@+id/action_topRatedMovieListFragment_to_networkErrorFragment"
+            app:destination="@id/networkErrorFragment"
+            app:popUpTo="@+id/topRatedMovieListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/networkErrorFragment"
         android:name="com.andor.watchit.screens.networkerror.controller.NetworkErrorFragment"
         android:label=" "
-        tools:layout="@layout/network_error_fragment">
-        <action
-            android:id="@+id/action_networkErrorFragment_to_topRatedMovieListFragment"
-            app:destination="@id/topRatedMovieListFragment"
-            app:popUpTo="@+id/nav_graph.xml" />
-    </fragment>
+        tools:layout="@layout/network_error_fragment" />
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.andor.watchit.screens.moviedetail.controller.MovieDetailFragment"
@@ -39,7 +34,8 @@
         tools:layout="@layout/movie_detail_fragment">
         <action
             android:id="@+id/action_movieDetailFragment_to_posterFragment"
-            app:destination="@id/posterFragment" />
+            app:destination="@id/posterFragment"
+            app:popUpTo="@+id/movieDetailFragment" />
         <argument
             android:name="movieDetail"
             app:argType="com.andor.watchit.usecase.common.model.GeneralMovie" />
@@ -61,5 +57,10 @@
         <action
             android:id="@+id/action_searchMovieFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_searchMovieFragment_to_networkErrorFragment"
+            app:destination="@id/networkErrorFragment"
+            app:popUpTo="@+id/searchMovieFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

@@ -27,7 +27,7 @@ class PosterViewMvcImpl(
     override fun setMoviePoster(movieDetail: GeneralMovie) {
 
         posterMovieImageView.also {
-            imageLoader.loadImageInto(it, movieDetail.posterPath)
+            imageLoader.loadImageIntoWithGlide(it, movieDetail.posterPath)
         }
 
         posterMovieTitleTextView.also {

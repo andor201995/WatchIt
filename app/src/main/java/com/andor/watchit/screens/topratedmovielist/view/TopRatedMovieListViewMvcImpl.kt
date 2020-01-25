@@ -1,12 +1,13 @@
 package com.andor.watchit.screens.topratedmovielist.view
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.ContentLoadingProgressBar
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.R
+import com.andor.watchit.core.inVisible
 import com.andor.watchit.core.visible
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.helper.Utils
@@ -14,6 +15,7 @@ import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.topratedmovielist.model.Event
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.controller.TopRatedMovieListAdapter
 import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.todkars.shimmer.ShimmerRecyclerView
 
 
 class TopRatedMovieListViewMvcImpl(
@@ -23,7 +25,8 @@ class TopRatedMovieListViewMvcImpl(
 ) : BaseObservableViewMvc<Event>(),
     TopRatedMovieListViewMvc {
 
-    private var loader: ContentLoadingProgressBar
+    private var shimmerRecyclerView: ShimmerRecyclerView
+    private var loader: View
     private var recyclerView: RecyclerView
     private lateinit var adapter: TopRatedMovieListAdapter
 
@@ -31,6 +34,7 @@ class TopRatedMovieListViewMvcImpl(
         setRootView(layoutInflater.inflate(R.layout.top_rated_movie_list_fragment, parent, false))
         recyclerView = findViewById(R.id.top_rated_movie_list)
         loader = findViewById(R.id.loader)
+        shimmerRecyclerView = findViewById(R.id.shimmer_recycler_view)
         setUpRecyclerView(viewMvcFactory)
     }
 
@@ -45,8 +49,8 @@ class TopRatedMovieListViewMvcImpl(
             recyclerView.adapter = this.adapter
 
             val gridCount = Utils.getPossibleGridCount(context)
-
             recyclerView.layoutManager = GridLayoutManager(context, gridCount)
+            shimmerRecyclerView.layoutManager = GridLayoutManager(context, gridCount)
         } else {
             adapter = recyclerView.adapter as TopRatedMovieListAdapter
         }
@@ -57,12 +61,13 @@ class TopRatedMovieListViewMvcImpl(
     }
 
     override fun showLoader() {
-        loader.show()
+        shimmerRecyclerView.showShimmer()
         loader.visible()
     }
 
     override fun hideLoader() {
-        loader.hide()
+        shimmerRecyclerView.hideShimmer()
+        loader.inVisible()
     }
 
     override fun showListLoadingError() {
