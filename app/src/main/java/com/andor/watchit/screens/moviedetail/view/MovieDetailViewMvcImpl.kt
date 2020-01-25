@@ -37,7 +37,7 @@ class MovieDetailViewMvcImpl(
     @SuppressLint("SetTextI18n")
     override fun setMovieDetails(movieDetail: GeneralMovie) {
         posterImageView.also {
-            imageLoader.loadImageInto(it, movieDetail.posterPath)
+            imageLoader.loadImageIntoWithGlide(it, movieDetail.posterPath)
             it.setOnClickListener {
                 getEventStream().onNext(Event.PosterClick(movieDetail))
             }

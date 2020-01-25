@@ -43,6 +43,8 @@ object Version {
 
     const val shimmer = "0.5.0@aar"
     const val picasso = "2.71828"
+    const val glide = "4.11.0"
+
     const val pagination = "2.1.1"
     const val zoomage = "1.3.0-SNAPSHOT"
 
@@ -106,6 +108,10 @@ object Libraries {
 
     //Picasso
     const val picasso = "com.squareup.picasso:picasso:${Version.picasso}"
+
+    //Glide
+    const val glide = "com.github.bumptech.glide:glide:${Version.glide}"
+    const val glide_compiler = "com.github.bumptech.glide:compiler:${Version.glide}"
 
     //Zoomage
     const val zoomage = "com.jsibbold:zoomage:${Version.zoomage}"

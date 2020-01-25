@@ -62,6 +62,9 @@ dependencies {
 
     implementation Libraries.shimmer
     implementation Libraries.picasso
+    implementation Libraries.glide
+    annotationProcessor Libraries.glide_compiler
+
     implementation Libraries.pagination
     implementation Libraries.pagination_rxjava
 

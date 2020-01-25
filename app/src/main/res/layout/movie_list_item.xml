@@ -22,7 +22,6 @@
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:contentDescription="@string/poster_image"
-            android:scaleType="fitXY"
             android:src="@drawable/ic_image_24px" />
 
     </androidx.cardview.widget.CardView>
