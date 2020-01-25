@@ -10,11 +10,19 @@ import com.andor.watchit.screens.topratedmovielist.controller.TopRatedMovieListF
 import com.andor.watchit.usecase.common.model.GeneralMovie
 
 class ScreenNavigator(private val activity: Activity) {
-    fun navigateToErrorScreen() {
+    fun navigateFromTopRatedScreenToErrorScreen() {
         Navigation.findNavController(activity, R.id.nav_host)
             .safeNavigation(
-                listOf(R.id.topRatedMovieListFragment, R.id.searchMovieFragment),
-                R.id.networkErrorFragment
+                R.id.topRatedMovieListFragment,
+                R.id.action_topRatedMovieListFragment_to_networkErrorFragment
+            )
+    }
+
+    fun navigateFromSearchScreenToErrorScreen() {
+        Navigation.findNavController(activity, R.id.nav_host)
+            .safeNavigation(
+                R.id.searchMovieFragment,
+                R.id.action_searchMovieFragment_to_networkErrorFragment
             )
     }
 

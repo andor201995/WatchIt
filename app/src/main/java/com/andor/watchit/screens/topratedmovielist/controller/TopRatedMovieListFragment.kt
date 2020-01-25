@@ -133,7 +133,7 @@ class TopRatedMovieListFragment : BaseFragment() {
                         }
                         is NetworkState.Initial.Error -> {
                             mViewMvc.hideLoader()
-                            mScreenNavigator.navigateToErrorScreen()
+                            mScreenNavigator.navigateFromTopRatedScreenToErrorScreen()
                         }
                         is NetworkState.Initial.Loading -> {
                             mViewMvc.showLoader()

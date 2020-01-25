@@ -140,7 +140,7 @@ class SearchMovieFragment : BaseFragment() {
                         is NetworkState.Initial.Error -> {
                             mViewMvc.hidePlaceHolder()
                             mViewMvc.hideLoader()
-                            mScreenNavigator.navigateToErrorScreen()
+                            mScreenNavigator.navigateFromSearchScreenToErrorScreen()
                         }
                         is NetworkState.Initial.Loading -> {
                             mViewMvc.showLoader()
