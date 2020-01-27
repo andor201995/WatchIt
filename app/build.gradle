@@ -65,7 +65,7 @@ dependencies {
 
     implementation Libraries.picasso
     implementation Libraries.glide
-    annotationProcessor Libraries.glide_compiler
+    kapt Libraries.glide_compiler
 
     implementation Libraries.pagination
     implementation Libraries.pagination_rxjava
