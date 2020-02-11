@@ -6,16 +6,33 @@ import androidx.core.content.ContextCompat
 import com.andor.watchit.R
 import com.andor.watchit.core.Constants
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.squareup.picasso.Picasso
 
 
-class ImageLoader(private val context: Context) {
+class GlideImageLoader(private val context: Context) : ImageLoader {
 
-    val picasso = Picasso.get()
 
-    val glide = Glide.with(context)
+    private val glide: RequestManager = Glide.with(context)
 
-    fun loadImageIntoWithPicasso(view: ImageView, uri: String?) {
+    override fun loadImageInto(view: ImageView, uri: String?) {
+        glide
+            .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/${uri}")
+            .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_image_24px)!!)
+            .error(ContextCompat.getDrawable(context, R.drawable.ic_error_24px)!!)
+            .into(view)
+    }
+
+    override fun cleanUp(imageView: ImageView) {
+        glide.clear(imageView)
+        imageView.setImageDrawable(null)
+    }
+}
+
+class PicassoImageLoader(private val context: Context) : ImageLoader {
+
+    private val picasso: Picasso = Picasso.get()
+    override fun loadImageInto(view: ImageView, uri: String?) {
         picasso
             .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/${uri}")
             .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_image_24px)!!)
@@ -23,18 +40,13 @@ class ImageLoader(private val context: Context) {
             .into(view)
     }
 
-    fun loadImageIntoWithGlide(view: ImageView, uri: String?) {
-        glide
-            .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/${uri}")
-            .centerCrop()
-            .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_image_24px)!!)
-            .error(ContextCompat.getDrawable(context, R.drawable.ic_error_24px)!!)
-            .into(view)
-    }
-
-    fun cleanUp(imageView: ImageView) {
+    override fun cleanUp(imageView: ImageView) {
         picasso.cancelRequest(imageView)
-        glide.clear(imageView)
         imageView.setImageDrawable(null)
     }
+}
+
+interface ImageLoader {
+    fun loadImageInto(view: ImageView, uri: String?)
+    fun cleanUp(imageView: ImageView)
 }

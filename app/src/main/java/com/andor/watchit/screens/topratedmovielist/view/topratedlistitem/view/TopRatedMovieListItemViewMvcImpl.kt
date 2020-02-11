@@ -33,7 +33,7 @@ class TopRatedMovieListItemViewMvcImpl(
         }.subscribe(getEventStream())
 
         moviePosterImageView.also {
-            imageLoader.loadImageIntoWithGlide(it, generalMovie.posterPath)
+            imageLoader.loadImageInto(it, generalMovie.posterPath)
         }
 
     }
