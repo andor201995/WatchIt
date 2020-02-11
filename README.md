@@ -33,7 +33,9 @@ Reference:
   - [Paging Retry](https://github.com/android/architecture-components-samples/blob/master/PagingWithNetworkSample/app/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/repository/inMemory/byPage/PageKeyedSubredditDataSource.kt)
   - [Fragment Transition](https://medium.com/@serbelga/shared-elements-in-android-navigation-architecture-component-bc5e7922ecdf)
   - [Spannable and Ellipsize](https://stackoverflow.com/q/14691511/7972699)
+  - [Parcelize](https://android.jlelse.eu/yet-another-awesome-kotlin-feature-parcelize-5439718ba220)
   
   Library:
   - [zoomage](https://github.com/jsibbold/zoomage)
   - [shimmer recycler view](https://android-arsenal.com/details/1/7612)
+  

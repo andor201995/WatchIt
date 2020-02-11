@@ -31,7 +31,7 @@ class SearchMovieItemViewMvcImpl(
             Event.OpenMovie(item)
         }.subscribe(getEventStream())
 
-        imageLoader.loadImageIntoWithGlide(moviePosterImageView, item.posterPath)
+        imageLoader.loadImageInto(moviePosterImageView, item.posterPath)
     }
 
     override fun cleanUp() {

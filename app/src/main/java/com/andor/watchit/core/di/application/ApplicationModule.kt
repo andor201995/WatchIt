@@ -6,6 +6,7 @@ import com.andor.watchit.network.findmovie.FindMovieEndPoint
 import com.andor.watchit.network.findmovie.FindMovieEndPointImpl
 import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPoint
 import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPointImpl
+import com.andor.watchit.screens.common.helper.GlideImageLoader
 import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.usecase.findmovie.FindMovieDataSourceFactory
 import com.andor.watchit.usecase.findmovie.FindMovieUseCase
@@ -84,6 +85,7 @@ class ApplicationModule(private val application: Application) {
     @Singleton
     @Provides
     fun provideImageLoader(): ImageLoader {
-        return ImageLoader(application)
+        return GlideImageLoader(application)
+//        return PicassoImageLoader(application)
     }
 }
