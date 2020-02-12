@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class GeneralMovie(
     val originalTitle: String?,
     val posterPath: String?,
-    val movieId: Int?,
+    val movieId: Int,
     val overView: String?,
     val releaseData: String?,
     val movieRating: Double?
