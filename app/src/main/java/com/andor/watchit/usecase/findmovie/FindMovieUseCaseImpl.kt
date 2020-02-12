@@ -8,29 +8,44 @@ import io.reactivex.subjects.SingleSubject
 
 class FindMovieUseCaseImpl(private val findMovieEndPoint: FindMovieEndPoint) : FindMovieUseCase {
 
+    var oldQuery = ""
+    lateinit var oldResult: FetchResult
+
     override fun findMovie(page: Int, query: String): SingleSubject<FetchResult> {
         val responseSingle = SingleSubject.create<FetchResult>()
         val convertedQuery = Converter.convertFrom(query)
-        findMovieEndPoint.findMovieAndNotify(
-            page,
-            convertedQuery,
-            object : FindMovieEndPoint.Listener {
-                override fun onFetchFailed() {
-                    responseSingle.onSuccess(FetchResult.Failure)
-                }
 
-                override fun onFetchSuccess(movieSchema: TopRatedMovieSchema) {
-                    responseSingle.onSuccess(
-                        FetchResult.Success(
+        if (convertedQuery.isNotBlank() && convertedQuery != oldQuery) {
+            findMovieEndPoint.findMovieAndNotify(
+                page,
+                convertedQuery,
+                object : FindMovieEndPoint.Listener {
+                    override fun onFetchFailed() {
+                        responseSingle.onSuccess(FetchResult.Failure)
+                    }
+
+                    override fun onFetchSuccess(movieSchema: TopRatedMovieSchema) {
+                        val responseResult = FetchResult.Success(
                             Converter.convertFrom(movieSchema),
                             movieSchema.page,
                             movieSchema.total_pages,
                             movieSchema.total_results
                         )
-                    )
-                }
+                        oldQuery = convertedQuery
+                        oldResult = responseResult
 
-            })
+                        responseSingle.onSuccess(
+                            responseResult
+                        )
+                    }
+
+                })
+        } else if (::oldResult.isInitialized && convertedQuery == oldQuery) {
+            responseSingle.onSuccess(oldResult)
+        } else {
+            responseSingle.onSuccess(FetchResult.InvalidQuery)
+        }
+
         return responseSingle
     }
 }

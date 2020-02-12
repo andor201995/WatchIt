@@ -3,7 +3,6 @@ package com.andor.watchit.screens.searchmovie.model
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
-import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.andor.watchit.usecase.common.model.NetworkState
 import com.andor.watchit.usecase.findmovie.FindMovieDataSourceFactory
@@ -13,7 +12,6 @@ import io.reactivex.subjects.BehaviorSubject
 class SearchMovieViewModel(private val findMovieDataSourceFactory: FindMovieDataSourceFactory) :
     ViewModel() {
 
-    private var lastSearchQuery: String = ""
     var movieStream: BehaviorSubject<PagedList<GeneralMovie>> = BehaviorSubject.create()
     val nextNetworkStateStream: BehaviorSubject<NetworkState.Next> =
         BehaviorSubject.create()
@@ -51,14 +49,11 @@ class SearchMovieViewModel(private val findMovieDataSourceFactory: FindMovieData
     }
 
     fun findMovie(newQuery: String) {
-        val query = Converter.convertFrom(newQuery)
-        if (query.isNotBlank() && lastSearchQuery != query) {
-            lastSearchQuery = query
-            findMovieDataSourceFactory.query = query
-            RxPagedListBuilder(findMovieDataSourceFactory, getPageConfig())
-                .setFetchScheduler(Schedulers.io())
-                .buildObservable()
-                .subscribe(movieStream)
-        }
+        findMovieDataSourceFactory.query = newQuery
+        RxPagedListBuilder(findMovieDataSourceFactory, getPageConfig())
+            .setFetchScheduler(Schedulers.io())
+            .buildObservable()
+            .subscribe(movieStream)
+
     }
 }

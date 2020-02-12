@@ -101,6 +101,10 @@ class SearchMovieViewMvcImpl(
 
                 queryTextChanges()
                     .debounce(1, TimeUnit.SECONDS)
+                    .filter {
+                        it.isNotBlank()
+                    }
+                    .distinctUntilChanged()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
                         getEventStream().onNext(Event.FindMovie(it.toString()))

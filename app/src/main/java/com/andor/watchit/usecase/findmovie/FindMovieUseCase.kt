@@ -13,6 +13,7 @@ interface FindMovieUseCase {
         ) : FetchResult()
 
         object Failure : FetchResult()
+        object InvalidQuery : FetchResult()
     }
 
     fun findMovie(page: Int, query: String): Single<FetchResult>

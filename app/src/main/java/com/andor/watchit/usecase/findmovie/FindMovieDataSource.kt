@@ -45,6 +45,10 @@ class FindMovieDataSource(
                             initialNetworkStateStream.onNext(NetworkState.Initial.Error)
                             nextNetworkStateStream.onNext(NetworkState.Next.Error)
                         }
+                        is FetchResult.InvalidQuery -> {
+                            // zero result for invalid query
+                            initialNetworkStateStream.onNext(NetworkState.Initial.Success(0))
+                        }
                     }
                 }
             })
