@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/motion_scene"
+    tools:context=".screens.moviedetail.controller.MovieDetailFragment">
+
+    <ImageView
+        android:id="@+id/movieDetailPosterImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/poster_image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_image_24px" />
+
+    <TextView
+        android:id="@+id/movieDetailMovieTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/movieTitleBackground"
+        android:fontFamily="sans-serif-smallcaps"
+        android:gravity="center_vertical"
+        android:padding="@dimen/commonPadding"
+        android:text="@string/movie_title"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/commonTextSize" />
+
+    <ScrollView
+        android:id="@+id/detailScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/movieDetailMovieOverviewHeadTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@string/movie_detail_heading_font"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/commonPadding"
+                android:paddingLeft="@dimen/commonPadding"
+                android:paddingTop="@dimen/commonPadding"
+                android:paddingEnd="@dimen/commonPadding"
+                android:paddingRight="@dimen/commonPadding"
+                android:text="@string/overview"
+                android:textColor="@color/headTextColor"
+                android:textSize="@dimen/commonTextSize" />
+
+            <TextView
+                android:id="@+id/movieDetailMovieOverviewTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@string/movie_detail_heading_font"
+                android:gravity="center_vertical"
+                android:maxLines="@integer/overviewMaxLength"
+                android:paddingStart="@dimen/commonPadding"
+                android:paddingLeft="@dimen/commonPadding"
+                android:paddingEnd="@dimen/commonPadding"
+                android:paddingRight="@dimen/commonPadding"
+                android:paddingBottom="@dimen/commonPadding"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/commonTextSize" />
+
+            <TextView
+                android:id="@+id/movieDetailMovieRatingTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@string/movie_detail_heading_font"
+                android:gravity="center_vertical"
+                android:padding="@dimen/commonPadding"
+                android:text="@string/movie_rating"
+                android:textColor="@color/headTextColor"
+                android:textSize="@dimen/commonTextSize" />
+
+            <TextView
+                android:id="@+id/movieDetailMovieReleaseDataTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@string/movie_detail_heading_font"
+                android:gravity="center_vertical"
+                android:padding="@dimen/commonPadding"
+                android:text="@string/release_data"
+                android:textColor="@color/headTextColor"
+                android:textSize="@dimen/commonTextSize" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
