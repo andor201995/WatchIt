@@ -1,7 +1,6 @@
 package com.andor.watchit.screens.moviedetail.view
 
 import android.annotation.SuppressLint
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -26,7 +25,7 @@ class MovieDetailViewMvcImpl(
     private var posterImageView: ImageView
 
     init {
-        setRootView(inflater.inflate(R.layout.movie_detail_fragment, parent, false))
+        setRootView(inflater.inflate(R.layout.movie_detail_fragment_start, parent, false))
         posterImageView = findViewById(R.id.movieDetailPosterImageView)
         movieTitleTextView = findViewById(R.id.movieDetailMovieTitleTextView)
         overViewTextView = findViewById(R.id.movieDetailMovieOverviewTextView)
@@ -38,27 +37,15 @@ class MovieDetailViewMvcImpl(
     override fun setMovieDetails(movieDetail: GeneralMovie) {
         posterImageView.also {
             imageLoader.loadImageInto(it, movieDetail.posterPath)
-            it.setOnClickListener {
-                getEventStream().onNext(Event.PosterClick(movieDetail))
-            }
+//            it.setOnClickListener {
+//                getEventStream().onNext(Event.PosterClick(movieDetail))
+//            }
         }
 
         movieTitleTextView.text = movieDetail.originalTitle
 
         overViewTextView.also {
             it.text = movieDetail.overView
-
-            it.setOnClickListener { view ->
-                if (view is TextView) {
-                    if (view.ellipsize != null) {
-                        view.maxLines = Integer.MAX_VALUE
-                        view.ellipsize = null
-                    } else {
-                        view.maxLines = getInteger(R.integer.overviewMaxLength)
-                        view.ellipsize = TextUtils.TruncateAt.END
-                    }
-                }
-            }
         }
 
         ratingTextView.appendTextWithColor(
