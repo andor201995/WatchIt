@@ -65,10 +65,5 @@
             android:textColor="@color/headTextColor"
             android:textSize="@dimen/commonTextSize" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/large_text" />
-
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.core.widget.NestedScrollView>
