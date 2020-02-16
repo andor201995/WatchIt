@@ -1,18 +1,26 @@
 package com.andor.watchit.helper
 
+import com.andor.watchit.network.common.schema.GeneralTvSchema
 import com.andor.watchit.network.common.schema.TopRatedMovieSchema
 import com.google.gson.Gson
 import java.io.File
 
 object TestData {
 
+    val TV_SERVER_RESPONSE_JSON_SUCCESS: String = getJson("success_tv.json")
     val SERVER_RESPONSE_JSON_SUCCESS_NULL: String = getJson("nullData.json")
     val SERVER_RESPONSE_JSON_SUCCESS: String = getJson("success.json")
-
     val SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA: TopRatedMovieSchema =
         Gson().fromJson<TopRatedMovieSchema>(
             SERVER_RESPONSE_JSON_SUCCESS,
             TopRatedMovieSchema::class.java
+        )
+
+
+    val TV_SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA: GeneralTvSchema =
+        Gson().fromJson<GeneralTvSchema>(
+            TV_SERVER_RESPONSE_JSON_SUCCESS,
+            GeneralTvSchema::class.java
         )
 
     /**

@@ -31,6 +31,9 @@ android {
         targetCompatibility = Version.java
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
