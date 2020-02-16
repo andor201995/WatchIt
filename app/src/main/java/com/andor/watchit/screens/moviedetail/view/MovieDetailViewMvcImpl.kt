@@ -1,7 +1,6 @@
 package com.andor.watchit.screens.moviedetail.view
 
 import android.annotation.SuppressLint
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -47,18 +46,6 @@ class MovieDetailViewMvcImpl(
 
         overViewTextView.also {
             it.text = movieDetail.overView
-
-            it.setOnClickListener { view ->
-                if (view is TextView) {
-                    if (view.ellipsize != null) {
-                        view.maxLines = Integer.MAX_VALUE
-                        view.ellipsize = null
-                    } else {
-                        view.maxLines = getInteger(R.integer.overviewMaxLength)
-                        view.ellipsize = TextUtils.TruncateAt.END
-                    }
-                }
-            }
         }
 
         ratingTextView.appendTextWithColor(

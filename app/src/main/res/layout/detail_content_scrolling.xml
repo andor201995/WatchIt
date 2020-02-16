@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/detailScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/movieDetailMovieOverviewHeadTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@string/movie_detail_heading_font"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/commonPadding"
+            android:paddingLeft="@dimen/commonPadding"
+            android:paddingTop="@dimen/commonPadding"
+            android:paddingEnd="@dimen/commonPadding"
+            android:paddingRight="@dimen/commonPadding"
+            android:text="@string/overview"
+            android:textColor="@color/headTextColor"
+            android:textSize="@dimen/commonTextSize" />
+
+        <TextView
+            android:id="@+id/movieDetailMovieOverviewTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@string/movie_detail_heading_font"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/commonPadding"
+            android:paddingLeft="@dimen/commonPadding"
+            android:paddingEnd="@dimen/commonPadding"
+            android:paddingRight="@dimen/commonPadding"
+            android:paddingBottom="@dimen/commonPadding"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/commonTextSize" />
+
+        <TextView
+            android:id="@+id/movieDetailMovieRatingTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@string/movie_detail_heading_font"
+            android:gravity="center_vertical"
+            android:padding="@dimen/commonPadding"
+            android:text="@string/movie_rating"
+            android:textColor="@color/headTextColor"
+            android:textSize="@dimen/commonTextSize" />
+
+        <TextView
+            android:id="@+id/movieDetailMovieReleaseDataTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@string/movie_detail_heading_font"
+            android:gravity="center_vertical"
+            android:padding="@dimen/commonPadding"
+            android:text="@string/release_data"
+            android:textColor="@color/headTextColor"
+            android:textSize="@dimen/commonTextSize" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/large_text" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.core.widget.NestedScrollView>
