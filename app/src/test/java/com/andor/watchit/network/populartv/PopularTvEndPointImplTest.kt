@@ -47,7 +47,7 @@ class PopularTvEndPointImplTest {
         val popularMovies = systemUT.getPopularMovies(1)
 //        Assert
         popularMovies.doOnSuccess {
-            Assert.assertEquals(TestData.TV_SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA, it)
+            Assert.assertEquals(TestData.TV_SERVER_RESPONSE_POPULAR_TV_SCHEMA, it)
         }
     }
 

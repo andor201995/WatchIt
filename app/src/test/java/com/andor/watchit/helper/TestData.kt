@@ -17,7 +17,7 @@ object TestData {
         )
 
 
-    val TV_SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA: GeneralTvSchema =
+    val TV_SERVER_RESPONSE_POPULAR_TV_SCHEMA: GeneralTvSchema =
         Gson().fromJson<GeneralTvSchema>(
             TV_SERVER_RESPONSE_JSON_SUCCESS,
             GeneralTvSchema::class.java
