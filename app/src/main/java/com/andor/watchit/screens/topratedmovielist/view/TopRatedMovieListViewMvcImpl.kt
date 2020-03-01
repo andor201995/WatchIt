@@ -1,6 +1,7 @@
 package com.andor.watchit.screens.topratedmovielist.view
 
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import com.andor.watchit.R
@@ -16,13 +17,14 @@ import com.andor.watchit.usecase.common.model.GeneralMovie
 
 
 class TopRatedMovieListViewMvcImpl(
+    parent: ViewGroup?,
     layoutInflater: LayoutInflater,
     viewMvcFactory: ViewMvcFactory
 ) : BaseObservableViewMvc<Event>(),
     TopRatedMovieListViewMvc {
 
     private var binding: TopRatedMovieListFragmentBinding =
-        TopRatedMovieListFragmentBinding.inflate(layoutInflater)
+        TopRatedMovieListFragmentBinding.inflate(layoutInflater, parent, false)
     private lateinit var topRatedMovieListAdapter: TopRatedMovieListAdapter
 
     init {

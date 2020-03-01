@@ -48,7 +48,7 @@ class TopRatedMovieListFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         if (!::mViewMvc.isInitialized) {
-            mViewMvc = mViewMvcFactory.getTopRatedMovieMvc()
+            mViewMvc = mViewMvcFactory.getTopRatedMovieMvc(container)
         }
         return mViewMvc.getRootView()
     }

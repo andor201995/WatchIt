@@ -24,8 +24,9 @@ class ViewMvcFactory(
     private val layoutInflater: LayoutInflater,
     private val imageLoader: ImageLoader
 ) {
-    fun getTopRatedMovieMvc(): TopRatedMovieListViewMvc {
+    fun getTopRatedMovieMvc(parent: ViewGroup?): TopRatedMovieListViewMvc {
         return TopRatedMovieListViewMvcImpl(
+            parent,
             layoutInflater,
             this
         )
