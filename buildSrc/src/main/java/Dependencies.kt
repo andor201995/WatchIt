@@ -13,7 +13,7 @@ object Releases {
 
 object Version {
 
-    const val gradle_build = "3.5.3"
+    const val gradle_build = "3.6.0"
     const val compileSdk = 29
     const val minSdk = 16
     const val targetSdk = 29

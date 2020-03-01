@@ -31,6 +31,13 @@ android {
         targetCompatibility = Version.java
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    android {
+        viewBinding.enabled = true
+    }
 }
 
 dependencies {
@@ -75,9 +82,9 @@ dependencies {
 
     implementation Libraries.zoomage
 
-    testImplementation TestLibraries.junit
     testImplementation TestLibraries.junit_ext
-    testImplementation TestLibraries.espresso
+    androidTestImplementation TestLibraries.junit_ext
+    androidTestImplementation TestLibraries.espresso
     testImplementation TestLibraries.mockito_kotlin
     testImplementation TestLibraries.mockwebserver
 

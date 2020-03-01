@@ -47,10 +47,9 @@ class TopRatedMovieListFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        mViewMvc = if (::mViewMvc.isInitialized) mViewMvc else mViewMvcFactory.getTopRatedMovieMvc(
-            container
-        )
+        if (!::mViewMvc.isInitialized) {
+            mViewMvc = mViewMvcFactory.getTopRatedMovieMvc()
+        }
         return mViewMvc.getRootView()
     }
 
