@@ -48,7 +48,8 @@ object Version {
     const val pagination = "2.1.1"
     const val zoomage = "1.3.0-SNAPSHOT"
 
-
+    const val room = "2.2.5"
+    const val coroutine = "1.3.5"
 }
 
 object Libraries {
@@ -116,6 +117,16 @@ object Libraries {
 
     //Zoomage
     const val zoomage = "com.jsibbold:zoomage:${Version.zoomage}"
+
+    //Room
+    const val room_compiler = "androidx.room:room-compiler:${Version.room}"
+    const val room_ktx = "androidx.room:room-ktx:${Version.room}"
+
+    //Coroutine
+    const val coroutine_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.coroutine}"
+    const val coroutine_android =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutine}"
+
 
 }
 
