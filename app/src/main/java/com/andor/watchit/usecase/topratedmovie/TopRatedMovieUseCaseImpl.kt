@@ -3,10 +3,14 @@ package com.andor.watchit.usecase.topratedmovie
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.network.common.schema.TopRatedMovieSchema
 import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPoint
+import com.andor.watchit.repository.MovieRepository
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import io.reactivex.subjects.SingleSubject
 
-class TopRatedMovieUseCaseImpl(private val topRatedMovieListEndPoint: TopRatedMovieListEndPoint) :
+class TopRatedMovieUseCaseImpl(
+    private val topRatedMovieListEndPoint: TopRatedMovieListEndPoint,
+    private val repository: MovieRepository
+) :
     TopRatedMovieUseCase {
 
     sealed class FetchResult {
