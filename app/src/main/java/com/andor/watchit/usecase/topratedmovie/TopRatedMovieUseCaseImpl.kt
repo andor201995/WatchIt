@@ -6,12 +6,18 @@ import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPoint
 import com.andor.watchit.repository.MovieRepository
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import io.reactivex.subjects.SingleSubject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.math.ceil
 
 class TopRatedMovieUseCaseImpl(
     private val topRatedMovieListEndPoint: TopRatedMovieListEndPoint,
     private val repository: MovieRepository
 ) :
     TopRatedMovieUseCase {
+
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     sealed class FetchResult {
         data class Success(
@@ -29,11 +35,18 @@ class TopRatedMovieUseCaseImpl(
         topRatedMovieListEndPoint.onFetchTopRatedMovieListAndNotify(pageNumber,
             object : TopRatedMovieListEndPoint.Listener {
                 override fun onFetchSuccess(topRatedMovieSchema: TopRatedMovieSchema) {
+
+                    val generalMovies = Converter.convertFrom(
+                        topRatedMovieSchema
+                    )
+
+                    coroutineScope.launch {
+                        repository.addAllMovie(generalMovies)
+                    }
+
                     topRatedMovieFetchEvent.onSuccess(
                         FetchResult.Success(
-                            Converter.convertFrom(
-                                topRatedMovieSchema
-                            ),
+                            generalMovies,
                             topRatedMovieSchema.page,
                             topRatedMovieSchema.total_pages,
                             topRatedMovieSchema.total_results
@@ -42,9 +55,27 @@ class TopRatedMovieUseCaseImpl(
                 }
 
                 override fun onFetchFailed() {
-                    topRatedMovieFetchEvent.onSuccess(
-                        FetchResult.Failure
-                    )
+
+                    coroutineScope.launch {
+                        val cachedMovies = repository.getPagedMovies(pageNumber)
+                        val cacheMovieCount = repository.getMovieCount()
+
+                        if (cacheMovieCount > 0) {
+                            topRatedMovieFetchEvent.onSuccess(
+                                FetchResult.Success(
+                                    cachedMovies,
+                                    pageNumber,
+                                    ceil(cacheMovieCount / 20f).toInt(),
+                                    cacheMovieCount
+                                )
+                            )
+                        } else {
+                            topRatedMovieFetchEvent.onSuccess(
+                                FetchResult.Failure
+                            )
+                        }
+
+                    }
                 }
             })
 
