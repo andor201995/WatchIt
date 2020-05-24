@@ -1,6 +1,6 @@
 package com.andor.watchit.core.di.application
 
-import android.app.Application
+import android.content.Context
 import com.andor.watchit.core.framework.RoomMovieDataSource
 import com.andor.watchit.core.framework.db.DatabaseService
 import com.andor.watchit.core.framework.db.MovieDao
@@ -16,7 +16,7 @@ class RepositoryModule {
     fun getMovieRepository(movieDataSource: MovieDataSource) = MovieRepository(movieDataSource)
 
     @Provides
-    fun getDatabaseService(application: Application) = DatabaseService.getInstance(application)
+    fun getDatabaseService(context: Context) = DatabaseService.getInstance(context)
 
     @Provides
     fun getMovieDao(databaseService: DatabaseService) = databaseService.getMovieDao()

@@ -8,7 +8,8 @@ import dagger.Component
     modules = [
         ApplicationModule::class,
         NetworkModule::class,
-        ActivityBindingModule::class
+        ActivityBindingModule::class,
+        RepositoryModule::class
     ]
 )
 @ApplicationScope

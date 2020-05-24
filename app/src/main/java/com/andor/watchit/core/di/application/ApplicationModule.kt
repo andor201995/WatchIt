@@ -1,6 +1,7 @@
 package com.andor.watchit.core.di.application
 
 import android.content.Context
+import com.andor.watchit.core.framework.UseCases
 import com.andor.watchit.network.common.MovieApi
 import com.andor.watchit.network.findmovie.FindMovieEndPoint
 import com.andor.watchit.network.findmovie.FindMovieEndPointImpl
