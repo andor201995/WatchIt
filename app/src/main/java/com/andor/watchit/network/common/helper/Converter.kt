@@ -16,7 +16,7 @@ object Converter {
                     movieId = it.id,
                     movieRating = it.vote_average,
                     overView = it.overview,
-                    releaseData = it.release_date
+                    releaseDate = it.release_date
                 )
             )
         }

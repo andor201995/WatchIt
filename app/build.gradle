@@ -73,6 +73,12 @@ dependencies {
 
     implementation Libraries.zoomage
 
+    kapt Libraries.room_compiler
+    implementation Libraries.room_ktx
+
+    implementation Libraries.coroutine_android
+    implementation Libraries.coroutine_core
+
     testImplementation TestLibraries.junit
     testImplementation TestLibraries.junit_ext
     testImplementation TestLibraries.espresso

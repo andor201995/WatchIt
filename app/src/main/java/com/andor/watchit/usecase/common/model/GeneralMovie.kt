@@ -9,6 +9,6 @@ data class GeneralMovie(
     val posterPath: String?,
     val movieId: Int,
     val overView: String?,
-    val releaseData: String?,
+    val releaseDate: String?,
     val movieRating: Double?
 ) : Parcelable
