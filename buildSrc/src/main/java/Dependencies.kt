@@ -13,12 +13,12 @@ object Releases {
 
 object Version {
 
-    const val gradle_build = "3.5.3"
+    const val gradle_build = "3.6.3"
     const val compileSdk = 29
     const val minSdk = 16
     const val targetSdk = 29
     const val build_tool = "29.0.2"
-    const val kotlin = "1.3.61"
+    const val kotlin = "1.3.72"
     const val androidx = "1.1.0"
     const val junit_ext = "1.1.1"
     const val androidx_legacy = "1.0.0"
@@ -85,6 +85,7 @@ object Libraries {
     const val dagger_android = "com.google.dagger:dagger-android:${Version.dagger}"
     const val dagger_android_support = "com.google.dagger:dagger-android-support:${Version.dagger}"
     const val dagger_compiler = "com.google.dagger:dagger-compiler:${Version.dagger}"
+    const val dagger_processor = "com.google.dagger:dagger-android-processor:${Version.dagger}"
 
     //Retrofit
     const val gson_converter = "com.squareup.retrofit2:converter-gson:${Version.retrofit}"

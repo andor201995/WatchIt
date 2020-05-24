@@ -1,6 +1,6 @@
 package com.andor.watchit.core.di.application
 
-import android.app.Application
+import android.content.Context
 import com.andor.watchit.network.common.MovieApi
 import com.andor.watchit.network.findmovie.FindMovieEndPoint
 import com.andor.watchit.network.findmovie.FindMovieEndPointImpl
@@ -19,18 +19,15 @@ import dagger.Module
 import dagger.Provides
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import javax.inject.Singleton
 
 @Module
-class ApplicationModule(private val application: Application) {
+class ApplicationModule(@get:Provides val application: Context) {
 
-    @Singleton
     @Provides
     fun provideTopRatedMovieListUseCase(topRatedMovieListEndPoint: TopRatedMovieListEndPoint): TopRatedMovieUseCase {
         return TopRatedMovieUseCaseImpl(topRatedMovieListEndPoint)
     }
 
-    @Singleton
     @Provides
     fun provideTopRatedMovieListEndPoint(movieApi: MovieApi): TopRatedMovieListEndPoint {
         return TopRatedMovieListEndPointImpl(
@@ -56,13 +53,11 @@ class ApplicationModule(private val application: Application) {
         )
     }
 
-    @Singleton
     @Provides
     fun provideFindMovieUseCase(findMovieEndPoint: FindMovieEndPoint): FindMovieUseCase {
         return FindMovieUseCaseImpl(findMovieEndPoint)
     }
 
-    @Singleton
     @Provides
     fun provideFindMovieEndPoint(movieApi: MovieApi): FindMovieEndPoint {
         return FindMovieEndPointImpl(movieApi)
@@ -76,16 +71,14 @@ class ApplicationModule(private val application: Application) {
         return FindMovieDataSourceFactory(findMovieUseCase, executor)
     }
 
-    @Singleton
     @Provides
     fun provideExecutor(): ExecutorService {
         return Executors.newFixedThreadPool(5)
     }
 
-    @Singleton
     @Provides
-    fun provideImageLoader(): ImageLoader {
-        return GlideImageLoader(application)
+    fun provideImageLoader(context: Context): ImageLoader {
+        return GlideImageLoader(context)
 //        return PicassoImageLoader(application)
     }
 }

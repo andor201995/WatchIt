@@ -29,11 +29,6 @@ class MovieDetailFragment : BaseFragment() {
     @Inject
     lateinit var mScreenNavigator: ScreenNavigator
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        presentationComponent.inject(this)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,7 +56,10 @@ class MovieDetailFragment : BaseFragment() {
             override fun onNext(t: Event) {
                 when (t) {
                     is Event.PosterClick -> {
-                        mScreenNavigator.navigateToPosterScreen(t.movieDetail)
+                        mScreenNavigator.navigateToPosterScreen(
+                            this@MovieDetailFragment,
+                            t.movieDetail
+                        )
                     }
                     is Event.PosterScrollToBack -> {
 

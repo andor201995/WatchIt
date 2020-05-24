@@ -44,7 +44,6 @@ class SearchMovieFragment : BaseFragment() {
         savedInstanceState?.let {
             mSearchQuery = savedInstanceState.getString(searchQueryTag, "")
         }
-        presentationComponent.inject(this)
     }
 
     override fun onCreateView(
@@ -100,10 +99,13 @@ class SearchMovieFragment : BaseFragment() {
                         mSearchQuery = t.query
                     }
                     is Event.SearchCollapse -> {
-                        mScreenNavigator.navigateUp()
+                        mScreenNavigator.navigateUp(this@SearchMovieFragment)
                     }
                     is Event.OpenMovie -> {
-                        mScreenNavigator.navigateFromSearchScreenToMovieDetailScreen(t.generalMovie)
+                        mScreenNavigator.navigateFromSearchScreenToMovieDetailScreen(
+                            this@SearchMovieFragment,
+                            t.generalMovie
+                        )
                     }
                 }
             }
@@ -144,7 +146,7 @@ class SearchMovieFragment : BaseFragment() {
                             mViewMvc.hidePlaceHolder()
                             mViewMvc.hideLoader()
                             mViewMvc.hideEmptyListPlaceholder()
-                            mScreenNavigator.navigateFromSearchScreenToErrorScreen()
+                            mScreenNavigator.navigateFromSearchScreenToErrorScreen(this@SearchMovieFragment)
                         }
                         is NetworkState.Initial.Loading -> {
                             mViewMvc.showLoader()

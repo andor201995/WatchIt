@@ -1,13 +1,10 @@
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
-
-apply plugin: 'kotlin-kapt'
-
-apply plugin: 'androidx.navigation.safeargs.kotlin'
-
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+}
 android {
     compileSdkVersion Version.compileSdk
     buildToolsVersion Version.build_tool
@@ -34,8 +31,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation Libraries.kotlin
     implementation Libraries.appcompat
     implementation Libraries.androidxcore
@@ -50,6 +45,9 @@ dependencies {
     implementation Libraries.lifecycle_viewmodel_ktx
 
     implementation Libraries.dagger
+    implementation Libraries.dagger_android
+    implementation Libraries.dagger_android_support
+    kapt Libraries.dagger_processor
     kapt Libraries.dagger_compiler
 
     implementation Libraries.gson_converter

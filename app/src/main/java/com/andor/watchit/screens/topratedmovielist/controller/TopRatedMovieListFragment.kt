@@ -40,14 +40,12 @@ class TopRatedMovieListFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        presentationComponent.inject(this)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         mViewMvc = if (::mViewMvc.isInitialized) mViewMvc else mViewMvcFactory.getTopRatedMovieMvc(
             container
         )
@@ -96,10 +94,13 @@ class TopRatedMovieListFragment : BaseFragment() {
                             mViewModel.retryLoadingList()
                         }
                         is Event.LoadMovie -> {
-                            mScreenNavigator.navigateFromTopRatedScreenToMovieDetailScreen(t.generalMovie)
+                            mScreenNavigator.navigateFromTopRatedScreenToMovieDetailScreen(
+                                this@TopRatedMovieListFragment,
+                                t.generalMovie
+                            )
                         }
                         is Event.OpenSearchScreen -> {
-                            mScreenNavigator.navigateToSearchScreen()
+                            mScreenNavigator.navigateToSearchScreen(this@TopRatedMovieListFragment)
                         }
                     }
                 }
@@ -133,7 +134,7 @@ class TopRatedMovieListFragment : BaseFragment() {
                         }
                         is NetworkState.Initial.Error -> {
                             mViewMvc.hideLoader()
-                            mScreenNavigator.navigateFromTopRatedScreenToErrorScreen()
+                            mScreenNavigator.navigateFromTopRatedScreenToErrorScreen(this@TopRatedMovieListFragment)
                         }
                         is NetworkState.Initial.Loading -> {
                             mViewMvc.showLoader()

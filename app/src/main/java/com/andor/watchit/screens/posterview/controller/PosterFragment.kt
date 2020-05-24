@@ -21,11 +21,6 @@ class PosterFragment : BaseFragment() {
     @Inject
     lateinit var mViewMvcFactory: ViewMvcFactory
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        presentationComponent.inject(this)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
