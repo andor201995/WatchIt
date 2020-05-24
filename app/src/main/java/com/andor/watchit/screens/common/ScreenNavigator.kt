@@ -1,7 +1,7 @@
 package com.andor.watchit.screens.common
 
-import android.app.Activity
-import androidx.navigation.Navigation
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import com.andor.watchit.R
 import com.andor.watchit.core.safeNavigation
 import com.andor.watchit.screens.moviedetail.controller.MovieDetailFragmentDirections
@@ -9,58 +9,64 @@ import com.andor.watchit.screens.searchmovie.controller.SearchMovieFragmentDirec
 import com.andor.watchit.screens.topratedmovielist.controller.TopRatedMovieListFragmentDirections
 import com.andor.watchit.usecase.common.model.GeneralMovie
 
-class ScreenNavigator(private val activity: Activity) {
-    fun navigateFromTopRatedScreenToErrorScreen() {
-        Navigation.findNavController(activity, R.id.nav_host)
+class ScreenNavigator() {
+    fun navigateFromTopRatedScreenToErrorScreen(fragment: Fragment) {
+        NavHostFragment.findNavController(fragment)
             .safeNavigation(
                 R.id.topRatedMovieListFragment,
                 R.id.action_topRatedMovieListFragment_to_networkErrorFragment
             )
     }
 
-    fun navigateFromSearchScreenToErrorScreen() {
-        Navigation.findNavController(activity, R.id.nav_host)
+    fun navigateFromSearchScreenToErrorScreen(fragment: Fragment) {
+        NavHostFragment.findNavController(fragment)
             .safeNavigation(
                 R.id.searchMovieFragment,
                 R.id.action_searchMovieFragment_to_networkErrorFragment
             )
     }
 
-    fun navigateFromTopRatedScreenToMovieDetailScreen(generalMovie: GeneralMovie) {
+    fun navigateFromTopRatedScreenToMovieDetailScreen(
+        fragment: Fragment,
+        generalMovie: GeneralMovie
+    ) {
         val action =
             TopRatedMovieListFragmentDirections.actionTopRatedMovieListFragmentToMovieDetailFragment(
                 generalMovie
             )
-        Navigation.findNavController(activity, R.id.nav_host)
+        NavHostFragment.findNavController(fragment)
             .safeNavigation(R.id.topRatedMovieListFragment, action)
     }
 
-    fun navigateFromSearchScreenToMovieDetailScreen(generalMovie: GeneralMovie) {
+    fun navigateFromSearchScreenToMovieDetailScreen(
+        fragment: Fragment,
+        generalMovie: GeneralMovie
+    ) {
         val action =
             SearchMovieFragmentDirections.actionSearchMovieFragmentToMovieDetailFragment(
                 generalMovie
             )
-        Navigation.findNavController(activity, R.id.nav_host)
+        NavHostFragment.findNavController(fragment)
             .safeNavigation(R.id.searchMovieFragment, action)
     }
 
-    fun navigateToPosterScreen(movieDetail: GeneralMovie) {
+    fun navigateToPosterScreen(fragment: Fragment, movieDetail: GeneralMovie) {
         val action =
             MovieDetailFragmentDirections.actionMovieDetailFragmentToPosterFragment(movieDetail)
-        Navigation.findNavController(activity, R.id.nav_host)
+        NavHostFragment.findNavController(fragment)
             .safeNavigation(R.id.movieDetailFragment, action)
     }
 
-    fun navigateToSearchScreen() {
-        Navigation.findNavController(activity, R.id.nav_host)
+    fun navigateToSearchScreen(fragment: Fragment) {
+        NavHostFragment.findNavController(fragment)
             .safeNavigation(
                 R.id.topRatedMovieListFragment,
                 R.id.action_topRatedMovieListFragment_to_searchMovieFragment
             )
     }
 
-    fun navigateUp() {
-        Navigation.findNavController(activity, R.id.nav_host).navigateUp()
+    fun navigateUp(fragment: Fragment) {
+        NavHostFragment.findNavController(fragment).navigateUp()
     }
 
 }

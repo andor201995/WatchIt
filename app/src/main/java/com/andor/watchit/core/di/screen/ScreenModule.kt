@@ -10,7 +10,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class ScreenModule(@get:Provides val activity: Activity) {
+class ScreenModule {
 
     @Provides
     fun provideViewMvcFactory(inflater: LayoutInflater, imageLoader: ImageLoader): ViewMvcFactory {
@@ -23,7 +23,7 @@ class ScreenModule(@get:Provides val activity: Activity) {
     }
 
     @Provides
-    fun provideScreenNavigator(activity: Activity): ScreenNavigator {
-        return ScreenNavigator(activity)
+    fun provideScreenNavigator(): ScreenNavigator {
+        return ScreenNavigator()
     }
 }

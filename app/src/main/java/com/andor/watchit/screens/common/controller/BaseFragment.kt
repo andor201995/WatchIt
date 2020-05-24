@@ -1,12 +1,8 @@
 package com.andor.watchit.screens.common.controller
 
 import android.os.Bundle
-import androidx.annotation.UiThread
 import androidx.fragment.app.Fragment
-import com.andor.watchit.core.MainApplication
-import com.andor.watchit.core.di.application.ApplicationComponent
-import com.andor.watchit.core.di.screen.ScreenComponent
-import com.andor.watchit.core.di.screen.ScreenModule
+import com.andor.watchit.core.di.common.Injector
 import java.util.*
 
 abstract class BaseFragment : Fragment() {
@@ -19,29 +15,22 @@ abstract class BaseFragment : Fragment() {
 
     private lateinit var instanceId: String
 
-    @get:UiThread
-    protected val screenComponent: ScreenComponent
-        get() {
-            return applicationComponent
-                .getPresentationComponent(ScreenModule(activity!!))
-        }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
         instanceId =
             savedInstanceState?.getString(BaseActivity.INSTANCE_ID_KEY)?.let { return@let it }
                 ?: UUID.randomUUID().toString()
 
-//        if (!injected) {
-//            Injector.inject(this)
-//            injected = true
-//        }
+        if (!injected) {
+            Injector.inject(this)
+            injected = true
+        }
+        super.onCreate(savedInstanceState)
     }
 
-//    override fun onDestroyView() {
-//        Injector.clear(this)
-//        super.onDestroyView()
-//    }
+    override fun onDestroyView() {
+        Injector.clear(this)
+        super.onDestroyView()
+    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -49,7 +38,4 @@ abstract class BaseFragment : Fragment() {
     }
 
     internal fun getInstanceId() = instanceId
-
-    private val applicationComponent: ApplicationComponent
-        get() = (activity!!.application as MainApplication).mApplicationComponent
 }

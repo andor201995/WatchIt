@@ -6,11 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.andor.watchit.core.di.common.Injector
 import com.andor.watchit.core.di.screen.FragmentInjector
 import java.util.*
+import javax.inject.Inject
 
 abstract class BaseActivity : AppCompatActivity() {
 
-//    @Inject
-//    lateinit var fragmentInjector: FragmentInjector
+    @Inject
+    lateinit var injector: FragmentInjector
 
     companion object {
         const val INSTANCE_ID_KEY = "instance_Id_activity"
@@ -43,7 +44,7 @@ abstract class BaseActivity : AppCompatActivity() {
     abstract fun getLayoutRes(): Int
 
     fun getFragmentInjector(): FragmentInjector {
-        TODO("In fragment iteration")
+        return injector
     }
 
     internal fun getInstanceId() = instanceId

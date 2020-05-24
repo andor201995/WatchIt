@@ -22,13 +22,9 @@ class NetworkErrorFragment : BaseFragment() {
 
     @Inject
     lateinit var mViewMvcFactory: ViewMvcFactory
+
     @Inject
     lateinit var mScreenNavigator: ScreenNavigator
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        screenComponent.inject(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +52,7 @@ class NetworkErrorFragment : BaseFragment() {
             override fun onNext(t: NetworkErrorViewMvc.Event) {
                 when (t) {
                     NetworkErrorViewMvc.Event.SwipeRefresh -> {
-                        mScreenNavigator.navigateUp()
+                        mScreenNavigator.navigateUp(this@NetworkErrorFragment)
                     }
                 }
             }
