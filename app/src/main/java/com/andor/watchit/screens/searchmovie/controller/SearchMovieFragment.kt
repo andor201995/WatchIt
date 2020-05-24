@@ -44,7 +44,7 @@ class SearchMovieFragment : BaseFragment() {
         savedInstanceState?.let {
             mSearchQuery = savedInstanceState.getString(searchQueryTag, "")
         }
-        presentationComponent.inject(this)
+        screenComponent.inject(this)
     }
 
     override fun onCreateView(

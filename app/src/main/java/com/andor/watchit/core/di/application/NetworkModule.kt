@@ -15,7 +15,6 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
-    @Singleton
     @Provides
     fun provideRetroFit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
@@ -26,7 +25,6 @@ class NetworkModule {
             .build()
     }
 
-    @Singleton
     @Provides
     fun provideOkHttpClient(
         authInterceptor: AuthInterceptor,
@@ -44,7 +42,6 @@ class NetworkModule {
         return AuthInterceptor()
     }
 
-    @Singleton
     @Provides
     fun provideMovieApi(retrofit: Retrofit): MovieApi {
         return retrofit.create(MovieApi::class.java)

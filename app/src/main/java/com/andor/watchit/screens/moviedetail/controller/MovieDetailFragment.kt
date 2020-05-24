@@ -31,7 +31,7 @@ class MovieDetailFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presentationComponent.inject(this)
+        screenComponent.inject(this)
     }
 
     override fun onCreateView(

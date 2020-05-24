@@ -1,4 +1,4 @@
-package com.andor.watchit.core.di.presentation
+package com.andor.watchit.core.di.screen
 
 import android.app.Activity
 import android.content.Context
@@ -10,7 +10,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class PresentationModule(private val activity: Activity) {
+class ScreenModule(@get:Provides val activity: Activity) {
 
     @Provides
     fun provideViewMvcFactory(inflater: LayoutInflater, imageLoader: ImageLoader): ViewMvcFactory {
@@ -20,16 +20,6 @@ class PresentationModule(private val activity: Activity) {
     @Provides
     fun provideLayoutInflater(context: Context): LayoutInflater {
         return LayoutInflater.from(context)
-    }
-
-    @Provides
-    fun provideContext(): Context {
-        return activity
-    }
-
-    @Provides
-    fun provideActivity(): Activity {
-        return activity
     }
 
     @Provides

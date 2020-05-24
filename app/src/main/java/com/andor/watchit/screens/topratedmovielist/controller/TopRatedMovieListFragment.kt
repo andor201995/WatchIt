@@ -40,7 +40,7 @@ class TopRatedMovieListFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        presentationComponent.inject(this)
+        screenComponent.inject(this)
     }
 
     override fun onCreateView(
