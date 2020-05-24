@@ -4,12 +4,15 @@ import com.andor.watchit.helper.TestData
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.network.common.schema.TopRatedMovieSchema
 import com.andor.watchit.network.findmovie.FindMovieEndPoint
+import com.andor.watchit.repository.MovieRepository
 import com.andor.watchit.usecase.findmovie.FindMovieUseCase.FetchResult
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.observers.TestObserver
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -25,9 +28,13 @@ class FindMovieUseCaseImplTest {
 
     private val VALID_QUERY: String = "VALID QUERY"
     private val VALID_PAGE: Int = 1
+
     // region helper fields ------------------------------------------------------------------------
     @Mock
     private lateinit var mFindMovieEndPointMock: FindMovieEndPoint
+
+    @Mock
+    private lateinit var mMovieRepository: MovieRepository
     private val testObserver = TestObserver<FetchResult>()
 
     // end region helper fields --------------------------------------------------------------------
@@ -36,7 +43,7 @@ class FindMovieUseCaseImplTest {
 
     @Before
     fun setup() {
-        systemUT = FindMovieUseCaseImpl(mFindMovieEndPointMock)
+        systemUT = FindMovieUseCaseImpl(mFindMovieEndPointMock, mMovieRepository)
         // initial state setup
     }
 
@@ -82,16 +89,20 @@ class FindMovieUseCaseImplTest {
     //Find movie error response
     @Test
     fun findMovieAndNotify_validInput_returnFailure() {
-        //Arrange
-        val schema = TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA
-        failure()
-        //Act
-        systemUT.findMovie(VALID_PAGE, VALID_QUERY).subscribe(testObserver)
-        //Assert
-        testObserver.assertValue {
-            it is FetchResult.Failure
-        }
+        runBlocking {
+            //Arrange
+            whenever(mMovieRepository.getSearchCount(any(), any())).thenReturn(0)
+            val schema = TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA
+            failure()
+            //Act
+            systemUT.findMovie(VALID_PAGE, VALID_QUERY).subscribe(testObserver)
+            //Assert
+            delay(200)
+            testObserver.assertValue {
+                it is FetchResult.Failure
+            }
 
+        }
     }
 
     // region helper methods -----------------------------------------------------------------------

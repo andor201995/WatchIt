@@ -3,10 +3,13 @@ package com.andor.watchit.usecase.topratedmovie
 import com.andor.watchit.helper.TestData
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPoint
+import com.andor.watchit.repository.MovieRepository
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.observers.TestObserver
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -22,6 +25,9 @@ class TopRatedMovieUseCaseImplTest {
     // region helper fields ------------------------------------------------------------------------
     @Mock
     lateinit var mTopRatedMovieListEndPointMock: TopRatedMovieListEndPoint
+
+    @Mock
+    lateinit var mMovieRepository: MovieRepository
     private val testObserver = TestObserver<TopRatedMovieUseCaseImpl.FetchResult>()
     // end region helper fields --------------------------------------------------------------------
 
@@ -29,8 +35,11 @@ class TopRatedMovieUseCaseImplTest {
 
     @Before
     fun setup() {
-        systemUT = TopRatedMovieUseCaseImpl(mTopRatedMovieListEndPointMock)
+        systemUT = TopRatedMovieUseCaseImpl(mTopRatedMovieListEndPointMock, mMovieRepository)
         // initial state setup
+        runBlocking {
+            whenever(mMovieRepository.addAllMovie(any())).thenReturn(Unit)
+        }
     }
 
     @After
@@ -62,18 +71,22 @@ class TopRatedMovieUseCaseImplTest {
     }
 
     @Test
-    fun fetchTopRatedMovieAndNotify_Failure_retrunFailure() {
+    fun fetchTopRatedMovieAndNotify_Failure_returnFailure() {
         //Arrange
-        failure()
-        //Act
-        systemUT.fetchTopRatedMovieAndNotify(1).subscribe(testObserver)
-        //Assert
-        verify(mTopRatedMovieListEndPointMock).onFetchTopRatedMovieListAndNotify(
-            any(),
-            any()
-        )
-        testObserver.assertValue {
-            it is TopRatedMovieUseCaseImpl.FetchResult.Failure
+        runBlocking {
+            whenever(mMovieRepository.getMovieCount()).thenReturn(0)
+            failure()
+            //Act
+            systemUT.fetchTopRatedMovieAndNotify(1).subscribe(testObserver)
+            //Assert
+            delay(200)
+            verify(mTopRatedMovieListEndPointMock).onFetchTopRatedMovieListAndNotify(
+                any(),
+                any()
+            )
+            testObserver.assertValue {
+                it is TopRatedMovieUseCaseImpl.FetchResult.Failure
+            }
         }
     }
 
