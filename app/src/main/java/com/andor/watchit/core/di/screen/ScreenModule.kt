@@ -1,4 +1,4 @@
-package com.andor.watchit.core.di.presentation
+package com.andor.watchit.core.di.screen
 
 import android.app.Activity
 import android.content.Context
@@ -10,7 +10,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class PresentationModule(private val activity: Activity) {
+class ScreenModule {
 
     @Provides
     fun provideViewMvcFactory(inflater: LayoutInflater, imageLoader: ImageLoader): ViewMvcFactory {
@@ -23,17 +23,7 @@ class PresentationModule(private val activity: Activity) {
     }
 
     @Provides
-    fun provideContext(): Context {
-        return activity
-    }
-
-    @Provides
-    fun provideActivity(): Activity {
-        return activity
-    }
-
-    @Provides
-    fun provideScreenNavigator(activity: Activity): ScreenNavigator {
-        return ScreenNavigator(activity)
+    fun provideScreenNavigator(): ScreenNavigator {
+        return ScreenNavigator()
     }
 }

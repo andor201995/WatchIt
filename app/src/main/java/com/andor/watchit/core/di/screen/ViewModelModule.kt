@@ -1,6 +1,7 @@
-package com.andor.watchit.core.di.presentation
+package com.andor.watchit.core.di.screen
 
 import androidx.lifecycle.ViewModel
+import com.andor.watchit.core.di.common.ViewModelKey
 import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.searchmovie.model.SearchMovieViewModel
 import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieListViewModel
@@ -15,15 +16,6 @@ import kotlin.reflect.KClass
 
 @Module
 class ViewModelModule {
-    @Target(
-        AnnotationTarget.FUNCTION,
-        AnnotationTarget.PROPERTY_GETTER,
-        AnnotationTarget.PROPERTY_SETTER
-    )
-    @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
-    @MapKey
-    internal annotation class ViewModelKey(val value: KClass<out ViewModel>)
-
     @Provides
     fun viewModelFactory(providerMap: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>): ViewModelFactory {
         return ViewModelFactory(providerMap)

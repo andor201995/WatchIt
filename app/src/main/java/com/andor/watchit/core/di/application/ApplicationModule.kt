@@ -1,7 +1,6 @@
 package com.andor.watchit.core.di.application
 
-import android.app.Application
-import com.andor.watchit.core.framework.UseCases
+import android.content.Context
 import com.andor.watchit.network.common.MovieApi
 import com.andor.watchit.network.findmovie.FindMovieEndPoint
 import com.andor.watchit.network.findmovie.FindMovieEndPointImpl
@@ -21,16 +20,10 @@ import dagger.Module
 import dagger.Provides
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import javax.inject.Singleton
 
 @Module
-class ApplicationModule(private val application: Application) {
+class ApplicationModule(@get:Provides val application: Context) {
 
-    @Provides
-    fun provideApplication(): Application = application
-
-
-    @Singleton
     @Provides
     fun provideTopRatedMovieListUseCase(
         topRatedMovieListEndPoint: TopRatedMovieListEndPoint,
@@ -39,7 +32,6 @@ class ApplicationModule(private val application: Application) {
         TopRatedMovieUseCaseImpl(topRatedMovieListEndPoint, repository)
 
 
-    @Singleton
     @Provides
     fun provideTopRatedMovieListEndPoint(movieApi: MovieApi): TopRatedMovieListEndPoint =
         TopRatedMovieListEndPointImpl(
@@ -66,7 +58,6 @@ class ApplicationModule(private val application: Application) {
             executor
         )
 
-    @Singleton
     @Provides
     fun provideFindMovieUseCase(
         findMovieEndPoint: FindMovieEndPoint,
@@ -74,7 +65,6 @@ class ApplicationModule(private val application: Application) {
     ): FindMovieUseCase =
         FindMovieUseCaseImpl(findMovieEndPoint, repository)
 
-    @Singleton
     @Provides
     fun provideFindMovieEndPoint(movieApi: MovieApi): FindMovieEndPoint =
         FindMovieEndPointImpl(movieApi)
@@ -88,16 +78,15 @@ class ApplicationModule(private val application: Application) {
         FindMovieDataSourceFactory(findMovieUseCase, executor)
 
 
-    @Singleton
     @Provides
     fun provideExecutor(): ExecutorService = Executors.newFixedThreadPool(5)
 
 
-    @Singleton
     @Provides
-    fun provideImageLoader(application: Application): ImageLoader = GlideImageLoader(application)
-//        = PicassoImageLoader(application)
-
+    fun provideImageLoader(context: Context): ImageLoader {
+        return GlideImageLoader(context)
+//        return PicassoImageLoader(application)
+    }
 
     @Provides
     fun provideUseCases(

@@ -1,12 +1,17 @@
 package com.andor.watchit.core.di.application
 
-import com.andor.watchit.core.di.presentation.PresentationComponent
-import com.andor.watchit.core.di.presentation.PresentationModule
+import com.andor.watchit.core.MainApplication
+import com.andor.watchit.core.di.common.ApplicationScope
 import dagger.Component
-import javax.inject.Singleton
 
-@Singleton
-@Component(modules = [ApplicationModule::class, NetworkModule::class, RepositoryModule::class])
+@Component(
+    modules = [
+        ApplicationModule::class,
+        NetworkModule::class,
+        ActivityBindingModule::class
+    ]
+)
+@ApplicationScope
 interface ApplicationComponent {
-    fun getPresentationComponent(presentationModule: PresentationModule): PresentationComponent
+    fun inject(mainApplication: MainApplication)
 }

@@ -1,27 +1,41 @@
 package com.andor.watchit.screens.common.controller
 
-import androidx.annotation.UiThread
+import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.andor.watchit.core.MainApplication
-import com.andor.watchit.core.di.application.ApplicationComponent
-import com.andor.watchit.core.di.presentation.PresentationComponent
-import com.andor.watchit.core.di.presentation.PresentationModule
+import com.andor.watchit.core.di.common.Injector
+import java.util.*
 
-open class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment() {
 
-    private var mIsInjectorUsed: Boolean = false
+    private var injected: Boolean = false
 
-    @get:UiThread
-    protected val presentationComponent: PresentationComponent
-        get() {
-            if (mIsInjectorUsed) {
-                throw RuntimeException("there is no need to use injector more than once")
-            }
-            mIsInjectorUsed = true
-            return applicationComponent
-                .getPresentationComponent(PresentationModule(activity!!))
+    companion object {
+        const val INSTANCE_ID_KEY = "instance_Id_fragment"
+    }
+
+    private lateinit var instanceId: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        instanceId =
+            savedInstanceState?.getString(BaseActivity.INSTANCE_ID_KEY)?.let { return@let it }
+                ?: UUID.randomUUID().toString()
+
+        if (!injected) {
+            Injector.inject(this)
+            injected = true
         }
+        super.onCreate(savedInstanceState)
+    }
 
-    private val applicationComponent: ApplicationComponent
-        get() = (activity!!.application as MainApplication).mApplicationComponent
+    override fun onDestroyView() {
+        Injector.clear(this)
+        super.onDestroyView()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(INSTANCE_ID_KEY, instanceId)
+    }
+
+    internal fun getInstanceId() = instanceId
 }
