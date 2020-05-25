@@ -10,9 +10,10 @@ import io.reactivex.subjects.SingleSubject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.math.ceil
 
-class FindMovieUseCaseImpl(
+class FindMovieUseCaseImpl @Inject constructor(
     private val findMovieEndPoint: FindMovieEndPoint,
     private val repository: MovieRepository
 ) : FindMovieUseCase {

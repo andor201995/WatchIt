@@ -8,9 +8,10 @@ import com.andor.watchit.usecase.common.model.NetworkState
 import com.andor.watchit.usecase.topratedmovie.TopRatedMovieDataSourceFactory
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
+import javax.inject.Inject
 
 
-class TopRatedMovieListViewModel(
+class TopRatedMovieListViewModel @Inject constructor(
     private val topRatedMovieDataSourceFactory: TopRatedMovieDataSourceFactory
 ) :
     ViewModel() {

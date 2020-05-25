@@ -9,9 +9,10 @@ import io.reactivex.subjects.SingleSubject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.math.ceil
 
-class TopRatedMovieUseCaseImpl(
+class TopRatedMovieUseCaseImpl @Inject constructor(
     private val topRatedMovieListEndPoint: TopRatedMovieListEndPoint,
     private val repository: MovieRepository
 ) :
