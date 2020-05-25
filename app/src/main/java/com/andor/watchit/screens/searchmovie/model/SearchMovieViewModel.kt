@@ -9,8 +9,9 @@ import com.andor.watchit.usecase.common.model.NetworkState
 import com.andor.watchit.usecase.findmovie.FindMovieDataSourceFactory
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
+import javax.inject.Inject
 
-class SearchMovieViewModel(private val findMovieDataSourceFactory: FindMovieDataSourceFactory) :
+class SearchMovieViewModel @Inject constructor(private val findMovieDataSourceFactory: FindMovieDataSourceFactory) :
     ViewModel() {
 
     private var lastSearchQuery: String = ""

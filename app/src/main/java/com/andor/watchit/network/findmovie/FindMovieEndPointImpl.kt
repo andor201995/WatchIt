@@ -5,8 +5,10 @@ import com.andor.watchit.network.common.schema.TopRatedMovieSchema
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class FindMovieEndPointImpl(private val movieApi: MovieApi) : FindMovieEndPoint {
+class FindMovieEndPointImpl @Inject constructor(private val movieApi: MovieApi) :
+    FindMovieEndPoint {
 
     override fun findMovieAndNotify(
         page: Int,

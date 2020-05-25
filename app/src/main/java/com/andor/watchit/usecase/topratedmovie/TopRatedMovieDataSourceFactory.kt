@@ -3,9 +3,10 @@ package com.andor.watchit.usecase.topratedmovie
 import androidx.paging.DataSource
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import io.reactivex.subjects.PublishSubject
+import javax.inject.Inject
 
 
-class TopRatedMovieDataSourceFactory(val topRatedMovieDataSource: TopRatedMovieDataSource) :
+class TopRatedMovieDataSourceFactory @Inject constructor(val topRatedMovieDataSource: TopRatedMovieDataSource) :
     DataSource.Factory<Long, GeneralMovie>() {
 
     private val mDataSourceRelay: PublishSubject<TopRatedMovieDataSource> = PublishSubject.create()
