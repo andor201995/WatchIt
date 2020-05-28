@@ -9,5 +9,4 @@ open class BaseObservableViewMvc<EVENT_TYPE> : ObservableViewMvc<EVENT_TYPE>, Ba
     override fun getEventStream(): PublishSubject<EVENT_TYPE> {
         return viewEventStream
     }
-
 }

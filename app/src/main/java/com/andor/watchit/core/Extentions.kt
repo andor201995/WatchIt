@@ -27,7 +27,6 @@ fun NavController.safeNavigation(currentDestinationResourceId: Int, action: NavD
     }
 }
 
-
 fun NavController.safeNavigation(
     currentDestinationResourceId: Int,
     action: NavDirections,

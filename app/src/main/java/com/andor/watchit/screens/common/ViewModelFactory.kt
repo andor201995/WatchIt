@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import javax.inject.Provider
 
-
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory(providerMap: Map<Class<out ViewModel>, Provider<ViewModel>>) :
     ViewModelProvider.Factory {
@@ -14,5 +13,4 @@ class ViewModelFactory(providerMap: Map<Class<out ViewModel>, Provider<ViewModel
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return mProviderMap[modelClass]!!.get() as T
     }
-
 }

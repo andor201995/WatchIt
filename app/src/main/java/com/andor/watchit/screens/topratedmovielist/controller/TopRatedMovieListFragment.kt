@@ -1,7 +1,12 @@
 package com.andor.watchit.screens.topratedmovielist.controller
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import com.andor.watchit.R
@@ -43,7 +48,8 @@ class TopRatedMovieListFragment : BaseFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         mViewMvc = if (::mViewMvc.isInitialized) mViewMvc else mViewMvcFactory.getTopRatedMovieMvc(
@@ -107,7 +113,6 @@ class TopRatedMovieListFragment : BaseFragment() {
             })
     }
 
-
     private fun bindPagedListStateObserver() {
         val pageListStateObserver =
             object : RxBaseObserver<PagedList<GeneralMovie>>() {
@@ -120,7 +125,6 @@ class TopRatedMovieListFragment : BaseFragment() {
             .subscribe(pageListStateObserver)
 
         compositeDisposable.add(pageListStateObserver)
-
     }
 
     private fun bindNetworkStateObserver() {
@@ -149,13 +153,12 @@ class TopRatedMovieListFragment : BaseFragment() {
             .subscribe(initialNetworkStateObserver)
         compositeDisposable.add(initialNetworkStateObserver)
 
-
         val nextNetworkStateObserver =
             object : RxBaseObserver<NetworkState.Next>() {
                 override fun onNext(t: NetworkState.Next) {
                     when (t) {
                         is NetworkState.Next.Success -> {
-                            //do nothing
+                            // do nothing
                         }
                         is NetworkState.Next.Error -> {
                             mViewMvc.showListLoadingError()
@@ -166,7 +169,6 @@ class TopRatedMovieListFragment : BaseFragment() {
                         is NetworkState.Next.Completed -> {
                             mViewMvc.showListLoadingCompleted()
                         }
-
                     }
                 }
             }

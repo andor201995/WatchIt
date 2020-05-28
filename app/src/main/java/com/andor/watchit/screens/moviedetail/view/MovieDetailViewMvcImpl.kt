@@ -13,7 +13,6 @@ import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.moviedetail.model.Event
 import com.andor.watchit.usecase.common.model.GeneralMovie
 
-
 class MovieDetailViewMvcImpl(
     parent: ViewGroup?,
     inflater: LayoutInflater,

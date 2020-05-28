@@ -68,5 +68,4 @@ class ScreenNavigator() {
     fun navigateUp(fragment: Fragment) {
         NavHostFragment.findNavController(fragment).navigateUp()
     }
-
 }

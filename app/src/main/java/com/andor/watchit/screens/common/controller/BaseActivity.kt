@@ -5,7 +5,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.andor.watchit.core.di.common.Injector
 import com.andor.watchit.core.di.screen.FragmentInjector
-import java.util.*
+import java.util.UUID
 import javax.inject.Inject
 
 abstract class BaseActivity : AppCompatActivity() {

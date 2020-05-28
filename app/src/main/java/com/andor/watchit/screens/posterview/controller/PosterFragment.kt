@@ -22,7 +22,8 @@ class PosterFragment : BaseFragment() {
     lateinit var mViewMvcFactory: ViewMvcFactory
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         mViewMvc = mViewMvcFactory.getPosterViewMvc(container)
@@ -37,5 +38,4 @@ class PosterFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(PosterViewModel::class.java)
     }
-
 }

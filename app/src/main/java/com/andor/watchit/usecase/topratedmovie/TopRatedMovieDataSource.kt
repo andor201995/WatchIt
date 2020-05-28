@@ -16,7 +16,6 @@ class TopRatedMovieDataSource(
         retryExecutor
     ) {
 
-
     override fun loadInitial(
         params: LoadInitialParams<Long>,
         callback: LoadInitialCallback<Long, GeneralMovie>
@@ -61,7 +60,7 @@ class TopRatedMovieDataSource(
                     when (t) {
                         is TopRatedMovieUseCaseImpl.FetchResult.Success -> {
                             nextNetworkStateStream.onNext(NetworkState.Next.Success)
-                            //check for last
+                            // check for last
                             val nextPage =
                                 if (t.maxPageCount.toLong() == params.key) {
                                     nextNetworkStateStream.onNext(NetworkState.Next.Completed)
@@ -82,7 +81,5 @@ class TopRatedMovieDataSource(
                     }
                 }
             })
-
     }
-
 }

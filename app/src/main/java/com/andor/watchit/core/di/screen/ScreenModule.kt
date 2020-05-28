@@ -15,12 +15,9 @@ class ScreenModule {
     fun provideViewMvcFactory(inflater: LayoutInflater, imageLoader: ImageLoader) =
         ViewMvcFactory(inflater, imageLoader)
 
-
     @Provides
     fun provideLayoutInflater(context: Context): LayoutInflater = LayoutInflater.from(context)
 
-
     @Provides
     fun provideScreenNavigator() = ScreenNavigator()
-
 }

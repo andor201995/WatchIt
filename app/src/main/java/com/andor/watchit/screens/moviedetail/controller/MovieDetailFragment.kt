@@ -30,7 +30,8 @@ class MovieDetailFragment : BaseFragment() {
     lateinit var mScreenNavigator: ScreenNavigator
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         mViewMvc = mViewMvcFactory.getMovieDetailViewMvc(container)
@@ -62,11 +63,9 @@ class MovieDetailFragment : BaseFragment() {
                         )
                     }
                     is Event.PosterScrollToBack -> {
-
                     }
                 }
             }
-
         }
         compositeDisposable.add(eventObserver)
         mViewMvc.getEventStream().subscribe(eventObserver)

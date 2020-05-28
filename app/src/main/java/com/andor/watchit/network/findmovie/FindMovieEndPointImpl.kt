@@ -2,10 +2,10 @@ package com.andor.watchit.network.findmovie
 
 import com.andor.watchit.network.common.MovieApi
 import com.andor.watchit.network.common.schema.TopRatedMovieSchema
+import javax.inject.Inject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import javax.inject.Inject
 
 class FindMovieEndPointImpl @Inject constructor(private val movieApi: MovieApi) :
     FindMovieEndPoint {

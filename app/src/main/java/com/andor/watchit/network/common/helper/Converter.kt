@@ -29,5 +29,4 @@ object Converter {
         val result = mat.replaceAll("+")
         return result.removePrefix("+").removeSuffix("+")
     }
-
 }

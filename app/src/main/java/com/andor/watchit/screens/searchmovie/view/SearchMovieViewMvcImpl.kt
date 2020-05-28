@@ -2,7 +2,11 @@ package com.andor.watchit.screens.searchmovie.view
 
 import android.app.SearchManager
 import android.content.Context
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.FragmentActivity
 import androidx.paging.PagedList
@@ -21,7 +25,6 @@ import com.jakewharton.rxbinding3.appcompat.queryTextChanges
 import com.todkars.shimmer.ShimmerRecyclerView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
-
 
 class SearchMovieViewMvcImpl(
     parent: ViewGroup?,
@@ -61,7 +64,6 @@ class SearchMovieViewMvcImpl(
 
             recyclerView.layoutManager = GridLayoutManager(context, gridCount)
             shimmerRecyclerView.layoutManager = GridLayoutManager(context, gridCount)
-
         } else {
             adapter = recyclerView.adapter as SearchMovieListAdapter
         }
@@ -83,7 +85,6 @@ class SearchMovieViewMvcImpl(
                 getEventStream().onNext(Event.SearchCollapse)
                 return true
             }
-
         })
         val searchView = searchActionMenuItem.actionView
 

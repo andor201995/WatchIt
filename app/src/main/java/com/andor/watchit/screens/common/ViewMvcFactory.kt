@@ -81,5 +81,4 @@ class ViewMvcFactory(
     fun getSearchMovieItemViewMvc(parent: ViewGroup): SearchMovieItemViewMvc {
         return SearchMovieItemViewMvcImpl(parent, layoutInflater, imageLoader)
     }
-
 }

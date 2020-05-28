@@ -23,5 +23,4 @@ class RepositoryModule {
 
     @Provides
     fun getMovieDataSource(movieDao: MovieDao): MovieDataSource = RoomMovieDataSource(movieDao)
-
 }

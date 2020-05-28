@@ -7,11 +7,11 @@ import com.andor.watchit.repository.MovieRepository
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.andor.watchit.usecase.findmovie.FindMovieUseCase.FetchResult
 import io.reactivex.subjects.SingleSubject
+import javax.inject.Inject
+import kotlin.math.ceil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-import kotlin.math.ceil
 
 class FindMovieUseCaseImpl @Inject constructor(
     private val findMovieEndPoint: FindMovieEndPoint,
@@ -61,7 +61,6 @@ class FindMovieUseCaseImpl @Inject constructor(
                         )
                     )
                 }
-
             })
         return responseSingle
     }

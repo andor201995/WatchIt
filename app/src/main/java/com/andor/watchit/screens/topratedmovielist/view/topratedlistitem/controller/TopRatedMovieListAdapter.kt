@@ -12,7 +12,6 @@ import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.To
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import io.reactivex.subjects.PublishSubject
 
-
 class TopRatedMovieListAdapter(
     private val viewMvcFactory: ViewMvcFactory,
     private val eventStream: PublishSubject<Event>
@@ -41,7 +40,6 @@ class TopRatedMovieListAdapter(
         }
         return TopMovieHolder(mViewMvc)
     }
-
 
     override fun onBindViewHolder(holder: TopMovieHolder, position: Int) {
 
@@ -120,5 +118,4 @@ class TopRatedMovieListAdapter(
         object Error : ListLoading()
         object Completed : ListLoading()
     }
-
 }

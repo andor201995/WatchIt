@@ -20,7 +20,6 @@ class MainActivity : BaseActivity() {
 
     override fun getLayoutRes() = R.layout.activity_main
 
-
     override fun onSupportNavigateUp(): Boolean = Navigation.findNavController(
         this,
         R.id.nav_host

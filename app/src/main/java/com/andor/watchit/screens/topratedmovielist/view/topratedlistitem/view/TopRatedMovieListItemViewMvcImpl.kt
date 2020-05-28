@@ -35,7 +35,6 @@ class TopRatedMovieListItemViewMvcImpl(
         moviePosterImageView.also {
             imageLoader.loadImageInto(it, generalMovie.posterPath)
         }
-
     }
 
     override fun cleanUp() {
