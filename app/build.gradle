@@ -85,5 +85,5 @@ dependencies {
     testImplementation TestLibraries.mockito_kotlin
     testImplementation TestLibraries.mockwebserver
 
-
+    debugImplementation Debug.database_debug
 }

@@ -13,6 +13,7 @@ object Releases {
 
 object Version {
 
+    const val database_debug = "1.0.6"
     const val gradle_build = "3.6.3"
     const val compileSdk = 29
     const val minSdk = 16
@@ -143,4 +144,8 @@ object TestLibraries {
     const val mockito_kotlin =
         "com.nhaarman.mockitokotlin2:mockito-kotlin:${Version.mockito_kotlin}"
     const val mockwebserver = "com.squareup.okhttp3:mockwebserver:${Version.mockwebserver}"
+}
+
+object Debug {
+    const val database_debug = "com.amitshekhar.android:debug-db:${Version.database_debug}"
 }
