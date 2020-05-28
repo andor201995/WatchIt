@@ -7,7 +7,6 @@ import javax.inject.Inject
 
 class MainApplication : Application() {
 
-
     @Inject
     lateinit var injector: ActivityInjector
 

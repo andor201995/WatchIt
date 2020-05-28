@@ -9,15 +9,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.squareup.picasso.Picasso
 
-
 class GlideImageLoader(private val context: Context) : ImageLoader {
-
 
     private val glide: RequestManager = Glide.with(context)
 
     override fun loadImageInto(view: ImageView, uri: String?) {
         glide
-            .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/${uri}")
+            .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/$uri")
             .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_image_24px)!!)
             .error(ContextCompat.getDrawable(context, R.drawable.ic_error_24px)!!)
             .into(view)
@@ -34,7 +32,7 @@ class PicassoImageLoader(private val context: Context) : ImageLoader {
     private val picasso: Picasso = Picasso.get()
     override fun loadImageInto(view: ImageView, uri: String?) {
         picasso
-            .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/${uri}")
+            .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/$uri")
             .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_image_24px)!!)
             .error(ContextCompat.getDrawable(context, R.drawable.ic_error_24px)!!)
             .into(view)

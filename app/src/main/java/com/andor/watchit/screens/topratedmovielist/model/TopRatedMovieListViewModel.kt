@@ -10,7 +10,6 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
-
 class TopRatedMovieListViewModel @Inject constructor(
     private val topRatedMovieDataSourceFactory: TopRatedMovieDataSourceFactory
 ) :
@@ -21,7 +20,6 @@ class TopRatedMovieListViewModel @Inject constructor(
         BehaviorSubject.create()
     val initialNetworkStateStream: BehaviorSubject<NetworkState.Initial> =
         BehaviorSubject.create()
-
 
     init {
         val pagedListConfig = PagedList.Config.Builder()
@@ -47,7 +45,6 @@ class TopRatedMovieListViewModel @Inject constructor(
             .flatMap {
                 it.initialNetworkStateStream
             }.subscribe(initialNetworkStateStream)
-
     }
 
     fun retryLoadingList() {

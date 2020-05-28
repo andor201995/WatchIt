@@ -1,6 +1,5 @@
 package com.andor.watchit.core.di.application
 
-import android.app.Application
 import android.content.Context
 import com.andor.watchit.core.MainApplication
 import com.andor.watchit.core.di.common.ApplicationScope

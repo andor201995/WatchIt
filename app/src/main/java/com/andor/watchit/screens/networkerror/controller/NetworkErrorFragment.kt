@@ -27,7 +27,8 @@ class NetworkErrorFragment : BaseFragment() {
     lateinit var mScreenNavigator: ScreenNavigator
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         mViewMvc = mViewMvcFactory.getNetworkErrorViewMvc(container)
@@ -59,7 +60,6 @@ class NetworkErrorFragment : BaseFragment() {
 
             override fun onError(e: Throwable) {
             }
-
         }
         compositeDisposable.add(eventObserve)
         mViewMvc.getEventStream().subscribe(eventObserve)

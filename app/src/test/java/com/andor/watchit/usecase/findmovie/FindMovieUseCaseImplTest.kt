@@ -54,12 +54,12 @@ class FindMovieUseCaseImplTest {
 
     @Test
     fun findMovieAndNotify_validInput() {
-        //Arrange
+        // Arrange
         val pageAC = argumentCaptor<Int>()
         val queryAC = argumentCaptor<String>()
-        //Act
+        // Act
         systemUT.findMovie(VALID_PAGE, VALID_QUERY)
-        //Assert
+        // Assert
         verify(mFindMovieEndPointMock).findMovieAndNotify(
             pageAC.capture(),
             queryAC.capture(),
@@ -71,37 +71,35 @@ class FindMovieUseCaseImplTest {
 
     @Test
     fun findMovieAndNotify_validInput_returnSuccess() {
-        //Arrange
+        // Arrange
         val schema = TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA
         success(schema)
-        //Act
+        // Act
         systemUT.findMovie(VALID_PAGE, VALID_QUERY).subscribe(testObserver)
-        //Assert
+        // Assert
         testObserver.assertValue {
             it is FetchResult.Success &&
                     it.pageNumber == schema.page &&
                     it.generalMovieList == Converter.convertFrom(schema) &&
                     it.maxPageCount == schema.total_pages
         }
-
     }
 
-    //Find movie error response
+    // Find movie error response
     @Test
     fun findMovieAndNotify_validInput_returnFailure() {
         runBlocking {
-            //Arrange
+            // Arrange
             whenever(mMovieRepository.getSearchCount(any(), any())).thenReturn(0)
             val schema = TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA
             failure()
-            //Act
+            // Act
             systemUT.findMovie(VALID_PAGE, VALID_QUERY).subscribe(testObserver)
-            //Assert
+            // Assert
             delay(200)
             testObserver.assertValue {
                 it is FetchResult.Failure
             }
-
         }
     }
 

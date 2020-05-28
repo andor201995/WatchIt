@@ -1,7 +1,11 @@
 package com.andor.watchit.screens.searchmovie.controller
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import com.andor.watchit.R
@@ -19,7 +23,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-
 
 class SearchMovieFragment : BaseFragment() {
 
@@ -47,7 +50,8 @@ class SearchMovieFragment : BaseFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         if (!(::mViewMvc.isInitialized)) {
@@ -126,7 +130,6 @@ class SearchMovieFragment : BaseFragment() {
             .subscribe(pageListStateObserver)
 
         compositeDisposable.add(pageListStateObserver)
-
     }
 
     private fun bindNetworkStateObserver() {
@@ -163,13 +166,12 @@ class SearchMovieFragment : BaseFragment() {
             .subscribe(initialNetworkStateObserver)
         compositeDisposable.add(initialNetworkStateObserver)
 
-
         val nextNetworkStateObserver =
             object : RxBaseObserver<NetworkState.Next>() {
                 override fun onNext(t: NetworkState.Next) {
                     when (t) {
                         is NetworkState.Next.Success -> {
-                            //do nothing
+                            // do nothing
                         }
                         is NetworkState.Next.Error -> {
 //                            mViewMvc.showListLoadingError()
@@ -180,7 +182,6 @@ class SearchMovieFragment : BaseFragment() {
                         is NetworkState.Next.Completed -> {
 //                            mViewMvc.showListLoadingCompleted()
                         }
-
                     }
                 }
             }

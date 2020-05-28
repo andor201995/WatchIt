@@ -49,11 +49,11 @@ class TopRatedMovieUseCaseImplTest {
 
     @Test
     fun fetchTopRatedMovieAndNotify_success_returnValidData() {
-        //Arrange
+        // Arrange
         success()
-        //Act
+        // Act
         systemUT.fetchTopRatedMovieAndNotify(1).subscribe(testObserver)
-        //Assert
+        // Assert
         verify(mTopRatedMovieListEndPointMock).onFetchTopRatedMovieListAndNotify(
             any(),
             any()
@@ -67,18 +67,17 @@ class TopRatedMovieUseCaseImplTest {
                 testServerResponse.total_results
             )
         }
-
     }
 
     @Test
     fun fetchTopRatedMovieAndNotify_Failure_returnFailure() {
-        //Arrange
+        // Arrange
         runBlocking {
             whenever(mMovieRepository.getMovieCount()).thenReturn(0)
             failure()
-            //Act
+            // Act
             systemUT.fetchTopRatedMovieAndNotify(1).subscribe(testObserver)
-            //Assert
+            // Assert
             delay(200)
             verify(mTopRatedMovieListEndPointMock).onFetchTopRatedMovieListAndNotify(
                 any(),

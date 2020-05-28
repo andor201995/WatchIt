@@ -1,7 +1,11 @@
 package com.andor.watchit.core.framework.db
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.Query
+import androidx.room.RawQuery
 import androidx.sqlite.db.SimpleSQLiteQuery
 
 @Dao

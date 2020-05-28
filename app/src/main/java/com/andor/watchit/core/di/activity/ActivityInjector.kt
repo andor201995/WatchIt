@@ -46,5 +46,4 @@ class ActivityInjector @Inject constructor(
         }
         cache.remove(activity.getInstanceId())
     }
-
 }

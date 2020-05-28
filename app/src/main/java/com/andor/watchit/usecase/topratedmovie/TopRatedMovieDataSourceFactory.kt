@@ -5,7 +5,6 @@ import com.andor.watchit.usecase.common.model.GeneralMovie
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
-
 class TopRatedMovieDataSourceFactory @Inject constructor(val topRatedMovieDataSource: TopRatedMovieDataSource) :
     DataSource.Factory<Long, GeneralMovie>() {
 

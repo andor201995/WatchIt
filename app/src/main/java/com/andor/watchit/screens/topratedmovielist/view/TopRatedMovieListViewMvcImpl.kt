@@ -17,7 +17,6 @@ import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.control
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.todkars.shimmer.ShimmerRecyclerView
 
-
 class TopRatedMovieListViewMvcImpl(
     parent: ViewGroup?,
     layoutInflater: LayoutInflater,

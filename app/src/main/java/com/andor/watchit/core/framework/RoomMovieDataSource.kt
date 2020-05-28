@@ -43,7 +43,6 @@ class RoomMovieDataSource(private val movieDao: MovieDao) : MovieDataSource {
             getQueryString(queryArgs).insert(0, "SELECT COUNT(movie_id) FROM(\n").append("\n)")
         val simpleSQLiteQuery = SimpleSQLiteQuery(queryString.toString())
         return movieDao.getSearchMovieCount(simpleSQLiteQuery)
-
     }
 
     private fun getQueryString(

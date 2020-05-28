@@ -7,6 +7,7 @@ import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPointImpl
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
+import java.net.HttpURLConnection
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -15,7 +16,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import java.net.HttpURLConnection
 
 @RunWith(MockitoJUnitRunner::class)
 class TopRatedMovieListEndPointImplTest {
@@ -56,38 +56,35 @@ class TopRatedMovieListEndPointImplTest {
     // fetch success with correct data
     @Test
     fun onFetchTopRatedMovieListAndNotify_fetchSuccess_validData() {
-        //Arrange
+        // Arrange
         success(TestData.SERVER_RESPONSE_JSON_SUCCESS)
-        //Act
+        // Act
         systemUT.onFetchTopRatedMovieListAndNotify(VALID_PAGE_NUMBER, listener)
-        //Assert
+        // Assert
         verify(listener, times(1)).onFetchSuccess(TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA)
     }
-
 
     // fetch failure with no data and error msg
     @Test
     fun onFetchTopRatedMovieListAndNotify_fetchFail_nullData() {
-        //Arrange
+        // Arrange
         success(TestData.SERVER_RESPONSE_JSON_SUCCESS_NULL)
-        //Act
+        // Act
         systemUT.onFetchTopRatedMovieListAndNotify(VALID_PAGE_NUMBER, listener)
-        //Assert
+        // Assert
         verify(listener, times(0)).onFetchSuccess(any())
         verify(listener, times(1)).onFetchFailed()
-
     }
 
     @Test
     fun onFetchTopRatedMovieListAndNotify_fetchNetworFail_nullData() {
-        //Arrange
+        // Arrange
         failure()
-        //Act
+        // Act
         systemUT.onFetchTopRatedMovieListAndNotify(VALID_PAGE_NUMBER, listener)
-        //Assert
+        // Assert
         verify(listener, times(0)).onFetchSuccess(any())
         verify(listener, times(1)).onFetchFailed()
-
     }
 
     // region helper methods -----------------------------------------------------------------------

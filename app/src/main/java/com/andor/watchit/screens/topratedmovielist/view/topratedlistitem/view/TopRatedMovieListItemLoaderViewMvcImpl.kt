@@ -31,7 +31,6 @@ class TopRatedMovieListItemLoaderViewMvcImpl(parent: ViewGroup?, inflater: Layou
             getEventStream()
                 .onNext(Event.RetryListLoading)
         }
-
     }
 
     override fun showLoader() {

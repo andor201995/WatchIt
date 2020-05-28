@@ -60,7 +60,7 @@ class FindMovieDataSource(
                     when (t) {
                         is FetchResult.Success -> {
                             nextNetworkStateStream.onNext(NetworkState.Next.Success)
-                            //check for last
+                            // check for last
                             val nextPage =
                                 if (t.maxPageCount.toLong() == params.key) {
                                     nextNetworkStateStream.onNext(NetworkState.Next.Completed)

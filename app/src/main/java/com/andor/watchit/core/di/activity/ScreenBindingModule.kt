@@ -2,7 +2,11 @@ package com.andor.watchit.core.di.activity
 
 import androidx.fragment.app.Fragment
 import com.andor.watchit.core.di.common.ScreenKey
-import com.andor.watchit.core.di.screen.*
+import com.andor.watchit.core.di.screen.MovieDetailFragmentComponent
+import com.andor.watchit.core.di.screen.NetworkErrorFragmentComponent
+import com.andor.watchit.core.di.screen.PosterFragmentComponent
+import com.andor.watchit.core.di.screen.SearchMovieFragmentComponent
+import com.andor.watchit.core.di.screen.TopRatedMovieListFragmentComponent
 import com.andor.watchit.screens.moviedetail.controller.MovieDetailFragment
 import com.andor.watchit.screens.networkerror.controller.NetworkErrorFragment
 import com.andor.watchit.screens.posterview.controller.PosterFragment

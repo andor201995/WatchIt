@@ -5,6 +5,9 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
 }
+
+apply from: "../ktlint.gradle"
+
 android {
     compileSdkVersion Version.compileSdk
     buildToolsVersion Version.build_tool

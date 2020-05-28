@@ -6,11 +6,11 @@ import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPoint
 import com.andor.watchit.repository.MovieRepository
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import io.reactivex.subjects.SingleSubject
+import javax.inject.Inject
+import kotlin.math.ceil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-import kotlin.math.ceil
 
 class TopRatedMovieUseCaseImpl @Inject constructor(
     private val topRatedMovieListEndPoint: TopRatedMovieListEndPoint,
@@ -75,7 +75,6 @@ class TopRatedMovieUseCaseImpl @Inject constructor(
                                 FetchResult.Failure
                             )
                         }
-
                     }
                 }
             })

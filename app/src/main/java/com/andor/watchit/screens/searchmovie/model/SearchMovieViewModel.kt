@@ -21,7 +21,6 @@ class SearchMovieViewModel @Inject constructor(private val findMovieDataSourceFa
     val initialNetworkStateStream: BehaviorSubject<NetworkState.Initial> =
         BehaviorSubject.create()
 
-
     init {
 
         findMovieDataSourceFactory
@@ -35,7 +34,6 @@ class SearchMovieViewModel @Inject constructor(private val findMovieDataSourceFa
             .flatMap {
                 it.initialNetworkStateStream
             }.subscribe(initialNetworkStateStream)
-
     }
 
     private fun getPageConfig(): PagedList.Config {
