@@ -1,6 +1,5 @@
 package com.andor.watchit.core.di.screen
 
-import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import com.andor.watchit.screens.common.ScreenNavigator
@@ -13,17 +12,15 @@ import dagger.Provides
 class ScreenModule {
 
     @Provides
-    fun provideViewMvcFactory(inflater: LayoutInflater, imageLoader: ImageLoader): ViewMvcFactory {
-        return ViewMvcFactory(inflater, imageLoader)
-    }
+    fun provideViewMvcFactory(inflater: LayoutInflater, imageLoader: ImageLoader) =
+        ViewMvcFactory(inflater, imageLoader)
+
 
     @Provides
-    fun provideLayoutInflater(context: Context): LayoutInflater {
-        return LayoutInflater.from(context)
-    }
+    fun provideLayoutInflater(context: Context): LayoutInflater = LayoutInflater.from(context)
+
 
     @Provides
-    fun provideScreenNavigator(): ScreenNavigator {
-        return ScreenNavigator()
-    }
+    fun provideScreenNavigator() = ScreenNavigator()
+
 }
