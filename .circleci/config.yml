@@ -23,8 +23,8 @@ jobs:
       - run:
           name: Run Tests
           command: ./gradlew lint test
-       - run:
-          name: Run Tests
+      - run:
+          name: Run Lint
           command: ./gradlew ktlint
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: app/build/reports
