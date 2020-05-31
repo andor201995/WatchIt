@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,4 +18,31 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/btm_nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorIcons"
+        android:hapticFeedbackEnabled="true"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+        app:menu="@menu/menu_bottom_main" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/searchFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:isScrollContainer="true"
+        android:src="@drawable/ic_search_24dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:elevation="10dp"
+        app:fabSize="normal"
+        app:layout_anchor="@id/btm_nav_bar"
+        app:layout_anchorGravity="center"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+        app:maxImageSize="35dp"
+        app:rippleColor="@color/colorIcons" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

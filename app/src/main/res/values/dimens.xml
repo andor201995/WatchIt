@@ -6,4 +6,6 @@
     <dimen name="movieDetailPosterHeight">300dp</dimen>
     <dimen name="commonPadding">10dp</dimen>
     <dimen name="commonTextSize">20sp</dimen>
+
+    <dimen name="dp0">0dp</dimen>
 </resources>
