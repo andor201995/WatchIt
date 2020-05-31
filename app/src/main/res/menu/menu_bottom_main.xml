@@ -7,7 +7,7 @@
         android:title="@string/movie"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/topRatedTvListFragment"
+        android:id="@+id/tvListFragment"
         android:icon="@drawable/ic_tv_24dp"
         android:title="@string/tv"
         app:showAsAction="ifRoom" />

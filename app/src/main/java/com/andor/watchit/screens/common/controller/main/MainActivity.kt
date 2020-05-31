@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.andor.watchit.R
@@ -17,9 +18,16 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val navController = NavHostFragment.findNavController(nav_host)
+        val appBarConfiguration = AppBarConfiguration
+            .Builder(
+                R.id.topRatedMovieListFragment,
+                R.id.tvListFragment
+            )
+            .build()
         NavigationUI.setupActionBarWithNavController(
             this,
-            navController
+            navController,
+            appBarConfiguration
         )
         setupBottomNavViewAndFAB(navController)
     }
@@ -38,6 +46,7 @@ class MainActivity : BaseActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.topRatedMovieListFragment -> showBottomNav()
+                R.id.tvListFragment -> showBottomNav()
                 else -> hideBottomNav()
             }
         }
