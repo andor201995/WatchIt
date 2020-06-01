@@ -5,7 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.andor.watchit.R
 import com.andor.watchit.core.inVisible
@@ -17,6 +17,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val navController = NavHostFragment.findNavController(nav_host)
         val appBarConfiguration = AppBarConfiguration
             .Builder(
@@ -24,12 +25,9 @@ class MainActivity : BaseActivity() {
                 R.id.tvListFragment
             )
             .build()
-        NavigationUI.setupActionBarWithNavController(
-            this,
-            navController,
-            appBarConfiguration
-        )
+
         setupBottomNavViewAndFAB(navController)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     private fun setupBottomNavViewAndFAB(navController: NavController) {
