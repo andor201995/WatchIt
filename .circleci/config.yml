@@ -25,7 +25,7 @@ jobs:
           command: ./gradlew assembleDebug --no-daemon
       - run:
           name: Run Tests
-          command: ./gradlew lint test --no-daemon
+          command: ./gradlew testDebug --no-daemon
       - run:
           name: Run Lint
           command: ./gradlew ktlint --no-daemon
