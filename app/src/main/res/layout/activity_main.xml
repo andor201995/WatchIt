@@ -23,6 +23,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/actionBar"
             android:theme="@style/ThemeActionBar"
             app:layout_scrollFlags="scroll|enterAlways" />
 
