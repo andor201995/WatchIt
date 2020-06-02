@@ -66,7 +66,8 @@ class MainActivity : BaseActivity() {
         appBarConfiguration = AppBarConfiguration
             .Builder(
                 R.id.topRatedMovieListFragment,
-                R.id.tvListFragment
+                R.id.tvListFragment,
+                R.id.settingFragment
             )
             .setDrawerLayout(drawer_layout)
             .build()

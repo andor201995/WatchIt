@@ -13,6 +13,11 @@
             android:icon="@drawable/ic_tv_24dp"
             android:title="@string/tv"
             app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/settingFragment"
+            android:icon="@drawable/ic_settings_applications_24dp"
+            android:title="@string/setting"
+            app:showAsAction="ifRoom" />
     </group>
 
 </menu>
