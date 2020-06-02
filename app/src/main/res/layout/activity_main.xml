@@ -19,6 +19,13 @@
             app:defaultNavHost="true"
             app:navGraph="@navigation/nav_graph" />
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:theme="@style/ThemeActionBar"
+            app:layout_scrollFlags="scroll|enterAlways" />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/btm_nav_bar"
             android:layout_width="match_parent"

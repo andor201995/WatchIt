@@ -12,7 +12,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.andor.watchit.R
 import com.andor.watchit.core.inVisible
@@ -26,6 +25,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setSupportActionBar(toolbar)
         setupNavigation()
     }
 
@@ -62,6 +62,7 @@ class MainActivity : BaseActivity() {
 
     private fun setupNavigation() {
         val navController = NavHostFragment.findNavController(nav_host)
+
         appBarConfiguration = AppBarConfiguration
             .Builder(
                 R.id.topRatedMovieListFragment,
@@ -70,9 +71,10 @@ class MainActivity : BaseActivity() {
             .setDrawerLayout(drawer_layout)
             .build()
 
-        setupBottomNavViewAndFAB(navController)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
         NavigationUI.setupWithNavController(navigationView, navController)
+
+        setupBottomNavViewAndFAB(navController)
     }
 
     private fun setupBottomNavViewAndFAB(navController: NavController) {
