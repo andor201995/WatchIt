@@ -1,25 +1,20 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/textColor</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
-        <!--Translucent action bar setup -->
-        <item name="android:actionBarStyle">@style/ThemeActionBar</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <!-- Support library compatibility -->
-        <item name="actionBarStyle">@style/ThemeActionBar</item>
-        <item name="windowActionBarOverlay">true</item>
-
         <item name="android:windowBackground">@color/applicationBackground</item>
         <item name="android:colorBackground">@color/applicationBackground</item>
     </style>
 
-    <style name="ThemeActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid">
-        <item name="android:background">@color/actionBar</item>
-        <!-- Support library compatibility -->
-        <item name="background">@color/actionBar</item>
+    <style name="ThemeActionBar" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="titleTextColor">@android:color/white</item>
     </style>
 
+    <style name="ThemeNavDrawer">
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="itemTextColor">@android:color/white</item>
+    </style>
 </resources>

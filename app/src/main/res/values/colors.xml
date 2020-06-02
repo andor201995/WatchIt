@@ -5,8 +5,10 @@
     <color name="colorAccent">#2A9A9E</color>
     <color name="applicationBackground">#33333F</color>
     <color name="movieTitleBackground">#7C160101</color>
-    <color name="actionBar">#00000000</color>
+    <color name="actionBar">#591C1A1A</color>
     <color name="textColor">#FFAF3D</color>
     <color name="headTextColor">#00FFC4</color>
-    <color name="colorIcons">#C65B6339</color>
+    <color name="colorIcons">#C6686868</color>
+    <color name="menu_welcome_bg">#56738A</color>
+    <color name="white">#FFFFFF</color>
 </resources>
