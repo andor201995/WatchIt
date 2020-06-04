@@ -1,20 +1,7 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/textColor</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/applicationBackground</item>
-        <item name="android:colorBackground">@color/applicationBackground</item>
-    </style>
-
-    <style name="ThemeActionBar" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:textColorSecondary">@android:color/white</item>
-        <item name="titleTextColor">@android:color/white</item>
-    </style>
-
-    <style name="ThemeNavDrawer">
-        <item name="android:textColorSecondary">@android:color/white</item>
-        <item name="itemTextColor">@android:color/white</item>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorAccent">@color/primaryColor</item>
+        <item name="colorPrimary">@color/primaryColor</item>
     </style>
 </resources>

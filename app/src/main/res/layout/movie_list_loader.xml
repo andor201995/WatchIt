@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?android:attr/actionBarSize"
         android:orientation="vertical"
-        app:shimmer_recycler_base_color="@color/colorPrimary"
+        app:shimmer_recycler_base_color="@color/shimmerColor"
         app:shimmer_recycler_colored="true"
         app:shimmer_recycler_highlight_color="@color/headTextColor"
         app:shimmer_recycler_item_count="5"

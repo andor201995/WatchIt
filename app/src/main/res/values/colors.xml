@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#2C2C44</color>
-    <color name="colorAccent">#2A9A9E</color>
-    <color name="applicationBackground">#33333F</color>
-    <color name="movieTitleBackground">#7C160101</color>
-    <color name="actionBar">#591C1A1A</color>
+    <!--  region theme colors  -->
+    <color name="primaryColor">#212121</color>
+    <color name="primaryLightColor">#484848</color>
+    <color name="primaryDarkColor">#000000</color>
+    <color name="secondaryColor">#01579b</color>
+    <color name="secondaryLightColor">#4f83cc</color>
+    <color name="secondaryDarkColor">#002f6c</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#ffffff</color>
+    <color name="accentColor">#ffffff</color>
+    <!--  endregion theme colors  -->
     <color name="textColor">#FFAF3D</color>
     <color name="headTextColor">#00FFC4</color>
-    <color name="colorIcons">#C6686868</color>
-    <color name="menu_welcome_bg">#56738A</color>
+
+
+    <!--  region bg color  -->
+    <color name="movieTitleBackground">#7C160101</color>
+    <color name="ic_launcher_watch_it_background">#A6001B</color>
+    <!--  endregion bg color  -->
+
+    <!--  region general colors  -->
     <color name="white">#FFFFFF</color>
+    <color name="red">#E24539</color>
+    <color name="shimmerColor">#36F4DE</color>
+    <!--  endregion general colors  -->
+
 </resources>

@@ -23,8 +23,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            android:background="@color/actionBar"
-            android:theme="@style/ThemeActionBar"
+            android:theme="@style/AppTheme"
             app:layout_scrollFlags="scroll|enterAlways" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -32,7 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/colorIcons"
             android:hapticFeedbackEnabled="true"
             app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
             app:menu="@menu/menu_bottom_main" />
@@ -45,15 +43,13 @@
             android:focusable="true"
             android:isScrollContainer="true"
             android:src="@drawable/ic_search_24dp"
-            app:backgroundTint="@color/colorPrimary"
             app:elevation="10dp"
             app:fabSize="normal"
             app:labelVisibilityMode="labeled"
             app:layout_anchor="@id/btm_nav_bar"
             app:layout_anchorGravity="center"
             app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
-            app:maxImageSize="35dp"
-            app:rippleColor="@color/colorIcons" />
+            app:maxImageSize="35dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -62,7 +58,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeNavDrawer"
         app:headerLayout="@layout/header_layout"
         app:menu="@menu/drawer_menu" />
 

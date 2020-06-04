@@ -18,6 +18,7 @@ android {
         versionCode Releases.versionCode
         versionName Releases.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -26,6 +27,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
+            minifyEnabled false
             resValue("string", "PORT_NUMBER", "8081")
         }
     }
@@ -84,6 +86,8 @@ dependencies {
 
     implementation Libraries.coroutine_android
     implementation Libraries.coroutine_core
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     testImplementation TestLibraries.junit
     testImplementation TestLibraries.junit_ext

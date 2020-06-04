@@ -1,6 +1,8 @@
 package com.andor.watchit.core
 
 import android.app.Application
+import android.content.Context
+import androidx.multidex.MultiDex
 import com.andor.watchit.core.di.activity.ActivityInjector
 import com.andor.watchit.core.di.application.DaggerApplicationComponent
 import javax.inject.Inject
@@ -18,5 +20,10 @@ class MainApplication : Application() {
 
     fun getActivityInjector(): ActivityInjector {
         return injector
+    }
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 }
