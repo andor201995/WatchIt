@@ -21,9 +21,9 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
+            style="@style/AppActionBarStyle"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            android:theme="@style/AppTheme"
             app:layout_scrollFlags="scroll|enterAlways" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -4,16 +4,15 @@
     <color name="accentColor">#FAC936</color>
 
     <color name="primaryColor">#FFBA6F</color>
-    <color name="primaryColorDark">#D94F8CF4</color>
-    <color name="primaryTextColor">#000000</color>
+    <color name="primaryColorDark">#D90E1633</color>
+    <color name="primaryTextColor">#FFFFFF</color>
 
     <color name="secondaryColor">#EAF463</color>
-    <color name="secondaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#FFFFFF</color>
 
-    <color name="windowBackGroundColor">#FFFFFF</color>
-    <color name="surfaceColor">#D94F8CF4</color>
+    <color name="windowBackGroundColor">#000000</color>
+    <color name="surfaceColor">#D90E1633</color>
     <!--  endregion theme colors  -->
-
 
     <!--  region bg color  -->
     <color name="movieTitleBackground">#7C160101</color>
@@ -21,10 +20,10 @@
     <!--  endregion bg color  -->
 
     <!--  region UI theme dependent  -->
-    <color name="shimmerColor">#118578</color>
-    <color name="textColor">#5C3805</color>
-    <color name="headTextColor">#31685C</color>
-    <color name="actionBarColor">#4DFFFFFF</color>
+    <color name="shimmerColor">#36F4DE</color>
+    <color name="textColor">#FFAF3D</color>
+    <color name="headTextColor">#00FFC4</color>
+    <color name="actionBarColor">#4D000000</color>
     <!--  endregion UI theme dependent  -->
 
     <!--  region general colors  -->
