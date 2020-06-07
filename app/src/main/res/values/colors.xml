@@ -25,6 +25,7 @@
     <color name="textColor">#5C3805</color>
     <color name="headTextColor">#31685C</color>
     <color name="actionBarColor">#4DFFFFFF</color>
+    <color name="navBarColor">#D94073CA</color>
     <!--  endregion UI theme dependent  -->
 
     <!--  region general colors  -->

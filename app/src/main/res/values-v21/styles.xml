@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -12,11 +13,7 @@
 
         <item name="android:windowBackground">@color/windowBackGroundColor</item>
         <item name="colorSurface">@color/surfaceColor</item>
-    </style>
 
-    <style name="AppActionBarStyle" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="android:background">@color/actionBarColor</item>
-        <item name="titleTextColor">@color/primaryTextColor</item>
+        <item name="android:navigationBarColor">@color/navBarColor</item>
     </style>
-
 </resources>
