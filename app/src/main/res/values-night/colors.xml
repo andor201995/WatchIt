@@ -12,25 +12,15 @@
 
     <color name="windowBackGroundColor">#000000</color>
     <color name="surfaceColor">#D90E1633</color>
-    <!--  endregion theme colors  -->
 
-    <!--  region bg color  -->
-    <color name="movieTitleBackground">#7C160101</color>
-    <color name="ic_launcher_watch_it_background">#A6001B</color>
-    <!--  endregion bg color  -->
+    <color name="actionBarColor">#4D000000</color>
+    <color name="navBarColor">#D9021147</color>
+    <!--  endregion theme colors  -->
 
     <!--  region UI theme dependent  -->
     <color name="shimmerColor">#36F4DE</color>
     <color name="textColor">#FFAF3D</color>
     <color name="headTextColor">#00FFC4</color>
-    <color name="actionBarColor">#4D000000</color>
-    <color name="navBarColor">#D9021147</color>
     <!--  endregion UI theme dependent  -->
-
-    <!--  region general colors  -->
-    <color name="white">#FFFFFF</color>
-    <color name="red">#E24539</color>
-    <color name="transparent">#00000000</color>
-    <!--  endregion general colors  -->
 
 </resources>

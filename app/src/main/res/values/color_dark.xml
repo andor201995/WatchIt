@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  region theme colors  -->
+    <color name="accentColor_dark">#FAC936</color>
+
+    <color name="primaryColor_dark">#FFBA6F</color>
+    <color name="primaryColorDark_dark">#D90E1633</color>
+    <color name="primaryTextColor_dark">#FFFFFF</color>
+
+    <color name="secondaryColor_dark">#EAF463</color>
+    <color name="secondaryTextColor_dark">#FFFFFF</color>
+
+    <color name="windowBackGroundColor_dark">#000000</color>
+    <color name="surfaceColor_dark">#D90E1633</color>
+
+    <color name="actionBarColor_dark">#4D000000</color>
+    <color name="navBarColor_dark">#D9021147</color>
+    <!--  endregion theme colors  -->
+
+    <!--  region UI theme dependent  -->
+    <color name="shimmerColor_dark">#36F4DE</color>
+    <color name="textColor_dark">#FFAF3D</color>
+    <color name="headTextColor_dark">#00FFC4</color>
+    <!--  endregion UI theme dependent  -->
+</resources>

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="AppTheme.Default" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorAccent">@color/primaryColor</item>
 
         <item name="colorPrimary">@color/primaryColor</item>
@@ -13,6 +13,12 @@
         <item name="android:windowBackground">@color/windowBackGroundColor</item>
         <item name="colorSurface">@color/surfaceColor</item>
         <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/navBarColor</item>
+
+        <!--  region Theme dependent attr  -->
+        <item name="app_color_shimmer">@color/shimmerColor</item>
+        <item name="app_color_text">@color/textColor</item>
+        <item name="app_color_headText">@color/headTextColor</item>
+        <!--  endregion Theme dependent attr  -->
     </style>
 
     <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">

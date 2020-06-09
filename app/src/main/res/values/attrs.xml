@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="app_color_shimmer" format="color" />
+    <attr name="app_color_text" format="color" />
+    <attr name="app_color_headText" format="color" />
+</resources>
