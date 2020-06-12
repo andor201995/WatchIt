@@ -81,6 +81,6 @@
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.andor.watchit.screens.settings.SettingFragment"
-        android:label="setting_fragment"
+        android:label=" "
         tools:layout="@layout/setting_fragment" />
 </navigation>

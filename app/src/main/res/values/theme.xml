@@ -21,6 +21,8 @@
         <item name="app_color_shimmer">@color/shimmerColor_light</item>
         <item name="app_color_text">@color/textColor_light</item>
         <item name="app_color_headText">@color/headTextColor_light</item>
+        <item name="app_color_movieTitleBackground">@color/movieTitleBackground_light</item>
+        <item name="app_color_actionbar">@color/actionBarColor_light</item>
         <!--  endregion Theme dependent attr  -->
     </style>
 
@@ -44,6 +46,8 @@
         <item name="app_color_shimmer">@color/shimmerColor_dark</item>
         <item name="app_color_text">@color/textColor_dark</item>
         <item name="app_color_headText">@color/headTextColor_dark</item>
+        <item name="app_color_movieTitleBackground">@color/movieTitleBackground_dark</item>
+        <item name="app_color_actionbar">@color/actionBarColor_dark</item>
         <!--  endregion Theme dependent attr  -->
     </style>
 

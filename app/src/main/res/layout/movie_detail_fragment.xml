@@ -33,7 +33,7 @@
                 android:id="@+id/movieDetailMovieTitleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/movieTitleBackground"
+                android:background="?app_color_movieTitleBackground"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="center_vertical"
                 android:padding="@dimen/commonPadding"

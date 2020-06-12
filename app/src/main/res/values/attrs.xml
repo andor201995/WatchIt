@@ -3,4 +3,6 @@
     <attr name="app_color_shimmer" format="color" />
     <attr name="app_color_text" format="color" />
     <attr name="app_color_headText" format="color" />
+    <attr name="app_color_movieTitleBackground" format="color" />
+    <attr name="app_color_actionbar" format="color" />
 </resources>

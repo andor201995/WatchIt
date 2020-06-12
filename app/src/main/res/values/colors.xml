@@ -18,7 +18,6 @@
     <!--  endregion theme colors  -->
 
     <!--  region common color  -->
-    <color name="movieTitleBackground">#7C160101</color>
     <color name="ic_launcher_watch_it_background">#A6001B</color>
     <!--  endregion common color  -->
 
@@ -26,6 +25,7 @@
     <color name="shimmerColor">#118578</color>
     <color name="textColor">#5C3805</color>
     <color name="headTextColor">#31685C</color>
+    <color name="movieTitleBackground">#7C160101</color>
     <!--  endregion UI theme dependent  -->
 
     <!--  region general colors  -->

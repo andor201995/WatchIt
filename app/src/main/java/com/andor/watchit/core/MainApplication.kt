@@ -9,6 +9,8 @@ import javax.inject.Inject
 
 class MainApplication : Application() {
 
+    var themeInt: Int = ThemeUtils.THEME_MATERIAL_DEFAULT
+
     @Inject
     lateinit var injector: ActivityInjector
 

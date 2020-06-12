@@ -21,6 +21,7 @@
     <color name="shimmerColor_light">#118578</color>
     <color name="textColor_light">#5C3805</color>
     <color name="headTextColor_light">#31685C</color>
+    <color name="movieTitleBackground_light">#7C160101</color>
     <!--  endregion UI theme dependent  -->
 
 </resources>

@@ -21,5 +21,6 @@
     <color name="shimmerColor_dark">#36F4DE</color>
     <color name="textColor_dark">#FFAF3D</color>
     <color name="headTextColor_dark">#00FFC4</color>
+    <color name="movieTitleBackground_dark">#7CC5C5C5</color>
     <!--  endregion UI theme dependent  -->
 </resources>

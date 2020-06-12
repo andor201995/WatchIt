@@ -18,15 +18,17 @@
         <item name="app_color_shimmer">@color/shimmerColor</item>
         <item name="app_color_text">@color/textColor</item>
         <item name="app_color_headText">@color/headTextColor</item>
+        <item name="app_color_movieTitleBackground">@color/movieTitleBackground</item>
+        <item name="app_color_actionbar">@color/actionBarColor</item>
         <!--  endregion Theme dependent attr  -->
     </style>
 
     <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/actionBarColor</item>
+        <item name="android:background">?app_color_actionbar</item>
         <item name="android:titleTextStyle">@style/MyActionBar.TitleTextStyle</item>
 
         <!-- Support library compatibility -->
-        <item name="background">@color/actionBarColor</item>
+        <item name="background">?app_color_actionbar</item>
         <item name="titleTextStyle">@style/MyActionBar.TitleTextStyle</item>
     </style>
 
