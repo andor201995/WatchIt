@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorAccent">@color/accentColor_light</item>
+
+        <item name="colorPrimary">@color/primaryColor_light</item>
+        <item name="colorPrimaryDark">@color/primaryColorDark_light</item>
+        <item name="android:textColorPrimary">@color/primaryTextColor_light</item>
+
+        <item name="colorSecondary">@color/secondaryColor_light</item>
+        <item name="android:textColorSecondary">@color/secondaryTextColor_light</item>
+
+        <item name="android:windowBackground">@color/windowBackGroundColor_light</item>
+        <item name="colorSurface">@color/surfaceColor_light</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">
+            @color/navBarColor_light
+        </item>
+
+        <!--  region Theme dependent attr  -->
+        <item name="app_color_shimmer">@color/shimmerColor_light</item>
+        <item name="app_color_text">@color/textColor_light</item>
+        <item name="app_color_headText">@color/headTextColor_light</item>
+        <item name="app_color_movieTitleBackground">@color/movieTitleBackground_light</item>
+        <item name="app_color_actionbar">@color/actionBarColor_light</item>
+        <!--  endregion Theme dependent attr  -->
+    </style>
+
+    <style name="AppTheme.Dark" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorAccent">@color/accentColor_dark</item>
+
+        <item name="colorPrimary">@color/primaryColor_dark</item>
+        <item name="colorPrimaryDark">@color/primaryColorDark_dark</item>
+        <item name="android:textColorPrimary">@color/primaryTextColor_dark</item>
+
+        <item name="colorSecondary">@color/secondaryColor_dark</item>
+        <item name="android:textColorSecondary">@color/secondaryTextColor_dark</item>
+
+        <item name="android:windowBackground">@color/windowBackGroundColor_dark</item>
+        <item name="colorSurface">@color/surfaceColor_dark</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">
+            @color/navBarColor_dark
+        </item>
+
+        <!--  region Theme dependent attr  -->
+        <item name="app_color_shimmer">@color/shimmerColor_dark</item>
+        <item name="app_color_text">@color/textColor_dark</item>
+        <item name="app_color_headText">@color/headTextColor_dark</item>
+        <item name="app_color_movieTitleBackground">@color/movieTitleBackground_dark</item>
+        <item name="app_color_actionbar">@color/actionBarColor_dark</item>
+        <!--  endregion Theme dependent attr  -->
+    </style>
+
+</resources>

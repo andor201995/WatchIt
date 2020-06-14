@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/errorSwipeRefresh"
     android:layout_width="match_parent"
-    android:background="@color/ic_launcher_watch_it_background"
+    android:background="@color/red"
     android:layout_height="match_parent"
     tools:context=".screens.networkerror.controller.NetworkErrorFragment">
 
@@ -31,7 +31,7 @@
             android:fontFamily="@string/movie_detail_heading_font"
             android:gravity="center"
             android:text="@string/networkErrorText"
-            android:textColor="@color/textColor"
+            android:textColor="?app_color_text"
             android:textSize="@dimen/commonTextSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

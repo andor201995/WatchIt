@@ -11,7 +11,7 @@
         android:fontFamily="@string/movie_detail_heading_font"
         android:gravity="center"
         android:text="@string/series_list_coming_soon"
-        android:textColor="@color/textColor"
+        android:textColor="?app_color_text"
         android:textSize="20sp" />
 
 </FrameLayout>

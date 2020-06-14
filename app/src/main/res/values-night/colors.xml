@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  region theme colors  -->
+    <color name="accentColor">#FAC936</color>
+
+    <color name="primaryColor">#FFBA6F</color>
+    <color name="primaryColorDark">#D90E1633</color>
+    <color name="primaryTextColor">#FFFFFF</color>
+
+    <color name="secondaryColor">#EAF463</color>
+    <color name="secondaryTextColor">#FFFFFF</color>
+
+    <color name="windowBackGroundColor">#000000</color>
+    <color name="surfaceColor">#D90E1633</color>
+
+    <color name="actionBarColor">#4D000000</color>
+    <color name="navBarColor">#D9021147</color>
+    <!--  endregion theme colors  -->
+
+    <!--  region UI theme dependent  -->
+    <color name="shimmerColor">#36F4DE</color>
+    <color name="textColor">#FFAF3D</color>
+    <color name="headTextColor">#00FFC4</color>
+    <color name="movieTitleBackground">#7CC5C5C5</color>
+    <!--  endregion UI theme dependent  -->
+
+</resources>

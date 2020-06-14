@@ -62,11 +62,11 @@ class MovieDetailViewMvcImpl(
 
         ratingTextView.appendTextWithColor(
             " ${movieDetail.movieRating}",
-            getColor(R.color.textColor)
+            getAttrColor(R.attr.app_color_text)
         )
         releaseDateTextView.appendTextWithColor(
             " ${movieDetail.releaseDate}",
-            getColor(R.color.textColor)
+            getAttrColor(R.attr.app_color_text)
         )
     }
 }

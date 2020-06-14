@@ -1,20 +1,38 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/textColor</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/applicationBackground</item>
-        <item name="android:colorBackground">@color/applicationBackground</item>
+    <style name="AppTheme.Default" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorAccent">@color/primaryColor</item>
+
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryColorDark</item>
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
+
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="android:textColorSecondary">@color/secondaryTextColor</item>
+
+        <item name="android:windowBackground">@color/windowBackGroundColor</item>
+        <item name="colorSurface">@color/surfaceColor</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/navBarColor</item>
+
+        <!--  region Theme dependent attr  -->
+        <item name="app_color_shimmer">@color/shimmerColor</item>
+        <item name="app_color_text">@color/textColor</item>
+        <item name="app_color_headText">@color/headTextColor</item>
+        <item name="app_color_movieTitleBackground">@color/movieTitleBackground</item>
+        <item name="app_color_actionbar">@color/actionBarColor</item>
+        <!--  endregion Theme dependent attr  -->
     </style>
 
-    <style name="ThemeActionBar" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:textColorSecondary">@android:color/white</item>
-        <item name="titleTextColor">@android:color/white</item>
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">?app_color_actionbar</item>
+        <item name="android:titleTextStyle">@style/MyActionBar.TitleTextStyle</item>
+
+        <!-- Support library compatibility -->
+        <item name="background">?app_color_actionbar</item>
+        <item name="titleTextStyle">@style/MyActionBar.TitleTextStyle</item>
     </style>
 
-    <style name="ThemeNavDrawer">
-        <item name="android:textColorSecondary">@android:color/white</item>
-        <item name="itemTextColor">@android:color/white</item>
+    <style name="MyActionBar.TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 </resources>

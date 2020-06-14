@@ -1,7 +1,12 @@
 package com.andor.watchit.screens.common.mvc
 
 import android.content.Context
+import android.util.TypedValue
 import android.view.View
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorRes
+import androidx.annotation.IntegerRes
+import androidx.core.content.ContextCompat
 
 open class BaseViewMvc : ViewMvc {
 
@@ -26,11 +31,18 @@ open class BaseViewMvc : ViewMvc {
         return context.resources.getString(id)
     }
 
-    protected fun getInteger(id: Int): Int {
+    protected fun getInteger(@IntegerRes id: Int): Int {
         return context.resources.getInteger(id)
     }
 
-    protected fun getColor(id: Int): Int {
-        return context.resources.getInteger(id)
+    protected fun getColor(@ColorRes id: Int): Int {
+        return ContextCompat.getColor(context, id)
+    }
+
+    protected fun getAttrColor(@AttrRes id: Int): Int {
+        val typedValue = TypedValue()
+        val theme = context.theme
+        theme.resolveAttribute(id, typedValue, true)
+        return typedValue.data
     }
 }

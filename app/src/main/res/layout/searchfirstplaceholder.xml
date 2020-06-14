@@ -20,6 +20,6 @@
         android:layout_centerInParent="true"
         android:fontFamily="@string/movie_detail_heading_font"
         android:text="@string/search_firstplaceholder"
-        android:textColor="@color/headTextColor"
+        android:textColor="?app_color_headText"
         android:textSize="20sp" />
 </RelativeLayout>

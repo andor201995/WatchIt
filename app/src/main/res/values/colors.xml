@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#2C2C44</color>
-    <color name="colorAccent">#2A9A9E</color>
-    <color name="applicationBackground">#33333F</color>
+    <!--  region theme colors  -->
+    <color name="accentColor">#FAC936</color>
+
+    <color name="primaryColor">#FFBA6F</color>
+    <color name="primaryColorDark">#D94F8CF4</color>
+    <color name="primaryTextColor">#000000</color>
+
+    <color name="secondaryColor">#EAF463</color>
+    <color name="secondaryTextColor">#000000</color>
+
+    <color name="windowBackGroundColor">#FFFFFF</color>
+    <color name="surfaceColor">#D94F8CF4</color>
+
+    <color name="actionBarColor">#4DFFFFFF</color>
+    <color name="navBarColor">#D94073CA</color>
+    <!--  endregion theme colors  -->
+
+    <!--  region common color  -->
+    <color name="ic_launcher_watch_it_background">#A6001B</color>
+    <!--  endregion common color  -->
+
+    <!--  region UI theme dependent  -->
+    <color name="shimmerColor">#118578</color>
+    <color name="textColor">#5C3805</color>
+    <color name="headTextColor">#31685C</color>
     <color name="movieTitleBackground">#7C160101</color>
-    <color name="actionBar">#591C1A1A</color>
-    <color name="textColor">#FFAF3D</color>
-    <color name="headTextColor">#00FFC4</color>
-    <color name="colorIcons">#C6686868</color>
-    <color name="menu_welcome_bg">#56738A</color>
+    <!--  endregion UI theme dependent  -->
+
+    <!--  region general colors  -->
     <color name="white">#FFFFFF</color>
+    <color name="red">#E24539</color>
+    <color name="transparent">#00000000</color>
+    <!--  endregion general colors  -->
+
 </resources>

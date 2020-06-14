@@ -33,7 +33,7 @@
                 android:id="@+id/movieDetailMovieTitleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/movieTitleBackground"
+                android:background="?app_color_movieTitleBackground"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="center_vertical"
                 android:padding="@dimen/commonPadding"
@@ -65,7 +65,7 @@
                 android:paddingEnd="@dimen/commonPadding"
                 android:paddingRight="@dimen/commonPadding"
                 android:text="@string/overview"
-                android:textColor="@color/headTextColor"
+                android:textColor="?app_color_headText"
                 android:textSize="@dimen/commonTextSize" />
 
             <TextView
@@ -81,7 +81,7 @@
                 android:paddingEnd="@dimen/commonPadding"
                 android:paddingRight="@dimen/commonPadding"
                 android:paddingBottom="@dimen/commonPadding"
-                android:textColor="@color/textColor"
+                android:textColor="?app_color_text"
                 android:textSize="@dimen/commonTextSize" />
 
             <TextView
@@ -92,7 +92,7 @@
                 android:gravity="center_vertical"
                 android:padding="@dimen/commonPadding"
                 android:text="@string/movie_rating"
-                android:textColor="@color/headTextColor"
+                android:textColor="?app_color_headText"
                 android:textSize="@dimen/commonTextSize" />
 
             <TextView
@@ -103,7 +103,7 @@
                 android:gravity="center_vertical"
                 android:padding="@dimen/commonPadding"
                 android:text="@string/release_data"
-                android:textColor="@color/headTextColor"
+                android:textColor="?app_color_headText"
                 android:textSize="@dimen/commonTextSize" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

@@ -18,7 +18,11 @@
     <string name="search">Search</string>
     <string name="welcome_guest">Welcome, Guest</string>
     <string name="series_list_coming_soon">Series list coming soon</string>
-    <string name="setting_page_coming_soon">Setting\'s page coming soon</string>
     <string name="setting">setting</string>
+    <string name="select_theme">Select Theme</string>
+    <string name="default_theme">Default</string>
+    <string name="light_theme">Light</string>
+    <string name="dark_theme">Dark</string>
+    <string name="submit_theme">submit</string>
     <!-- endregion UI -->
 </resources>
