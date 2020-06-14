@@ -19,7 +19,7 @@
 
     <!--  region common color  -->
     <color name="ic_launcher_watch_it_background">#A6001B</color>
-    <color name="splashScreenColor">#7E3535</color>
+    <color name="splashScreenColor">#A6001B</color>
     <!--  endregion common color  -->
 
     <!--  region UI theme dependent  -->
