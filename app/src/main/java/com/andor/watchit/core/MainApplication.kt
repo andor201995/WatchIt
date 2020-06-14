@@ -3,13 +3,28 @@ package com.andor.watchit.core
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
+import com.andor.watchit.core.ThemeUtils.THEME_KEY
+import com.andor.watchit.core.ThemeUtils.THEME_MATERIAL_DEFAULT
+import com.andor.watchit.core.ThemeUtils.THEME_SHARED_PREF_KEY
 import com.andor.watchit.core.di.activity.ActivityInjector
 import com.andor.watchit.core.di.application.DaggerApplicationComponent
 import javax.inject.Inject
 
 class MainApplication : Application() {
 
-    var themeInt: Int = ThemeUtils.THEME_MATERIAL_DEFAULT
+    var themeInt: Int
+        get() {
+            return getSharedPreferences(THEME_SHARED_PREF_KEY, Context.MODE_PRIVATE)?.getInt(
+                THEME_KEY,
+                THEME_MATERIAL_DEFAULT
+            ) ?: THEME_MATERIAL_DEFAULT
+        }
+        set(value) {
+            getSharedPreferences(THEME_SHARED_PREF_KEY, Context.MODE_PRIVATE)?.edit()?.putInt(
+                THEME_KEY,
+                value
+            )?.apply()
+        }
 
     @Inject
     lateinit var injector: ActivityInjector

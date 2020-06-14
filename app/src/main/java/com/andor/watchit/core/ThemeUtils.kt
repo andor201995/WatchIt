@@ -1,31 +1,28 @@
 package com.andor.watchit.core
 
 import android.app.Activity
-import android.content.Intent
 import com.andor.watchit.R
 
 object ThemeUtils {
-    private var sTheme = 0
 
+    const val THEME_SHARED_PREF_KEY = "theme_pref"
+    const val THEME_KEY = "theme_key"
     const val THEME_MATERIAL_DEFAULT = 0
     const val THEME_YOUR_CUSTOM_LIGHT = 1
     const val THEME_YOUR_CUSTOM_DARK = 2
 
     fun changeToTheme(activity: Activity, theme: Int) {
-        sTheme = theme
-        activity.finish()
-        activity.startActivity(Intent(activity, activity.javaClass))
-        activity.overridePendingTransition(
-            R.anim.nav_default_enter_anim,
-            R.anim.nav_default_exit_anim
-        )
+        (activity.application as MainApplication).themeInt = theme
+        activity.recreate()
     }
 
     fun onActivityCreateSetTheme(activity: Activity) {
-        when (sTheme) {
-            THEME_MATERIAL_DEFAULT -> activity.setTheme(R.style.AppTheme_Default)
-            THEME_YOUR_CUSTOM_LIGHT -> activity.setTheme(R.style.AppTheme_Light)
-            THEME_YOUR_CUSTOM_DARK -> activity.setTheme(R.style.AppTheme_Dark)
+        activity.apply {
+            when ((application as MainApplication).themeInt) {
+                THEME_MATERIAL_DEFAULT -> theme.applyStyle(R.style.AppTheme_Default, true)
+                THEME_YOUR_CUSTOM_LIGHT -> theme.applyStyle(R.style.AppTheme_Light, true)
+                THEME_YOUR_CUSTOM_DARK -> theme.applyStyle(R.style.AppTheme_Dark, true)
+            }
         }
     }
 }

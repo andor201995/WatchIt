@@ -86,8 +86,8 @@ dependencies {
 
     implementation Libraries.coroutine_android
     implementation Libraries.coroutine_core
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation Libraries.material_design
+    implementation Libraries.multi_dex
 
     testImplementation TestLibraries.junit
     testImplementation TestLibraries.junit_ext

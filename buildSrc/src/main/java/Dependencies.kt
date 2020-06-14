@@ -13,6 +13,8 @@ object Releases {
 
 object Version {
 
+    const val multi_dex = "2.0.1"
+    const val material = "1.1.0"
     const val database_debug = "1.0.6"
     const val gradle_build = "4.0.0"
     const val compileSdk = 29
@@ -125,6 +127,9 @@ object Libraries {
     const val coroutine_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.coroutine}"
     const val coroutine_android =
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutine}"
+
+    const val material_design = "com.google.android.material:material:${Version.material}"
+    const val multi_dex = "androidx.multidex:multidex:${Version.multi_dex}"
 }
 
 object TestLibraries {
