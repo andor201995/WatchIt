@@ -1,5 +1,7 @@
 package com.andor.watchit.screens.common.controller.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.view.GravityCompat
@@ -20,6 +22,10 @@ import com.andor.watchit.screens.common.controller.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
+
+    companion object {
+        fun getIntent(context: Context) = Intent(context, MainActivity::class.java)
+    }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
