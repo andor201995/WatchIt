@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_watch_it_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Default">
-        <activity android:name="com.andor.watchit.screens.common.controller.main.MainActivity">
+        <activity
+            android:name=".screens.splash.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -20,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".screens.common.controller.main.MainActivity" />
     </application>
 
 </manifest>

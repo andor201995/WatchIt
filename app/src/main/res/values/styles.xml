@@ -35,4 +35,11 @@
     <style name="MyActionBar.TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
+
+    <style name="SplashScreen" parent="AppTheme.Default">
+        <item name="colorPrimaryDark">@color/splashScreenColor</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/splashScreenColor
+        </item>
+    </style>
 </resources>
