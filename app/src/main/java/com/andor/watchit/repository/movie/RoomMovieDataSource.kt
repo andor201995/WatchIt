@@ -1,12 +1,11 @@
-package com.andor.watchit.core.framework
+package com.andor.watchit.repository.movie
 
 import androidx.sqlite.db.SimpleSQLiteQuery
-import com.andor.watchit.core.framework.db.MovieDao
-import com.andor.watchit.core.framework.db.MovieEntity
-import com.andor.watchit.repository.MovieDataSource
+import com.andor.watchit.repository.entity.MovieEntity
 import com.andor.watchit.usecase.common.model.GeneralMovie
 
-class RoomMovieDataSource(private val movieDao: MovieDao) : MovieDataSource {
+class RoomMovieDataSource(private val movieDao: MovieDao) :
+    MovieDataSource {
 
     override suspend fun add(generalMovie: GeneralMovie) =
         movieDao.addMovieEntity(MovieEntity.fromGeneralMovie(generalMovie))
@@ -14,7 +13,8 @@ class RoomMovieDataSource(private val movieDao: MovieDao) : MovieDataSource {
     override suspend fun addAll(generalMovieList: List<GeneralMovie>) =
         movieDao.addAllMovieEntity(generalMovieList.map { MovieEntity.fromGeneralMovie(it) })
 
-    override suspend fun get(movieId: Double) = movieDao.getMovieEntity(movieId)?.toGeneralMovie()
+    override suspend fun get(movieId: Double) = movieDao
+        .getMovieEntity(movieId)?.toGeneralMovie()
 
     override suspend fun getAll(): List<GeneralMovie> =
         movieDao.getAllMovieEntity().map { it.toGeneralMovie() }
@@ -31,7 +31,8 @@ class RoomMovieDataSource(private val movieDao: MovieDao) : MovieDataSource {
         val queryArgs = query.split("+")
 
         val queryString =
-            getQueryString(queryArgs).append("\nORDER BY rating DESC LIMIT 20 OFFSET ($pageNumber-1)*20")
+            getQueryString(queryArgs)
+                .append("\nORDER BY rating DESC LIMIT 20 OFFSET ($pageNumber-1)*20")
 
         val simpleSQLiteQuery = SimpleSQLiteQuery(queryString.toString())
         return movieDao.getMovieEntityByQuery(simpleSQLiteQuery).map { it.toGeneralMovie() }
@@ -40,7 +41,8 @@ class RoomMovieDataSource(private val movieDao: MovieDao) : MovieDataSource {
     override suspend fun getSearchMovieCount(query: String, pageNumber: Int): Int {
         val queryArgs = query.split("+")
         val queryString =
-            getQueryString(queryArgs).insert(0, "SELECT COUNT(movie_id) FROM(\n").append("\n)")
+            getQueryString(queryArgs)
+                .insert(0, "SELECT COUNT(movie_id) FROM(\n").append("\n)")
         val simpleSQLiteQuery = SimpleSQLiteQuery(queryString.toString())
         return movieDao.getSearchMovieCount(simpleSQLiteQuery)
     }

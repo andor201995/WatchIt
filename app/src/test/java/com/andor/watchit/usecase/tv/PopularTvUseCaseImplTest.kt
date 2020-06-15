@@ -4,6 +4,7 @@ import com.andor.watchit.helper.TestData
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.network.common.schema.TvSchema
 import com.andor.watchit.network.tv.PopularTvEndPoint
+import com.andor.watchit.repository.tv.TvRepository
 import com.andor.watchit.usecase.common.model.TvUiModel
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
@@ -28,13 +29,16 @@ class PopularTvUseCaseImplTest {
     @Mock
     private lateinit var mPopularTvEndPointMock: PopularTvEndPoint
     private val testObserver = TestObserver<List<TvUiModel>>()
+
+    @Mock
+    private lateinit var tvRepository: TvRepository
     // end region helper fields --------------------------------------------------------------------
 
     private lateinit var systemUT: PopularTvUseCase
 
     @Before
     fun setup() {
-        systemUT = PopularTvUseCaseImpl(mPopularTvEndPointMock)
+        systemUT = PopularTvUseCaseImpl(mPopularTvEndPointMock, tvRepository)
         // initial state setup
     }
 

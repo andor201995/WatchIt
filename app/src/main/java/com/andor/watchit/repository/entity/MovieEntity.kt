@@ -1,4 +1,4 @@
-package com.andor.watchit.core.framework.db
+package com.andor.watchit.repository.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -22,14 +22,15 @@ data class MovieEntity(
     val movieRating: Double?
 ) {
     companion object {
-        fun fromGeneralMovie(generalMovie: GeneralMovie) = MovieEntity(
-            generalMovie.originalTitle,
-            generalMovie.posterPath,
-            generalMovie.movieId,
-            generalMovie.overView,
-            generalMovie.releaseDate,
-            generalMovie.movieRating
-        )
+        fun fromGeneralMovie(generalMovie: GeneralMovie) =
+            MovieEntity(
+                generalMovie.originalTitle,
+                generalMovie.posterPath,
+                generalMovie.movieId,
+                generalMovie.overView,
+                generalMovie.releaseDate,
+                generalMovie.movieRating
+            )
     }
 
     fun toGeneralMovie() = GeneralMovie(

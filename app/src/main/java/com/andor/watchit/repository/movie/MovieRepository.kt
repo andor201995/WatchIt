@@ -1,4 +1,4 @@
-package com.andor.watchit.repository
+package com.andor.watchit.repository.movie
 
 import com.andor.watchit.usecase.common.model.GeneralMovie
 

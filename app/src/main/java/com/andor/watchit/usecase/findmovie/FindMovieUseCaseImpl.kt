@@ -3,7 +3,7 @@ package com.andor.watchit.usecase.findmovie
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.network.common.schema.TopRatedMovieSchema
 import com.andor.watchit.network.findmovie.FindMovieEndPoint
-import com.andor.watchit.repository.MovieRepository
+import com.andor.watchit.repository.movie.MovieRepository
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.andor.watchit.usecase.findmovie.FindMovieUseCase.FetchResult
 import io.reactivex.subjects.SingleSubject
