@@ -12,7 +12,7 @@ class MovieRepository(private val dataSource: MovieDataSource) {
 
     suspend fun getAllMovies() = dataSource.getAll()
 
-    suspend fun getPagedMovies(pageNumber: Int) = dataSource.getpage(pageNumber)
+    suspend fun getPagedMovies(pageNumber: Int) = dataSource.getPage(pageNumber)
 
     suspend fun removeMovie(generalMovie: GeneralMovie) = dataSource.remove(generalMovie)
 

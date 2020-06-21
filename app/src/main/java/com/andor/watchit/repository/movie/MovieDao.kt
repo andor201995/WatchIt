@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import androidx.room.RawQuery
 import androidx.sqlite.db.SimpleSQLiteQuery
+import com.andor.watchit.repository.entity.MovieDbContract
 import com.andor.watchit.repository.entity.MovieEntity
 
 @Dao
@@ -18,22 +19,22 @@ interface MovieDao {
     @Insert(onConflict = REPLACE)
     suspend fun addAllMovieEntity(movieEntityList: List<MovieEntity>)
 
-    @Query("SELECT * FROM movie WHERE movie_id=:movieId")
+    @Query("SELECT * FROM ${MovieDbContract.TABLE_NAME} WHERE ${MovieDbContract.MOVIE_ID}=:movieId")
     suspend fun getMovieEntity(movieId: Double): MovieEntity?
 
-    @Query("SELECT * FROM movie ORDER BY rating")
+    @Query("SELECT * FROM ${MovieDbContract.TABLE_NAME} ORDER BY ${MovieDbContract.RATING}")
     suspend fun getAllMovieEntity(): List<MovieEntity>
 
     @Query(
-        """SELECT * FROM movie ORDER BY rating DESC 
-        LIMIT :pageSize OFFSET (:pageNumber-1)*:pageSize"""
+        """SELECT * FROM ${MovieDbContract.TABLE_NAME} ORDER BY ${MovieDbContract.RATING} DESC
+                LIMIT :pageSize OFFSET (:pageNumber - 1)*:pageSize"""
     )
     suspend fun getPagedMovie(pageNumber: Int, pageSize: Int): List<MovieEntity>
 
     @Delete
     suspend fun deleteMovie(movieEntity: MovieEntity)
 
-    @Query("SELECT COUNT(movie_id) FROM movie")
+    @Query("SELECT COUNT(${MovieDbContract.MOVIE_ID}) FROM ${MovieDbContract.TABLE_NAME}")
     suspend fun getCount(): Int
 
     @RawQuery

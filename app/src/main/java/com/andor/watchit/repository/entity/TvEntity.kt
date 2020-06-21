@@ -5,20 +5,20 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.andor.watchit.usecase.common.model.TvUiModel
 
-@Entity(tableName = "tv")
+@Entity(tableName = TvDbContract.TABLE_NAME)
 data class TvEntity(
-    @ColumnInfo(name = "original_title")
+    @ColumnInfo(name = TvDbContract.ORIGINAL_TITLE)
     val originalTitle: String?,
-    @ColumnInfo(name = "poster_path")
+    @ColumnInfo(name = TvDbContract.POSTER_PATH)
     val posterPath: String?,
     @PrimaryKey
-    @ColumnInfo(name = "tv_id")
+    @ColumnInfo(name = TvDbContract.TV_ID)
     val tvId: Int,
-    @ColumnInfo(name = "overview")
+    @ColumnInfo(name = TvDbContract.OVERVIEW)
     val overView: String?,
-    @ColumnInfo(name = "first_air_date")
+    @ColumnInfo(name = TvDbContract.FIRST_AIR_DATE)
     val firstAirDate: String?,
-    @ColumnInfo(name = "rating")
+    @ColumnInfo(name = TvDbContract.RATING)
     val rating: Double?
 ) {
     companion object {
@@ -43,4 +43,14 @@ data class TvEntity(
         this.firstAirDate,
         this.rating
     )
+}
+
+object TvDbContract {
+    const val TABLE_NAME = "tv"
+    const val TV_ID = "tv_id"
+    const val RATING = "rating"
+    const val ORIGINAL_TITLE = "original_title"
+    const val OVERVIEW = "overview"
+    const val FIRST_AIR_DATE = "first_air_date"
+    const val POSTER_PATH = "poster_path"
 }

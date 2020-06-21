@@ -5,20 +5,20 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.andor.watchit.usecase.common.model.GeneralMovie
 
-@Entity(tableName = "movie")
+@Entity(tableName = MovieDbContract.TABLE_NAME)
 data class MovieEntity(
-    @ColumnInfo(name = "original_title")
+    @ColumnInfo(name = MovieDbContract.ORIGINAL_TITLE)
     val originalTitle: String?,
-    @ColumnInfo(name = "poster_path")
+    @ColumnInfo(name = MovieDbContract.POSTER_PATH)
     val posterPath: String?,
     @PrimaryKey
-    @ColumnInfo(name = "movie_id")
+    @ColumnInfo(name = MovieDbContract.MOVIE_ID)
     val movieId: Int,
-    @ColumnInfo(name = "overview")
+    @ColumnInfo(name = MovieDbContract.OVERVIEW)
     val overView: String?,
-    @ColumnInfo(name = "release_date")
+    @ColumnInfo(name = MovieDbContract.RELEASE_DATE)
     val releaseDate: String?,
-    @ColumnInfo(name = "rating")
+    @ColumnInfo(name = MovieDbContract.RATING)
     val movieRating: Double?
 ) {
     companion object {
@@ -41,4 +41,14 @@ data class MovieEntity(
         this.releaseDate,
         this.movieRating
     )
+}
+
+object MovieDbContract {
+    const val TABLE_NAME = "movie"
+    const val MOVIE_ID = "movie_id"
+    const val RATING = "rating"
+    const val ORIGINAL_TITLE = "original_title"
+    const val OVERVIEW = "overview"
+    const val RELEASE_DATE = "release_date"
+    const val POSTER_PATH = "poster_path"
 }
