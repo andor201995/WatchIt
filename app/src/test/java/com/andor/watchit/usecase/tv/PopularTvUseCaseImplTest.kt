@@ -1,16 +1,17 @@
 package com.andor.watchit.usecase.tv
 
-import com.andor.watchit.helper.TestData
+import com.andor.watchit.helper.TestData.TV_SERVER_RESPONSE_POPULAR_TV_SCHEMA
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.network.common.schema.TvSchema
 import com.andor.watchit.network.tv.PopularTvEndPoint
 import com.andor.watchit.repository.tv.TvRepository
-import com.andor.watchit.usecase.common.model.TvUiModel
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Single
 import io.reactivex.observers.TestObserver
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import okhttp3.internal.EMPTY_RESPONSE
 import org.junit.Assert
 import org.junit.Before
@@ -28,7 +29,7 @@ class PopularTvUseCaseImplTest {
     // region helper fields ------------------------------------------------------------------------
     @Mock
     private lateinit var mPopularTvEndPointMock: PopularTvEndPoint
-    private val testObserver = TestObserver<List<TvUiModel>>()
+    private val testObserver = TestObserver<PopularTvUseCase.FetchResult>()
 
     @Mock
     private lateinit var tvRepository: TvRepository
@@ -56,36 +57,49 @@ class PopularTvUseCaseImplTest {
     fun getPopularTv_success_returnGeneralTv() {
         // Arrange
         success()
+        val schema = TV_SERVER_RESPONSE_POPULAR_TV_SCHEMA
         // Act
         systemUT.getPopularTv(1).subscribe(testObserver)
         // Assert
         testObserver.assertValueCount(1)
         testObserver.assertValue {
-            it == Converter.convertFrom(TestData.TV_SERVER_RESPONSE_POPULAR_TV_SCHEMA)
+            it == PopularTvUseCase.FetchResult.Success(
+                Converter.convertFrom(schema),
+                schema.page,
+                schema.total_pages,
+                schema.total_results
+            )
         }
     }
 
     @Test
     fun getPopularTv_failure() {
-        // Arrange
-        failure()
-        // Act
-        systemUT.getPopularTv(1).subscribe(testObserver)
-        // Assert
-        Assert.assertEquals(1, testObserver.errorCount())
+        runBlocking {
+            // Arrange
+            whenever(tvRepository.getTvCount()).thenReturn(0)
+            failure()
+            // Act
+            systemUT.getPopularTv(1).subscribe(testObserver)
+            // Assert
+            delay(200)
+            Assert.assertEquals(1, testObserver.valueCount())
+            testObserver.assertValue {
+                it == PopularTvUseCase.FetchResult.Failure
+            }
+        }
     }
 
     // region helper methods -----------------------------------------------------------------------
     private fun success() {
         val successSingle: Single<TvSchema> =
-            Single.just(TestData.TV_SERVER_RESPONSE_POPULAR_TV_SCHEMA)
+            Single.just(TV_SERVER_RESPONSE_POPULAR_TV_SCHEMA)
         whenever(mPopularTvEndPointMock.getPopularMovies(any())).thenReturn(successSingle)
     }
 
     private fun failure() {
-        val successSingle: Single<TvSchema> =
+        val failureSingle: Single<TvSchema> =
             Single.error(HttpException(Response.error<String>(400, EMPTY_RESPONSE)))
-        whenever(mPopularTvEndPointMock.getPopularMovies(any())).thenReturn(successSingle)
+        whenever(mPopularTvEndPointMock.getPopularMovies(any())).thenReturn(failureSingle)
     }
     // endregion helper methods --------------------------------------------------------------------
 

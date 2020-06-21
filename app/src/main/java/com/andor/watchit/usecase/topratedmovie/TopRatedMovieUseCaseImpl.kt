@@ -34,51 +34,57 @@ class TopRatedMovieUseCaseImpl @Inject constructor(
     override fun fetchTopRatedMovieAndNotify(pageNumber: Int): SingleSubject<FetchResult> {
         val topRatedMovieFetchEvent: SingleSubject<FetchResult> = SingleSubject.create()
         topRatedMovieListEndPoint.onFetchTopRatedMovieListAndNotify(pageNumber,
-            object : TopRatedMovieListEndPoint.Listener {
-                override fun onFetchSuccess(topRatedMovieSchema: TopRatedMovieSchema) {
-
-                    val generalMovies = Converter.convertFrom(
-                        topRatedMovieSchema
-                    )
-
-                    coroutineScope.launch {
-                        repository.addAllMovie(generalMovies)
-                    }
-
-                    topRatedMovieFetchEvent.onSuccess(
-                        FetchResult.Success(
-                            generalMovies,
-                            topRatedMovieSchema.page,
-                            topRatedMovieSchema.total_pages,
-                            topRatedMovieSchema.total_results
-                        )
-                    )
-                }
-
-                override fun onFetchFailed() {
-
-                    coroutineScope.launch {
-                        val cachedMovies = repository.getPagedMovies(pageNumber)
-                        val cacheMovieCount = repository.getMovieCount()
-
-                        if (cacheMovieCount > 0) {
-                            topRatedMovieFetchEvent.onSuccess(
-                                FetchResult.Success(
-                                    cachedMovies,
-                                    pageNumber,
-                                    ceil(cacheMovieCount / 20f).toInt(),
-                                    cacheMovieCount
-                                )
-                            )
-                        } else {
-                            topRatedMovieFetchEvent.onSuccess(
-                                FetchResult.Failure
-                            )
-                        }
-                    }
-                }
-            })
+            getFetchListener(topRatedMovieFetchEvent, pageNumber)
+        )
 
         return topRatedMovieFetchEvent
+    }
+
+    private fun getFetchListener(
+        topRatedMovieFetchEvent: SingleSubject<FetchResult>,
+        pageNumber: Int
+    ): TopRatedMovieListEndPoint.Listener = object : TopRatedMovieListEndPoint.Listener {
+        override fun onFetchSuccess(topRatedMovieSchema: TopRatedMovieSchema) {
+
+            val generalMovies = Converter.convertFrom(
+                topRatedMovieSchema
+            )
+
+            coroutineScope.launch {
+                repository.addAllMovie(generalMovies)
+            }
+
+            topRatedMovieFetchEvent.onSuccess(
+                FetchResult.Success(
+                    generalMovies,
+                    topRatedMovieSchema.page,
+                    topRatedMovieSchema.total_pages,
+                    topRatedMovieSchema.total_results
+                )
+            )
+        }
+
+        override fun onFetchFailed() {
+
+            coroutineScope.launch {
+                val cachedMovies = repository.getPagedMovies(pageNumber)
+                val cacheMovieCount = repository.getMovieCount()
+
+                if (cacheMovieCount > 0) {
+                    topRatedMovieFetchEvent.onSuccess(
+                        FetchResult.Success(
+                            cachedMovies,
+                            pageNumber,
+                            ceil(cacheMovieCount / 20f).toInt(),
+                            cacheMovieCount
+                        )
+                    )
+                } else {
+                    topRatedMovieFetchEvent.onSuccess(
+                        FetchResult.Failure
+                    )
+                }
+            }
+        }
     }
 }
