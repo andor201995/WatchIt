@@ -15,7 +15,7 @@ import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
-import com.andor.watchit.screens.topratedmovielist.model.Event
+import com.andor.watchit.screens.topratedmovielist.model.MovieListEvent
 import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieListViewModel
 import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvc
 import com.andor.watchit.usecase.common.model.GeneralMovie
@@ -52,16 +52,16 @@ class TopRatedMovieListFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mViewMvc = if (::mViewMvc.isInitialized) mViewMvc else mViewMvcFactory.getTopRatedMovieMvc(
-            container
-        )
+        mViewMvc = if (::mViewMvc.isInitialized) mViewMvc
+        else mViewMvcFactory.getTopRatedMovieMvc(container)
         return mViewMvc.getRootView()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mViewModel =
-            ViewModelProvider(this, mViewModelFactory).get(TopRatedMovieListViewModel::class.java)
+            ViewModelProvider(this, mViewModelFactory)
+                .get(TopRatedMovieListViewModel::class.java)
     }
 
     override fun onStart() {
@@ -93,20 +93,22 @@ class TopRatedMovieListFragment : BaseFragment() {
 
     private fun bindListEventObserver() {
         mViewMvc.getEventStream()
-            .subscribe(object : RxBaseObserver<Event>() {
-                override fun onNext(t: Event) {
+            .subscribe(object : RxBaseObserver<MovieListEvent>() {
+                override fun onNext(t: MovieListEvent) {
                     when (t) {
-                        is Event.RetryListLoading -> {
+                        is MovieListEvent.RetryListLoading -> {
                             mViewModel.retryLoadingList()
                         }
-                        is Event.LoadMovie -> {
+                        is MovieListEvent.LoadMovie -> {
                             mScreenNavigator.navigateFromTopRatedScreenToMovieDetailScreen(
                                 this@TopRatedMovieListFragment,
                                 t.generalMovie
                             )
                         }
-                        is Event.OpenSearchScreen -> {
-                            mScreenNavigator.navigateToSearchScreen(this@TopRatedMovieListFragment)
+                        is MovieListEvent.OpenSearchScreen -> {
+                            mScreenNavigator.navigateToSearchScreen(
+                                this@TopRatedMovieListFragment
+                            )
                         }
                     }
                 }
@@ -138,7 +140,9 @@ class TopRatedMovieListFragment : BaseFragment() {
                         }
                         is NetworkState.Initial.Error -> {
                             mViewMvc.hideLoader()
-                            mScreenNavigator.navigateFromTopRatedScreenToErrorScreen(this@TopRatedMovieListFragment)
+                            mScreenNavigator.navigateFromTopRatedScreenToErrorScreen(
+                                this@TopRatedMovieListFragment
+                            )
                         }
                         is NetworkState.Initial.Loading -> {
                             mViewMvc.showLoader()

@@ -1,20 +1,19 @@
-package com.andor.watchit.screens.topratedmovielist.model
+package com.andor.watchit.screens.tvlist.model
 
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
-import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.andor.watchit.usecase.common.model.NetworkState
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovieDataSourceFactory
+import com.andor.watchit.usecase.common.model.TvUiModel
+import com.andor.watchit.usecase.tv.TvListPageDataSourceFactory
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
-class TopRatedMovieListViewModel @Inject constructor(
-    private val topRatedMovieDataSourceFactory: TopRatedMovieDataSourceFactory
+class TvListViewModel @Inject constructor(
+    private val tvListPageDataSourceFactory: TvListPageDataSourceFactory
 ) : ViewModel() {
-
-    var topRatedMovieStream: BehaviorSubject<PagedList<GeneralMovie>> = BehaviorSubject.create()
+    var tvStream: BehaviorSubject<PagedList<TvUiModel>> = BehaviorSubject.create()
     val nextNetworkStateStream: BehaviorSubject<NetworkState.Next> =
         BehaviorSubject.create()
     val initialNetworkStateStream: BehaviorSubject<NetworkState.Initial> =
@@ -28,18 +27,18 @@ class TopRatedMovieListViewModel @Inject constructor(
             .setMaxSize(200)
             .build()
 
-        RxPagedListBuilder(topRatedMovieDataSourceFactory, pagedListConfig)
+        RxPagedListBuilder(tvListPageDataSourceFactory, pagedListConfig)
             .setFetchScheduler(Schedulers.io())
             .buildObservable()
-            .subscribe(topRatedMovieStream)
+            .subscribe(tvStream)
 
-        topRatedMovieDataSourceFactory
+        tvListPageDataSourceFactory
             .getDataSourceStream()
             .flatMap {
                 it.nextNetworkStateStream
             }.subscribe(nextNetworkStateStream)
 
-        topRatedMovieDataSourceFactory
+        tvListPageDataSourceFactory
             .getDataSourceStream()
             .flatMap {
                 it.initialNetworkStateStream
@@ -47,6 +46,6 @@ class TopRatedMovieListViewModel @Inject constructor(
     }
 
     fun retryLoadingList() {
-        topRatedMovieDataSourceFactory.topRatedMoviePageDataSource.retryAllFailed()
+        tvListPageDataSourceFactory.pageDataSource.retryAllFailed()
     }
 }

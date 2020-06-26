@@ -6,6 +6,7 @@ import com.andor.watchit.screens.networkerror.controller.NetworkErrorFragment
 import com.andor.watchit.screens.posterview.controller.PosterFragment
 import com.andor.watchit.screens.searchmovie.controller.SearchMovieFragment
 import com.andor.watchit.screens.topratedmovielist.controller.TopRatedMovieListFragment
+import com.andor.watchit.screens.tvlist.controller.TVListFragment
 import dagger.Subcomponent
 import dagger.android.AndroidInjector
 
@@ -72,4 +73,17 @@ interface SearchMovieFragmentComponent : AndroidInjector<SearchMovieFragment> {
 
     @Subcomponent.Factory
     interface Factory : AndroidInjector.Factory<SearchMovieFragment>
+}
+
+@ScreenScope
+@Subcomponent(
+    modules = [
+        ViewModelModule::class,
+        ScreenModule::class
+    ]
+)
+interface TvListFragmentComponent : AndroidInjector<TVListFragment> {
+
+    @Subcomponent.Factory
+    interface Factory : AndroidInjector.Factory<TVListFragment>
 }

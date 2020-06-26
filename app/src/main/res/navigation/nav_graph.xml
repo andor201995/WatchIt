@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/tvListFragment"
-        android:name="com.andor.watchit.screens.tvlist.TVListFragment"
+        android:name="com.andor.watchit.screens.tvlist.controller.TVListFragment"
         android:label="@string/app_name"
         tools:layout="@layout/tv_list_fragment">
         <action

@@ -7,6 +7,7 @@ import com.andor.watchit.repository.movie.MovieDataSourceImpl
 import com.andor.watchit.repository.movie.MovieRepository
 import com.andor.watchit.repository.tv.TvDataSource
 import com.andor.watchit.repository.tv.TvDataSourceImpl
+import com.andor.watchit.repository.tv.TvRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -21,6 +22,10 @@ class RepositoryModule {
     @Provides
     fun getMovieRepository(movieDataSource: MovieDataSource) =
         MovieRepository(movieDataSource)
+
+    @Provides
+    fun getTvRepository(tvDataSource: TvDataSource) =
+        TvRepository(tvDataSource)
 
     @Provides
     fun getDatabaseService(context: Context) = DatabaseService.getInstance(context)

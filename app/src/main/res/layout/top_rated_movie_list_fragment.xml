@@ -13,6 +13,6 @@
 
     <include
         android:id="@+id/loader"
-        layout="@layout/movie_list_loader" />
+        layout="@layout/list_loader" />
 
 </FrameLayout>

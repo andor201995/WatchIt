@@ -7,7 +7,7 @@ import android.widget.ImageView
 import com.andor.watchit.R
 import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
-import com.andor.watchit.screens.topratedmovielist.model.Event
+import com.andor.watchit.screens.topratedmovielist.model.MovieListEvent
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.jakewharton.rxbinding3.view.clicks
 
@@ -17,7 +17,7 @@ class TopRatedMovieListItemViewMvcImpl(
     private val imageLoader: ImageLoader
 ) :
     TopRatedMovieListItemViewMvc,
-    BaseObservableViewMvc<Event>() {
+    BaseObservableViewMvc<MovieListEvent>() {
     private var moviePosterContainer: View
     private var moviePosterImageView: ImageView
 
@@ -29,7 +29,7 @@ class TopRatedMovieListItemViewMvcImpl(
 
     override fun updateView(generalMovie: GeneralMovie) {
         moviePosterContainer.clicks().map {
-            Event.LoadMovie(generalMovie)
+            MovieListEvent.LoadMovie(generalMovie)
         }.subscribe(getEventStream())
 
         moviePosterImageView.also {

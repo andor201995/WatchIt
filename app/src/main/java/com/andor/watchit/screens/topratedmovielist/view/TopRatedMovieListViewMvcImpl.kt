@@ -12,7 +12,7 @@ import com.andor.watchit.core.visible
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.helper.Utils
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
-import com.andor.watchit.screens.topratedmovielist.model.Event
+import com.andor.watchit.screens.topratedmovielist.model.MovieListEvent
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.controller.TopRatedMovieListAdapter
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.todkars.shimmer.ShimmerRecyclerView
@@ -21,7 +21,7 @@ class TopRatedMovieListViewMvcImpl(
     parent: ViewGroup?,
     layoutInflater: LayoutInflater,
     viewMvcFactory: ViewMvcFactory
-) : BaseObservableViewMvc<Event>(),
+) : BaseObservableViewMvc<MovieListEvent>(),
     TopRatedMovieListViewMvc {
 
     private var shimmerRecyclerView: ShimmerRecyclerView
@@ -83,7 +83,7 @@ class TopRatedMovieListViewMvcImpl(
 
     override fun selectOptionItem(itemId: Int) {
         if (itemId == R.id.search) {
-            getEventStream().onNext(Event.OpenSearchScreen)
+            getEventStream().onNext(MovieListEvent.OpenSearchScreen)
         }
     }
 }

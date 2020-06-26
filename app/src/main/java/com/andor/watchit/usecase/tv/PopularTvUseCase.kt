@@ -7,6 +7,7 @@ import com.andor.watchit.repository.tv.TvRepository
 import com.andor.watchit.usecase.common.model.TvUiModel
 import com.andor.watchit.usecase.tv.PopularTvUseCase.Companion.PAGE_SIZE
 import io.reactivex.subjects.SingleSubject
+import javax.inject.Inject
 import kotlin.math.ceil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +32,7 @@ interface PopularTvUseCase {
     }
 }
 
-class PopularTvUseCaseImpl(
+class PopularTvUseCaseImpl @Inject constructor(
     private val popularTvEndPoint: PopularTvEndPoint,
     private val repository: TvRepository
 ) : PopularTvUseCase {

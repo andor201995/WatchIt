@@ -8,7 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.Executor
 
-class TopRatedMovieDataSource(
+class TopRatedMoviePageDataSource(
     private val useCase: TopRatedMovieUseCase,
     retryExecutor: Executor
 ) :
@@ -30,11 +30,15 @@ class TopRatedMovieDataSource(
                 override fun onSuccess(t: TopRatedMovieUseCaseImpl.FetchResult) {
                     when (t) {
                         is TopRatedMovieUseCaseImpl.FetchResult.Success -> {
-                            initialNetworkStateStream.onNext(NetworkState.Initial.Success(t.totalResults))
+                            initialNetworkStateStream.onNext(
+                                NetworkState.Initial.Success(t.totalResults)
+                            )
                             nextNetworkStateStream.onNext(NetworkState.Next.Success)
                             if (t.pageNumber == 1) {
                                 retry = null
-                                callback.onResult(t.generalMovieList, null, 2L)
+                                callback.onResult(
+                                    t.generalMovieList, null, 2L
+                                )
                             }
                         }
                         is TopRatedMovieUseCaseImpl.FetchResult.Failure -> {
