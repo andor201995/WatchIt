@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.moviedetail.model
+package com.andor.watchit.screens.listdetail.model
 
 import androidx.lifecycle.ViewModel
 

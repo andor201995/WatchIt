@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
-import com.andor.watchit.screens.moviedetail.controller.MovieDetailFragmentArgs
+import com.andor.watchit.screens.listdetail.controller.ListDetailFragmentArgs
 import com.andor.watchit.screens.posterview.model.PosterViewModel
 import com.andor.watchit.screens.posterview.view.PosterViewMvc
 import javax.inject.Inject
@@ -28,7 +28,7 @@ class PosterFragment : BaseFragment() {
     ): View? {
         mViewMvc = mViewMvcFactory.getPosterViewMvc(container)
         if (arguments != null) {
-            val movieDetail = MovieDetailFragmentArgs.fromBundle(arguments!!).movieDetail
+            val movieDetail = ListDetailFragmentArgs.fromBundle(arguments!!).detailModel
             mViewMvc.setMoviePoster(movieDetail)
         }
         return mViewMvc.getRootView()

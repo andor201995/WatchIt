@@ -3,8 +3,8 @@ package com.andor.watchit.screens.common
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.andor.watchit.screens.common.helper.ImageLoader
-import com.andor.watchit.screens.moviedetail.view.MovieDetailViewMvc
-import com.andor.watchit.screens.moviedetail.view.MovieDetailViewMvcImpl
+import com.andor.watchit.screens.listdetail.view.MovieDetailViewMvc
+import com.andor.watchit.screens.listdetail.view.MovieDetailViewMvcImpl
 import com.andor.watchit.screens.networkerror.view.NetworkErrorViewMvc
 import com.andor.watchit.screens.networkerror.view.NetworkErrorViewMvcImpl
 import com.andor.watchit.screens.posterview.view.PosterViewMvc
@@ -19,12 +19,12 @@ import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.To
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvcImpl
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvcImpl
+import com.andor.watchit.screens.tvlist.view.TvListItemLoaderViewMvc
+import com.andor.watchit.screens.tvlist.view.TvListItemLoaderViewMvcImpl
+import com.andor.watchit.screens.tvlist.view.TvListItemViewMvc
+import com.andor.watchit.screens.tvlist.view.TvListItemViewMvcImpl
 import com.andor.watchit.screens.tvlist.view.TvListViewMvc
 import com.andor.watchit.screens.tvlist.view.TvListViewMvcImpl
-import com.andor.watchit.screens.tvlist.view.listitem.TvListItemLoaderViewMvc
-import com.andor.watchit.screens.tvlist.view.listitem.TvListItemLoaderViewMvcImpl
-import com.andor.watchit.screens.tvlist.view.listitem.TvListItemViewMvc
-import com.andor.watchit.screens.tvlist.view.listitem.TvListItemViewMvcImpl
 
 class ViewMvcFactory(
     private val layoutInflater: LayoutInflater,

@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.tvlist.view.listitem
+package com.andor.watchit.screens.tvlist.controller
 
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.mvc.ViewMvc
 import com.andor.watchit.screens.tvlist.model.TvListEvent
+import com.andor.watchit.screens.tvlist.view.TvListItemLoaderViewMvc
+import com.andor.watchit.screens.tvlist.view.TvListItemViewMvc
 import com.andor.watchit.usecase.common.model.TvUiModel
 import io.reactivex.subjects.PublishSubject
 
@@ -14,7 +16,9 @@ class TvListAdapter(
     private val viewMvcFactory: ViewMvcFactory,
     private val tvListEventStream: PublishSubject<TvListEvent>
 ) :
-    PagedListAdapter<TvUiModel, TvListAdapter.TvHolder>(tvDiffUtil) {
+    PagedListAdapter<TvUiModel, TvListAdapter.TvHolder>(
+        tvDiffUtil
+    ) {
 
     companion object {
         private val tvDiffUtil = object : DiffUtil.ItemCallback<TvUiModel>() {
@@ -30,7 +34,8 @@ class TvListAdapter(
 
         private const val TYPE_PROGRESS = 0
         private const val TYPE_ITEM = 1
-        private var listLoadingState: ListLoading = ListLoading.Loading
+        private var listLoadingState: ListLoading =
+            ListLoading.Loading
     }
 
     override fun setHasStableIds(hasStableIds: Boolean) {

@@ -11,8 +11,8 @@ import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.helper.Utils
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.common.mvc.ObservableViewMvc
+import com.andor.watchit.screens.tvlist.controller.TvListAdapter
 import com.andor.watchit.screens.tvlist.model.TvListEvent
-import com.andor.watchit.screens.tvlist.view.listitem.TvListAdapter
 import com.andor.watchit.usecase.common.model.TvUiModel
 
 interface TvListViewMvc : ObservableViewMvc<TvListEvent> {

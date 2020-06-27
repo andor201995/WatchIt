@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.tvlist.view.listitem
+package com.andor.watchit.screens.tvlist.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.moviedetail.controller
+package com.andor.watchit.screens.listdetail.controller
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,13 +9,13 @@ import com.andor.watchit.core.rx.RxBaseObserver
 import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
-import com.andor.watchit.screens.moviedetail.model.Event
-import com.andor.watchit.screens.moviedetail.model.MovieDetailViewModel
-import com.andor.watchit.screens.moviedetail.view.MovieDetailViewMvc
+import com.andor.watchit.screens.listdetail.model.Event
+import com.andor.watchit.screens.listdetail.model.MovieDetailViewModel
+import com.andor.watchit.screens.listdetail.view.MovieDetailViewMvc
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-class MovieDetailFragment : BaseFragment() {
+class ListDetailFragment : BaseFragment() {
 
     private lateinit var mViewMvc: MovieDetailViewMvc
 
@@ -36,8 +36,8 @@ class MovieDetailFragment : BaseFragment() {
     ): View? {
         mViewMvc = mViewMvcFactory.getMovieDetailViewMvc(container)
         if (arguments != null) {
-            val movieDetail = MovieDetailFragmentArgs.fromBundle(arguments!!).movieDetail
-            mViewMvc.setMovieDetails(movieDetail)
+            val detailUiModel = ListDetailFragmentArgs.fromBundle(arguments!!).detailModel
+            mViewMvc.setDetails(detailUiModel)
         }
         return mViewMvc.getRootView()
     }
@@ -58,8 +58,8 @@ class MovieDetailFragment : BaseFragment() {
                 when (t) {
                     is Event.PosterClick -> {
                         mScreenNavigator.navigateToPosterScreen(
-                            this@MovieDetailFragment,
-                            t.movieDetail
+                            this@ListDetailFragment,
+                            t.detailModel
                         )
                     }
                     is Event.PosterScrollToBack -> {

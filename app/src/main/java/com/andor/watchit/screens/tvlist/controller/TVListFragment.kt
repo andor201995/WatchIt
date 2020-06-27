@@ -12,7 +12,6 @@ import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
 import com.andor.watchit.screens.tvlist.model.TvListEvent
-import com.andor.watchit.screens.tvlist.model.TvListViewModel
 import com.andor.watchit.screens.tvlist.view.TvListViewMvc
 import com.andor.watchit.usecase.common.model.NetworkState
 import com.andor.watchit.usecase.common.model.TvUiModel
@@ -78,10 +77,10 @@ class TVListFragment : BaseFragment() {
                             mViewModel.retryLoadingList()
                         }
                         is TvListEvent.LoadTv -> {
-//                            mScreenNavigator.navigateFromTopRatedScreenToMovieDetailScreen(
-//                                this@TVListFragment,
-//                                t.tvUiModel
-//                            )
+                            mScreenNavigator.navigateFromTvListScreenToMovieDetailScreen(
+                                this@TVListFragment,
+                                t.tvUiModel
+                            )
                         }
                     }
                 }

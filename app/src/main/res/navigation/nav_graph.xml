@@ -11,8 +11,8 @@
         android:label="@string/app_name"
         tools:layout="@layout/top_rated_movie_list_fragment">
         <action
-            android:id="@+id/action_topRatedMovieListFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
+            android:id="@+id/action_topRatedMovieListFragment_to_listDetailFragment"
+            app:destination="@id/listDetailFragment" />
         <action
             android:id="@+id/action_topRatedMovieListFragment_to_searchMovieFragment"
             app:destination="@id/searchMovieFragment" />
@@ -28,17 +28,17 @@
         android:label=" "
         tools:layout="@layout/network_error_fragment" />
     <fragment
-        android:id="@+id/movieDetailFragment"
-        android:name="com.andor.watchit.screens.moviedetail.controller.MovieDetailFragment"
+        android:id="@+id/listDetailFragment"
+        android:name="com.andor.watchit.screens.listdetail.controller.ListDetailFragment"
         android:label=" "
         tools:layout="@layout/movie_detail_fragment">
         <action
-            android:id="@+id/action_movieDetailFragment_to_posterFragment"
+            android:id="@+id/action_listDetailFragment_to_posterFragment"
             app:destination="@id/posterFragment"
-            app:popUpTo="@+id/movieDetailFragment" />
+            app:popUpTo="@+id/listDetailFragment" />
         <argument
-            android:name="movieDetail"
-            app:argType="com.andor.watchit.usecase.common.model.GeneralMovie" />
+            android:name="detailModel"
+            app:argType="com.andor.watchit.screens.listdetail.model.DetailUiModel" />
     </fragment>
     <fragment
         android:id="@+id/posterFragment"
@@ -46,8 +46,8 @@
         android:label=" "
         tools:layout="@layout/poster_fragment">
         <argument
-            android:name="movieDetail"
-            app:argType="com.andor.watchit.usecase.common.model.GeneralMovie" />
+            android:name="detailModel"
+            app:argType="com.andor.watchit.screens.listdetail.model.DetailUiModel" />
     </fragment>
     <fragment
         android:id="@+id/searchMovieFragment"
@@ -55,8 +55,8 @@
         android:label=" "
         tools:layout="@layout/search_movie_fragment">
         <action
-            android:id="@+id/action_searchMovieFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
+            android:id="@+id/action_searchMovieFragment_to_listDetailFragment"
+            app:destination="@id/listDetailFragment" />
         <action
             android:id="@+id/action_searchMovieFragment_to_networkErrorFragment"
             app:destination="@id/networkErrorFragment"
@@ -75,8 +75,8 @@
             android:id="@+id/action_TVListFragment_to_searchMovieFragment"
             app:destination="@id/searchMovieFragment" />
         <action
-            android:id="@+id/action_TVListFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
+            android:id="@+id/action_TVListFragment_to_listDetailFragment"
+            app:destination="@id/listDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingFragment"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".screens.moviedetail.controller.MovieDetailFragment">
+    tools:context=".screens.listdetail.controller.ListDetailFragment">
 
     <RelativeLayout
         android:id="@+id/movieDetailContainer"
@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/movieDetailMovieTitleTextView"
+                android:id="@+id/posterTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?app_color_movieTitleBackground"
@@ -48,13 +48,14 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/detailContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/posterContainer"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/movieDetailMovieOverviewHeadTextView"
+                android:id="@+id/infoDetailTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@string/movie_detail_heading_font"
@@ -69,7 +70,7 @@
                 android:textSize="@dimen/commonTextSize" />
 
             <TextView
-                android:id="@+id/movieDetailMovieOverviewTextView"
+                android:id="@+id/infoDetailText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -83,29 +84,6 @@
                 android:paddingBottom="@dimen/commonPadding"
                 android:textColor="?app_color_text"
                 android:textSize="@dimen/commonTextSize" />
-
-            <TextView
-                android:id="@+id/movieDetailMovieRatingTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@string/movie_detail_heading_font"
-                android:gravity="center_vertical"
-                android:padding="@dimen/commonPadding"
-                android:text="@string/movie_rating"
-                android:textColor="?app_color_headText"
-                android:textSize="@dimen/commonTextSize" />
-
-            <TextView
-                android:id="@+id/movieDetailMovieReleaseDataTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@string/movie_detail_heading_font"
-                android:gravity="center_vertical"
-                android:padding="@dimen/commonPadding"
-                android:text="@string/release_data"
-                android:textColor="?app_color_headText"
-                android:textSize="@dimen/commonTextSize" />
-
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 

@@ -2,13 +2,13 @@ package com.andor.watchit.core.di.activity
 
 import androidx.fragment.app.Fragment
 import com.andor.watchit.core.di.common.ScreenKey
-import com.andor.watchit.core.di.screen.MovieDetailFragmentComponent
+import com.andor.watchit.core.di.screen.ListDetailFragmentComponent
 import com.andor.watchit.core.di.screen.NetworkErrorFragmentComponent
 import com.andor.watchit.core.di.screen.PosterFragmentComponent
 import com.andor.watchit.core.di.screen.SearchMovieFragmentComponent
 import com.andor.watchit.core.di.screen.TopRatedMovieListFragmentComponent
 import com.andor.watchit.core.di.screen.TvListFragmentComponent
-import com.andor.watchit.screens.moviedetail.controller.MovieDetailFragment
+import com.andor.watchit.screens.listdetail.controller.ListDetailFragment
 import com.andor.watchit.screens.networkerror.controller.NetworkErrorFragment
 import com.andor.watchit.screens.posterview.controller.PosterFragment
 import com.andor.watchit.screens.searchmovie.controller.SearchMovieFragment
@@ -22,7 +22,7 @@ import dagger.multibindings.IntoMap
 @Module(
     subcomponents = [
         TopRatedMovieListFragmentComponent::class,
-        MovieDetailFragmentComponent::class,
+        ListDetailFragmentComponent::class,
         NetworkErrorFragmentComponent::class,
         PosterFragmentComponent::class,
         SearchMovieFragmentComponent::class,
@@ -40,9 +40,9 @@ abstract class ScreenBindingModule {
 
     @Binds
     @IntoMap
-    @ScreenKey(MovieDetailFragment::class)
-    abstract fun bindMovieDetailFragment(
-        factory: MovieDetailFragmentComponent.Factory
+    @ScreenKey(ListDetailFragment::class)
+    abstract fun bindListDetailFragment(
+        factory: ListDetailFragmentComponent.Factory
     ): AndroidInjector.Factory<out Fragment>
 
     @Binds

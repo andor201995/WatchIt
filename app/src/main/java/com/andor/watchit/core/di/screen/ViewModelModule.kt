@@ -5,7 +5,7 @@ import com.andor.watchit.core.di.common.ViewModelKey
 import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.searchmovie.model.SearchMovieViewModel
 import com.andor.watchit.screens.topratedmovielist.model.TopRatedMovieListViewModel
-import com.andor.watchit.screens.tvlist.model.TvListViewModel
+import com.andor.watchit.screens.tvlist.controller.TvListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.tvlist.model
+package com.andor.watchit.screens.tvlist.controller
 
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
