@@ -13,7 +13,7 @@ import com.andor.watchit.screens.networkerror.controller.NetworkErrorFragment
 import com.andor.watchit.screens.posterview.controller.PosterFragment
 import com.andor.watchit.screens.searchmovie.controller.SearchMovieFragment
 import com.andor.watchit.screens.topratedmovielist.controller.TopRatedMovieListFragment
-import com.andor.watchit.screens.tvlist.controller.TVListFragment
+import com.andor.watchit.screens.tvlist.controller.TvListFragment
 import dagger.Binds
 import dagger.Module
 import dagger.android.AndroidInjector
@@ -68,7 +68,7 @@ abstract class ScreenBindingModule {
 
     @Binds
     @IntoMap
-    @ScreenKey(TVListFragment::class)
+    @ScreenKey(TvListFragment::class)
     abstract fun bindTvListFragment(
         factory: TvListFragmentComponent.Factory
     ): AndroidInjector.Factory<out Fragment>

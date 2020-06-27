@@ -20,7 +20,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class TVListFragment : BaseFragment() {
+class TvListFragment : BaseFragment() {
 
     private lateinit var mViewMvc: TvListViewMvc
     private lateinit var mViewModel: TvListViewModel
@@ -78,7 +78,7 @@ class TVListFragment : BaseFragment() {
                         }
                         is TvListEvent.LoadTv -> {
                             mScreenNavigator.navigateFromTvListScreenToMovieDetailScreen(
-                                this@TVListFragment,
+                                this@TvListFragment,
                                 t.tvUiModel
                             )
                         }
@@ -113,7 +113,7 @@ class TVListFragment : BaseFragment() {
                         is NetworkState.Initial.Error -> {
                             mViewMvc.hideLoader()
                             mScreenNavigator.navigateFromTopRatedScreenToErrorScreen(
-                                this@TVListFragment
+                                this@TvListFragment
                             )
                         }
                         is NetworkState.Initial.Loading -> {
