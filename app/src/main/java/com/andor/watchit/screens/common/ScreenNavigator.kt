@@ -8,7 +8,7 @@ import com.andor.watchit.screens.listdetail.controller.ListDetailFragmentDirecti
 import com.andor.watchit.screens.listdetail.model.DetailUiModel
 import com.andor.watchit.screens.searchmovie.controller.SearchMovieFragmentDirections
 import com.andor.watchit.screens.topratedmovielist.controller.TopRatedMovieListFragmentDirections
-import com.andor.watchit.screens.tvlist.controller.TVListFragmentDirections
+import com.andor.watchit.screens.tvlist.controller.TvListFragmentDirections
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.andor.watchit.usecase.common.model.TvUiModel
 import com.andor.watchit.usecase.common.model.toDetailModel
@@ -78,7 +78,7 @@ class ScreenNavigator {
         tvUiModel: TvUiModel
     ) {
         val action =
-            TVListFragmentDirections.actionTVListFragmentToListDetailFragment(
+            TvListFragmentDirections.actionTVListFragmentToListDetailFragment(
                 tvUiModel.toDetailModel()
             )
         NavHostFragment.findNavController(fragment)
