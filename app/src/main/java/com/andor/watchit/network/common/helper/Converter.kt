@@ -1,7 +1,9 @@
 package com.andor.watchit.network.common.helper
 
 import com.andor.watchit.network.common.schema.TopRatedMovieSchema
+import com.andor.watchit.network.common.schema.TvSchema
 import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.TvUiModel
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -21,6 +23,23 @@ object Converter {
             )
         }
         return listOfTopRatedMovie
+    }
+
+    fun convertFrom(generalTvSchema: TvSchema): ArrayList<TvUiModel> {
+        val listOfPopularTv = ArrayList<TvUiModel>()
+        generalTvSchema.results.forEach {
+            listOfPopularTv.add(
+                TvUiModel(
+                    originalTitle = it.original_name,
+                    posterPath = it.poster_path,
+                    tvId = it.id,
+                    tvRating = it.vote_average,
+                    overView = it.overview,
+                    firstAirDate = it.first_air_date
+                )
+            )
+        }
+        return listOfPopularTv
     }
 
     fun convertFrom(query: String): String {

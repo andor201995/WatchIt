@@ -5,17 +5,19 @@ import com.andor.watchit.usecase.common.model.GeneralMovie
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
-class TopRatedMovieDataSourceFactory @Inject constructor(val topRatedMovieDataSource: TopRatedMovieDataSource) :
-    DataSource.Factory<Long, GeneralMovie>() {
+class TopRatedMovieDataSourceFactory @Inject constructor(
+    val topRatedMoviePageDataSource: TopRatedMoviePageDataSource
+) : DataSource.Factory<Long, GeneralMovie>() {
 
-    private val mDataSourceRelay: PublishSubject<TopRatedMovieDataSource> = PublishSubject.create()
+    private val mPageDataSourceRelay: PublishSubject<TopRatedMoviePageDataSource> =
+        PublishSubject.create()
 
     override fun create(): DataSource<Long, GeneralMovie> {
-        mDataSourceRelay.onNext(topRatedMovieDataSource)
-        return topRatedMovieDataSource
+        mPageDataSourceRelay.onNext(topRatedMoviePageDataSource)
+        return topRatedMoviePageDataSource
     }
 
-    fun getDataSourceStream(): PublishSubject<TopRatedMovieDataSource> {
-        return mDataSourceRelay
+    fun getDataSourceStream(): PublishSubject<TopRatedMoviePageDataSource> {
+        return mPageDataSourceRelay
     }
 }

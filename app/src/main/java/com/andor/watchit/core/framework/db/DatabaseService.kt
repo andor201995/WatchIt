@@ -4,8 +4,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.andor.watchit.repository.entity.MovieEntity
+import com.andor.watchit.repository.entity.TvEntity
+import com.andor.watchit.repository.movie.MovieDao
+import com.andor.watchit.repository.tv.TvDao
 
-@Database(entities = [MovieEntity::class], version = 1)
+@Database(
+    entities = [
+        MovieEntity::class,
+        TvEntity::class
+    ], version = 1
+)
 abstract class DatabaseService : RoomDatabase() {
 
     companion object {
@@ -22,4 +31,5 @@ abstract class DatabaseService : RoomDatabase() {
     }
 
     abstract fun getMovieDao(): MovieDao
+    abstract fun getTvDao(): TvDao
 }

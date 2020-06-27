@@ -2,6 +2,7 @@ package com.andor.watchit.core.di.application
 
 import com.andor.watchit.core.Constants
 import com.andor.watchit.network.common.MovieApi
+import com.andor.watchit.network.common.TvApi
 import com.andor.watchit.network.common.helper.AuthInterceptor
 import dagger.Module
 import dagger.Provides
@@ -41,6 +42,9 @@ class NetworkModule {
 
     @Provides
     fun provideMovieApi(retrofit: Retrofit): MovieApi = retrofit.create(MovieApi::class.java)
+
+    @Provides
+    fun provideTvApi(retrofit: Retrofit): TvApi = retrofit.create(TvApi::class.java)
 
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {

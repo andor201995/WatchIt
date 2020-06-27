@@ -12,8 +12,7 @@ import javax.inject.Inject
 
 class TopRatedMovieListViewModel @Inject constructor(
     private val topRatedMovieDataSourceFactory: TopRatedMovieDataSourceFactory
-) :
-    ViewModel() {
+) : ViewModel() {
 
     var topRatedMovieStream: BehaviorSubject<PagedList<GeneralMovie>> = BehaviorSubject.create()
     val nextNetworkStateStream: BehaviorSubject<NetworkState.Next> =
@@ -48,6 +47,6 @@ class TopRatedMovieListViewModel @Inject constructor(
     }
 
     fun retryLoadingList() {
-        topRatedMovieDataSourceFactory.topRatedMovieDataSource.retryAllFailed()
+        topRatedMovieDataSourceFactory.topRatedMoviePageDataSource.retryAllFailed()
     }
 }

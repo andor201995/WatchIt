@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.mvc.ViewMvc
-import com.andor.watchit.screens.topratedmovielist.model.Event
+import com.andor.watchit.screens.topratedmovielist.model.MovieListEvent
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvc
 import com.andor.watchit.usecase.common.model.GeneralMovie
@@ -14,7 +14,7 @@ import io.reactivex.subjects.PublishSubject
 
 class TopRatedMovieListAdapter(
     private val viewMvcFactory: ViewMvcFactory,
-    private val eventStream: PublishSubject<Event>
+    private val movieListEventStream: PublishSubject<MovieListEvent>
 ) :
     PagedListAdapter<GeneralMovie, TopRatedMovieListAdapter.TopMovieHolder>(topRatedMovieDiffUtil) {
 
@@ -46,7 +46,7 @@ class TopRatedMovieListAdapter(
         when (val mViewMvc = holder.mViewMvc) {
             is TopRatedMovieListItemViewMvc -> {
 
-                mViewMvc.getEventStream().subscribe(eventStream)
+                mViewMvc.getEventStream().subscribe(movieListEventStream)
 
                 val topRatedMovie = getItem(position)
                 topRatedMovie?.let {
@@ -55,7 +55,7 @@ class TopRatedMovieListAdapter(
             }
             is TopRatedMovieListItemLoaderViewMvc -> {
 
-                mViewMvc.getEventStream().subscribe(eventStream)
+                mViewMvc.getEventStream().subscribe(movieListEventStream)
 
                 when (listLoadingState) {
                     is ListLoading.Loading -> {

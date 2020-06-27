@@ -3,7 +3,7 @@ package com.andor.watchit.usecase.topratedmovie
 import com.andor.watchit.helper.TestData
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPoint
-import com.andor.watchit.repository.MovieRepository
+import com.andor.watchit.repository.movie.MovieRepository
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever

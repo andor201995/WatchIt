@@ -1,19 +1,31 @@
 package com.andor.watchit.core.di.application
 
 import android.content.Context
-import com.andor.watchit.core.framework.RoomMovieDataSource
 import com.andor.watchit.core.framework.db.DatabaseService
-import com.andor.watchit.core.framework.db.MovieDao
-import com.andor.watchit.repository.MovieDataSource
-import com.andor.watchit.repository.MovieRepository
+import com.andor.watchit.repository.movie.MovieDataSource
+import com.andor.watchit.repository.movie.MovieDataSourceImpl
+import com.andor.watchit.repository.movie.MovieRepository
+import com.andor.watchit.repository.tv.TvDataSource
+import com.andor.watchit.repository.tv.TvDataSourceImpl
+import com.andor.watchit.repository.tv.TvRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
-@Module
+@Module(
+    includes = [
+        RepositoryModule.Binding::class
+    ]
+)
 class RepositoryModule {
 
     @Provides
-    fun getMovieRepository(movieDataSource: MovieDataSource) = MovieRepository(movieDataSource)
+    fun getMovieRepository(movieDataSource: MovieDataSource) =
+        MovieRepository(movieDataSource)
+
+    @Provides
+    fun getTvRepository(tvDataSource: TvDataSource) =
+        TvRepository(tvDataSource)
 
     @Provides
     fun getDatabaseService(context: Context) = DatabaseService.getInstance(context)
@@ -22,5 +34,14 @@ class RepositoryModule {
     fun getMovieDao(databaseService: DatabaseService) = databaseService.getMovieDao()
 
     @Provides
-    fun getMovieDataSource(movieDao: MovieDao): MovieDataSource = RoomMovieDataSource(movieDao)
+    fun getTVDao(databaseService: DatabaseService) = databaseService.getTvDao()
+
+    @Module
+    internal interface Binding {
+        @Binds
+        fun getMovieDataSource(movieDataSourceImpl: MovieDataSourceImpl): MovieDataSource
+
+        @Binds
+        fun getTvDataSource(tvDataSourceImpl: TvDataSourceImpl): TvDataSource
+    }
 }

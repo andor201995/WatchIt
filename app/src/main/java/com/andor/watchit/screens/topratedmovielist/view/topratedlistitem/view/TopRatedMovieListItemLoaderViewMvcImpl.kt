@@ -9,11 +9,11 @@ import com.andor.watchit.R
 import com.andor.watchit.core.inVisible
 import com.andor.watchit.core.visible
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
-import com.andor.watchit.screens.topratedmovielist.model.Event
+import com.andor.watchit.screens.topratedmovielist.model.MovieListEvent
 
 class TopRatedMovieListItemLoaderViewMvcImpl(parent: ViewGroup?, inflater: LayoutInflater) :
     TopRatedMovieListItemLoaderViewMvc,
-    BaseObservableViewMvc<Event>() {
+    BaseObservableViewMvc<MovieListEvent>() {
 
     private var retryContainer: View
     private var container: View
@@ -21,7 +21,7 @@ class TopRatedMovieListItemLoaderViewMvcImpl(parent: ViewGroup?, inflater: Layou
     private val progressBar: ContentLoadingProgressBar
 
     init {
-        setRootView(inflater.inflate(R.layout.top_rated_movie_list_item_loader, parent, false))
+        setRootView(inflater.inflate(R.layout.list_item_loader, parent, false))
         progressBar = findViewById(R.id.itemLoader)
         errorImageView = findViewById(R.id.itemError)
         retryContainer = findViewById(R.id.retryContainer)
@@ -29,7 +29,7 @@ class TopRatedMovieListItemLoaderViewMvcImpl(parent: ViewGroup?, inflater: Layou
 
         retryContainer.setOnClickListener {
             getEventStream()
-                .onNext(Event.RetryListLoading)
+                .onNext(MovieListEvent.RetryListLoading)
         }
     }
 

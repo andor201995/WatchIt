@@ -1,11 +1,12 @@
 package com.andor.watchit.core.di.screen
 
 import com.andor.watchit.core.di.common.ScreenScope
-import com.andor.watchit.screens.moviedetail.controller.MovieDetailFragment
+import com.andor.watchit.screens.listdetail.controller.ListDetailFragment
 import com.andor.watchit.screens.networkerror.controller.NetworkErrorFragment
 import com.andor.watchit.screens.posterview.controller.PosterFragment
 import com.andor.watchit.screens.searchmovie.controller.SearchMovieFragment
 import com.andor.watchit.screens.topratedmovielist.controller.TopRatedMovieListFragment
+import com.andor.watchit.screens.tvlist.controller.TvListFragment
 import dagger.Subcomponent
 import dagger.android.AndroidInjector
 
@@ -29,10 +30,10 @@ interface TopRatedMovieListFragmentComponent : AndroidInjector<TopRatedMovieList
         ScreenModule::class
     ]
 )
-interface MovieDetailFragmentComponent : AndroidInjector<MovieDetailFragment> {
+interface ListDetailFragmentComponent : AndroidInjector<ListDetailFragment> {
 
     @Subcomponent.Factory
-    interface Factory : AndroidInjector.Factory<MovieDetailFragment>
+    interface Factory : AndroidInjector.Factory<ListDetailFragment>
 }
 
 @ScreenScope
@@ -72,4 +73,17 @@ interface SearchMovieFragmentComponent : AndroidInjector<SearchMovieFragment> {
 
     @Subcomponent.Factory
     interface Factory : AndroidInjector.Factory<SearchMovieFragment>
+}
+
+@ScreenScope
+@Subcomponent(
+    modules = [
+        ViewModelModule::class,
+        ScreenModule::class
+    ]
+)
+interface TvListFragmentComponent : AndroidInjector<TvListFragment> {
+
+    @Subcomponent.Factory
+    interface Factory : AndroidInjector.Factory<TvListFragment>
 }

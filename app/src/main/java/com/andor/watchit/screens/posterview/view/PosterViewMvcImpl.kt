@@ -7,8 +7,8 @@ import android.widget.TextView
 import com.andor.watchit.R
 import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
+import com.andor.watchit.screens.listdetail.model.DetailUiModel
 import com.andor.watchit.screens.posterview.model.Event
-import com.andor.watchit.usecase.common.model.GeneralMovie
 
 class PosterViewMvcImpl(
     parent: ViewGroup?,
@@ -24,14 +24,14 @@ class PosterViewMvcImpl(
         posterMovieTitleTextView = findViewById(R.id.posterMovieTitleTextView)
     }
 
-    override fun setMoviePoster(movieDetail: GeneralMovie) {
+    override fun setMoviePoster(detailUiModel: DetailUiModel) {
 
         posterMovieImageView.also {
-            imageLoader.loadImageInto(it, movieDetail.posterPath)
+            imageLoader.loadImageInto(it, detailUiModel.posterPath)
         }
 
         posterMovieTitleTextView.also {
-            it.text = movieDetail.originalTitle
+            it.text = detailUiModel.posterTitle
         }
     }
 }
