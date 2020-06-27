@@ -7,6 +7,8 @@ import com.andor.watchit.R
 import com.andor.watchit.core.Constants
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.squareup.picasso.Picasso
 
 class GlideImageLoader(private val context: Context) : ImageLoader {
@@ -14,8 +16,11 @@ class GlideImageLoader(private val context: Context) : ImageLoader {
     private val glide: RequestManager = Glide.with(context)
 
     override fun loadImageInto(view: ImageView, uri: String?) {
+        val requestOptions = RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL)
         glide
             .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/$uri")
+            .thumbnail(glide.load("${Constants.BASE_IMAGE_URL}/${Constants.THUMB_SIZE}/$uri"))
+            .apply(requestOptions)
             .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_image_24px)!!)
             .error(ContextCompat.getDrawable(context, R.drawable.ic_error_24px)!!)
             .into(view)
