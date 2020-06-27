@@ -21,7 +21,7 @@ class TopRatedMovieListItemLoaderViewMvcImpl(parent: ViewGroup?, inflater: Layou
     private val progressBar: ContentLoadingProgressBar
 
     init {
-        setRootView(inflater.inflate(R.layout.top_rated_movie_list_item_loader, parent, false))
+        setRootView(inflater.inflate(R.layout.list_item_loader, parent, false))
         progressBar = findViewById(R.id.itemLoader)
         errorImageView = findViewById(R.id.itemError)
         retryContainer = findViewById(R.id.retryContainer)

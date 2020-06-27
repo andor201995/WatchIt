@@ -15,5 +15,5 @@
         app:shimmer_recycler_colored="true"
         app:shimmer_recycler_highlight_color="?attr/app_color_headText"
         app:shimmer_recycler_item_count="5"
-        app:shimmer_recycler_layout="@layout/movie_list_loader_item" />
+        app:shimmer_recycler_layout="@layout/list_loader_item" />
 </LinearLayout>

@@ -31,11 +31,17 @@ android {
             resValue("string", "PORT_NUMBER", "8081")
         }
     }
+
     compileOptions {
         sourceCompatibility = Version.java
         targetCompatibility = Version.java
     }
 
+    android {
+        buildFeatures{
+            viewBinding = true
+        }
+    }
 }
 
 dependencies {

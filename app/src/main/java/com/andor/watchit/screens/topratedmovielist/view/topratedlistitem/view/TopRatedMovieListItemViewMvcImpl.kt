@@ -22,9 +22,9 @@ class TopRatedMovieListItemViewMvcImpl(
     private var moviePosterImageView: ImageView
 
     init {
-        setRootView(inflater.inflate(R.layout.movie_list_item, parent, false))
-        moviePosterImageView = findViewById(R.id.moviePosterImageView)
-        moviePosterContainer = findViewById(R.id.moviePosterContainer)
+        setRootView(inflater.inflate(R.layout.list_item, parent, false))
+        moviePosterImageView = findViewById(R.id.posterImageView)
+        moviePosterContainer = findViewById(R.id.posterContainer)
     }
 
     override fun updateView(generalMovie: GeneralMovie) {

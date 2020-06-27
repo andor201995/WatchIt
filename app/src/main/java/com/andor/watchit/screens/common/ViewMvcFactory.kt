@@ -21,6 +21,10 @@ import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.To
 import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvcImpl
 import com.andor.watchit.screens.tvlist.view.TvListViewMvc
 import com.andor.watchit.screens.tvlist.view.TvListViewMvcImpl
+import com.andor.watchit.screens.tvlist.view.listitem.TvListItemLoaderViewMvc
+import com.andor.watchit.screens.tvlist.view.listitem.TvListItemLoaderViewMvcImpl
+import com.andor.watchit.screens.tvlist.view.listitem.TvListItemViewMvc
+import com.andor.watchit.screens.tvlist.view.listitem.TvListItemViewMvcImpl
 
 class ViewMvcFactory(
     private val layoutInflater: LayoutInflater,
@@ -86,4 +90,17 @@ class ViewMvcFactory(
         layoutInflater,
         this
     )
+
+    fun getTvListItemLoaderViewMvc(parent: ViewGroup): TvListItemLoaderViewMvc =
+        TvListItemLoaderViewMvcImpl(
+            parent,
+            layoutInflater
+        )
+
+    fun getTvListItemViewMvc(parent: ViewGroup): TvListItemViewMvc =
+        TvListItemViewMvcImpl(
+            parent,
+            layoutInflater,
+            imageLoader
+        )
 }

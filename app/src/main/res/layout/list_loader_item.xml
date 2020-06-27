@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/moviePosterContainer"
+        android:id="@+id/posterContainer"
         android:layout_width="@dimen/itemWidth"
         android:layout_height="@dimen/itemHeight"
         android:layout_gravity="center"
@@ -17,7 +17,7 @@
         app:cardUseCompatPadding="true">
 
         <ImageView
-            android:id="@+id/moviePosterImageView"
+            android:id="@+id/posterImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
