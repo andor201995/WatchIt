@@ -1,5 +1,6 @@
 package com.andor.watchit.network.common.helper
 
+import com.andor.watchit.core.Constants.AUTH_TOKEN
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -8,7 +9,7 @@ class AuthInterceptor : Interceptor {
         var req = chain.request()
         // DONT INCLUDE API KEYS IN YOUR SOURCE CODE
         val url =
-            req.url().newBuilder().addQueryParameter("api_key", "1b86aca7dce418eb4ff10493f30fef44")
+            req.url().newBuilder().addQueryParameter("api_key", AUTH_TOKEN)
                 .build()
         req = req.newBuilder().url(url).build()
         return chain.proceed(req)
