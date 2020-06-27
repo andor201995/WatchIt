@@ -19,6 +19,7 @@ class GlideImageLoader(private val context: Context) : ImageLoader {
         val requestOptions = RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL)
         glide
             .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/$uri")
+            .fitCenter()
             .thumbnail(glide.load("${Constants.BASE_IMAGE_URL}/${Constants.THUMB_SIZE}/$uri"))
             .apply(requestOptions)
             .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_image_24px)!!)
