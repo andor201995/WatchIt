@@ -9,7 +9,7 @@ import com.andor.watchit.core.rx.RxBaseObserver
 import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
-import com.andor.watchit.screens.listdetail.model.Event
+import com.andor.watchit.screens.listdetail.model.DetailViewEvent
 import com.andor.watchit.screens.listdetail.model.MovieDetailViewModel
 import com.andor.watchit.screens.listdetail.view.MovieDetailViewMvc
 import io.reactivex.disposables.CompositeDisposable
@@ -53,16 +53,16 @@ class ListDetailFragment : BaseFragment() {
     }
 
     private fun bindEventStream() {
-        val eventObserver = object : RxBaseObserver<Event>() {
-            override fun onNext(t: Event) {
+        val eventObserver = object : RxBaseObserver<DetailViewEvent>() {
+            override fun onNext(t: DetailViewEvent) {
                 when (t) {
-                    is Event.PosterClick -> {
+                    is DetailViewEvent.PosterClick -> {
                         mScreenNavigator.navigateToPosterScreen(
                             this@ListDetailFragment,
                             t.detailModel
                         )
                     }
-                    is Event.PosterScrollToBack -> {
+                    is DetailViewEvent.PosterScrollToBack -> {
                     }
                 }
             }

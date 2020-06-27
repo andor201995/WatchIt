@@ -12,13 +12,13 @@ import com.andor.watchit.core.appendTextWithColor
 import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.listdetail.model.DetailUiModel
-import com.andor.watchit.screens.listdetail.model.Event
+import com.andor.watchit.screens.listdetail.model.DetailViewEvent
 
 class MovieDetailViewMvcImpl(
     parent: ViewGroup?,
     private val inflater: LayoutInflater,
     private val imageLoader: ImageLoader
-) : MovieDetailViewMvc, BaseObservableViewMvc<Event>() {
+) : MovieDetailViewMvc, BaseObservableViewMvc<DetailViewEvent>() {
     private var overViewTextView: TextView
     private var movieTitleTextView: TextView
     private var posterImageView: ImageView
@@ -37,7 +37,7 @@ class MovieDetailViewMvcImpl(
         posterImageView.also {
             imageLoader.loadImageInto(it, detailModel.posterPath)
             it.setOnClickListener {
-                getEventStream().onNext(Event.PosterClick(detailModel))
+                getEventStream().onNext(DetailViewEvent.PosterClick(detailModel))
             }
         }
 
