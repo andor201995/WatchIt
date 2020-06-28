@@ -7,7 +7,7 @@ import android.widget.ImageView
 import com.andor.watchit.R
 import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
-import com.andor.watchit.screens.searchmovie.model.Event
+import com.andor.watchit.screens.searchmovie.model.SearchViewEvent
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.jakewharton.rxbinding3.view.clicks
 
@@ -15,7 +15,7 @@ class SearchMovieItemViewMvcImpl(
     parent: ViewGroup?,
     inflater: LayoutInflater,
     private val imageLoader: ImageLoader
-) : SearchMovieItemViewMvc, BaseObservableViewMvc<Event>() {
+) : SearchMovieItemViewMvc, BaseObservableViewMvc<SearchViewEvent>() {
     private var moviePosterContainer: View
     private var moviePosterImageView: ImageView
 
@@ -28,7 +28,7 @@ class SearchMovieItemViewMvcImpl(
 
     override fun bindItem(item: GeneralMovie) {
         moviePosterContainer.clicks().map {
-            Event.OpenMovie(item)
+            SearchViewEvent.OpenMovie(item)
         }.subscribe(getEventStream())
 
         imageLoader.loadImageInto(moviePosterImageView, item.posterPath)

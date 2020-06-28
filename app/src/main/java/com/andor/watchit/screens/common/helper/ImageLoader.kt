@@ -19,11 +19,11 @@ class GlideImageLoader(private val context: Context) : ImageLoader {
         val requestOptions = RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL)
         glide
             .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/$uri")
-            .fitCenter()
+            .centerCrop()
             .thumbnail(glide.load("${Constants.BASE_IMAGE_URL}/${Constants.THUMB_SIZE}/$uri"))
             .apply(requestOptions)
-            .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_image_24px)!!)
-            .error(ContextCompat.getDrawable(context, R.drawable.ic_error_24px)!!)
+            .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_image)!!)
+            .error(ContextCompat.getDrawable(context, R.drawable.ic_error)!!)
             .into(view)
     }
 
@@ -39,8 +39,8 @@ class PicassoImageLoader(private val context: Context) : ImageLoader {
     override fun loadImageInto(view: ImageView, uri: String?) {
         picasso
             .load("${Constants.BASE_IMAGE_URL}/${Constants.IMAGE_SIZE}/$uri")
-            .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_image_24px)!!)
-            .error(ContextCompat.getDrawable(context, R.drawable.ic_error_24px)!!)
+            .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_image)!!)
+            .error(ContextCompat.getDrawable(context, R.drawable.ic_error)!!)
             .into(view)
     }
 

@@ -2,6 +2,7 @@ package com.andor.watchit.usecase.topratedmovie
 
 import com.andor.watchit.helper.TestData
 import com.andor.watchit.network.common.helper.Converter
+import com.andor.watchit.network.common.schema.TopRatedMovieSchema
 import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPoint
 import com.andor.watchit.repository.movie.MovieRepository
 import com.nhaarman.mockitokotlin2.any
@@ -49,23 +50,26 @@ class TopRatedMovieUseCaseImplTest {
 
     @Test
     fun fetchTopRatedMovieAndNotify_success_returnValidData() {
-        // Arrange
-        success()
-        // Act
-        systemUT.fetchTopRatedMovieAndNotify(1).subscribe(testObserver)
-        // Assert
-        verify(mTopRatedMovieListEndPointMock).onFetchTopRatedMovieListAndNotify(
-            any(),
-            any()
-        )
-        val testServerResponse = TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA
-        testObserver.assertValue {
-            it == TopRatedMovieUseCaseImpl.FetchResult.Success(
-                Converter.convertFrom(testServerResponse),
-                testServerResponse.page,
-                testServerResponse.total_pages,
-                testServerResponse.total_results
+        runBlocking {
+            // Arrange
+            val testServerResponse = TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA
+            success(testServerResponse)
+            // Act
+            systemUT.fetchTopRatedMovieAndNotify(1).subscribe(testObserver)
+            // Assert
+            delay(200)
+            verify(mTopRatedMovieListEndPointMock).onFetchTopRatedMovieListAndNotify(
+                any(),
+                any()
             )
+            testObserver.assertValue {
+                it == TopRatedMovieUseCaseImpl.FetchResult.Success(
+                    Converter.convertFrom(testServerResponse),
+                    testServerResponse.page,
+                    testServerResponse.total_pages,
+                    testServerResponse.total_results
+                )
+            }
         }
     }
 
@@ -73,7 +77,6 @@ class TopRatedMovieUseCaseImplTest {
     fun fetchTopRatedMovieAndNotify_Failure_returnFailure() {
         // Arrange
         runBlocking {
-            whenever(mMovieRepository.getMovieCount()).thenReturn(0)
             failure()
             // Act
             systemUT.fetchTopRatedMovieAndNotify(1).subscribe(testObserver)
@@ -91,7 +94,8 @@ class TopRatedMovieUseCaseImplTest {
 
     // region helper methods -----------------------------------------------------------------------
 
-    private fun failure() {
+    private suspend fun failure() {
+        whenever(mMovieRepository.getMovieCount()).thenReturn(0)
         whenever(
             mTopRatedMovieListEndPointMock.onFetchTopRatedMovieListAndNotify(
                 any(),
@@ -104,7 +108,14 @@ class TopRatedMovieUseCaseImplTest {
         }
     }
 
-    private fun success() {
+    private suspend fun success(testServerResponse: TopRatedMovieSchema) {
+        whenever(mMovieRepository.getMovieCount()).thenReturn(testServerResponse.total_results)
+        whenever(mMovieRepository.getPagedMovies(any())).thenReturn(
+            Converter.convertFrom(
+                testServerResponse
+            )
+        )
+
         whenever(
             mTopRatedMovieListEndPointMock.onFetchTopRatedMovieListAndNotify(
                 any(),

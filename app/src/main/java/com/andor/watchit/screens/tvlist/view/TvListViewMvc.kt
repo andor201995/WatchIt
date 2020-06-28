@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
-import com.andor.watchit.core.inVisible
+import com.andor.watchit.core.gone
 import com.andor.watchit.core.visible
 import com.andor.watchit.databinding.TvListFragmentBinding
 import com.andor.watchit.screens.common.ViewMvcFactory
@@ -64,13 +64,13 @@ class TvListViewMvcImpl(
     }
 
     override fun showLoader() {
-        binding.loader.shimmerRecyclerView.showShimmer()
         binding.loader.root.visible()
+        binding.loader.shimmerRecyclerView.showShimmer()
     }
 
     override fun hideLoader() {
+        binding.loader.root.gone()
         binding.loader.shimmerRecyclerView.hideShimmer()
-        binding.loader.root.inVisible()
     }
 
     override fun showListLoadingError() {

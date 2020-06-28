@@ -45,30 +45,37 @@ class PopularTvUseCaseImplTest {
 
     @Test
     fun getPopularTv_withCorrectData() {
-        // Arrange
-        success()
-        // Act
-        systemUT.getPopularTv(10).subscribe(testObserver)
-        // Assert
-        verify(mPopularTvEndPointMock).getPopularMovies(10)
+        runBlocking {
+            // Arrange
+            val schema = TV_SERVER_RESPONSE_POPULAR_TV_SCHEMA
+            success(schema)
+            // Act
+            systemUT.getPopularTv(10).subscribe(testObserver)
+            // Assert
+            delay(200)
+            verify(mPopularTvEndPointMock).getPopularMovies(10)
+        }
     }
 
     @Test
     fun getPopularTv_success_returnGeneralTv() {
-        // Arrange
-        success()
-        val schema = TV_SERVER_RESPONSE_POPULAR_TV_SCHEMA
-        // Act
-        systemUT.getPopularTv(1).subscribe(testObserver)
-        // Assert
-        testObserver.assertValueCount(1)
-        testObserver.assertValue {
-            it == PopularTvUseCase.FetchResult.Success(
-                Converter.convertFrom(schema),
-                schema.page,
-                schema.total_pages,
-                schema.total_results
-            )
+        runBlocking {
+            // Arrange
+            val schema = TV_SERVER_RESPONSE_POPULAR_TV_SCHEMA
+            success(schema)
+            // Act
+            systemUT.getPopularTv(1).subscribe(testObserver)
+            // Assert
+            delay(200)
+            testObserver.assertValueCount(1)
+            testObserver.assertValue {
+                it == PopularTvUseCase.FetchResult.Success(
+                    Converter.convertFrom(schema),
+                    schema.page,
+                    schema.total_pages,
+                    schema.total_results
+                )
+            }
         }
     }
 
@@ -76,7 +83,6 @@ class PopularTvUseCaseImplTest {
     fun getPopularTv_failure() {
         runBlocking {
             // Arrange
-            whenever(tvRepository.getTvCount()).thenReturn(0)
             failure()
             // Act
             systemUT.getPopularTv(1).subscribe(testObserver)
@@ -90,13 +96,19 @@ class PopularTvUseCaseImplTest {
     }
 
     // region helper methods -----------------------------------------------------------------------
-    private fun success() {
+    private suspend fun success(schema: TvSchema) {
         val successSingle: Single<TvSchema> =
             Single.just(TV_SERVER_RESPONSE_POPULAR_TV_SCHEMA)
+
+        whenever(tvRepository.getTvCount()).thenReturn(schema.total_results)
+        whenever(tvRepository.getPagedTv(any())).thenReturn(Converter.convertFrom(schema))
+
         whenever(mPopularTvEndPointMock.getPopularMovies(any())).thenReturn(successSingle)
     }
 
-    private fun failure() {
+    private suspend fun failure() {
+        whenever(tvRepository.getTvCount()).thenReturn(0)
+
         val failureSingle: Single<TvSchema> =
             Single.error(HttpException(Response.error<String>(400, EMPTY_RESPONSE)))
         whenever(mPopularTvEndPointMock.getPopularMovies(any())).thenReturn(failureSingle)

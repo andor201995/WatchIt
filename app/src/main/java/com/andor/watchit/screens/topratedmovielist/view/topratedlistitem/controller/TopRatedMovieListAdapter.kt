@@ -15,22 +15,28 @@ import io.reactivex.subjects.PublishSubject
 class TopRatedMovieListAdapter(
     private val viewMvcFactory: ViewMvcFactory,
     private val movieListEventStream: PublishSubject<MovieListEvent>
-) :
-    PagedListAdapter<GeneralMovie, TopRatedMovieListAdapter.TopMovieHolder>(topRatedMovieDiffUtil) {
+) : PagedListAdapter<GeneralMovie, TopRatedMovieListAdapter.TopMovieHolder>(
+    topRatedMovieDiffUtil
+) {
+    companion object {
+        private val topRatedMovieDiffUtil = object : DiffUtil.ItemCallback<GeneralMovie>() {
+
+            override fun areItemsTheSame(oldItem: GeneralMovie, newItem: GeneralMovie): Boolean {
+                return oldItem.movieId == newItem.movieId
+            }
+
+            override fun areContentsTheSame(
+                oldItem: GeneralMovie,
+                newItem: GeneralMovie
+            ): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 
     private val TYPE_PROGRESS = 0
     private val TYPE_ITEM = 1
     private var listLoadingState: ListLoading = ListLoading.Loading
-
-    override fun setHasStableIds(hasStableIds: Boolean) {
-        super.setHasStableIds(hasStableIds)
-        setHasStableIds(true)
-    }
-
-    override fun getItemId(position: Int): Long {
-        val topRatedMovie = getItem(position)
-        return topRatedMovie?.movieId?.toLong() ?: super.getItemId(position)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopMovieHolder {
         val mViewMvc: ViewMvc = if (viewType == TYPE_PROGRESS) {
@@ -87,6 +93,12 @@ class TopRatedMovieListAdapter(
         }
     }
 
+    override fun getItemCount(): Int {
+        val itemCount = super.getItemCount()
+        if (itemCount > 0) movieListEventStream.onNext(MovieListEvent.HideLoader)
+        return itemCount
+    }
+
     fun setListLoadingState(newListLoading: ListLoading) {
         if (listLoadingState != newListLoading) {
             listLoadingState = newListLoading
@@ -96,22 +108,6 @@ class TopRatedMovieListAdapter(
 
     inner class TopMovieHolder(val mViewMvc: ViewMvc) :
         RecyclerView.ViewHolder(mViewMvc.getRootView())
-
-    companion object {
-        private val topRatedMovieDiffUtil = object : DiffUtil.ItemCallback<GeneralMovie>() {
-
-            override fun areItemsTheSame(oldItem: GeneralMovie, newItem: GeneralMovie): Boolean {
-                return oldItem.movieId == newItem.movieId
-            }
-
-            override fun areContentsTheSame(
-                oldItem: GeneralMovie,
-                newItem: GeneralMovie
-            ): Boolean {
-                return oldItem == newItem
-            }
-        }
-    }
 
     sealed class ListLoading {
         object Loading : ListLoading()
