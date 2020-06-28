@@ -6,4 +6,5 @@ sealed class MovieListEvent {
     data class LoadMovie(val generalMovie: GeneralMovie) : MovieListEvent()
     object RetryListLoading : MovieListEvent()
     object OpenSearchScreen : MovieListEvent()
+    object HideLoader : MovieListEvent()
 }

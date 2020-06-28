@@ -57,34 +57,34 @@ class PopularTvUseCaseImpl @Inject constructor(
             val modelList = Converter.convertFrom(schema)
             coroutineScope.launch {
                 repository.addAllTv(modelList)
+                getTvByRatingFromDbAndNotify(pageNumber, result)
             }
+        } else {
+            coroutineScope.launch {
+                getTvByRatingFromDbAndNotify(pageNumber, result)
+            }
+        }
+    }
+
+    private suspend fun getTvByRatingFromDbAndNotify(
+        pageNumber: Int,
+        result: SingleSubject<PopularTvUseCase.FetchResult>
+    ) {
+        val cachedMovies = repository.getPagedTv(pageNumber)
+        val cacheMovieCount = repository.getTvCount()
+        if (cacheMovieCount > 0) {
             result.onSuccess(
                 PopularTvUseCase.FetchResult.Success(
-                    modelList,
-                    schema.page,
-                    schema.total_pages,
-                    schema.total_results
+                    cachedMovies,
+                    pageNumber,
+                    ceil(cacheMovieCount / PAGE_SIZE).toInt(),
+                    cacheMovieCount
                 )
             )
         } else {
-            coroutineScope.launch {
-                val cachedMovies = repository.getPagedTv(pageNumber)
-                val cacheMovieCount = repository.getTvCount()
-                if (cacheMovieCount > 0) {
-                    result.onSuccess(
-                        PopularTvUseCase.FetchResult.Success(
-                            cachedMovies,
-                            pageNumber,
-                            ceil(cacheMovieCount / PAGE_SIZE).toInt(),
-                            cacheMovieCount
-                        )
-                    )
-                } else {
-                    result.onSuccess(
-                        PopularTvUseCase.FetchResult.Failure
-                    )
-                }
-            }
+            result.onSuccess(
+                PopularTvUseCase.FetchResult.Failure
+            )
         }
     }
 }

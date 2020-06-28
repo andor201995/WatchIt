@@ -7,7 +7,7 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.R
-import com.andor.watchit.core.inVisible
+import com.andor.watchit.core.gone
 import com.andor.watchit.core.visible
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.helper.Utils
@@ -60,13 +60,13 @@ class TopRatedMovieListViewMvcImpl(
     }
 
     override fun showLoader() {
-        shimmerRecyclerView.showShimmer()
         loader.visible()
+        shimmerRecyclerView.showShimmer()
     }
 
     override fun hideLoader() {
+        loader.gone()
         shimmerRecyclerView.hideShimmer()
-        loader.inVisible()
     }
 
     override fun showListLoadingError() {

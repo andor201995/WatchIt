@@ -23,7 +23,7 @@
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:contentDescription="@string/poster_image"
-            android:src="@drawable/ic_image_24px" />
+            android:src="@drawable/ic_image" />
 
     </androidx.cardview.widget.CardView>
 

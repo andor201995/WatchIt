@@ -52,39 +52,37 @@ class TopRatedMovieUseCaseImpl @Inject constructor(
 
             coroutineScope.launch {
                 repository.addAllMovie(generalMovies)
+                getMovieByRatingFromDbAndNotify(pageNumber, topRatedMovieFetchEvent)
             }
-
-            topRatedMovieFetchEvent.onSuccess(
-                FetchResult.Success(
-                    generalMovies,
-                    topRatedMovieSchema.page,
-                    topRatedMovieSchema.total_pages,
-                    topRatedMovieSchema.total_results
-                )
-            )
         }
 
         override fun onFetchFailed() {
-
             coroutineScope.launch {
-                val cachedMovies = repository.getPagedMovies(pageNumber)
-                val cacheMovieCount = repository.getMovieCount()
-
-                if (cacheMovieCount > 0) {
-                    topRatedMovieFetchEvent.onSuccess(
-                        FetchResult.Success(
-                            cachedMovies,
-                            pageNumber,
-                            ceil(cacheMovieCount / 20f).toInt(),
-                            cacheMovieCount
-                        )
-                    )
-                } else {
-                    topRatedMovieFetchEvent.onSuccess(
-                        FetchResult.Failure
-                    )
-                }
+                getMovieByRatingFromDbAndNotify(pageNumber, topRatedMovieFetchEvent)
             }
+        }
+    }
+
+    private suspend fun getMovieByRatingFromDbAndNotify(
+        pageNumber: Int,
+        topRatedMovieFetchEvent: SingleSubject<FetchResult>
+    ) {
+        val cachedMovies = repository.getPagedMovies(pageNumber)
+        val cacheMovieCount = repository.getMovieCount()
+
+        if (cacheMovieCount > 0) {
+            topRatedMovieFetchEvent.onSuccess(
+                FetchResult.Success(
+                    cachedMovies,
+                    pageNumber,
+                    ceil(cacheMovieCount / 20f).toInt(),
+                    cacheMovieCount
+                )
+            )
+        } else {
+            topRatedMovieFetchEvent.onSuccess(
+                FetchResult.Failure
+            )
         }
     }
 }

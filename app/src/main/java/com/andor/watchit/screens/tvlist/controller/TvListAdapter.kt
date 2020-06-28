@@ -15,10 +15,9 @@ import io.reactivex.subjects.PublishSubject
 class TvListAdapter(
     private val viewMvcFactory: ViewMvcFactory,
     private val tvListEventStream: PublishSubject<TvListEvent>
-) :
-    PagedListAdapter<TvUiModel, TvListAdapter.TvHolder>(
-        tvDiffUtil
-    ) {
+) : PagedListAdapter<TvUiModel, TvListAdapter.TvHolder>(
+    tvDiffUtil
+) {
 
     companion object {
         private val tvDiffUtil = object : DiffUtil.ItemCallback<TvUiModel>() {
@@ -36,16 +35,6 @@ class TvListAdapter(
         private const val TYPE_ITEM = 1
         private var listLoadingState: ListLoading =
             ListLoading.Loading
-    }
-
-    override fun setHasStableIds(hasStableIds: Boolean) {
-        super.setHasStableIds(hasStableIds)
-        setHasStableIds(true)
-    }
-
-    override fun getItemId(position: Int): Long {
-        val tvUiModel = getItem(position)
-        return tvUiModel?.tvId?.toLong() ?: super.getItemId(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvHolder {
@@ -108,6 +97,14 @@ class TvListAdapter(
             listLoadingState = newListLoading
             notifyDataSetChanged()
         }
+    }
+
+    override fun getItemCount(): Int {
+        val itemCount = super.getItemCount()
+        if (itemCount > 0) {
+            tvListEventStream.onNext(TvListEvent.HideLoader)
+        }
+        return itemCount
     }
 
     inner class TvHolder(val mViewMvc: ViewMvc) :

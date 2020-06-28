@@ -16,7 +16,9 @@ fun NavController.safeNavigation(currentDestinationResourceId: Int, actionId: In
 }
 
 fun NavController.safeNavigation(listCurrentDestinationResourceId: List<Int>, actionId: Int) {
-    if (currentDestination != null && listCurrentDestinationResourceId.contains(currentDestination!!.id)) {
+    if (currentDestination != null &&
+        listCurrentDestinationResourceId.contains(currentDestination!!.id)
+    ) {
         navigate(actionId)
     }
 }
@@ -41,7 +43,7 @@ fun View.visible() {
     this.visibility = View.VISIBLE
 }
 
-fun View.inVisible() {
+fun View.gone() {
     this.visibility = View.GONE
 }
 

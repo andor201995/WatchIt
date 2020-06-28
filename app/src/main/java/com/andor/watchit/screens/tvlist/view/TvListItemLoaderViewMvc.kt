@@ -3,7 +3,7 @@ package com.andor.watchit.screens.tvlist.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.andor.watchit.R
-import com.andor.watchit.core.inVisible
+import com.andor.watchit.core.gone
 import com.andor.watchit.core.visible
 import com.andor.watchit.databinding.ListItemLoaderBinding
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
@@ -35,7 +35,7 @@ class TvListItemLoaderViewMvcImpl(
     override fun showLoader() {
         binding.itemLoader.show()
         binding.itemLoader.visible()
-        binding.retryContainer.inVisible()
+        binding.retryContainer.gone()
     }
 
     override fun showError() {
@@ -44,6 +44,6 @@ class TvListItemLoaderViewMvcImpl(
     }
 
     override fun hideRow() {
-        binding.loaderItemContainer.inVisible()
+        binding.loaderItemContainer.gone()
     }
 }

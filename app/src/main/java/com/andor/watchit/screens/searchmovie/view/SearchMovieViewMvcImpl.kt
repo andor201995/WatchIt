@@ -13,12 +13,12 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.R
-import com.andor.watchit.core.inVisible
+import com.andor.watchit.core.gone
 import com.andor.watchit.core.visible
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.helper.Utils
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
-import com.andor.watchit.screens.searchmovie.model.Event
+import com.andor.watchit.screens.searchmovie.model.SearchViewEvent
 import com.andor.watchit.screens.searchmovie.view.searchmovieitem.controller.SearchMovieListAdapter
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.jakewharton.rxbinding3.appcompat.queryTextChanges
@@ -30,7 +30,7 @@ class SearchMovieViewMvcImpl(
     parent: ViewGroup?,
     inflater: LayoutInflater,
     viewMvcFactory: ViewMvcFactory
-) : SearchMovieViewMvc, BaseObservableViewMvc<Event>() {
+) : SearchMovieViewMvc, BaseObservableViewMvc<SearchViewEvent>() {
     private var emptyPlaceHolderContainer: View
     private var shimmerRecyclerView: ShimmerRecyclerView
     private var loader: View
@@ -82,7 +82,7 @@ class SearchMovieViewMvcImpl(
             }
 
             override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
-                getEventStream().onNext(Event.SearchCollapse)
+                getEventStream().onNext(SearchViewEvent.SearchCollapse)
                 return true
             }
         })
@@ -104,14 +104,14 @@ class SearchMovieViewMvcImpl(
                     .debounce(1, TimeUnit.SECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
-                        getEventStream().onNext(Event.FindMovie(it.toString()))
+                        getEventStream().onNext(SearchViewEvent.FindMovie(it.toString()))
                     }
             }
         }
     }
 
     override fun hidePlaceHolder() {
-        placeHolderContainer.inVisible()
+        placeHolderContainer.gone()
     }
 
     override fun updateList(list: PagedList<GeneralMovie>) {
@@ -124,7 +124,7 @@ class SearchMovieViewMvcImpl(
 
     override fun hideLoader() {
         shimmerRecyclerView.hideShimmer()
-        loader.inVisible()
+        loader.gone()
     }
 
     override fun showLoader() {
@@ -137,6 +137,6 @@ class SearchMovieViewMvcImpl(
     }
 
     override fun hideEmptyListPlaceholder() {
-        emptyPlaceHolderContainer.inVisible()
+        emptyPlaceHolderContainer.gone()
     }
 }

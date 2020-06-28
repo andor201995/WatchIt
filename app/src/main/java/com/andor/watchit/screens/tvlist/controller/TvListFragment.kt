@@ -70,6 +70,7 @@ class TvListFragment : BaseFragment() {
 
     private fun bindListEventObserver() {
         mViewMvc.getEventStream()
+            .distinctUntilChanged()
             .subscribe(object : RxBaseObserver<TvListEvent>() {
                 override fun onNext(t: TvListEvent) {
                     when (t) {
@@ -81,6 +82,9 @@ class TvListFragment : BaseFragment() {
                                 this@TvListFragment,
                                 t.tvUiModel
                             )
+                        }
+                        is TvListEvent.HideLoader -> {
+                            mViewMvc.hideLoader()
                         }
                     }
                 }
@@ -108,10 +112,8 @@ class TvListFragment : BaseFragment() {
                 override fun onNext(t: NetworkState.Initial) {
                     when (t) {
                         is NetworkState.Initial.Success -> {
-                            mViewMvc.hideLoader()
                         }
                         is NetworkState.Initial.Error -> {
-                            mViewMvc.hideLoader()
                             mScreenNavigator.navigateFromTopRatedScreenToErrorScreen(
                                 this@TvListFragment
                             )

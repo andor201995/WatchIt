@@ -14,8 +14,8 @@ import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
-import com.andor.watchit.screens.searchmovie.model.Event
 import com.andor.watchit.screens.searchmovie.model.SearchMovieViewModel
+import com.andor.watchit.screens.searchmovie.model.SearchViewEvent
 import com.andor.watchit.screens.searchmovie.view.SearchMovieViewMvc
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.andor.watchit.usecase.common.model.NetworkState
@@ -95,27 +95,32 @@ class SearchMovieFragment : BaseFragment() {
     }
 
     private fun bindToViewEventStream() {
-        val observer = object : RxBaseObserver<Event>() {
-            override fun onNext(t: Event) {
+        val observer = object : RxBaseObserver<SearchViewEvent>() {
+            override fun onNext(t: SearchViewEvent) {
                 when (t) {
-                    is Event.FindMovie -> {
+                    is SearchViewEvent.FindMovie -> {
                         mViewModel.findMovie(t.query)
                         mSearchQuery = t.query
                     }
-                    is Event.SearchCollapse -> {
+                    is SearchViewEvent.SearchCollapse -> {
                         mScreenNavigator.navigateUp(this@SearchMovieFragment)
                     }
-                    is Event.OpenMovie -> {
+                    is SearchViewEvent.OpenMovie -> {
                         mScreenNavigator.navigateFromSearchScreenToMovieDetailScreen(
                             this@SearchMovieFragment,
                             t.generalMovie
                         )
                     }
+                    is SearchViewEvent.HideLoader -> {
+                        mViewMvc.hideLoader()
+                    }
                 }
             }
         }
         compositeDisposable.add(observer)
-        mViewMvc.getEventStream().subscribe(observer)
+        mViewMvc.getEventStream()
+            .distinctUntilChanged()
+            .subscribe(observer)
     }
 
     private fun bindPagedListStateObserver() {
@@ -149,7 +154,9 @@ class SearchMovieFragment : BaseFragment() {
                             mViewMvc.hidePlaceHolder()
                             mViewMvc.hideLoader()
                             mViewMvc.hideEmptyListPlaceholder()
-                            mScreenNavigator.navigateFromSearchScreenToErrorScreen(this@SearchMovieFragment)
+                            mScreenNavigator.navigateFromSearchScreenToErrorScreen(
+                                this@SearchMovieFragment
+                            )
                         }
                         is NetworkState.Initial.Loading -> {
                             mViewMvc.showLoader()

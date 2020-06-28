@@ -16,7 +16,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.andor.watchit.R
-import com.andor.watchit.core.inVisible
+import com.andor.watchit.core.gone
 import com.andor.watchit.core.visible
 import com.andor.watchit.screens.common.controller.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -55,8 +55,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun hideNavViews() {
-        btm_nav_bar.inVisible()
-        searchFAB.inVisible()
+        btm_nav_bar.gone()
+        searchFAB.gone()
         drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 

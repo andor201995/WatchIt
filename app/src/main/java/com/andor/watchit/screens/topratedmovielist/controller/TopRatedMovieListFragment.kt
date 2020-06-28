@@ -93,6 +93,7 @@ class TopRatedMovieListFragment : BaseFragment() {
 
     private fun bindListEventObserver() {
         mViewMvc.getEventStream()
+            .distinctUntilChanged()
             .subscribe(object : RxBaseObserver<MovieListEvent>() {
                 override fun onNext(t: MovieListEvent) {
                     when (t) {
@@ -110,6 +111,7 @@ class TopRatedMovieListFragment : BaseFragment() {
                                 this@TopRatedMovieListFragment
                             )
                         }
+                        is MovieListEvent.HideLoader -> mViewMvc.hideLoader()
                     }
                 }
             })
@@ -136,10 +138,8 @@ class TopRatedMovieListFragment : BaseFragment() {
                 override fun onNext(t: NetworkState.Initial) {
                     when (t) {
                         is NetworkState.Initial.Success -> {
-                            mViewMvc.hideLoader()
                         }
                         is NetworkState.Initial.Error -> {
-                            mViewMvc.hideLoader()
                             mScreenNavigator.navigateFromTopRatedScreenToErrorScreen(
                                 this@TopRatedMovieListFragment
                             )
