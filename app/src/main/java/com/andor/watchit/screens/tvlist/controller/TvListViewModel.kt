@@ -5,7 +5,7 @@ import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
 import com.andor.watchit.usecase.common.model.NetworkState
 import com.andor.watchit.usecase.common.model.TvUiModel
-import com.andor.watchit.usecase.tv.TvListPageDataSourceFactory
+import com.andor.watchit.usecase.pagesource.TvListPageDataSourceFactory
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject

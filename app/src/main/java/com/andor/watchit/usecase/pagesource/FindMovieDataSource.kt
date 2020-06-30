@@ -1,48 +1,51 @@
-package com.andor.watchit.usecase.tv
+package com.andor.watchit.usecase.pagesource
 
 import androidx.paging.DataSource
 import com.andor.watchit.core.rx.RxBaseSingleObserver
 import com.andor.watchit.usecase.common.datasource.PageKeyedDataSourceWithRetry
+import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.andor.watchit.usecase.common.model.NetworkState
-import com.andor.watchit.usecase.common.model.TvUiModel
+import com.andor.watchit.usecase.search.FindMovieUseCase
+import com.andor.watchit.usecase.search.FindMovieUseCase.FetchResult
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.BehaviorSubject
 import java.util.concurrent.Executor
-import javax.inject.Inject
 
-class TvListPageDataSource @Inject constructor(
-    private val useCase: PopularTvUseCase,
+class FindMovieDataSource(
+    private val useCase: FindMovieUseCase,
+    private val query: String,
     retryExecutor: Executor
-) : PageKeyedDataSourceWithRetry<Long, TvUiModel, NetworkState.Initial, NetworkState.Next>(
+) : PageKeyedDataSourceWithRetry<Long, MovieUiModel, NetworkState.Initial, NetworkState.Next>(
     retryExecutor
 ) {
+
     override fun loadInitial(
         params: LoadInitialParams<Long>,
-        callback: LoadInitialCallback<Long, TvUiModel>
+        callback: LoadInitialCallback<Long, MovieUiModel>
     ) {
         initialNetworkStateStream.onNext(NetworkState.Initial.Loading)
         nextNetworkStateStream.onNext(NetworkState.Next.Loading)
 
-        useCase.getPopularTv(1)
+        useCase.findMovie(1, query)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : RxBaseSingleObserver<PopularTvUseCase.FetchResult>() {
-                override fun onSuccess(t: PopularTvUseCase.FetchResult) {
+            .subscribe(object : RxBaseSingleObserver<FetchResult>() {
+                override fun onSuccess(t: FetchResult) {
                     when (t) {
-                        is PopularTvUseCase.FetchResult.Success -> {
+                        is FetchResult.Success -> {
                             initialNetworkStateStream.onNext(
-                                NetworkState.Initial.Success(t.totalResults)
+                                NetworkState.Initial.Success(t.totalResult)
                             )
                             nextNetworkStateStream.onNext(NetworkState.Next.Success)
                             if (t.pageNumber == 1) {
                                 retry = null
                                 callback.onResult(
-                                    t.TvUiModelList, null, 2L
+                                    t.movieUiModelList, null, 2L
                                 )
                             }
                         }
-                        is PopularTvUseCase.FetchResult.Failure -> {
+                        is FetchResult.Failure -> {
                             retry = {
                                 loadInitial(params, callback)
                             }
@@ -54,15 +57,15 @@ class TvListPageDataSource @Inject constructor(
             })
     }
 
-    override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, TvUiModel>) {
+    override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, MovieUiModel>) {
         nextNetworkStateStream.onNext(NetworkState.Next.Loading)
-        useCase.getPopularTv(params.key.toInt())
+        useCase.findMovie(params.key.toInt(), query)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : RxBaseSingleObserver<PopularTvUseCase.FetchResult>() {
-                override fun onSuccess(t: PopularTvUseCase.FetchResult) {
+            .subscribe(object : RxBaseSingleObserver<FetchResult>() {
+                override fun onSuccess(t: FetchResult) {
                     when (t) {
-                        is PopularTvUseCase.FetchResult.Success -> {
+                        is FetchResult.Success -> {
                             nextNetworkStateStream.onNext(NetworkState.Next.Success)
                             // check for last
                             val nextPage =
@@ -74,9 +77,9 @@ class TvListPageDataSource @Inject constructor(
                                 }
 
                             retry = null
-                            callback.onResult(t.TvUiModelList, nextPage)
+                            callback.onResult(t.movieUiModelList, nextPage)
                         }
-                        is PopularTvUseCase.FetchResult.Failure -> {
+                        is FetchResult.Failure -> {
                             retry = {
                                 loadAfter(params, callback)
                             }
@@ -88,18 +91,28 @@ class TvListPageDataSource @Inject constructor(
     }
 }
 
-class TvListPageDataSourceFactory @Inject constructor(
-    internal val pageDataSource: TvListPageDataSource
-) : DataSource.Factory<Long, TvUiModel>() {
+class FindMovieDataSourceFactory(
+    private val useCase: FindMovieUseCase,
+    private val executor: Executor
+) :
+    DataSource.Factory<Long, MovieUiModel>() {
+    private val mDataSourceRelay: BehaviorSubject<FindMovieDataSource> = BehaviorSubject.create()
 
-    private val mDataSourceRelay: PublishSubject<TvListPageDataSource> = PublishSubject.create()
+    var query: String = ""
 
-    override fun create(): DataSource<Long, TvUiModel> {
-        mDataSourceRelay.onNext(pageDataSource)
-        return pageDataSource
+    override
+    fun create(): DataSource<Long, MovieUiModel> {
+        val dataSource =
+            FindMovieDataSource(
+                useCase,
+                query,
+                executor
+            )
+        mDataSourceRelay.onNext(dataSource)
+        return dataSource
     }
 
-    fun getDataSourceStream(): PublishSubject<TvListPageDataSource> {
+    fun getDataSourceStream(): BehaviorSubject<FindMovieDataSource> {
         return mDataSourceRelay
     }
 }

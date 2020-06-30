@@ -5,7 +5,7 @@ import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
 import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.andor.watchit.usecase.common.model.NetworkState
-import com.andor.watchit.usecase.movie.TopRatedMovieDataSourceFactory
+import com.andor.watchit.usecase.pagesource.TopRatedMovieDataSourceFactory
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject

@@ -6,7 +6,7 @@ import androidx.paging.RxPagedListBuilder
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.andor.watchit.usecase.common.model.NetworkState
-import com.andor.watchit.usecase.search.FindMovieDataSourceFactory
+import com.andor.watchit.usecase.pagesource.FindMovieDataSourceFactory
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject

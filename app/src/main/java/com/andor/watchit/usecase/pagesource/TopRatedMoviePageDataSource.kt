@@ -1,23 +1,25 @@
-package com.andor.watchit.usecase.search
+package com.andor.watchit.usecase.pagesource
 
 import androidx.paging.DataSource
 import com.andor.watchit.core.rx.RxBaseSingleObserver
 import com.andor.watchit.usecase.common.datasource.PageKeyedDataSourceWithRetry
 import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.andor.watchit.usecase.common.model.NetworkState
-import com.andor.watchit.usecase.search.FindMovieUseCase.FetchResult
+import com.andor.watchit.usecase.movie.TopRatedMovieUseCase
+import com.andor.watchit.usecase.movie.TopRatedMovieUseCaseImpl
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.Executor
+import javax.inject.Inject
 
-class FindMovieDataSource(
-    private val useCase: FindMovieUseCase,
-    private val query: String,
+class TopRatedMoviePageDataSource(
+    private val useCase: TopRatedMovieUseCase,
     retryExecutor: Executor
-) : PageKeyedDataSourceWithRetry<Long, MovieUiModel, NetworkState.Initial, NetworkState.Next>(
-    retryExecutor
-) {
+) :
+    PageKeyedDataSourceWithRetry<Long, MovieUiModel, NetworkState.Initial, NetworkState.Next>(
+        retryExecutor
+    ) {
 
     override fun loadInitial(
         params: LoadInitialParams<Long>,
@@ -26,15 +28,15 @@ class FindMovieDataSource(
         initialNetworkStateStream.onNext(NetworkState.Initial.Loading)
         nextNetworkStateStream.onNext(NetworkState.Next.Loading)
 
-        useCase.findMovie(1, query)
+        useCase.fetchTopRatedMovieAndNotify(1)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : RxBaseSingleObserver<FetchResult>() {
-                override fun onSuccess(t: FetchResult) {
+            .subscribe(object : RxBaseSingleObserver<TopRatedMovieUseCaseImpl.FetchResult>() {
+                override fun onSuccess(t: TopRatedMovieUseCaseImpl.FetchResult) {
                     when (t) {
-                        is FetchResult.Success -> {
+                        is TopRatedMovieUseCaseImpl.FetchResult.Success -> {
                             initialNetworkStateStream.onNext(
-                                NetworkState.Initial.Success(t.totalResult)
+                                NetworkState.Initial.Success(t.totalResults)
                             )
                             nextNetworkStateStream.onNext(NetworkState.Next.Success)
                             if (t.pageNumber == 1) {
@@ -44,7 +46,7 @@ class FindMovieDataSource(
                                 )
                             }
                         }
-                        is FetchResult.Failure -> {
+                        is TopRatedMovieUseCaseImpl.FetchResult.Failure -> {
                             retry = {
                                 loadInitial(params, callback)
                             }
@@ -57,14 +59,15 @@ class FindMovieDataSource(
     }
 
     override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, MovieUiModel>) {
+
         nextNetworkStateStream.onNext(NetworkState.Next.Loading)
-        useCase.findMovie(params.key.toInt(), query)
+        useCase.fetchTopRatedMovieAndNotify(params.key.toInt())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : RxBaseSingleObserver<FetchResult>() {
-                override fun onSuccess(t: FetchResult) {
+            .subscribe(object : RxBaseSingleObserver<TopRatedMovieUseCaseImpl.FetchResult>() {
+                override fun onSuccess(t: TopRatedMovieUseCaseImpl.FetchResult) {
                     when (t) {
-                        is FetchResult.Success -> {
+                        is TopRatedMovieUseCaseImpl.FetchResult.Success -> {
                             nextNetworkStateStream.onNext(NetworkState.Next.Success)
                             // check for last
                             val nextPage =
@@ -78,7 +81,7 @@ class FindMovieDataSource(
                             retry = null
                             callback.onResult(t.movieUiModelList, nextPage)
                         }
-                        is FetchResult.Failure -> {
+                        is TopRatedMovieUseCaseImpl.FetchResult.Failure -> {
                             retry = {
                                 loadAfter(params, callback)
                             }
@@ -90,23 +93,19 @@ class FindMovieDataSource(
     }
 }
 
-class FindMovieDataSourceFactory(
-    private val useCase: FindMovieUseCase,
-    private val executor: Executor
-) :
-    DataSource.Factory<Long, MovieUiModel>() {
-    private val mDataSourceRelay: BehaviorSubject<FindMovieDataSource> = BehaviorSubject.create()
+class TopRatedMovieDataSourceFactory @Inject constructor(
+    val topRatedMoviePageDataSource: TopRatedMoviePageDataSource
+) : DataSource.Factory<Long, MovieUiModel>() {
 
-    var query: String = ""
+    private val mPageDataSourceRelay: PublishSubject<TopRatedMoviePageDataSource> =
+        PublishSubject.create()
 
-    override
-    fun create(): DataSource<Long, MovieUiModel> {
-        val dataSource = FindMovieDataSource(useCase, query, executor)
-        mDataSourceRelay.onNext(dataSource)
-        return dataSource
+    override fun create(): DataSource<Long, MovieUiModel> {
+        mPageDataSourceRelay.onNext(topRatedMoviePageDataSource)
+        return topRatedMoviePageDataSource
     }
 
-    fun getDataSourceStream(): BehaviorSubject<FindMovieDataSource> {
-        return mDataSourceRelay
+    fun getDataSourceStream(): PublishSubject<TopRatedMoviePageDataSource> {
+        return mPageDataSourceRelay
     }
 }
