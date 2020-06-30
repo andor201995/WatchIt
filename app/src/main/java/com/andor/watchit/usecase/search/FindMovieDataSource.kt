@@ -1,25 +1,27 @@
 package com.andor.watchit.usecase.search
 
+import androidx.paging.DataSource
 import com.andor.watchit.core.rx.RxBaseSingleObserver
 import com.andor.watchit.usecase.common.datasource.PageKeyedDataSourceWithRetry
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.andor.watchit.usecase.common.model.NetworkState
 import com.andor.watchit.usecase.search.FindMovieUseCase.FetchResult
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.BehaviorSubject
 import java.util.concurrent.Executor
 
 class FindMovieDataSource(
     private val useCase: FindMovieUseCase,
     private val query: String,
     retryExecutor: Executor
-) : PageKeyedDataSourceWithRetry<Long, GeneralMovie, NetworkState.Initial, NetworkState.Next>(
+) : PageKeyedDataSourceWithRetry<Long, MovieUiModel, NetworkState.Initial, NetworkState.Next>(
     retryExecutor
 ) {
 
     override fun loadInitial(
         params: LoadInitialParams<Long>,
-        callback: LoadInitialCallback<Long, GeneralMovie>
+        callback: LoadInitialCallback<Long, MovieUiModel>
     ) {
         initialNetworkStateStream.onNext(NetworkState.Initial.Loading)
         nextNetworkStateStream.onNext(NetworkState.Next.Loading)
@@ -38,7 +40,7 @@ class FindMovieDataSource(
                             if (t.pageNumber == 1) {
                                 retry = null
                                 callback.onResult(
-                                    t.generalMovieList, null, 2L
+                                    t.movieUiModelList, null, 2L
                                 )
                             }
                         }
@@ -54,7 +56,7 @@ class FindMovieDataSource(
             })
     }
 
-    override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, GeneralMovie>) {
+    override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, MovieUiModel>) {
         nextNetworkStateStream.onNext(NetworkState.Next.Loading)
         useCase.findMovie(params.key.toInt(), query)
             .subscribeOn(Schedulers.io())
@@ -74,7 +76,7 @@ class FindMovieDataSource(
                                 }
 
                             retry = null
-                            callback.onResult(t.generalMovieList, nextPage)
+                            callback.onResult(t.movieUiModelList, nextPage)
                         }
                         is FetchResult.Failure -> {
                             retry = {
@@ -85,5 +87,26 @@ class FindMovieDataSource(
                     }
                 }
             })
+    }
+}
+
+class FindMovieDataSourceFactory(
+    private val useCase: FindMovieUseCase,
+    private val executor: Executor
+) :
+    DataSource.Factory<Long, MovieUiModel>() {
+    private val mDataSourceRelay: BehaviorSubject<FindMovieDataSource> = BehaviorSubject.create()
+
+    var query: String = ""
+
+    override
+    fun create(): DataSource<Long, MovieUiModel> {
+        val dataSource = FindMovieDataSource(useCase, query, executor)
+        mDataSourceRelay.onNext(dataSource)
+        return dataSource
+    }
+
+    fun getDataSourceStream(): BehaviorSubject<FindMovieDataSource> {
+        return mDataSourceRelay
     }
 }

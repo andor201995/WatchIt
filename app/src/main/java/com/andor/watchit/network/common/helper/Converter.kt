@@ -2,17 +2,17 @@ package com.andor.watchit.network.common.helper
 
 import com.andor.watchit.network.common.schema.TopRatedMovieSchema
 import com.andor.watchit.network.common.schema.TvSchema
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.andor.watchit.usecase.common.model.TvUiModel
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 object Converter {
-    fun convertFrom(topRatedMovieSchema: TopRatedMovieSchema): List<GeneralMovie> {
-        val listOfTopRatedMovie = ArrayList<GeneralMovie>()
+    fun convertFrom(topRatedMovieSchema: TopRatedMovieSchema): List<MovieUiModel> {
+        val listOfTopRatedMovie = ArrayList<MovieUiModel>()
         topRatedMovieSchema.results.forEach {
             listOfTopRatedMovie.add(
-                GeneralMovie(
+                MovieUiModel(
                     originalTitle = it.original_title,
                     posterPath = it.poster_path,
                     movieId = it.id,

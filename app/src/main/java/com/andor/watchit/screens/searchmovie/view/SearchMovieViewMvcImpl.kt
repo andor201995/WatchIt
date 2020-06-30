@@ -20,7 +20,7 @@ import com.andor.watchit.screens.common.helper.Utils
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.searchmovie.model.SearchViewEvent
 import com.andor.watchit.screens.searchmovie.view.searchmovieitem.controller.SearchMovieListAdapter
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.jakewharton.rxbinding3.appcompat.queryTextChanges
 import com.todkars.shimmer.ShimmerRecyclerView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -114,7 +114,7 @@ class SearchMovieViewMvcImpl(
         placeHolderContainer.gone()
     }
 
-    override fun updateList(list: PagedList<GeneralMovie>) {
+    override fun updateList(list: PagedList<MovieUiModel>) {
         adapter.submitList(list)
     }
 

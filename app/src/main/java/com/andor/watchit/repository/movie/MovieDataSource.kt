@@ -4,45 +4,45 @@ import androidx.sqlite.db.SimpleSQLiteQuery
 import com.andor.watchit.repository.RepositoryUtils.constructSearchQuery
 import com.andor.watchit.repository.entity.MovieDbContract
 import com.andor.watchit.repository.entity.MovieEntity
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.MovieUiModel
 import javax.inject.Inject
 
 interface MovieDataSource {
-    suspend fun add(generalMovie: GeneralMovie)
-    suspend fun addAll(generalMovieList: List<GeneralMovie>)
-    suspend fun get(movieId: Double): GeneralMovie?
-    suspend fun getAll(): List<GeneralMovie>
-    suspend fun remove(generalMovie: GeneralMovie)
-    suspend fun getPage(pageNumber: Int, pageSize: Int = 20): List<GeneralMovie>
+    suspend fun add(movieUiModel: MovieUiModel)
+    suspend fun addAll(movieUiModelList: List<MovieUiModel>)
+    suspend fun get(movieId: Double): MovieUiModel?
+    suspend fun getAll(): List<MovieUiModel>
+    suspend fun remove(movieUiModel: MovieUiModel)
+    suspend fun getPage(pageNumber: Int, pageSize: Int = 20): List<MovieUiModel>
     suspend fun getCachedMovieCount(): Int
-    suspend fun getMoviesByName(query: String, pageNumber: Int): List<GeneralMovie>
+    suspend fun getMoviesByName(query: String, pageNumber: Int): List<MovieUiModel>
     suspend fun getSearchMovieCount(query: String, pageNumber: Int): Int
 }
 
 class MovieDataSourceImpl @Inject constructor(private val movieDao: MovieDao) :
     MovieDataSource {
 
-    override suspend fun add(generalMovie: GeneralMovie) =
-        movieDao.addMovieEntity(MovieEntity.fromGeneralMovie(generalMovie))
+    override suspend fun add(movieUiModel: MovieUiModel) =
+        movieDao.addMovieEntity(MovieEntity.fromGeneralMovie(movieUiModel))
 
-    override suspend fun addAll(generalMovieList: List<GeneralMovie>) =
-        movieDao.addAllMovieEntity(generalMovieList.map { MovieEntity.fromGeneralMovie(it) })
+    override suspend fun addAll(movieUiModelList: List<MovieUiModel>) =
+        movieDao.addAllMovieEntity(movieUiModelList.map { MovieEntity.fromGeneralMovie(it) })
 
     override suspend fun get(movieId: Double) = movieDao
         .getMovieEntity(movieId)?.toGeneralMovie()
 
-    override suspend fun getAll(): List<GeneralMovie> =
+    override suspend fun getAll(): List<MovieUiModel> =
         movieDao.getAllMovieEntity().map { it.toGeneralMovie() }
 
-    override suspend fun remove(generalMovie: GeneralMovie) =
-        movieDao.deleteMovie(MovieEntity.fromGeneralMovie(generalMovie))
+    override suspend fun remove(movieUiModel: MovieUiModel) =
+        movieDao.deleteMovie(MovieEntity.fromGeneralMovie(movieUiModel))
 
-    override suspend fun getPage(pageNumber: Int, pageSize: Int): List<GeneralMovie> =
+    override suspend fun getPage(pageNumber: Int, pageSize: Int): List<MovieUiModel> =
         movieDao.getPagedMovie(pageNumber, pageSize).map { it.toGeneralMovie() }
 
     override suspend fun getCachedMovieCount(): Int = movieDao.getCount()
 
-    override suspend fun getMoviesByName(query: String, pageNumber: Int): List<GeneralMovie> {
+    override suspend fun getMoviesByName(query: String, pageNumber: Int): List<MovieUiModel> {
         val queryArgs = query.split("+")
 
         val queryString =

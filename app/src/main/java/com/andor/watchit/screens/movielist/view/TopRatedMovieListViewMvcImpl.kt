@@ -14,7 +14,7 @@ import com.andor.watchit.screens.common.helper.Utils
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.movielist.model.MovieListEvent
 import com.andor.watchit.screens.movielist.view.topratedlistitem.controller.TopRatedMovieListAdapter
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.todkars.shimmer.ShimmerRecyclerView
 
 class TopRatedMovieListViewMvcImpl(
@@ -55,8 +55,8 @@ class TopRatedMovieListViewMvcImpl(
         }
     }
 
-    override fun updateList(listOfGeneralMovie: PagedList<GeneralMovie>) {
-        adapter.submitList(listOfGeneralMovie)
+    override fun updateList(listOfMovieUiModel: PagedList<MovieUiModel>) {
+        adapter.submitList(listOfMovieUiModel)
     }
 
     override fun showLoader() {

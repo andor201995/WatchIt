@@ -9,7 +9,7 @@ import com.andor.watchit.screens.listdetail.model.DetailUiModel
 import com.andor.watchit.screens.movielist.controller.TopRatedMovieListFragmentDirections
 import com.andor.watchit.screens.searchmovie.controller.SearchMovieFragmentDirections
 import com.andor.watchit.screens.tvlist.controller.TvListFragmentDirections
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.andor.watchit.usecase.common.model.TvUiModel
 import com.andor.watchit.usecase.common.model.toDetailModel
 
@@ -32,11 +32,11 @@ class ScreenNavigator {
 
     fun navigateFromTopRatedScreenToMovieDetailScreen(
         fragment: Fragment,
-        generalMovie: GeneralMovie
+        movieUiModel: MovieUiModel
     ) {
         val action =
             TopRatedMovieListFragmentDirections.actionTopRatedMovieListFragmentToListDetailFragment(
-                generalMovie.toDetailModel()
+                movieUiModel.toDetailModel()
             )
         NavHostFragment.findNavController(fragment)
             .safeNavigation(R.id.topRatedMovieListFragment, action)
@@ -44,11 +44,11 @@ class ScreenNavigator {
 
     fun navigateFromSearchScreenToMovieDetailScreen(
         fragment: Fragment,
-        generalMovie: GeneralMovie
+        movieUiModel: MovieUiModel
     ) {
         val action =
             SearchMovieFragmentDirections.actionSearchMovieFragmentToListDetailFragment(
-                generalMovie.toDetailModel()
+                movieUiModel.toDetailModel()
             )
         NavHostFragment.findNavController(fragment)
             .safeNavigation(R.id.searchMovieFragment, action)

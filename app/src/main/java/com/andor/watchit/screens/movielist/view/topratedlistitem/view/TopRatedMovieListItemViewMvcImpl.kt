@@ -8,7 +8,7 @@ import com.andor.watchit.R
 import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.movielist.model.MovieListEvent
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.jakewharton.rxbinding3.view.clicks
 
 class TopRatedMovieListItemViewMvcImpl(
@@ -27,13 +27,13 @@ class TopRatedMovieListItemViewMvcImpl(
         moviePosterContainer = findViewById(R.id.posterContainer)
     }
 
-    override fun updateView(generalMovie: GeneralMovie) {
+    override fun updateView(movieUiModel: MovieUiModel) {
         moviePosterContainer.clicks().map {
-            MovieListEvent.LoadMovie(generalMovie)
+            MovieListEvent.LoadMovie(movieUiModel)
         }.subscribe(getEventStream())
 
         moviePosterImageView.also {
-            imageLoader.loadImageInto(it, generalMovie.posterPath)
+            imageLoader.loadImageInto(it, movieUiModel.posterPath)
         }
     }
 

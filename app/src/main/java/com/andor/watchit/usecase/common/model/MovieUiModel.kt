@@ -5,7 +5,7 @@ import com.andor.watchit.screens.listdetail.model.DetailUiModel
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class GeneralMovie(
+data class MovieUiModel(
     val originalTitle: String?,
     val posterPath: String?,
     val movieId: Int,
@@ -14,7 +14,7 @@ data class GeneralMovie(
     val movieRating: Double?
 ) : Parcelable
 
-fun GeneralMovie.toDetailModel(): DetailUiModel {
+fun MovieUiModel.toDetailModel(): DetailUiModel {
     val detailMap = mutableMapOf<String, String>().apply {
         releaseDate.takeIf { it.isNullOrBlank().not() }?.let {
             put("Release Date :", it)

@@ -8,25 +8,25 @@ import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.mvc.ViewMvc
 import com.andor.watchit.screens.searchmovie.model.SearchViewEvent
 import com.andor.watchit.screens.searchmovie.view.searchmovieitem.view.SearchMovieItemViewMvc
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.MovieUiModel
 import io.reactivex.subjects.PublishSubject
 
 class SearchMovieListAdapter(
     private val viewMvcFactory: ViewMvcFactory,
     private val searchViewEventStream: PublishSubject<SearchViewEvent>
-) : PagedListAdapter<GeneralMovie, SearchMovieListAdapter.SearchMovieHolder>(
+) : PagedListAdapter<MovieUiModel, SearchMovieListAdapter.SearchMovieHolder>(
     searchedMovieDiffUtil
 ) {
     companion object {
-        private val searchedMovieDiffUtil = object : DiffUtil.ItemCallback<GeneralMovie>() {
+        private val searchedMovieDiffUtil = object : DiffUtil.ItemCallback<MovieUiModel>() {
 
-            override fun areItemsTheSame(oldItem: GeneralMovie, newItem: GeneralMovie): Boolean {
+            override fun areItemsTheSame(oldItem: MovieUiModel, newItem: MovieUiModel): Boolean {
                 return oldItem.movieId == newItem.movieId
             }
 
             override fun areContentsTheSame(
-                oldItem: GeneralMovie,
-                newItem: GeneralMovie
+                oldItem: MovieUiModel,
+                newItem: MovieUiModel
             ): Boolean {
                 return oldItem == newItem
             }

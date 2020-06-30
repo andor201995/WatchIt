@@ -1,24 +1,27 @@
 package com.andor.watchit.usecase.movie
 
+import androidx.paging.DataSource
 import com.andor.watchit.core.rx.RxBaseSingleObserver
 import com.andor.watchit.usecase.common.datasource.PageKeyedDataSourceWithRetry
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.andor.watchit.usecase.common.model.NetworkState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.Executor
+import javax.inject.Inject
 
 class TopRatedMoviePageDataSource(
     private val useCase: TopRatedMovieUseCase,
     retryExecutor: Executor
 ) :
-    PageKeyedDataSourceWithRetry<Long, GeneralMovie, NetworkState.Initial, NetworkState.Next>(
+    PageKeyedDataSourceWithRetry<Long, MovieUiModel, NetworkState.Initial, NetworkState.Next>(
         retryExecutor
     ) {
 
     override fun loadInitial(
         params: LoadInitialParams<Long>,
-        callback: LoadInitialCallback<Long, GeneralMovie>
+        callback: LoadInitialCallback<Long, MovieUiModel>
     ) {
         initialNetworkStateStream.onNext(NetworkState.Initial.Loading)
         nextNetworkStateStream.onNext(NetworkState.Next.Loading)
@@ -37,7 +40,7 @@ class TopRatedMoviePageDataSource(
                             if (t.pageNumber == 1) {
                                 retry = null
                                 callback.onResult(
-                                    t.generalMovieList, null, 2L
+                                    t.movieUiModelList, null, 2L
                                 )
                             }
                         }
@@ -53,7 +56,7 @@ class TopRatedMoviePageDataSource(
             })
     }
 
-    override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, GeneralMovie>) {
+    override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, MovieUiModel>) {
 
         nextNetworkStateStream.onNext(NetworkState.Next.Loading)
         useCase.fetchTopRatedMovieAndNotify(params.key.toInt())
@@ -74,7 +77,7 @@ class TopRatedMoviePageDataSource(
                                 }
 
                             retry = null
-                            callback.onResult(t.generalMovieList, nextPage)
+                            callback.onResult(t.movieUiModelList, nextPage)
                         }
                         is TopRatedMovieUseCaseImpl.FetchResult.Failure -> {
                             retry = {
@@ -85,5 +88,22 @@ class TopRatedMoviePageDataSource(
                     }
                 }
             })
+    }
+}
+
+class TopRatedMovieDataSourceFactory @Inject constructor(
+    val topRatedMoviePageDataSource: TopRatedMoviePageDataSource
+) : DataSource.Factory<Long, MovieUiModel>() {
+
+    private val mPageDataSourceRelay: PublishSubject<TopRatedMoviePageDataSource> =
+        PublishSubject.create()
+
+    override fun create(): DataSource<Long, MovieUiModel> {
+        mPageDataSourceRelay.onNext(topRatedMoviePageDataSource)
+        return topRatedMoviePageDataSource
+    }
+
+    fun getDataSourceStream(): PublishSubject<TopRatedMoviePageDataSource> {
+        return mPageDataSourceRelay
     }
 }

@@ -17,7 +17,7 @@ import com.andor.watchit.screens.common.controller.BaseFragment
 import com.andor.watchit.screens.searchmovie.model.SearchMovieViewModel
 import com.andor.watchit.screens.searchmovie.model.SearchViewEvent
 import com.andor.watchit.screens.searchmovie.view.SearchMovieViewMvc
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.andor.watchit.usecase.common.model.NetworkState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -108,7 +108,7 @@ class SearchMovieFragment : BaseFragment() {
                     is SearchViewEvent.OpenMovie -> {
                         mScreenNavigator.navigateFromSearchScreenToMovieDetailScreen(
                             this@SearchMovieFragment,
-                            t.generalMovie
+                            t.movieUiModel
                         )
                     }
                     is SearchViewEvent.HideLoader -> {
@@ -125,12 +125,12 @@ class SearchMovieFragment : BaseFragment() {
 
     private fun bindPagedListStateObserver() {
         val pageListStateObserver =
-            object : RxBaseObserver<PagedList<GeneralMovie>>() {
-                override fun onNext(t: PagedList<GeneralMovie>) {
+            object : RxBaseObserver<PagedList<MovieUiModel>>() {
+                override fun onNext(t: PagedList<MovieUiModel>) {
                     mViewMvc.updateList(t)
                 }
             }
-        mViewModel.movieStream.subscribeOn(Schedulers.io())
+        mViewModel.movieUiModelStream.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(pageListStateObserver)
 

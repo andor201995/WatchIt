@@ -18,7 +18,7 @@ import com.andor.watchit.screens.common.controller.BaseFragment
 import com.andor.watchit.screens.movielist.model.MovieListEvent
 import com.andor.watchit.screens.movielist.model.TopRatedMovieListViewModel
 import com.andor.watchit.screens.movielist.view.TopRatedMovieListViewMvc
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.andor.watchit.usecase.common.model.NetworkState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -103,7 +103,7 @@ class TopRatedMovieListFragment : BaseFragment() {
                         is MovieListEvent.LoadMovie -> {
                             mScreenNavigator.navigateFromTopRatedScreenToMovieDetailScreen(
                                 this@TopRatedMovieListFragment,
-                                t.generalMovie
+                                t.movieUiModel
                             )
                         }
                         is MovieListEvent.OpenSearchScreen -> {
@@ -119,12 +119,12 @@ class TopRatedMovieListFragment : BaseFragment() {
 
     private fun bindPagedListStateObserver() {
         val pageListStateObserver =
-            object : RxBaseObserver<PagedList<GeneralMovie>>() {
-                override fun onNext(t: PagedList<GeneralMovie>) {
+            object : RxBaseObserver<PagedList<MovieUiModel>>() {
+                override fun onNext(t: PagedList<MovieUiModel>) {
                     mViewMvc.updateList(t)
                 }
             }
-        mViewModel.topRatedMovieStream.subscribeOn(Schedulers.io())
+        mViewModel.movieUiModelStream.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(pageListStateObserver)
 

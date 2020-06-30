@@ -8,7 +8,7 @@ import com.andor.watchit.R
 import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.searchmovie.model.SearchViewEvent
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.jakewharton.rxbinding3.view.clicks
 
 class SearchMovieItemViewMvcImpl(
@@ -26,7 +26,7 @@ class SearchMovieItemViewMvcImpl(
         moviePosterContainer = findViewById(R.id.posterContainer)
     }
 
-    override fun bindItem(item: GeneralMovie) {
+    override fun bindItem(item: MovieUiModel) {
         moviePosterContainer.clicks().map {
             SearchViewEvent.OpenMovie(item)
         }.subscribe(getEventStream())

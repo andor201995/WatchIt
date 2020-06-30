@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.paging.PagedList
 import com.andor.watchit.screens.common.mvc.ObservableViewMvc
 import com.andor.watchit.screens.searchmovie.model.SearchViewEvent
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.MovieUiModel
 
 interface SearchMovieViewMvc : ObservableViewMvc<SearchViewEvent> {
     fun setSearchBar(
@@ -15,7 +15,7 @@ interface SearchMovieViewMvc : ObservableViewMvc<SearchViewEvent> {
     )
 
     fun hidePlaceHolder()
-    fun updateList(list: PagedList<GeneralMovie>)
+    fun updateList(list: PagedList<MovieUiModel>)
     fun showPlaceHolder()
     fun hideLoader()
     fun showLoader()

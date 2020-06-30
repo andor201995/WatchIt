@@ -80,7 +80,7 @@ class FindMovieUseCaseImplTest {
         testObserver.assertValue {
             it is FetchResult.Success &&
                     it.pageNumber == schema.page &&
-                    it.generalMovieList == Converter.convertFrom(schema) &&
+                    it.movieUiModelList == Converter.convertFrom(schema) &&
                     it.maxPageCount == schema.total_pages
         }
     }
