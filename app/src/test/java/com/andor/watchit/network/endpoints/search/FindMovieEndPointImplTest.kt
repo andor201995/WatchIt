@@ -54,7 +54,7 @@ class FindMovieEndPointImplTest {
         // Act
         systemUT.findMovieAndNotify(VALID_PAGE_NUMBER, VALID_QUERY, listener)
         // Assert
-        verify(listener, times(1)).onFetchSuccess(TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA)
+        verify(listener, times(1)).onFetchSuccess(TestData.SERVER_RESPONSE_MOVIE_SCHEMA)
     }
 
     // fetch failure with no data and error msg

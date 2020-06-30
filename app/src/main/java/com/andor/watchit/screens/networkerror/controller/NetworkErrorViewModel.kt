@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.networkerror.model
+package com.andor.watchit.screens.networkerror.controller
 
 import androidx.lifecycle.ViewModel
 

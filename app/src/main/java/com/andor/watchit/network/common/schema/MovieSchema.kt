@@ -1,6 +1,6 @@
 package com.andor.watchit.network.common.schema
 
-data class TopRatedMovieSchema(
+data class MovieSchema(
     val page: Int = 0,
     val results: List<Result> = listOf(),
     val total_pages: Int = 0,

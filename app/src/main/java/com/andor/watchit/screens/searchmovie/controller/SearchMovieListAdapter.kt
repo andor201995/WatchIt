@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.searchmovie.view.searchmovieitem.controller
+package com.andor.watchit.screens.searchmovie.controller
 
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.mvc.ViewMvc
 import com.andor.watchit.screens.searchmovie.model.SearchViewEvent
-import com.andor.watchit.screens.searchmovie.view.searchmovieitem.view.SearchMovieItemViewMvc
+import com.andor.watchit.screens.searchmovie.view.SearchMovieItemViewMvc
 import com.andor.watchit.usecase.common.model.MovieUiModel
 import io.reactivex.subjects.PublishSubject
 

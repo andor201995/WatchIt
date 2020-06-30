@@ -71,7 +71,7 @@ class MainActivity : BaseActivity() {
 
         appBarConfiguration = AppBarConfiguration
             .Builder(
-                R.id.topRatedMovieListFragment,
+                R.id.movieListFragment,
                 R.id.tvListFragment,
                 R.id.settingFragment
             )
@@ -98,7 +98,7 @@ class MainActivity : BaseActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.topRatedMovieListFragment -> showNavViews()
+                R.id.movieListFragment -> showNavViews()
                 R.id.tvListFragment -> showNavViews()
                 else -> hideNavViews()
             }

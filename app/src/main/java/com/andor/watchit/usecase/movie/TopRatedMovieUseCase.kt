@@ -1,7 +1,7 @@
 package com.andor.watchit.usecase.movie
 
 import com.andor.watchit.network.common.helper.Converter
-import com.andor.watchit.network.common.schema.TopRatedMovieSchema
+import com.andor.watchit.network.common.schema.MovieSchema
 import com.andor.watchit.network.endpoints.movie.TopRatedMovieListEndPoint
 import com.andor.watchit.repository.movie.MovieRepository
 import com.andor.watchit.usecase.common.model.MovieUiModel
@@ -50,10 +50,10 @@ class TopRatedMovieUseCaseImpl @Inject constructor(
         topRatedMovieFetchEvent: SingleSubject<FetchResult>,
         pageNumber: Int
     ): TopRatedMovieListEndPoint.Listener = object : TopRatedMovieListEndPoint.Listener {
-        override fun onFetchSuccess(topRatedMovieSchema: TopRatedMovieSchema) {
+        override fun onFetchSuccess(movieSchema: MovieSchema) {
 
             val generalMovies = Converter.convertFrom(
-                topRatedMovieSchema
+                movieSchema
             )
 
             coroutineScope.launch {

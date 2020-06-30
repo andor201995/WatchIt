@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.movielist.view.topratedlistitem.view
+package com.andor.watchit.screens.movielist.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +7,15 @@ import android.widget.ImageView
 import com.andor.watchit.R
 import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
+import com.andor.watchit.screens.common.mvc.ObservableViewMvc
 import com.andor.watchit.screens.movielist.model.MovieListEvent
 import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.jakewharton.rxbinding3.view.clicks
+
+interface TopRatedMovieListItemViewMvc : ObservableViewMvc<MovieListEvent> {
+    fun updateView(movieUiModel: MovieUiModel)
+    fun cleanUp()
+}
 
 class TopRatedMovieListItemViewMvcImpl(
     parent: ViewGroup?,

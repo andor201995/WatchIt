@@ -1,7 +1,7 @@
 package com.andor.watchit.usecase.search
 
 import com.andor.watchit.network.common.helper.Converter
-import com.andor.watchit.network.common.schema.TopRatedMovieSchema
+import com.andor.watchit.network.common.schema.MovieSchema
 import com.andor.watchit.network.endpoints.search.FindMovieEndPoint
 import com.andor.watchit.repository.movie.MovieRepository
 import com.andor.watchit.usecase.common.model.MovieUiModel
@@ -62,7 +62,7 @@ class FindMovieUseCaseImpl @Inject constructor(
                     }
                 }
 
-                override fun onFetchSuccess(movieSchema: TopRatedMovieSchema) {
+                override fun onFetchSuccess(movieSchema: MovieSchema) {
                     val movies = Converter.convertFrom(movieSchema)
                     coroutineScope.launch {
                         repository.addAllMovie(movies)

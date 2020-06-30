@@ -14,7 +14,6 @@ import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
-import com.andor.watchit.screens.searchmovie.model.SearchMovieViewModel
 import com.andor.watchit.screens.searchmovie.model.SearchViewEvent
 import com.andor.watchit.screens.searchmovie.view.SearchMovieViewMvc
 import com.andor.watchit.usecase.common.model.MovieUiModel

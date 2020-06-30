@@ -2,7 +2,7 @@ package com.andor.watchit.usecase.search
 
 import com.andor.watchit.helper.TestData
 import com.andor.watchit.network.common.helper.Converter
-import com.andor.watchit.network.common.schema.TopRatedMovieSchema
+import com.andor.watchit.network.common.schema.MovieSchema
 import com.andor.watchit.network.endpoints.search.FindMovieEndPoint
 import com.andor.watchit.repository.movie.MovieRepository
 import com.andor.watchit.usecase.search.FindMovieUseCase.FetchResult
@@ -72,7 +72,7 @@ class FindMovieUseCaseImplTest {
     @Test
     fun findMovieAndNotify_validInput_returnSuccess() {
         // Arrange
-        val schema = TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA
+        val schema = TestData.SERVER_RESPONSE_MOVIE_SCHEMA
         success(schema)
         // Act
         systemUT.findMovie(VALID_PAGE, VALID_QUERY).subscribe(testObserver)
@@ -113,7 +113,7 @@ class FindMovieUseCaseImplTest {
         }
     }
 
-    private fun success(schema: TopRatedMovieSchema) {
+    private fun success(schema: MovieSchema) {
         whenever(mFindMovieEndPointMock.findMovieAndNotify(any(), any(), any())).thenAnswer {
             val argument = it.getArgument<Any>(2)
             if (argument is FindMovieEndPoint.Listener) {

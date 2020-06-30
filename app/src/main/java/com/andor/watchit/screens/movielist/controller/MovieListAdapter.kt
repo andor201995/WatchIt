@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.movielist.view.topratedlistitem.controller
+package com.andor.watchit.screens.movielist.controller
 
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.mvc.ViewMvc
 import com.andor.watchit.screens.movielist.model.MovieListEvent
-import com.andor.watchit.screens.movielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
-import com.andor.watchit.screens.movielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvc
+import com.andor.watchit.screens.movielist.view.TopRatedMovieListItemLoaderViewMvc
+import com.andor.watchit.screens.movielist.view.TopRatedMovieListItemViewMvc
 import com.andor.watchit.usecase.common.model.MovieUiModel
 import io.reactivex.subjects.PublishSubject
 
-class TopRatedMovieListAdapter(
+class MovieListAdapter(
     private val viewMvcFactory: ViewMvcFactory,
     private val movieListEventStream: PublishSubject<MovieListEvent>
-) : PagedListAdapter<MovieUiModel, TopRatedMovieListAdapter.TopMovieHolder>(
+) : PagedListAdapter<MovieUiModel, MovieListAdapter.TopMovieHolder>(
     topRatedMovieDiffUtil
 ) {
     companion object {
@@ -36,7 +36,8 @@ class TopRatedMovieListAdapter(
 
     private val TYPE_PROGRESS = 0
     private val TYPE_ITEM = 1
-    private var listLoadingState: ListLoading = ListLoading.Loading
+    private var listLoadingState: ListLoading =
+        ListLoading.Loading
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopMovieHolder {
         val mViewMvc: ViewMvc = if (viewType == TYPE_PROGRESS) {

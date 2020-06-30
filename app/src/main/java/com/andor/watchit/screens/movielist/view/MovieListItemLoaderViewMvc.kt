@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.movielist.view.topratedlistitem.view
+package com.andor.watchit.screens.movielist.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,15 @@ import com.andor.watchit.R
 import com.andor.watchit.core.extensions.gone
 import com.andor.watchit.core.extensions.visible
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
+import com.andor.watchit.screens.common.mvc.ObservableViewMvc
 import com.andor.watchit.screens.movielist.model.MovieListEvent
+
+interface TopRatedMovieListItemLoaderViewMvc :
+    ObservableViewMvc<MovieListEvent> {
+    fun showLoader()
+    fun showError()
+    fun hideRow()
+}
 
 class TopRatedMovieListItemLoaderViewMvcImpl(parent: ViewGroup?, inflater: LayoutInflater) :
     TopRatedMovieListItemLoaderViewMvc,

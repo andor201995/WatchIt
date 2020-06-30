@@ -2,7 +2,7 @@ package com.andor.watchit.usecase.movie
 
 import com.andor.watchit.helper.TestData
 import com.andor.watchit.network.common.helper.Converter
-import com.andor.watchit.network.common.schema.TopRatedMovieSchema
+import com.andor.watchit.network.common.schema.MovieSchema
 import com.andor.watchit.network.endpoints.movie.TopRatedMovieListEndPoint
 import com.andor.watchit.repository.movie.MovieRepository
 import com.nhaarman.mockitokotlin2.any
@@ -53,7 +53,7 @@ class TopRatedMovieUseCaseImplTest {
         runBlocking {
             // Arrange
             val testServerResponse =
-                TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA
+                TestData.SERVER_RESPONSE_MOVIE_SCHEMA
             success(testServerResponse)
             // Act
             systemUT.fetchTopRatedMovieAndNotify(1).subscribe(testObserver)
@@ -110,7 +110,7 @@ class TopRatedMovieUseCaseImplTest {
         }
     }
 
-    private suspend fun success(testServerResponse: TopRatedMovieSchema) {
+    private suspend fun success(testServerResponse: MovieSchema) {
         whenever(mMovieRepository.getMovieCount()).thenReturn(testServerResponse.total_results)
         whenever(mMovieRepository.getPagedMovies(any())).thenReturn(
             Converter.convertFrom(
@@ -125,7 +125,7 @@ class TopRatedMovieUseCaseImplTest {
             )
         ).thenAnswer {
             val listener = it.getArgument(1) as TopRatedMovieListEndPoint.Listener
-            listener.onFetchSuccess(TestData.SERVER_RESPONSE_TOP_RATED_MOVIE_SCHEMA)
+            listener.onFetchSuccess(TestData.SERVER_RESPONSE_MOVIE_SCHEMA)
             listener
         }
     }

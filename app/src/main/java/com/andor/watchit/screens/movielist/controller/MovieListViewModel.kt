@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.movielist.model
+package com.andor.watchit.screens.movielist.controller
 
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
-class TopRatedMovieListViewModel @Inject constructor(
+class MovieListViewModel @Inject constructor(
     private val topRatedMovieDataSourceFactory: TopRatedMovieDataSourceFactory
 ) : ViewModel() {
 

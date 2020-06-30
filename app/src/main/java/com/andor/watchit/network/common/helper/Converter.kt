@@ -1,6 +1,6 @@
 package com.andor.watchit.network.common.helper
 
-import com.andor.watchit.network.common.schema.TopRatedMovieSchema
+import com.andor.watchit.network.common.schema.MovieSchema
 import com.andor.watchit.network.common.schema.TvSchema
 import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.andor.watchit.usecase.common.model.TvUiModel
@@ -8,9 +8,9 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 object Converter {
-    fun convertFrom(topRatedMovieSchema: TopRatedMovieSchema): List<MovieUiModel> {
+    fun convertFrom(movieSchema: MovieSchema): List<MovieUiModel> {
         val listOfTopRatedMovie = ArrayList<MovieUiModel>()
-        topRatedMovieSchema.results.forEach {
+        movieSchema.results.forEach {
             listOfTopRatedMovie.add(
                 MovieUiModel(
                     originalTitle = it.original_title,

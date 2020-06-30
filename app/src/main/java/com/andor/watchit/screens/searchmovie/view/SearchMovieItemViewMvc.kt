@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.searchmovie.view.searchmovieitem.view
+package com.andor.watchit.screens.searchmovie.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +7,15 @@ import android.widget.ImageView
 import com.andor.watchit.R
 import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
+import com.andor.watchit.screens.common.mvc.ObservableViewMvc
 import com.andor.watchit.screens.searchmovie.model.SearchViewEvent
 import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.jakewharton.rxbinding3.view.clicks
+
+interface SearchMovieItemViewMvc : ObservableViewMvc<SearchViewEvent> {
+    fun bindItem(item: MovieUiModel)
+    fun cleanUp()
+}
 
 class SearchMovieItemViewMvcImpl(
     parent: ViewGroup?,

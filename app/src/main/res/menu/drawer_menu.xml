@@ -4,7 +4,7 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/topRatedMovieListFragment"
+            android:id="@+id/movieListFragment"
             android:icon="@drawable/ic_movie_24dp"
             android:title="@string/movie"
             app:showAsAction="ifRoom" />

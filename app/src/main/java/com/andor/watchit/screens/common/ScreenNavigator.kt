@@ -6,7 +6,7 @@ import com.andor.watchit.R
 import com.andor.watchit.core.extensions.safeNavigation
 import com.andor.watchit.screens.listdetail.controller.ListDetailFragmentDirections
 import com.andor.watchit.screens.listdetail.model.DetailUiModel
-import com.andor.watchit.screens.movielist.controller.TopRatedMovieListFragmentDirections
+import com.andor.watchit.screens.movielist.controller.MovieListFragmentDirections
 import com.andor.watchit.screens.searchmovie.controller.SearchMovieFragmentDirections
 import com.andor.watchit.screens.tvlist.controller.TvListFragmentDirections
 import com.andor.watchit.usecase.common.model.MovieUiModel
@@ -17,7 +17,7 @@ class ScreenNavigator {
     fun navigateFromTopRatedScreenToErrorScreen(fragment: Fragment) {
         NavHostFragment.findNavController(fragment)
             .safeNavigation(
-                R.id.topRatedMovieListFragment,
+                R.id.movieListFragment,
                 R.id.action_topRatedMovieListFragment_to_networkErrorFragment
             )
     }
@@ -35,11 +35,11 @@ class ScreenNavigator {
         movieUiModel: MovieUiModel
     ) {
         val action =
-            TopRatedMovieListFragmentDirections.actionTopRatedMovieListFragmentToListDetailFragment(
+            MovieListFragmentDirections.actionTopRatedMovieListFragmentToListDetailFragment(
                 movieUiModel.toDetailModel()
             )
         NavHostFragment.findNavController(fragment)
-            .safeNavigation(R.id.topRatedMovieListFragment, action)
+            .safeNavigation(R.id.movieListFragment, action)
     }
 
     fun navigateFromSearchScreenToMovieDetailScreen(
@@ -64,7 +64,7 @@ class ScreenNavigator {
     fun navigateToSearchScreen(fragment: Fragment) {
         NavHostFragment.findNavController(fragment)
             .safeNavigation(
-                R.id.topRatedMovieListFragment,
+                R.id.movieListFragment,
                 R.id.action_topRatedMovieListFragment_to_searchMovieFragment
             )
     }

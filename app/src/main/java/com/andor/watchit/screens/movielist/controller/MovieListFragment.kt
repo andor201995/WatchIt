@@ -16,7 +16,6 @@ import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
 import com.andor.watchit.screens.movielist.model.MovieListEvent
-import com.andor.watchit.screens.movielist.model.TopRatedMovieListViewModel
 import com.andor.watchit.screens.movielist.view.TopRatedMovieListViewMvc
 import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.andor.watchit.usecase.common.model.NetworkState
@@ -25,9 +24,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class TopRatedMovieListFragment : BaseFragment() {
+class MovieListFragment : BaseFragment() {
 
-    private lateinit var mViewModel: TopRatedMovieListViewModel
+    private lateinit var mViewModel: MovieListViewModel
 
     private lateinit var mViewMvc: TopRatedMovieListViewMvc
 
@@ -61,7 +60,7 @@ class TopRatedMovieListFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         mViewModel =
             ViewModelProvider(this, mViewModelFactory)
-                .get(TopRatedMovieListViewModel::class.java)
+                .get(MovieListViewModel::class.java)
     }
 
     override fun onStart() {
@@ -102,13 +101,13 @@ class TopRatedMovieListFragment : BaseFragment() {
                         }
                         is MovieListEvent.LoadMovie -> {
                             mScreenNavigator.navigateFromTopRatedScreenToMovieDetailScreen(
-                                this@TopRatedMovieListFragment,
+                                this@MovieListFragment,
                                 t.movieUiModel
                             )
                         }
                         is MovieListEvent.OpenSearchScreen -> {
                             mScreenNavigator.navigateToSearchScreen(
-                                this@TopRatedMovieListFragment
+                                this@MovieListFragment
                             )
                         }
                         is MovieListEvent.HideLoader -> mViewMvc.hideLoader()
@@ -141,7 +140,7 @@ class TopRatedMovieListFragment : BaseFragment() {
                         }
                         is NetworkState.Initial.Error -> {
                             mScreenNavigator.navigateFromTopRatedScreenToErrorScreen(
-                                this@TopRatedMovieListFragment
+                                this@MovieListFragment
                             )
                         }
                         is NetworkState.Initial.Loading -> {

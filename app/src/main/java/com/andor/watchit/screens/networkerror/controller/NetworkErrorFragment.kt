@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
-import com.andor.watchit.screens.networkerror.model.NetworkErrorViewModel
 import com.andor.watchit.screens.networkerror.view.NetworkErrorViewMvc
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver

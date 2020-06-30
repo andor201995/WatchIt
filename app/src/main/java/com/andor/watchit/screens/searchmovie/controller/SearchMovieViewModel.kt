@@ -1,4 +1,4 @@
-package com.andor.watchit.screens.searchmovie.model
+package com.andor.watchit.screens.searchmovie.controller
 
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList

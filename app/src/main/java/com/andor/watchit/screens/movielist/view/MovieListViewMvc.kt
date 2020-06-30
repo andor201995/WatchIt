@@ -12,10 +12,22 @@ import com.andor.watchit.core.extensions.visible
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.helper.Utils
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
+import com.andor.watchit.screens.common.mvc.ObservableViewMvc
+import com.andor.watchit.screens.movielist.controller.MovieListAdapter
 import com.andor.watchit.screens.movielist.model.MovieListEvent
-import com.andor.watchit.screens.movielist.view.topratedlistitem.controller.TopRatedMovieListAdapter
 import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.todkars.shimmer.ShimmerRecyclerView
+
+interface TopRatedMovieListViewMvc :
+    ObservableViewMvc<MovieListEvent> {
+    fun updateList(listOfMovieUiModel: PagedList<MovieUiModel>)
+    fun showLoader()
+    fun hideLoader()
+    fun showListLoadingError()
+    fun showListLoadingCompleted()
+    fun showListLoading()
+    fun selectOptionItem(itemId: Int)
+}
 
 class TopRatedMovieListViewMvcImpl(
     parent: ViewGroup?,
@@ -27,7 +39,7 @@ class TopRatedMovieListViewMvcImpl(
     private var shimmerRecyclerView: ShimmerRecyclerView
     private var loader: View
     private var recyclerView: RecyclerView
-    private lateinit var adapter: TopRatedMovieListAdapter
+    private lateinit var adapter: MovieListAdapter
 
     init {
         setRootView(layoutInflater.inflate(R.layout.top_rated_movie_list_fragment, parent, false))
@@ -40,7 +52,7 @@ class TopRatedMovieListViewMvcImpl(
     private fun setUpRecyclerView(viewMvcFactory: ViewMvcFactory) {
         if (recyclerView.adapter == null) {
             adapter =
-                TopRatedMovieListAdapter(
+                MovieListAdapter(
                     viewMvcFactory,
                     getEventStream()
                 )
@@ -51,7 +63,7 @@ class TopRatedMovieListViewMvcImpl(
             recyclerView.layoutManager = GridLayoutManager(context, gridCount)
             shimmerRecyclerView.layoutManager = GridLayoutManager(context, gridCount)
         } else {
-            adapter = recyclerView.adapter as TopRatedMovieListAdapter
+            adapter = recyclerView.adapter as MovieListAdapter
         }
     }
 
@@ -70,15 +82,15 @@ class TopRatedMovieListViewMvcImpl(
     }
 
     override fun showListLoadingError() {
-        adapter.setListLoadingState(TopRatedMovieListAdapter.ListLoading.Error)
+        adapter.setListLoadingState(MovieListAdapter.ListLoading.Error)
     }
 
     override fun showListLoadingCompleted() {
-        adapter.setListLoadingState(TopRatedMovieListAdapter.ListLoading.Completed)
+        adapter.setListLoadingState(MovieListAdapter.ListLoading.Completed)
     }
 
     override fun showListLoading() {
-        adapter.setListLoadingState(TopRatedMovieListAdapter.ListLoading.Loading)
+        adapter.setListLoadingState(MovieListAdapter.ListLoading.Loading)
     }
 
     override fun selectOptionItem(itemId: Int) {

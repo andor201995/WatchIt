@@ -3,8 +3,8 @@ package com.andor.watchit.core.di.screen
 import androidx.lifecycle.ViewModel
 import com.andor.watchit.core.di.utils.ViewModelKey
 import com.andor.watchit.screens.common.ViewModelFactory
-import com.andor.watchit.screens.movielist.model.TopRatedMovieListViewModel
-import com.andor.watchit.screens.searchmovie.model.SearchMovieViewModel
+import com.andor.watchit.screens.movielist.controller.MovieListViewModel
+import com.andor.watchit.screens.searchmovie.controller.SearchMovieViewModel
 import com.andor.watchit.screens.tvlist.controller.TvListViewModel
 import dagger.Binds
 import dagger.Module
@@ -29,9 +29,9 @@ class ViewModelModule {
     internal interface Binding {
         @Binds
         @IntoMap
-        @ViewModelKey(TopRatedMovieListViewModel::class)
+        @ViewModelKey(MovieListViewModel::class)
         fun bindTopRatedMovieViewModel(
-            topRatedMovieListViewModel: TopRatedMovieListViewModel
+            movieListViewModel: MovieListViewModel
         ): ViewModel
 
         @Binds
