@@ -1,12 +1,12 @@
 package com.andor.watchit.core.di.activity
 
 import com.andor.watchit.core.framework.UseCases
+import com.andor.watchit.network.endpoints.movie.TopRatedMovieListEndPoint
+import com.andor.watchit.network.endpoints.movie.TopRatedMovieListEndPointImpl
+import com.andor.watchit.network.endpoints.search.FindMovieEndPoint
+import com.andor.watchit.network.endpoints.search.FindMovieEndPointImpl
 import com.andor.watchit.network.endpoints.tv.PopularTvEndPoint
 import com.andor.watchit.network.endpoints.tv.PopularTvEndPointImpl
-import com.andor.watchit.network.movie.TopRatedMovieListEndPoint
-import com.andor.watchit.network.movie.TopRatedMovieListEndPointImpl
-import com.andor.watchit.network.search.FindMovieEndPoint
-import com.andor.watchit.network.search.FindMovieEndPointImpl
 import com.andor.watchit.usecase.movie.TopRatedMovieDataSourceFactory
 import com.andor.watchit.usecase.movie.TopRatedMoviePageDataSource
 import com.andor.watchit.usecase.movie.TopRatedMovieUseCase

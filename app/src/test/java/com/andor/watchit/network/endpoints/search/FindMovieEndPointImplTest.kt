@@ -2,8 +2,6 @@ package com.andor.watchit.network.endpoints.search
 
 import com.andor.watchit.helper.MockServerRetrofit
 import com.andor.watchit.helper.TestData
-import com.andor.watchit.network.search.FindMovieEndPoint
-import com.andor.watchit.network.search.FindMovieEndPointImpl
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify

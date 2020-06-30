@@ -3,7 +3,7 @@ package com.andor.watchit.usecase.movie
 import com.andor.watchit.helper.TestData
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.network.common.schema.TopRatedMovieSchema
-import com.andor.watchit.network.movie.TopRatedMovieListEndPoint
+import com.andor.watchit.network.endpoints.movie.TopRatedMovieListEndPoint
 import com.andor.watchit.repository.movie.MovieRepository
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify

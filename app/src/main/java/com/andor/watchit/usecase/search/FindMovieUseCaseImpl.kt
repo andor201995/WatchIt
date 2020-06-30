@@ -2,7 +2,7 @@ package com.andor.watchit.usecase.search
 
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.network.common.schema.TopRatedMovieSchema
-import com.andor.watchit.network.search.FindMovieEndPoint
+import com.andor.watchit.network.endpoints.search.FindMovieEndPoint
 import com.andor.watchit.repository.movie.MovieRepository
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.andor.watchit.usecase.search.FindMovieUseCase.FetchResult
