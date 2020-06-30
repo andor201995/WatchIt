@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.andor.watchit.R
-import com.andor.watchit.core.appendTextWithColor
+import com.andor.watchit.core.extensions.appendTextWithColor
 import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.listdetail.model.DetailUiModel

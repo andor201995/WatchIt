@@ -1,18 +1,18 @@
 package com.andor.watchit.core.di.activity
 
 import androidx.fragment.app.Fragment
-import com.andor.watchit.core.di.common.ScreenKey
 import com.andor.watchit.core.di.screen.ListDetailFragmentComponent
 import com.andor.watchit.core.di.screen.NetworkErrorFragmentComponent
 import com.andor.watchit.core.di.screen.PosterFragmentComponent
 import com.andor.watchit.core.di.screen.SearchMovieFragmentComponent
 import com.andor.watchit.core.di.screen.TopRatedMovieListFragmentComponent
 import com.andor.watchit.core.di.screen.TvListFragmentComponent
+import com.andor.watchit.core.di.utils.ScreenKey
 import com.andor.watchit.screens.listdetail.controller.ListDetailFragment
+import com.andor.watchit.screens.movielist.controller.TopRatedMovieListFragment
 import com.andor.watchit.screens.networkerror.controller.NetworkErrorFragment
 import com.andor.watchit.screens.posterview.controller.PosterFragment
 import com.andor.watchit.screens.searchmovie.controller.SearchMovieFragment
-import com.andor.watchit.screens.topratedmovielist.controller.TopRatedMovieListFragment
 import com.andor.watchit.screens.tvlist.controller.TvListFragment
 import dagger.Binds
 import dagger.Module

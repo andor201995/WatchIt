@@ -1,7 +1,7 @@
 package com.andor.watchit.helper
 
-import com.andor.watchit.network.common.MovieApi
-import com.andor.watchit.network.common.TvApi
+import com.andor.watchit.network.api.MovieApi
+import com.andor.watchit.network.api.TvApi
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer

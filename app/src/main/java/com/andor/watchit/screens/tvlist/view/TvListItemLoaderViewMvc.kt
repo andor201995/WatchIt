@@ -3,8 +3,8 @@ package com.andor.watchit.screens.tvlist.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.andor.watchit.R
-import com.andor.watchit.core.gone
-import com.andor.watchit.core.visible
+import com.andor.watchit.core.extensions.gone
+import com.andor.watchit.core.extensions.visible
 import com.andor.watchit.databinding.ListItemLoaderBinding
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.common.mvc.ObservableViewMvc

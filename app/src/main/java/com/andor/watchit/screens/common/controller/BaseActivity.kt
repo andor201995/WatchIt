@@ -3,9 +3,9 @@ package com.andor.watchit.screens.common.controller
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import com.andor.watchit.core.ThemeUtils
-import com.andor.watchit.core.di.common.Injector
 import com.andor.watchit.core.di.screen.FragmentInjector
+import com.andor.watchit.core.di.utils.Injector
+import com.andor.watchit.core.utils.ThemeUtils
 import java.util.UUID
 import javax.inject.Inject
 

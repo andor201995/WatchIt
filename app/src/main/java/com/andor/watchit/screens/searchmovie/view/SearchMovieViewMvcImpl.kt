@@ -13,8 +13,8 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andor.watchit.R
-import com.andor.watchit.core.gone
-import com.andor.watchit.core.visible
+import com.andor.watchit.core.extensions.gone
+import com.andor.watchit.core.extensions.visible
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.helper.Utils
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc

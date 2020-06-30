@@ -3,11 +3,11 @@ package com.andor.watchit.screens.common
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.andor.watchit.R
-import com.andor.watchit.core.safeNavigation
+import com.andor.watchit.core.extensions.safeNavigation
 import com.andor.watchit.screens.listdetail.controller.ListDetailFragmentDirections
 import com.andor.watchit.screens.listdetail.model.DetailUiModel
+import com.andor.watchit.screens.movielist.controller.TopRatedMovieListFragmentDirections
 import com.andor.watchit.screens.searchmovie.controller.SearchMovieFragmentDirections
-import com.andor.watchit.screens.topratedmovielist.controller.TopRatedMovieListFragmentDirections
 import com.andor.watchit.screens.tvlist.controller.TvListFragmentDirections
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.andor.watchit.usecase.common.model.TvUiModel

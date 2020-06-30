@@ -5,6 +5,12 @@ import android.view.ViewGroup
 import com.andor.watchit.screens.common.helper.ImageLoader
 import com.andor.watchit.screens.listdetail.view.MovieDetailViewMvc
 import com.andor.watchit.screens.listdetail.view.MovieDetailViewMvcImpl
+import com.andor.watchit.screens.movielist.view.TopRatedMovieListViewMvc
+import com.andor.watchit.screens.movielist.view.TopRatedMovieListViewMvcImpl
+import com.andor.watchit.screens.movielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
+import com.andor.watchit.screens.movielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvcImpl
+import com.andor.watchit.screens.movielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvc
+import com.andor.watchit.screens.movielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvcImpl
 import com.andor.watchit.screens.networkerror.view.NetworkErrorViewMvc
 import com.andor.watchit.screens.networkerror.view.NetworkErrorViewMvcImpl
 import com.andor.watchit.screens.posterview.view.PosterViewMvc
@@ -13,12 +19,6 @@ import com.andor.watchit.screens.searchmovie.view.SearchMovieViewMvc
 import com.andor.watchit.screens.searchmovie.view.SearchMovieViewMvcImpl
 import com.andor.watchit.screens.searchmovie.view.searchmovieitem.view.SearchMovieItemViewMvc
 import com.andor.watchit.screens.searchmovie.view.searchmovieitem.view.SearchMovieItemViewMvcImpl
-import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvc
-import com.andor.watchit.screens.topratedmovielist.view.TopRatedMovieListViewMvcImpl
-import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvc
-import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemLoaderViewMvcImpl
-import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvc
-import com.andor.watchit.screens.topratedmovielist.view.topratedlistitem.view.TopRatedMovieListItemViewMvcImpl
 import com.andor.watchit.screens.tvlist.view.TvListItemLoaderViewMvc
 import com.andor.watchit.screens.tvlist.view.TvListItemLoaderViewMvcImpl
 import com.andor.watchit.screens.tvlist.view.TvListItemViewMvc

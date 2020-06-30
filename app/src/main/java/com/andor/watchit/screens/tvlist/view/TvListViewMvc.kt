@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
-import com.andor.watchit.core.gone
-import com.andor.watchit.core.visible
+import com.andor.watchit.core.extensions.gone
+import com.andor.watchit.core.extensions.visible
 import com.andor.watchit.databinding.TvListFragmentBinding
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.helper.Utils

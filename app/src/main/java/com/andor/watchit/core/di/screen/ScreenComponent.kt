@@ -1,11 +1,11 @@
 package com.andor.watchit.core.di.screen
 
-import com.andor.watchit.core.di.common.ScreenScope
+import com.andor.watchit.core.di.utils.ScreenScope
 import com.andor.watchit.screens.listdetail.controller.ListDetailFragment
+import com.andor.watchit.screens.movielist.controller.TopRatedMovieListFragment
 import com.andor.watchit.screens.networkerror.controller.NetworkErrorFragment
 import com.andor.watchit.screens.posterview.controller.PosterFragment
 import com.andor.watchit.screens.searchmovie.controller.SearchMovieFragment
-import com.andor.watchit.screens.topratedmovielist.controller.TopRatedMovieListFragment
 import com.andor.watchit.screens.tvlist.controller.TvListFragment
 import dagger.Subcomponent
 import dagger.android.AndroidInjector

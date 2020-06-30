@@ -16,8 +16,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.andor.watchit.R
-import com.andor.watchit.core.gone
-import com.andor.watchit.core.visible
+import com.andor.watchit.core.extensions.gone
+import com.andor.watchit.core.extensions.visible
 import com.andor.watchit.screens.common.controller.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 

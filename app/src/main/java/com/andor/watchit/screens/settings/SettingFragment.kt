@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.andor.watchit.R
 import com.andor.watchit.core.MainApplication
-import com.andor.watchit.core.ThemeUtils
+import com.andor.watchit.core.utils.ThemeUtils
 import kotlinx.android.synthetic.main.setting_fragment.*
 
 class SettingFragment : Fragment() {

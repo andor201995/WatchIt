@@ -3,7 +3,7 @@ package com.andor.watchit.usecase.tv
 import com.andor.watchit.helper.TestData.TV_SERVER_RESPONSE_POPULAR_TV_SCHEMA
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.network.common.schema.TvSchema
-import com.andor.watchit.network.tv.PopularTvEndPoint
+import com.andor.watchit.network.endpoints.tv.PopularTvEndPoint
 import com.andor.watchit.repository.tv.TvRepository
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify

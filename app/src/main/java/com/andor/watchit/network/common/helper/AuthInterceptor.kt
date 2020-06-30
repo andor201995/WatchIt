@@ -1,6 +1,6 @@
 package com.andor.watchit.network.common.helper
 
-import com.andor.watchit.core.Constants.AUTH_TOKEN
+import com.andor.watchit.core.utils.Constants.AUTH_TOKEN
 import okhttp3.Interceptor
 import okhttp3.Response
 

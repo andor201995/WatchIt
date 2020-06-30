@@ -6,13 +6,14 @@ import androidx.paging.RxPagedListBuilder
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.usecase.common.model.GeneralMovie
 import com.andor.watchit.usecase.common.model.NetworkState
-import com.andor.watchit.usecase.findmovie.FindMovieDataSourceFactory
+import com.andor.watchit.usecase.search.FindMovieDataSourceFactory
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
-class SearchMovieViewModel @Inject constructor(private val findMovieDataSourceFactory: FindMovieDataSourceFactory) :
-    ViewModel() {
+class SearchMovieViewModel @Inject constructor(
+    private val findMovieDataSourceFactory: FindMovieDataSourceFactory
+) : ViewModel() {
 
     private var lastSearchQuery: String = ""
     var movieStream: BehaviorSubject<PagedList<GeneralMovie>> = BehaviorSubject.create()

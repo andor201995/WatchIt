@@ -2,7 +2,7 @@ package com.andor.watchit.core.di.application
 
 import android.app.Activity
 import com.andor.watchit.core.di.activity.MainActivityComponent
-import com.andor.watchit.core.di.common.ActivityKey
+import com.andor.watchit.core.di.utils.ActivityKey
 import com.andor.watchit.screens.common.controller.main.MainActivity
 import dagger.Binds
 import dagger.Module
@@ -23,5 +23,6 @@ interface ActivityBindingModule {
     @Binds
     @IntoMap
     @ActivityKey(MainActivity::class)
-    fun bindMainActivityInjector(factory: MainActivityComponent.Factory): AndroidInjector.Factory<out Activity>
+    fun bindMainActivityInjector(factory: MainActivityComponent.Factory):
+            AndroidInjector.Factory<out Activity>
 }

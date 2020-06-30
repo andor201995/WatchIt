@@ -2,7 +2,7 @@ package com.andor.watchit.usecase.tv
 
 import com.andor.watchit.network.common.helper.Converter
 import com.andor.watchit.network.common.schema.TvSchema
-import com.andor.watchit.network.tv.PopularTvEndPoint
+import com.andor.watchit.network.endpoints.tv.PopularTvEndPoint
 import com.andor.watchit.repository.tv.TvRepository
 import com.andor.watchit.usecase.common.model.TvUiModel
 import com.andor.watchit.usecase.tv.PopularTvUseCase.Companion.PAGE_SIZE
