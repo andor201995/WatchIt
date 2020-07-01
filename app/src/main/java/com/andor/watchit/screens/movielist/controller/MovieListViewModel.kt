@@ -3,6 +3,7 @@ package com.andor.watchit.screens.movielist.controller
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
+import com.andor.watchit.screens.common.helper.ScreenUtils
 import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.andor.watchit.usecase.common.model.NetworkState
 import com.andor.watchit.usecase.pagesource.TopRatedMovieDataSourceFactory
@@ -15,18 +16,14 @@ class MovieListViewModel @Inject constructor(
 ) : ViewModel() {
 
     var movieUiModelStream: BehaviorSubject<PagedList<MovieUiModel>> = BehaviorSubject.create()
+
     val nextNetworkStateStream: BehaviorSubject<NetworkState.Next> =
         BehaviorSubject.create()
     val initialNetworkStateStream: BehaviorSubject<NetworkState.Initial> =
         BehaviorSubject.create()
 
     init {
-        val pagedListConfig = PagedList.Config.Builder()
-            .setEnablePlaceholders(true)
-            .setPrefetchDistance(60)
-            .setPageSize(20)
-            .setMaxSize(200)
-            .build()
+        val pagedListConfig = ScreenUtils.getPageListConfig()
 
         RxPagedListBuilder(topRatedMovieDataSourceFactory, pagedListConfig)
             .setFetchScheduler(Schedulers.io())

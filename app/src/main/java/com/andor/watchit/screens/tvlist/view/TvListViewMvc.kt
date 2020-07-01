@@ -8,7 +8,7 @@ import com.andor.watchit.core.extensions.gone
 import com.andor.watchit.core.extensions.visible
 import com.andor.watchit.databinding.TvListFragmentBinding
 import com.andor.watchit.screens.common.ViewMvcFactory
-import com.andor.watchit.screens.common.helper.Utils
+import com.andor.watchit.screens.common.helper.ScreenUtils
 import com.andor.watchit.screens.common.mvc.BaseObservableViewMvc
 import com.andor.watchit.screens.common.mvc.ObservableViewMvc
 import com.andor.watchit.screens.tvlist.controller.TvListAdapter
@@ -49,7 +49,7 @@ class TvListViewMvcImpl(
 
                 adapter = this@TvListViewMvcImpl.adapter
 
-                val gridCount = Utils.getPossibleGridCount(context)
+                val gridCount = ScreenUtils.getPossibleGridCount(context)
                 layoutManager = GridLayoutManager(context, gridCount)
                 binding.loader.shimmerRecyclerView.layoutManager =
                     GridLayoutManager(context, gridCount)
