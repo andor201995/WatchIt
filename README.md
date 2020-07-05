@@ -11,23 +11,18 @@
 Tmdb Api based application 
 
 Used:
-
- - CI
-   - Circle CI
-   - Github Actions
-
- - Architecture
-   - MVVM
-   - MVC
-
- - Gradle
-   - Kotlin DSL
-   - Gradle Dependencies plugin
-
- - Rx Java
-   - Rx Bindings
-
- - Pagination
+    - CI
+        - Circle CI
+        - Github Actions
+    - Architecture
+        - MVVM
+        - MVC
+    - Gradle
+        - Kotlin DSL
+        - Gradle Dependencies plugin
+    - Rx Java
+        - Rx Bindings
+    - Pagination
 
 Reference:
     - [Kotlin DSL](https://proandroiddev.com/gradle-dependency-management-with-kotlin-94eed4df9a28)
