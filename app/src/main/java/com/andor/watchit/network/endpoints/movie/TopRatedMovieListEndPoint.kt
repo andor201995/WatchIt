@@ -7,6 +7,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * Contract between use-case and
+ * top rated movie endpoint impl
+ */
 interface TopRatedMovieListEndPoint {
     interface Listener {
         fun onFetchSuccess(movieSchema: MovieSchema)

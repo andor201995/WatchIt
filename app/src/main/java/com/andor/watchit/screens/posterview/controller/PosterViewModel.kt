@@ -2,6 +2,4 @@ package com.andor.watchit.screens.posterview.controller
 
 import androidx.lifecycle.ViewModel
 
-class PosterViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
-}
+class PosterViewModel : ViewModel()

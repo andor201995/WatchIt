@@ -20,7 +20,7 @@ object ScreenUtils {
         val outMetrics = DisplayMetrics()
         display.getMetrics(outMetrics)
         val dimension = context.resources.getDimensionPixelSize(R.dimen.itemWidth)
-        val possibleGridCount = (outMetrics.widthPixels / dimension)
+        val possibleGridCount = outMetrics.widthPixels / dimension
         return if (possibleGridCount > 2) possibleGridCount else 2
     }
 
