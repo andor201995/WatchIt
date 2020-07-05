@@ -13,19 +13,19 @@ Tmdb Api based application
 Used:
 
 - CI
-  - Circle CI
-  - Github Actions
+    - Circle CI
+    - Github Actions
 
 - Architecture
-  - MVVM
-  - MVC
+    - MVVM
+    - MVC
 
 - Gradle
-  - Kotlin DSL
-  - Gradle Dependencies plugin
+    - Kotlin DSL
+    - Gradle Dependencies plugin
 
 - Rx Java
-  - Rx Bindings
+    - Rx Bindings
 
 - Pagination
 
