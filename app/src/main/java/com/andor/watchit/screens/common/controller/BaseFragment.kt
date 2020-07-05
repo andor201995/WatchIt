@@ -2,7 +2,7 @@ package com.andor.watchit.screens.common.controller
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.andor.watchit.core.di.common.Injector
+import com.andor.watchit.core.di.utils.Injector
 import java.util.UUID
 
 abstract class BaseFragment : Fragment() {

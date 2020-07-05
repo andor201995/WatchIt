@@ -14,10 +14,10 @@ import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
-import com.andor.watchit.screens.searchmovie.model.SearchMovieViewModel
+import com.andor.watchit.screens.common.helper.ScreenUtils.bindNetworkStreamsAndNotify
 import com.andor.watchit.screens.searchmovie.model.SearchViewEvent
 import com.andor.watchit.screens.searchmovie.view.SearchMovieViewMvc
-import com.andor.watchit.usecase.common.model.GeneralMovie
+import com.andor.watchit.usecase.common.model.MovieUiModel
 import com.andor.watchit.usecase.common.model.NetworkState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -54,7 +54,7 @@ class SearchMovieFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (!(::mViewMvc.isInitialized)) {
+        if (!::mViewMvc.isInitialized) {
             mViewMvc = mViewMvcFactory.getSearchViewMvc(container)
         }
         return mViewMvc.getRootView()
@@ -108,7 +108,7 @@ class SearchMovieFragment : BaseFragment() {
                     is SearchViewEvent.OpenMovie -> {
                         mScreenNavigator.navigateFromSearchScreenToMovieDetailScreen(
                             this@SearchMovieFragment,
-                            t.generalMovie
+                            t.movieUiModel
                         )
                     }
                     is SearchViewEvent.HideLoader -> {
@@ -125,12 +125,12 @@ class SearchMovieFragment : BaseFragment() {
 
     private fun bindPagedListStateObserver() {
         val pageListStateObserver =
-            object : RxBaseObserver<PagedList<GeneralMovie>>() {
-                override fun onNext(t: PagedList<GeneralMovie>) {
+            object : RxBaseObserver<PagedList<MovieUiModel>>() {
+                override fun onNext(t: PagedList<MovieUiModel>) {
                     mViewMvc.updateList(t)
                 }
             }
-        mViewModel.movieStream.subscribeOn(Schedulers.io())
+        mViewModel.movieUiModelStream.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(pageListStateObserver)
 
@@ -138,65 +138,35 @@ class SearchMovieFragment : BaseFragment() {
     }
 
     private fun bindNetworkStateObserver() {
-
-        val initialNetworkStateObserver =
-            object : RxBaseObserver<NetworkState.Initial>() {
-                override fun onNext(t: NetworkState.Initial) {
-                    when (t) {
-                        is NetworkState.Initial.Success -> {
-                            mViewMvc.hidePlaceHolder()
-                            mViewMvc.hideLoader()
-                            if (t.totalResult == 0) {
-                                mViewMvc.showEmptyListPlaceholder()
-                            }
-                        }
-                        is NetworkState.Initial.Error -> {
-                            mViewMvc.hidePlaceHolder()
-                            mViewMvc.hideLoader()
-                            mViewMvc.hideEmptyListPlaceholder()
-                            mScreenNavigator.navigateFromSearchScreenToErrorScreen(
-                                this@SearchMovieFragment
-                            )
-                        }
-                        is NetworkState.Initial.Loading -> {
-                            mViewMvc.showLoader()
-                            mViewMvc.hidePlaceHolder()
-                            mViewMvc.hideEmptyListPlaceholder()
+        bindNetworkStreamsAndNotify(
+            {
+                when (it) {
+                    is NetworkState.Initial.Success -> {
+                        mViewMvc.hidePlaceHolder()
+                        mViewMvc.hideLoader()
+                        if (it.totalResult == 0) {
+                            mViewMvc.showEmptyListPlaceholder()
                         }
                     }
-                }
-            }
-
-        mViewModel.initialNetworkStateStream
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(initialNetworkStateObserver)
-        compositeDisposable.add(initialNetworkStateObserver)
-
-        val nextNetworkStateObserver =
-            object : RxBaseObserver<NetworkState.Next>() {
-                override fun onNext(t: NetworkState.Next) {
-                    when (t) {
-                        is NetworkState.Next.Success -> {
-                            // do nothing
-                        }
-                        is NetworkState.Next.Error -> {
-//                            mViewMvc.showListLoadingError()
-                        }
-                        is NetworkState.Next.Loading -> {
-//                            mViewMvc.showListLoading()
-                        }
-                        is NetworkState.Next.Completed -> {
-//                            mViewMvc.showListLoadingCompleted()
-                        }
+                    is NetworkState.Initial.Error -> {
+                        mViewMvc.hidePlaceHolder()
+                        mViewMvc.hideLoader()
+                        mViewMvc.hideEmptyListPlaceholder()
+                        mScreenNavigator.navigateFromSearchScreenToErrorScreen(
+                            this@SearchMovieFragment
+                        )
+                    }
+                    is NetworkState.Initial.Loading -> {
+                        mViewMvc.showLoader()
+                        mViewMvc.hidePlaceHolder()
+                        mViewMvc.hideEmptyListPlaceholder()
                     }
                 }
-            }
-        mViewModel.nextNetworkStateStream
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(nextNetworkStateObserver)
-
-        compositeDisposable.add(nextNetworkStateObserver)
+            },
+            null,
+            mViewModel.initialNetworkStateStream,
+            mViewModel.nextNetworkStateStream,
+            compositeDisposable
+        )
     }
 }

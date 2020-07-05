@@ -4,7 +4,7 @@ import android.content.Context
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.andor.watchit.R
-import com.andor.watchit.core.Constants
+import com.andor.watchit.core.utils.Constants
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy

@@ -16,8 +16,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.andor.watchit.R
-import com.andor.watchit.core.gone
-import com.andor.watchit.core.visible
+import com.andor.watchit.core.extensions.gone
+import com.andor.watchit.core.extensions.visible
 import com.andor.watchit.screens.common.controller.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -71,7 +71,7 @@ class MainActivity : BaseActivity() {
 
         appBarConfiguration = AppBarConfiguration
             .Builder(
-                R.id.topRatedMovieListFragment,
+                R.id.movieListFragment,
                 R.id.tvListFragment,
                 R.id.settingFragment
             )
@@ -98,7 +98,7 @@ class MainActivity : BaseActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.topRatedMovieListFragment -> showNavViews()
+                R.id.movieListFragment -> showNavViews()
                 R.id.tvListFragment -> showNavViews()
                 else -> hideNavViews()
             }

@@ -11,6 +11,7 @@ import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewModelFactory
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
+import com.andor.watchit.screens.common.helper.ScreenUtils
 import com.andor.watchit.screens.tvlist.model.TvListEvent
 import com.andor.watchit.screens.tvlist.view.TvListViewMvc
 import com.andor.watchit.usecase.common.model.NetworkState
@@ -106,55 +107,37 @@ class TvListFragment : BaseFragment() {
     }
 
     private fun bindNetworkStateObserver() {
-
-        val initialNetworkStateObserver =
-            object : RxBaseObserver<NetworkState.Initial>() {
-                override fun onNext(t: NetworkState.Initial) {
-                    when (t) {
-                        is NetworkState.Initial.Success -> {
-                        }
-                        is NetworkState.Initial.Error -> {
-                            mScreenNavigator.navigateFromTopRatedScreenToErrorScreen(
-                                this@TvListFragment
-                            )
-                        }
-                        is NetworkState.Initial.Loading -> {
-                            mViewMvc.showLoader()
-                        }
+        ScreenUtils.bindNetworkStreamsAndNotify(
+            {
+                when (it) {
+                    is NetworkState.Initial.Success -> {
+                    }
+                    is NetworkState.Initial.Error -> {
+                        mScreenNavigator.navigateFromTopRatedScreenToErrorScreen(
+                            this@TvListFragment
+                        )
+                    }
+                    is NetworkState.Initial.Loading -> {
+                        mViewMvc.showLoader()
                     }
                 }
-            }
-
-        mViewModel.initialNetworkStateStream
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(initialNetworkStateObserver)
-        compositeDisposable.add(initialNetworkStateObserver)
-
-        val nextNetworkStateObserver =
-            object : RxBaseObserver<NetworkState.Next>() {
-                override fun onNext(t: NetworkState.Next) {
-                    when (t) {
-                        is NetworkState.Next.Success -> {
-                            // do nothing
-                        }
-                        is NetworkState.Next.Error -> {
-                            mViewMvc.showListLoadingError()
-                        }
-                        is NetworkState.Next.Loading -> {
-                            mViewMvc.showListLoading()
-                        }
-                        is NetworkState.Next.Completed -> {
-                            mViewMvc.showListLoadingCompleted()
-                        }
+            },
+            {
+                when (it) {
+                    is NetworkState.Next.Error -> {
+                        mViewMvc.showListLoadingError()
+                    }
+                    is NetworkState.Next.Loading -> {
+                        mViewMvc.showListLoading()
+                    }
+                    is NetworkState.Next.Completed -> {
+                        mViewMvc.showListLoadingCompleted()
                     }
                 }
-            }
-        mViewModel.nextNetworkStateStream
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(nextNetworkStateObserver)
-
-        compositeDisposable.add(nextNetworkStateObserver)
+            },
+            mViewModel.initialNetworkStateStream,
+            mViewModel.nextNetworkStateStream,
+            compositeDisposable
+        )
     }
 }

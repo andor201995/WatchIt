@@ -2,7 +2,7 @@ package com.andor.watchit.core.di.application
 
 import android.content.Context
 import com.andor.watchit.core.MainApplication
-import com.andor.watchit.core.di.common.ApplicationScope
+import com.andor.watchit.core.di.utils.ApplicationScope
 import dagger.BindsInstance
 import dagger.Component
 

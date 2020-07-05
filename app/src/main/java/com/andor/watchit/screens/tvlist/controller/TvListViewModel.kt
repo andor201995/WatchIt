@@ -3,9 +3,10 @@ package com.andor.watchit.screens.tvlist.controller
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
+import com.andor.watchit.screens.common.helper.ScreenUtils
 import com.andor.watchit.usecase.common.model.NetworkState
 import com.andor.watchit.usecase.common.model.TvUiModel
-import com.andor.watchit.usecase.tv.TvListPageDataSourceFactory
+import com.andor.watchit.usecase.pagesource.TvListPageDataSourceFactory
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
@@ -20,12 +21,7 @@ class TvListViewModel @Inject constructor(
         BehaviorSubject.create()
 
     init {
-        val pagedListConfig = PagedList.Config.Builder()
-            .setEnablePlaceholders(true)
-            .setPrefetchDistance(60)
-            .setPageSize(20)
-            .setMaxSize(200)
-            .build()
+        val pagedListConfig = ScreenUtils.getPageListConfig()
 
         RxPagedListBuilder(tvListPageDataSourceFactory, pagedListConfig)
             .setFetchScheduler(Schedulers.io())

@@ -1,7 +1,7 @@
 package com.andor.watchit.core.framework
 
-import com.andor.watchit.usecase.findmovie.FindMovieUseCase
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCase
+import com.andor.watchit.usecase.movie.TopRatedMovieUseCase
+import com.andor.watchit.usecase.search.FindMovieUseCase
 import com.andor.watchit.usecase.tv.PopularTvUseCase
 
 data class UseCases(

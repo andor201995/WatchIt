@@ -1,23 +1,23 @@
 package com.andor.watchit.core.di.activity
 
 import com.andor.watchit.core.framework.UseCases
-import com.andor.watchit.network.findmovie.FindMovieEndPoint
-import com.andor.watchit.network.findmovie.FindMovieEndPointImpl
-import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPoint
-import com.andor.watchit.network.topratedmovie.TopRatedMovieListEndPointImpl
-import com.andor.watchit.network.tv.PopularTvEndPoint
-import com.andor.watchit.network.tv.PopularTvEndPointImpl
-import com.andor.watchit.usecase.findmovie.FindMovieDataSourceFactory
-import com.andor.watchit.usecase.findmovie.FindMovieUseCase
-import com.andor.watchit.usecase.findmovie.FindMovieUseCaseImpl
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovieDataSourceFactory
-import com.andor.watchit.usecase.topratedmovie.TopRatedMoviePageDataSource
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCase
-import com.andor.watchit.usecase.topratedmovie.TopRatedMovieUseCaseImpl
+import com.andor.watchit.network.endpoints.movie.TopRatedMovieListEndPoint
+import com.andor.watchit.network.endpoints.movie.TopRatedMovieListEndPointImpl
+import com.andor.watchit.network.endpoints.search.FindMovieEndPoint
+import com.andor.watchit.network.endpoints.search.FindMovieEndPointImpl
+import com.andor.watchit.network.endpoints.tv.PopularTvEndPoint
+import com.andor.watchit.network.endpoints.tv.PopularTvEndPointImpl
+import com.andor.watchit.usecase.movie.TopRatedMovieUseCase
+import com.andor.watchit.usecase.movie.TopRatedMovieUseCaseImpl
+import com.andor.watchit.usecase.pagesource.FindMovieDataSourceFactory
+import com.andor.watchit.usecase.pagesource.TopRatedMovieDataSourceFactory
+import com.andor.watchit.usecase.pagesource.TopRatedMoviePageDataSource
+import com.andor.watchit.usecase.pagesource.TvListPageDataSource
+import com.andor.watchit.usecase.pagesource.TvListPageDataSourceFactory
+import com.andor.watchit.usecase.search.FindMovieUseCase
+import com.andor.watchit.usecase.search.FindMovieUseCaseImpl
 import com.andor.watchit.usecase.tv.PopularTvUseCase
 import com.andor.watchit.usecase.tv.PopularTvUseCaseImpl
-import com.andor.watchit.usecase.tv.TvListPageDataSource
-import com.andor.watchit.usecase.tv.TvListPageDataSourceFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -89,7 +89,10 @@ class MainActivityModule {
         findMovieUseCase: FindMovieUseCase,
         executor: ExecutorService
     ): FindMovieDataSourceFactory =
-        FindMovieDataSourceFactory(findMovieUseCase, executor)
+        FindMovieDataSourceFactory(
+            findMovieUseCase,
+            executor
+        )
 
     @Provides
     fun provideTvListPageDataSource(

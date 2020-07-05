@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
 import com.andor.watchit.screens.listdetail.controller.ListDetailFragmentArgs
-import com.andor.watchit.screens.posterview.model.PosterViewModel
 import com.andor.watchit.screens.posterview.view.PosterViewMvc
 import javax.inject.Inject
 

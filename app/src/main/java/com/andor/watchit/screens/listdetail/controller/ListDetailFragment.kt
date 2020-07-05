@@ -10,7 +10,6 @@ import com.andor.watchit.screens.common.ScreenNavigator
 import com.andor.watchit.screens.common.ViewMvcFactory
 import com.andor.watchit.screens.common.controller.BaseFragment
 import com.andor.watchit.screens.listdetail.model.DetailViewEvent
-import com.andor.watchit.screens.listdetail.model.MovieDetailViewModel
 import com.andor.watchit.screens.listdetail.view.MovieDetailViewMvc
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject

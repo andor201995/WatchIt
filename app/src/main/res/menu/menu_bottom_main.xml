@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/topRatedMovieListFragment"
+        android:id="@+id/movieListFragment"
         android:icon="@drawable/ic_movie_24dp"
         android:title="@string/movie"
         app:showAsAction="ifRoom" />

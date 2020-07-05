@@ -3,11 +3,11 @@ package com.andor.watchit.core
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
-import com.andor.watchit.core.ThemeUtils.THEME_KEY
-import com.andor.watchit.core.ThemeUtils.THEME_MATERIAL_DEFAULT
-import com.andor.watchit.core.ThemeUtils.THEME_SHARED_PREF_KEY
 import com.andor.watchit.core.di.activity.ActivityInjector
 import com.andor.watchit.core.di.application.DaggerApplicationComponent
+import com.andor.watchit.core.utils.ThemeUtils.THEME_KEY
+import com.andor.watchit.core.utils.ThemeUtils.THEME_MATERIAL_DEFAULT
+import com.andor.watchit.core.utils.ThemeUtils.THEME_SHARED_PREF_KEY
 import javax.inject.Inject
 
 class MainApplication : Application() {

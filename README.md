@@ -4,6 +4,8 @@
 
 [![GithubCI](https://github.com/andor201995/WatchIt/workflows/Java%20CI/badge.svg)](https://github.com/andor201995/WatchIt/actions?query=workflow%3A%22Java+CI%22)
 
+[![CodeFactor](https://www.codefactor.io/repository/github/andor201995/watchit/badge)](https://www.codefactor.io/repository/github/andor201995/watchit)
+
 
 ![Application icon](https://github.com/andor201995/WatchIt/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_watch_it_round.png)
 "Icon made by Pixel perfect from www.flaticon.com"
