@@ -6,18 +6,19 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
-apply from: "../ktlint.gradle"
+apply from: "../buildscripts/ktlint.gradle"
+apply from: "../buildscripts/jacoco.gradle"
 
 android {
     compileSdkVersion Version.compileSdk
     buildToolsVersion Version.build_tool
     defaultConfig {
-        applicationId ApplicationId.id
+        applicationId ApplicationConstants.app_id
         minSdkVersion Version.minSdk
         targetSdkVersion Version.targetSdk
         versionCode Releases.versionCode
         versionName Releases.versionName
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner ApplicationConstants.test_runner
         multiDexEnabled true
     }
 
@@ -27,6 +28,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
+            testCoverageEnabled true
             minifyEnabled false
             resValue("string", "PORT_NUMBER", "8081")
         }
@@ -37,8 +39,14 @@ android {
         targetCompatibility = Version.java
     }
 
+    testOptions {
+        execution ApplicationConstants.jacoco_test_execution
+        animationsDisabled true
+        unitTests.includeAndroidResources = true
+    }
+
     android {
-        buildFeatures{
+        buildFeatures {
             viewBinding = true
         }
     }
