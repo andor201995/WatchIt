@@ -12,22 +12,22 @@ Tmdb Api based application
 
 Used:
 
-- CI
-    - Circle CI
-    - Github Actions
+ - CI
+   - Circle CI
+   - Github Actions
 
-- Architecture
-    - MVVM
-    - MVC
+ - Architecture
+   - MVVM
+   - MVC
 
-- Gradle
-    - Kotlin DSL
-    - Gradle Dependencies plugin
+ - Gradle
+   - Kotlin DSL
+   - Gradle Dependencies plugin
 
-- Rx Java
-    - Rx Bindings
+ - Rx Java
+   - Rx Bindings
 
-- Pagination
+ - Pagination
 
 Reference:
     - [Kotlin DSL](https://proandroiddev.com/gradle-dependency-management-with-kotlin-94eed4df9a28)
@@ -42,4 +42,3 @@ Reference:
 Library:
     - [zoomage](https://github.com/jsibbold/zoomage)
     - [shimmer recycler view](https://android-arsenal.com/details/1/7612)
-  
