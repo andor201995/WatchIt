@@ -55,6 +55,8 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew jacocoTestReport
       - name: Set Poject token
-        run: export ${{ secrets.CODACY_PROJECT_TOKEN }}
+        env:
+          PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        run: export  CODACY_PROJECT_TOKEN="$PROJECT_TOKEN"
       - name: Send Report
         run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report --language Kotlin --force-language
