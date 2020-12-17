@@ -13,8 +13,12 @@ object ThemeUtils {
     const val THEME_YOUR_CUSTOM_DARK = 2
 
     fun changeToTheme(activity: Activity, theme: Int) {
-        (activity.application as MainApplication).themeInt = theme
-        activity.recreate()
+        activity.apply {
+            (application as MainApplication).themeInt = theme
+//            recreate()
+            finish()
+            startActivity(intent)
+        }
     }
 
     fun onActivityCreateSetTheme(activity: Activity) {
