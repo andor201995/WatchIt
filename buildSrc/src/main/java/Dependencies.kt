@@ -16,12 +16,12 @@ object Version {
     const val multi_dex = "2.0.1"
     const val material = "1.1.0"
     const val database_debug = "1.0.6"
-    const val gradle_build = "4.0.0"
+    const val gradle_build = "4.1.0"
     const val compileSdk = 29
     const val minSdk = 16
     const val targetSdk = 29
     const val build_tool = "29.0.2"
-    const val kotlin = "1.3.72"
+    const val kotlin = "1.4.10"
     const val androidx = "1.1.0"
     const val junit_ext = "1.1.1"
     const val androidx_legacy = "1.0.0"
