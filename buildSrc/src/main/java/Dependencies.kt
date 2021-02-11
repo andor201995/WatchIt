@@ -1,5 +1,7 @@
-object ApplicationId {
-    const val id = "com.andor.watchit"
+object ApplicationConstants {
+    const val app_id = "com.andor.watchit"
+    const val jacoco_test_execution = "ANDROIDX_TEST_ORCHESTRATOR"
+    const val test_runner = "androidx.test.runner.AndroidJUnitRunner"
 }
 
 object Modules {
@@ -12,7 +14,7 @@ object Releases {
 }
 
 object Version {
-
+    const val jacoco = "0.8.4"
     const val multi_dex = "2.0.1"
     const val material = "1.1.0"
     const val database_debug = "1.0.6"
