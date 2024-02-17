@@ -29,7 +29,7 @@ object Version {
     const val constraint_layout = "1.1.3"
     const val junit = "4.13"
     const val expresso = "3.2.0"
-    const val navigation_component = "2.1.0"
+    const val navigation_component = "2.3.5"
     const val dagger = "2.25.4"
     const val mockito_kotlin = "2.1.0"
 
@@ -49,7 +49,7 @@ object Version {
     const val glide = "4.11.0"
 
     const val pagination = "2.1.1"
-    const val zoomage = "1.3.0-SNAPSHOT"
+    const val zoomage = "1.3.1"
 
     const val room = "2.2.5"
     const val coroutine = "1.3.5"
